@@ -1,3 +1,4 @@
+title: "Jon Bash -- composer, sound designer, etc"
 sass:
   load_paths:
     - _sass
@@ -5,3 +6,9 @@ sass:
 exclude: []
 assets: /assets
 images: /assets/images
+defaults:
+  -
+    values:
+      author: Jon Bash
+      layout: default
+

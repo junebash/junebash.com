@@ -9,14 +9,13 @@
         <!-- other meta -->
         <meta name="description" content="{{ page.description }}">
         <meta name="author" content="{{ page.author }}"> 
-        <link rel="icon"  href="{{ site.images }}/favicon.ico">
 
         <!-- favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ site.images }}/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ site.images }}/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ site.images }}/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#60909e">
+        <link rel="mask-icon" href="{{ site.images }}/safari-pinned-tab.svg" color="#60909e">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
 
@@ -25,10 +24,13 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+        <!-- main css -->
+        <link rel="stylesheet" href="{{ site.assets }}/main.css">
+
     </head>
     <body>
         <!-- MAIN MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -64,6 +66,3 @@
             </div>
         </nav>
         <!-- MAIN CONTENT -->
-        <div class="container" >
-            <h1>{{ page.title }}</h1>
-        </div>

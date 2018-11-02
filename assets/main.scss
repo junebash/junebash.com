@@ -1,0 +1,14 @@
+---
+---
+
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+
+.content {
+    font-size: $custom-font-size;
+}
+
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
