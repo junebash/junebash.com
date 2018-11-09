@@ -1,7 +1,3 @@
----
-permalink: /about/
----
-
 # About Jon
 
 <ul class="nav nav-tabs" id="about-nav" role="tablist">
