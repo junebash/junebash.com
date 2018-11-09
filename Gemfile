@@ -1,0 +1,1 @@
+gem 'jekyll-email-protect'
