@@ -1,4 +1,6 @@
-# About Jon
+---
+title: About Jon
+---
 
 <ul class="nav nav-tabs" id="about-nav" role="tablist">
   <li class="nav-item">
