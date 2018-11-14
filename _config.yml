@@ -1,5 +1,6 @@
 title: "Jon Bash -- composer, sound designer, etc"
 email: jonbashmusic@gmail.com
+baseurl: null
 sass:
   load_paths:
     - _sass
@@ -12,8 +13,7 @@ defaults:
     values:
       author: Jon Bash
       layout: default
-gems:
+plugins:
   - jekyll-email-protect
 exclude:
   - temp_assets
-  - node_modules

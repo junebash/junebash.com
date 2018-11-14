@@ -35,19 +35,22 @@ I studied music composition at Western Washington University under Roger Briggs 
 
 ## Services
 
-### Dynamic music composition and sound design 
+### Dynamic music composition and sound design
+{: .service-heading}
 
 **...for games, films, television, web, the concert hall, dance, and other media or projects**
 
 Music and sound can enhance the story you’re dying to tell. That’s what I’m here for!
 
-### Lessons/coaching, classes, and workshops 
+### Lessons/coaching, classes, and workshops
+{: .service-heading}
 
 **...music theory, composition, digital audio, and more**
 
 Classical, electronic, experimental, folk/rock/pop, somewhere in between… I’m eclectic & versatile, and can help you be, too!
 
 ### Music consultation and production
+{: .service-heading}
 
 **...for your score, album, or any other music for which you need outside expertise**
 
