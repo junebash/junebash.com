@@ -12,3 +12,22 @@ body {
     min-height: 75rem;
     padding-top: 4.5rem;
 }
+
+.service-heading {
+    color: $heading-color;
+}
+
+blockquote {
+    //background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin-left: 1.5em;
+    margin-bottom: 3px;
+    margin-top: 20px;
+    padding-left: 0.5em;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    quotes: "\201C""\201D""\2018""\2019";
+    color: #ebebeb;
+    font-style: italic;
+}
+
