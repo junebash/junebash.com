@@ -17,3 +17,4 @@ plugins:
   - jekyll-email-protect
 exclude:
   - temp_assets
+  - node_modules
