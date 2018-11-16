@@ -1,6 +1,7 @@
 ---
 title: Home At Last!
 layout: default
+permalink: /
 ---
 
 Testing testing!!

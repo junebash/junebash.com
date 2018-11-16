@@ -1,4 +1,5 @@
 title: "Jon Bash -- composer, sound designer, etc"
+author: Jon Bash
 email: jonbashmusic@gmail.com
 baseurl: null
 sass:
@@ -8,13 +9,23 @@ sass:
 exclude: []
 assets: /assets
 images: /assets/images
+permalink: /:categories/:year/:month/:day/:slug/index.html
 defaults:
   -
+    scope:
+      path: ""
+      type: pages
     values:
-      author: Jon Bash
       layout: default
+collections:
+  - games
+  - films
+  - concert-music
+  - other-music
 plugins:
   - jekyll-email-protect
 exclude:
   - temp_assets
   - node_modules
+  - .DS_Store
+  - .gitignore

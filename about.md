@@ -104,9 +104,7 @@ Need some string arrangements for your band? Need an extra hand for orchestratio
 
 <div markdown="block" class="tab-pane fade" id="now" role="tabpanel" aria-labelledby="now-tab">
 
-## Now
-
-### a short overview of how I'm spending my time
+## Now <small>- a short overview of how I'm spending my time</small>
 
 - A feature-length **horror film score** (release date TBA)
 - Keeping my eyes and ears open for the right game to come my way

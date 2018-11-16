@@ -1,0 +1,13 @@
+---
+permalink: /concert-music/
+---
+
+{% for piece in site.concert-music %}
+    <h2>{{ piece.title }}</h2>
+    <ul>
+        <li>op.{{ piece.opus }}</li>
+        <li>{{ piece.length }}</li>
+        <li>completed {{ piece.completed }}</li>
+    </ul>
+    {{ piece.content | markdownify }}
+{% endfor %}
