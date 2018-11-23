@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 NPM := npm
 VENDOR_DIR = assets/vendor/
-JEKYLL := jekyll
+JEKYLL := bundle exec jekyll
 
 PROJECT_DEPS := package.json
 
@@ -19,10 +19,11 @@ check:
 
 install: $(PROJECT_DEPS)
 	$(NPM) install
-	gem install
+	bundle install
 
 update: $(PROJECT_DEPS)
 	$(NPM) update
+	bundle update
 
 include-npm-deps:
 	mkdir -p $(VENDOR_DIR)
@@ -31,7 +32,7 @@ include-npm-deps:
 	cp node_modules/bootstrap/dist/js/bootstrap.min.js $(VENDOR_DIR)
 
 build: include-npm-deps
-	JEKYLL_ENV=production bundle exec $(JEKYLL) build
+	JEKYLL_ENV=production $(JEKYLL) build
 
 serve: include-npm-deps
-	bundle exec $(JEKYLL) serve
+	$(JEKYLL) serve
