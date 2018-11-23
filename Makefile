@@ -19,6 +19,7 @@ check:
 
 install: $(PROJECT_DEPS)
 	$(NPM) install
+	gem install
 
 update: $(PROJECT_DEPS)
 	$(NPM) update
@@ -30,7 +31,7 @@ include-npm-deps:
 	cp node_modules/bootstrap/dist/js/bootstrap.min.js $(VENDOR_DIR)
 
 build: include-npm-deps
-	bundle exec $(JEKYLL) build
+	JEKYLL_ENV=production bundle exec $(JEKYLL) build
 
 serve: include-npm-deps
 	bundle exec $(JEKYLL) serve
