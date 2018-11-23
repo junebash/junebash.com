@@ -1,13 +1,26 @@
 ---
+title: Concert Works
 permalink: /concert-music/
 ---
 
 {% for piece in site.concert-music %}
-    <h2>{{ piece.title }}</h2>
-    <ul>
-        <li>op.{{ piece.opus }}</li>
-        <li>{{ piece.length }}</li>
+    <h2>
+        {{ piece.title }}<br />
+        <small>for {{ piece.ensemble-type }}</small>
+    </h2>
+    <ul class="piece-stats">
+        <li>length: {{ piece.length }}</li>
         <li>completed {{ piece.completed }}</li>
+        <li>premiered {{ piece.premiered }}</li>
     </ul>
+    {{ piece.bandcamp }}
+    {{ piece.soundcloud }}
+    <h3>Program Notes:</h3>
     {{ piece.content | markdownify }}
+    <h3>Instrumentation:</h3>
+    <ul class="instrumentation">
+        {% for i in piece.instrumentation %}
+            <li>{{ i }}</li>
+        {% endfor %}
+    </ul>
 {% endfor %}
