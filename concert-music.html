@@ -1,4 +1,5 @@
 ---
+# -*- engine:django -*-
 title: Concert Works
 permalink: /concert-music/
 ---
@@ -16,6 +17,15 @@ permalink: /concert-music/
                 <li>premiered {{ piece.premiered }}</li>
             </ul>
         </div>
+        {% if piece.movements %}
+            <div class="piece-movements">
+                <ol>
+                    {% for i in piece.movements %}
+                        <li>{{ i }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endif %}
         <div class="piece-media">
             {{ piece.bandcamp }}
             {{ piece.soundcloud }}
@@ -33,5 +43,4 @@ permalink: /concert-music/
             </ul>
         </div>
     </div>
-
 {% endfor %}
