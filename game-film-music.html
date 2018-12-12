@@ -1,0 +1,23 @@
+---
+# -*- engine:django -*-
+title: "Game & Film Music"
+permalink: /game-film-music/
+---
+<div id="games">
+    {% for game in site.games %}
+        <div class="game" id="{{ game.slug }}">
+            <h2 class="game-title">{{ game.title }}</h2>
+            <h3 class="game-dev">by {{ game.dev }}</h3>
+            {{ game.content | markdownify }}
+            <a href="{{ game.link }}"><button class="btn btn-primary" type="submit">Play the game!</button></a>
+        </div>
+    {% endfor %}
+</div>
+
+<div id="films">
+    {% for film in site.films %}
+        <div class="film" id="{{ film.slug }}">
+            <h2>{{ film.title }}</h2>
+        </div>
+    {% endfor %}
+</div>
