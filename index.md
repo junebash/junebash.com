@@ -1,5 +1,5 @@
 ---
-title: Home At Last!
+title: Home
 layout: default
 permalink: /
 ---
