@@ -1,11 +1,16 @@
 <!-- -*- engine:django -*- -->
 <!-- MAIN MENU -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ site.baseurl }}/">INSERT LOGO</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- brand -->
+    <a class="navbar-brand" href="{{ site.baseurl }}/">
+        <img src="/assets/images/jb-icon-128-inv.png" width="32" height="32" alt="">
+    </a>
+    <!-- small screen menu toggle -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <!-- main nav content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav">
             {% assign links = site.data.nav %}
             {% for link in links %}
@@ -16,7 +21,7 @@
                 {% if link.sublinks %}
                     <li class="nav-item dropdown {{ class }}">
                         <a href="{{ site.baseurl }}{{ link.url }}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ link.title }} <span class="caret"></span></a>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu bg-dark">
                             {% for sublink in link.sublinks %}
                                 <a class="dropdown-item" href="{{ site.baseurl }}{{ sublink.url }}">{{ sublink.title }}</a>
                             {% endfor %}
@@ -28,16 +33,13 @@
                     </li>
                 {% endif %}
             {% endfor %}
+            <!-- contact button -->
             <li class="nav-item {{ class }}">
                 <a href="#" class="nav-link" data-toggle="modal" data-target="#contactModal">
                     Contact
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
 </nav>
 

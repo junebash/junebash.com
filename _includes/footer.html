@@ -1,4 +1,23 @@
 <!-- -*- engine:django -*- -->
-<script src="{{'/assets/vendor/jquery.min.js' | prepend: site.baseurl}}"></script>
-<script src="{{'/assets/vendor/popper.min.js' | prepend: site.baseurl}}"></script>
-<script src="{{'/assets/vendor/bootstrap.min.js' | prepend: site.baseurl}}"></script>
+<footer class="footer" id="footer">
+    <div class="container" >
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <p id="footer-info">
+                    © 2018 Jon Bash
+                </p>
+            </div>
+            <div class="col-4">
+                <ul>
+                    <li>twitter</li>
+                    <li>bandcamp</li>
+                    <li>github</li>
+                    <li>mastodon</li>
+                    <li>rss</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% include scripts.html %}

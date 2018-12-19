@@ -3,8 +3,8 @@
   sublinks:
     - title: Concert Works
       url: /concert-music/
-    - title: Games & Films (PENDING)
-      url: '#'
+    - title: Games & Films
+      url: /game-film-music
     - title: Other Music (PENDING)
       url: '#'
 - title: About
