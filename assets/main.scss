@@ -21,6 +21,15 @@ h1.title {
     padding-top: 2rem;
 }
 
+div.page-title {
+    background-image: url("/assets/images/keyboard.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    h1 {
+        color: $white;
+    }
+}
+
 .centered {
     display: flex;
     align-items: center;
@@ -30,8 +39,18 @@ h1.title {
 .col-sm {
     margin-bottom: 1rem;
 }
+
 .row {
     margin-bottom: 2rem;
+}
+
+main {
+    padding-bottom: 0rem;
+    .container {
+        flex: 1;
+        background-color: $off-white;
+        margin-bottom: 0rem;
+    }
 }
 
 //------
@@ -47,11 +66,20 @@ nav.navbar div ul li div.dropdown-menu a.dropdown-item:hover {
     background: #666666
 }
 
+//---------
+// HEADER
+//---------
+
+header {
+    margin-bottom: 0;
+}
+
 //--------
 // FOOTER
 //--------
 
 #footer {
+    margin-top: 0;
     background: #999999;
     div.container div.row {
         margin-top: 1rem;
@@ -65,10 +93,6 @@ body {
     flex-direction: column;
 }
 
-main {
-    flex: 1;
-}
-
 div.social-stuff ul {
     float: right;
 }
@@ -80,7 +104,8 @@ div.social-stuff ul {
 // jumbotron background
 div.jumbotron {
     background-image: url("/assets/images/keyboard.jpeg");
-    background-width: 100%;
+    background-size: cover;
+    //background-width: 100%;
     background-repeat: no-repeat;
     margin-bottom: 0px;
     h1, p {
@@ -106,22 +131,28 @@ div.jumbotron {
 // ABOUT PAGE
 //------------
 
-// .service-heading {
-//     color: $heading-color;
-// }
+.service-heading {
+    text-decoration: underline;
+}
 
 blockquote {
-    //background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin-left: 1.5em;
-    margin-bottom: 3px;
-    margin-top: 20px;
-    padding-left: 0.5em;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    quotes: "\201C""\201D""\2018""\2019";
-    color: #777777;
-    font-style: italic;
+    p {
+        //background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin-left: 1.5em;
+        margin-bottom: 3px;
+        margin-top: 20px;
+        padding-left: 0.5em;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        quotes: "\201C""\201D""\2018""\2019";
+        color: #777777;
+        font-style: italic;
+        footer {
+            quotes: "";
+            border-left: 0px;
+        }
+    }
 }
 
 //---------------
