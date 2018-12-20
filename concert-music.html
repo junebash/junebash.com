@@ -27,7 +27,11 @@ permalink: /concert-music/
             </div>
         {% endif %}
         <div class="piece-media">
-            {{ piece.youtube }}
+          {% if piece.youtube %}
+            <div class="youtube-embed">
+              {{ piece.youtube }}
+            </div>
+          {% endif %}
             {{ piece.bandcamp }}
             {{ piece.soundcloud }}
         </div>
