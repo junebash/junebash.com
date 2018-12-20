@@ -23,5 +23,4 @@ Need some string and horn arrangements for your band? Need an extra hand for orc
 
 ---
 
-**[Interested in hiring me? Shoot me a message!](mailto:jon@jonbash.com)**
-
+<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#contactModal">Interested in hiring me? Shoot me a message!</button>
