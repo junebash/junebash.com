@@ -1,0 +1,124 @@
+---
+# -*- engine:django -*-
+title: Home
+layout: default
+permalink: /
+---
+
+<!-- header -->
+<div class="jumbotron container-fluid">
+  <div class="container">
+    <div class="centered" >
+      <img src="/assets/images/jb-icon-inv.png" width="128" height="128" class="centered">
+    </div>
+    <h1 class="display-3 jumbo-title centered">Jon Bash</h1>
+    <p class="centered">- * - composer, sound artist, etc - * -</p>
+  </div>
+</div>
+
+<!-- demo reel -->
+<div class="youtube-embed" >
+  <iframe width="100%" height="675" src="https://www.youtube.com/embed/yIrZaByKnqs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<!-- calls to action or whatever -->
+<div class="row" >
+  <div class="col-sm" >
+    <h2>
+      <a href="#">
+        Music!
+      </a>
+    </h2>
+    <p>
+      I write music for games, film, the concert hall, and fun.
+    </p>
+    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#musicModal">
+      Have a listen!
+    </button>
+  </div>
+  <div class="col-sm" >
+    <h2>
+      <a href="#">
+        Lessons!
+      </a>
+    </h2>
+    <p>
+      I teach music in classes and privately to students of all ages.
+    </p>
+    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#contactModal">
+      Book a session!
+    </button>
+  </div>
+  <div class="col-sm" >
+    <h2>
+      <a href="#">
+        Other Services!
+      </a>
+    </h2>
+    <p>
+      Need a hand arranging, typesetting, producing, or other professional help with your music?
+    </p>
+    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#contactModal">
+      Get in touch!
+    </button>
+  </div>
+</div>
+
+<!-- music modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="musicModal" aria-hidden="true" id="musicModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">What do you want to listen to?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row" >
+            <div class="col-sm" >
+              <h5>
+                <a href="/game-film-music/">
+                  Music for games/films!
+                </a>
+              </h5>
+              <p>
+                Goes with things that you watch and/or play!
+              </p>
+            </div>
+            <div class="col-sm" >
+              <h5>
+                <a href="/concert-music/">
+                  Concert music!
+                </a>
+              </h5>
+              <p>
+                Played by real people in real life!
+              </p>
+            </div>
+            <div class="col-sm" >
+              <h5>
+                <a href="/other-music/">
+                  Other music!
+                </a>
+              </h5>
+              <p>
+                Played by your speakers! I didn't know what else to call this one.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- giant picture of me -->
+<div id="itsa-me" >
+  <img src="/assets/images/jon-front.jpg" width="100%">
+</div>
+
