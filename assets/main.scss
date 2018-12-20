@@ -62,8 +62,11 @@ ul {
 // NAV
 //------
 
-nav.navbar div ul li div.dropdown-menu a.dropdown-item {
-    color: $white;
+nav.navbar div ul {
+    padding-bottom: 0rem;
+    li div.dropdown-menu a.dropdown-item {
+        color: $white;
+    }
 }
 
 nav.navbar div ul li div.dropdown-menu a.dropdown-item:hover {
@@ -77,7 +80,11 @@ nav.navbar div ul li div.dropdown-menu a.dropdown-item:hover {
 
 header {
     margin-bottom: 0;
+    div.page-title .title {
+        margin-bottom: 0;
+    }
 }
+
 
 //--------
 // FOOTER
