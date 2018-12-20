@@ -21,6 +21,19 @@ h1.title {
     padding-top: 2rem;
 }
 
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.col-sm {
+    margin-bottom: 1rem;
+}
+.row {
+    margin-bottom: 2rem;
+}
+
 //------
 // NAV
 //------
@@ -40,7 +53,12 @@ nav.navbar div ul li div.dropdown-menu a.dropdown-item:hover {
 
 #footer {
     background: #999999;
+    div.container div.row {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
 }
+
 body {
     display: flex;
     min-height: 100vh;
@@ -49,6 +67,39 @@ body {
 
 main {
     flex: 1;
+}
+
+div.social-stuff ul {
+    float: right;
+}
+
+//------------
+// HOME PAGE
+//------------
+
+// jumbotron background
+div.jumbotron {
+    background-image: url("/assets/images/keyboard.jpeg");
+    background-width: 100%;
+    background-repeat: no-repeat;
+    margin-bottom: 0px;
+    h1, p {
+        color: white;
+    }
+}
+.youtube-embed {
+    position: relative;
+    padding-bottom: 56%;
+    width: 100%;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 2rem;
+    iframe {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        overflow: hidden;
+    }
 }
 
 //------------
