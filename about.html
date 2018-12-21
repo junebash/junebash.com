@@ -26,8 +26,7 @@ title: About Jon
     {{ services_include | markdownify }}
   </div>
   <div class="tab-pane fade" id="testimonials" role="tabpanel" aria-labelledby="testimonials-tab">
-    {% capture testimonials_include %}{% include about/testimonials.md %}{% endcapture %}
-    {{ testimonials_include | markdownify }}
+    {% include about/testimonials.html %}
   </div>
   <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
     {% capture bio_include %}{% include about/bio.md %}{% endcapture %}
