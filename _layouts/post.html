@@ -3,6 +3,14 @@
 layout: default
 ---
 
-<p>{{ page.date }} - Written by {{ page.author }}</p>
+<p class="post-date">posted {{ page.date | date: "%A, %B %-d, %Y %-I:%M %p" }}</p>
+
+{% if page.image %}
+<img alt="{{ page.title }}" src="{{ page.image }}"/>
+{% endif %}
+
+<figcaption>{{ page.image-caption }}</figcaption>
+
+<hr />
 
 {{ content }}
