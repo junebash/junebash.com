@@ -1,17 +1,12 @@
 ---
-id: 272
 title: Why Composers Should Break Free of Genre Constraints
 date: 2015-06-18T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/06/19/Why-Composers-Should-Break-Free-of-Genre-Constraints
-permalink: /2015/06/18/why-composers-should-break-free-of-genre-constraints/
 categories:
-  - Uncategorized
+  - Music
 ---
 <p>I write music. Some of it is more electronic, some of it is written for instruments, much of it is a combination of the two. Some of it is light-hearted and off-kilter, some of it dark and immersive. It kinda runs the gamut, for better or worse.</p>
 
-<p>Notice I didn’t even mention a genre in that paragraph.<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> Because the truth is, talking about music in terms of genre can be more harmful than helpful sometimes.</p>
+<p>Notice I didn’t even mention a genre in that paragraph.<!--more--><sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> Because the truth is, talking about music in terms of genre can be more harmful than helpful sometimes.</p>
 
 <p>Genre can be really useful for finding music or describing it in a couple of words. If you like atmospheric, melodic, hazy, beat-driven electronic music, then sure, go ahead and Google “chillwave” and you’re likely to find some stuff that’s up your alley.</p>
 

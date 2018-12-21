@@ -1,16 +1,12 @@
 ---
-id: 457
 title: On Synthwave
 date: 2017-02-09T09:45:13+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=457
-permalink: /2017/02/09/on-synthwave/
-image: https://jonbash.com/wp-content/uploads/2017/02/27384224385_a870c55955_b.jpg
+image: /assets/images/synthwave.jpg
 categories:
-  - Uncategorized
+  - Music
 ---
-Lately I've been listening to ungodly amounts of synthwave. It's not something I expected to get really, really into, but now that I'm here in the midst of this obsession, I can start to trace where this all came from and why I'm digging it so much.
+Lately I've been listening to ungodly amounts of synthwave. It's not something I expected to get really, really into, but now that I'm here in the midst of this obsession, I can start to trace where this all came from and why I'm digging it so much.
+<!--more-->
 <h2>A focus on atmosphere &amp; forward momentum</h2>
 <img class="alignleft " src="https://i.vimeocdn.com/video/613822257_1280x720.jpg" width="414" height="233" />Different genres and subgenres of music tends to have different purposes, different stylistic tendencies, different strengths &amp; weaknesses. Some music reaches out and demands your attention, which doesn't work so well when you want to get some work done. Music with angular melodies and awkward rhythms and rapid changes of texture, though they'll always have a special place in my heart and in my playlists, aren't exactly easy to grade exams to.
 

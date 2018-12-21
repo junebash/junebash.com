@@ -1,16 +1,11 @@
 ---
-id: 508
 title: Uprooting Bitterness
 date: 2017-10-27T12:38:25+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=508
-permalink: /2017/10/27/uprooting-bitterness/
 categories:
-  - Uncategorized
+  - Dharma
 ---
 When someone you know gets a cool gig, there are a lot of emotions and thoughts that might come up and play through your mind. <em>I could have gotten that gig</em>, or on the flip-side, <em>I'm never going to get a gig like that</em>. Maybe something like <em>They don't deserve that job any more than me</em>, or <em>The gig probably sucks anyways</em>, or one of several other mental rabbit holes we can fall into.
-
+<!--more-->
 It's obvious to tell looking at these thought patterns from a distance that they're not coming from a particularly wholesome place, and yet we sometimes experience them whether or not we want to; to deny their existence isn't exactly helpful, either. So how do we deal with them? Here are a few ideas that I've found helpful.
 
 <hr />

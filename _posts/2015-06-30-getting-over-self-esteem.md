@@ -1,15 +1,10 @@
 ---
-id: 270
 title: Getting Over Self-Esteem
 date: 2015-06-30T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/productivity/2015/07/01/Getting-Over-Self-Esteem
-permalink: /2015/06/30/getting-over-self-esteem/
 categories:
-  - Uncategorized
+  - Dharma
 ---
-<p>I, like probably most people in creative fields, have struggled with self-esteem issues at times. Perhaps the most potentially dangerous attitude I’ve adopted along these lines is one that I think started when I was a teenager: that <strong>having low self-esteem is the only preferable alternative to becoming an arrogant egomaniac</strong>.</p>
+<p>I, like probably most people in creative fields, have struggled with self-esteem issues at times. Perhaps the most potentially dangerous attitude I’ve adopted along these lines is one that I think started when I was a teenager: that <strong>having low self-esteem is the only preferable alternative to becoming an arrogant egomaniac</strong>.</p><!--more-->
 
 <p>I’m not certain how common this specific mindset is, but I have a hunch that I’m not the only one who’s gone through it. Being a pretty typically angsty teenager, I had a fair amount of disdain for people that exuded false confidence, that talked themselves up or lied about how much they knew or just had an overwhelming sense of pride. So I told myself I would never become one of those people, for better or worse. I took that idea so far that when those periods of self-doubt and low self-esteem took hold, I would tell myself, “No, this is okay; this is <em>good</em>; at least you’re not an arrogant jerk.”</p>
 

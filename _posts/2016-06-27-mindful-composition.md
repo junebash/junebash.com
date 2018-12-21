@@ -1,21 +1,17 @@
 ---
-id: 392
 title: Mindful Composition
 date: 2016-06-27T15:45:19+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=392
-permalink: /2016/06/27/mindful-composition/
 categories:
-  - Uncategorized
+  - Music
+  - Dharma
 ---
 As a composer (and, I’m sure, in any creative endeavor), it’s extremely, deceptively easy to fall into a rhythm and habit and just <em>write</em> without thinking too much about it. We simply write what we think sounds like it <em>should</em> come next in that moment alone; where the melody “wants” to go. Often, this leads to a very natural, effortless style of music that flows out of the composer as if it just <em>had</em> to.
-
+<!--more-->
 But sometimes, before too long, this begins to make the music stale, repetitious, generic. Like we’ve heard it before. Lifeless. Almost <em>too</em> easy. Lacking in energy. The audience can sense that there’s just something <em>missing</em> from the music, and the composer might feel conflicted—they felt so <em>good</em> composing it, and yet now that they’re hearing it in this context, something just isn’t <em>working</em>.
 
 So how can a composer overcome this tendency to fall into habit?
 
-The answer, I think, is <em>mindfulness</em>.
+The answer, I think, is <em>mindfulness</em>.
 
 With every note a composer writes, they need to approach it with a sense of adventure, playfulness, openness. “Should this melody really descend now? Should it descend by <em>this</em> much? Should this note last for <em>this</em> long? Perhaps this needs to be a fermata? Perhaps this needs to be a measure of 7/16? Perhaps the harmony needs to begin a 12-tone row? Maybe this instrument needs to just sit out, and the accompaniment needs to just hold its note for a few more seconds while the drums pound out that ostinato?”
 

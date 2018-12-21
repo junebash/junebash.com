@@ -1,15 +1,11 @@
 ---
-id: 452
 title: 'Don&#8217;t Wait for Inspiration'
 date: 2017-01-11T21:05:33+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=452
-permalink: /2017/01/11/dont-wait-for-inspiration/
 categories:
-  - Uncategorized
+  - Music
 ---
 A series of reminders for myself that you may find helpful:
+<!--more-->
 <ul>
  	<li>Don't wait for inspiration to get to work.
 <ul>

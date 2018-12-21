@@ -1,15 +1,10 @@
 ---
-id: 446
 title: Open-Source Music
 date: 2016-10-29T10:51:13+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=446
-permalink: /2016/10/29/open-source-music/
 categories:
-  - Uncategorized
+  - Music
 ---
-I am an abashed (no pun intended) fiddler—and I don't mean I play violin. Recently I've been tipping my toes into the water of open-source development for fun, learning basics of git, CLIs, SQL, Emacs Lisp, various bits and pieces of various programming languages and frameworks, along with music-related languages and frameworks like Csound, PureData (I'm fairly competent already with Cycling 74's Max, which shares a common ancestor with PD) and then, finally <a href="http://www.lilypond.org">Lilypond</a>.
+I am an abashed (no pun intended) fiddler—and I don't mean I play violin. Recently I've been tipping my toes into the water of open-source development for fun, learning basics of git, CLIs, SQL, Emacs Lisp, various bits and pieces of various programming languages and frameworks, along with music-related languages and frameworks like Csound, PureData (I'm fairly competent already with Cycling 74's Max, which shares a common ancestor with PD) and then, finally <a href="http://www.lilypond.org">Lilypond</a>.<!--more-->
 
 It's, essentially, a niche tool and programming language for typesetting sheet music. In short, Lilypond:Music::Latex:Words. It's pretty difficult and slow to work with, though I'm wondering how much this has to do with my newbieness and how much is inherent with the tool. I could see myself potentially becoming fairly proficient and quick with it and using it as a legitimate compositional tool.
 

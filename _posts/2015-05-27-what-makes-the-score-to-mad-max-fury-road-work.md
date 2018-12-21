@@ -1,15 +1,10 @@
 ---
-id: 273
 title: What Makes the Score to Mad Max Fury Road Work
 date: 2015-05-27T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/05/28/What-Makes-the-Score-to-Fury-Road-Work
-permalink: /2015/05/27/what-makes-the-score-to-mad-max-fury-road-work/
 categories:
-  - Uncategorized
+  - "Games & Films"
 ---
-<p><em>Mad Max: Fury Road</em> surprised me. I had watched <em>Thunderdome</em> and parts of the other two movies growing up, and I was mildly, skeptically optimistic about the new movie when I saw the trailers and promos. I certainly was <em>NOT</em> expecting it to be one of the best action movies I’d ever seen. Now, this is coming from someone who’s generally not a huge fan of action movies, mind you, but I still was <em>very</em> pleasantly surprised by the movie.</p>
+<p><em>Mad Max: Fury Road</em> surprised me. I had watched <em>Thunderdome</em> and parts of the other two movies growing up, and I was mildly, skeptically optimistic about the new movie when I saw the trailers and promos. I certainly was <em>NOT</em> expecting it to be one of the best action movies I’d ever seen.<!--more--> Now, this is coming from someone who’s generally not a huge fan of action movies, mind you, but I still was <em>very</em> pleasantly surprised by the movie.</p>
 
 <p>I do have some mixed feelings on the music, though, and if you know me, you can probably predict at least partially why.</p>
 

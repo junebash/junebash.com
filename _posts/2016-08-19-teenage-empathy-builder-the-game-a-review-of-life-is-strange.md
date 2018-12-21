@@ -1,19 +1,18 @@
 ---
-id: 423
 title: 'Teenage Empathy Builder: The Game — A Review of “Life is Strange”'
 date: 2016-08-19T04:30:44+00:00
 author: jonbash
 layout: post
 guid: http://jonbash.com/?p=423
 permalink: /2016/08/19/teenage-empathy-builder-the-game-a-review-of-life-is-strange/
-image: https://jonbash.com/wp-content/uploads/2016/08/life-is-strange-lover-holding-hands-walking-on-railroad-tracks-poster-print-picture-on-canvas-cheap-2.jpg
+image: /assets/images/life-is-strange.jpg
 categories:
-  - Uncategorized
+  - "Games & Films"
 ---
 Lately I’ve been much more interested in games that don’t feature dudes shooting guns and saving the world from evil bad guys (or on an extra special occasion, a <em>lady</em> will shoot guns and save the world!). This has been a slowly growing trend for me (as evidenced by <a href="http://jonbash.com/2016/05/28/what-makes-undertale-so-wonderful/">my (sort of) recent <em>Undertale</em> blog</a>). I’m well aware that there are a <a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid">ton</a> of <a href="https://en.wikipedia.org/wiki/Mass_Effect">great</a> <a href="https://en.wikipedia.org/wiki/The_Last_of_Us">games</a> out <a href="https://en.wikipedia.org/wiki/Half-Life_2">there</a> with <a href="https://en.wikipedia.org/wiki/Uncharted#Uncharted:_The_Nathan_Drake_Collection">these</a> <a href="https://en.wikipedia.org/wiki/Final_Fantasy">sorts</a> of <a href="https://en.wikipedia.org/wiki/Fallout_3">stories</a> (and indeed, there’s still some that I’m <a href="https://en.wikipedia.org/wiki/Mass_Effect:_Andromeda">really looking forward to</a>), but I’m just getting a tad worn out on the ubiquity of them.
 
 <em>Life is Strange</em> is the perfect antidote to this disillusionment.
-
+<!--more-->
 For those unfamiliar, the game follows Max Caulfield, a teenager living in a small Oregon town and attending a boarding school with a prominent photography program. Following a tragic event on an already strange day, Max realizes that she has somehow gained the power to rewind time.
 
 https://www.youtube.com/watch?v=mpRhaXfvG_0

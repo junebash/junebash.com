@@ -1,15 +1,10 @@
 ---
-id: 464
 title: Make It Smaller (+ make space)
 date: 2017-03-23T11:42:43+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=464
-permalink: /2017/03/23/make-it-smaller/
 categories:
-  - Uncategorized
+  - Productivity
 ---
-I've been in a rather massive creative rut since roughly the start of this year (though I think the problem's roots go back further than that). I don't know how useful it is to try to find the reason behind it; at a certain point it stops mattering, and all that matters is just <em>doing something</em>, ceasing the rumination and getting to work. It's so easy to look at the job ahead, be it creative task or sometimes even a simple widget-cranking, and get overwhelmed, particularly the bigger it gets. And it's easy then to realize how silly this is, but then instead of taking positive action, to end up in a downward spiral of guilt and self-pity.
+I've been in a rather massive creative rut since roughly the start of this year (though I think the problem's roots go back further than that).<!--more--> I don't know how useful it is to try to find the reason behind it; at a certain point it stops mattering, and all that matters is just <em>doing something</em>, ceasing the rumination and getting to work. It's so easy to look at the job ahead, be it creative task or sometimes even a simple widget-cranking, and get overwhelmed, particularly the bigger it gets. And it's easy then to realize how silly this is, but then instead of taking positive action, to end up in a downward spiral of guilt and self-pity.
 
 One thing that's helped me move forward in these situations is to simply make the task as small as possible. Perhaps make the project smaller; what was once a giant symphony or double album might just become a single miniature. Forget the massive project list, the massive list of bugs. Let them be. Allow them to be completely forgotten (at least temporarily). And once the project itself is down to its tiniest form, focus on just the next possible physical action. Perhaps it's just "write a melodic phrase." It doesn't have to be a <em>good</em> phrase, even. Just a phrase. No harmony. Just a silly little line. Got that? Good. Now write another to make it a period. Now add some harmony. Again, it doesn't have to be good. Just do it.
 

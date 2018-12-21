@@ -1,16 +1,11 @@
 ---
-id: 268
 title: On Art, Commercialism, and Elitism
 date: 2015-07-14T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/07/15/On-Art-Commercialism-and-Elitism
-permalink: /2015/07/14/on-art-commercialism-and-elitism/
 categories:
-  - Uncategorized
+  - Music
 ---
 <p>Art and capitalism have a very dubious relationship.</p>
-
+<!--more-->
 <p>Art can be defined in countless ways; it’s commonly defined as something created solely to be admired for its own sake outside of any other purpose. This is why some types of music are sometimes not considered “art music”; dance music exists to get people moving their hips. Film music exists to accompany and accentuate a motion picture. They do not (primarily) exist to be studied and contemplated on their own terms.</p>
 
 <p>Commercial pop music also is often not considered art by many afficionados. As opposed to art music, it’s crafted for mass commercial consumption, to reach the widest audience possible. Often it caters to the lowest common denominator, and is therefore, by definition, generic. That said, art can serve dual purposes. IDM, for example, tends to have a great deal of detailed, studiable thought put into it despite its existence primarily as commercial pop music (although it definitely appeals to a slightly more niche audience).</p>

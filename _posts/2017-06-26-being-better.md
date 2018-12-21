@@ -1,15 +1,10 @@
 ---
-id: 471
 title: Being Better
 date: 2017-06-26T19:11:07+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=471
-permalink: /2017/06/26/being-better/
 categories:
-  - Uncategorized
+  - Dharma
 ---
-I recently resigned from my "day job" as Program Coordinator for the WWU Music Department. I'm now spending all my time trying to be a one-person music/sound-making business. This is scary as hell, and I don't know if it will be successful, but I have a lot of plans to at least make success a lot more likely in the long run, and I have a lot of folks that have been helping me out along the way. In some ways it's like I'm going back to school; training myself in a lot of details I never got a chance to learn while I was so busy in school and at work.
+I recently resigned from my "day job" as Program Coordinator for the WWU Music Department. I'm now spending all my time trying to be a one-person music/sound-making business.<!--more--> This is scary as hell, and I don't know if it will be successful, but I have a lot of plans to at least make success a lot more likely in the long run, and I have a lot of folks that have been helping me out along the way. In some ways it's like I'm going back to school; training myself in a lot of details I never got a chance to learn while I was so busy in school and at work.
 
 One thing I've been attempting to train myself in is the simple value of <em>being a good person</em>. Not just making oneself <em>look</em> good so people <em>think</em> I'm good, but actually living a good life, thinking about what I value and living those values, not compromising on the values I hold dearest, seeking justice in the world, standing up for what's right.
 

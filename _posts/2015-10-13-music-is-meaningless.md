@@ -1,20 +1,15 @@
 ---
-id: 257
 title: Music is Meaningless
 date: 2015-10-13T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/2015/10/14/Music-is-Meaningless
-permalink: /2015/10/13/music-is-meaningless/
 categories:
-  - Uncategorized
+  - Music
 ---
 <p>There is no such thing as sad music.</p>
 
 <p>There is no such thing as happy music.</p>
 
 <p>Music has no inherent emotional value or meaning.</p>
-
+<!--more-->
 <p>Hearing this, some may at first react rather negatively and strongly, saying that this is reductive and takes all the fun out of music.</p>
 
 <p>I disagree.</p>

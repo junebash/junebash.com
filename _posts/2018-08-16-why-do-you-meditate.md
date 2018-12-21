@@ -8,7 +8,7 @@ layout: post
 guid: http://jonbash.com/?p=545
 permalink: /2018/08/16/why-do-you-meditate/
 categories:
-  - Uncategorized
+  - Dharma
 ---
 This is a complicated question to answer, but I think it’s worth answering for those that care. I worry that it will come across as preachy, but my point is not to convince you to meditate and become a Buddhist; I just want to explain why in the hell I would bother to spend so many hours sitting on my ass doing nothing. Also I enjoy talking about it and don't get many opportunities to do so, so here's an explosion of words.
 

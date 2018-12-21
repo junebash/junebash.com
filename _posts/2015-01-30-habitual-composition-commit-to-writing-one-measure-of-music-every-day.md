@@ -1,18 +1,13 @@
 ---
-id: 274
 title: 'Habitual Composition &#8211; commit to writing one measure of music every day'
 date: 2015-01-30T16:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/productivity/2015/01/31/Habitual-Composition
-permalink: /2015/01/30/habitual-composition-commit-to-writing-one-measure-of-music-every-day/
 categories:
-  - Uncategorized
+  - Productivity
 ---
 <p>Since deciding to become a composer my sophomore year of college, back in 2010, composing consistently has been a pretty constant struggle for me. Every break, be it spring, winter, or the several-month summer break (even long weekends), I’d tell myself, “Alright, this break I’m going to compose more than ever!”</p>
 
 <p>Spoiler alert: it never worked.</p>
-
+<!--more-->
 <p>Breaks are supposed to be times of rest. They’re there to take some time off to be with family and friends, lay off the gas pedal of life a little, and give your head a little space before getting back to the grindstone of work and/or school. And taking breaks is good and necessary! But they’re not so conducive to getting work done. Work and breaks are mutually exclusive.</p>
 
 <p>Even not counting the breaks, trying to write music every day can be an enormous challenge. Traditional goal-setting will tell you to aim for the skies; I’ve heard of folks that have successfully written a piece of music every day for a year (we’ll get back to that one later…). To uber-positive motivational speakers, that’s proof right there: if they can do it, so can you! They say that even if you aim for the moon, you’ll land amongst the stars. But I say it’s also possible you’ll explode before even leaving the atmosphere.</p>

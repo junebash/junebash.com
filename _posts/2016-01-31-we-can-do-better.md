@@ -1,16 +1,11 @@
 ---
-id: 250
 title: We Can Do Better
 date: 2016-01-31T16:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/2016/02/01/We-Can-Do-Better
-permalink: /2016/01/31/we-can-do-better/
 categories:
-  - Uncategorized
+  - Dharma
 ---
 <p>This is another post adapted from an extended Facebook post, this one from (I think) early December 2015. I think this was one of those rare, exceptionally lucid moments where I captured what I was feeling fairly well, and I stand by it now. I know two kinda political posts from me in a row is a little bit weird and probably slightly uncomfortable and maybe even not what you were looking for following this blog? But, you know, you get a little bit of everything with me, I suppose!</p>
-
+<!--more-->
 <hr />
 
 <p>Sometimes I make the terrible decision of opening my eyes in the morning and, in an effort to wake up a bit more, pull out my phone and open up Facebook. This morning I saw people arguing about another recent shooting, stories about political candidates and their money, racism… We can do better. I realize Facebook is not the best place to gauge this kind of thing, but what really got me going was when I saw someone argue that humans, deep down, are animals that will just kill each other given the chance.</p>

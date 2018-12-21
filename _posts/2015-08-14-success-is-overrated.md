@@ -1,16 +1,11 @@
 ---
-id: 264
 title: Success is Overrated
 date: 2015-08-14T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/productivity/2015/08/15/Success-is-Overrated
-permalink: /2015/08/14/success-is-overrated/
 categories:
-  - Uncategorized
+  - Personal
 ---
 <p>For the past several months (years maybe?), I’ve been reading a lot (and attempting to implement) about how to better promote myself and market myself and network and all the weird Silcon-Valley-etc-online-entrepreneur mumbo-jumbo that goes along with that. Some of the folks that do it seem to get along fine with it but I’ve decided that I’m just… done with it. I’m not interested anymore in trying to convince others that what I’m doing is worthwhile.</p>
-
+<!--more-->
 <p>I would much rather just write music and share it with my small group of friends and family, some of whom care and some of whom don’t. If opportunities come my way, of <em>course</em> I’ll take them, with all the gratitude and enthusiasm they deserve. But I’ve been struggling with the idea of self-promotion ever since I started really trying at it (and before that really). I haven’t even been trying that long, but I’m looking down the long road it’s taking me on, and the road doesn’t look all that enjoyable to me.</p>
 
 <p>I don’t dislike people; on the contrary, I sincerely cherish the company of my friends. I don’t dislike meeting new people; meeting Matthew and Gordon from the <em>Beards, Cats, and Indie Game Audio</em> podcast was a really exciting moment for me, they seem like genuinely kind people, and I look forward to the next time I get to talk with them.</p>

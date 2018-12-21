@@ -1,16 +1,11 @@
 ---
-id: 266
 title: Participation in Music
 date: 2015-07-28T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/07/29/Participation-In-Music
-permalink: /2015/07/28/participation-in-music/
 categories:
-  - Uncategorized
+  - Music
 ---
 <p>Participation in music can sometimes get kind of a bad rap. My tendency is to associate it with somewhat patronizing practice of having the audience clap along or do some kind of call-and-response thing, which in practice usually only goes to show how little said audience remembers from the meager music education many of them probably had.</p>
-
+<!--more-->
 <p>But this isn’t always what was meant by “audience participation” in music. Music being a participatory activity used to be somewhat of a given.</p>
 
 <h2 id="the-ghost-of-music-past">The Ghost of Music Past</h2>

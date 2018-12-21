@@ -1,16 +1,12 @@
 ---
-id: 260
 title: Listen to People You Don’t Like
 date: 2015-09-14T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/self-development/2015/09/15/Listen-to-People-You-Dont-Like
-permalink: /2015/09/14/listen-to-people-you-dont-like/
 categories:
-  - Uncategorized
+  - Dharma
 ---
-<p>I recently listened to <a href="http://fourhourworkweek.com/2015/04/06/glenn-beck/">an interview with Glenn Beck</a>. As you might guess, I’m not a huge fan of the guy, and I was expecting that the interview wouldn’t change my perceptions of him.</p>
 
+<p>I recently listened to <a href="http://fourhourworkweek.com/2015/04/06/glenn-beck/">an interview with Glenn Beck</a>. As you might guess, I’m not a huge fan of the guy, and I was expecting that the interview wouldn’t change my perceptions of him.</p>
+<!--more-->
 <p>Having attempted to listen deeply with an open mind, I can say with some degree of confidence that I still disagree with a lot of what he seems to think, and I think many of his views are misguided. In some ways, he still seems like kind of a jerk. However, I also now see him more as a human, trying his best in the world to make it a better place. In a few areas of his life, I even kind of like the guy.</p>
 
 <p>Yes, you read that correctly: <em>I think there are likeable, admirable aspects of Glenn Beck</em>.</p>

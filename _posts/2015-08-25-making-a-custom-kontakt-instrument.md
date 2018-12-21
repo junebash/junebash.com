@@ -1,16 +1,11 @@
 ---
-id: 263
 title: Making a Custom Kontakt Instrument
 date: 2015-08-25T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/08/26/Making-a-Custom-Kontakt-Instrument
-permalink: /2015/08/25/making-a-custom-kontakt-instrument/
 categories:
-  - Uncategorized
+  - Music
 ---
 <p>Inspired by <a href="https://www.youtube.com/watch?v=MFHIBo3d4Rw">Junkie XL’s intriguing video series</a> on his studio and film work (especially on <em>Mad Max: Fury Road</em>), I decided to make some custom instruments using <a href="http://www.native-instruments.com/en/products/komplete/samplers/kontakt-5/">Native Instruments’ excellent industry-standard sampler Kontakt</a> (don’t buy it at full price; it and Komplete go on sale at least once a year) and some drums I had access to; so far, one small bass drum at the nearby university, and one small bass drum at home that I got for free a few years back.</p>
-
+<!--more-->
 <p>I’ve used these instruments in a few projects now, and I’m actually quite satisfied with how they turned out given the somewhat-impromptu recording setup and my meager experience with Kontakt. I thought I’d give a brief run-down of my process, and hopefully inspire someone else out there to add some unique, personalized sounds to their own music rather than only using presets and commercial libraries.</p>
 
 <h2 id="recording">Recording</h2>

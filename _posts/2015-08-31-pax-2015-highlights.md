@@ -1,16 +1,11 @@
 ---
-id: 262
 title: PAX 2015 Highlights
 date: 2015-08-31T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/games/2015/09/01/PAX-2015-Highlights
-permalink: /2015/08/31/pax-2015-highlights/
 categories:
-  - Uncategorized
+  - Personal
 ---
 <p>PAX is one of my favorite times of year, primarily because up and until recently, it’s where all of my real-life interaction with game industry folks happened, and every year it manages to reinvigorate my love of games and the people that make them. This year was no different.</p>
-
+<!--more-->
 <p>I won’t give you the play by play and painstaking details, but I’ll give you some of my favorite parts in roughly chronological order.</p>
 
 <ul>

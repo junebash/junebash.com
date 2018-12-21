@@ -1,15 +1,10 @@
 ---
-id: 269
 title: On Expectations in Music
 date: 2015-07-06T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/music/2015/07/07/On-Expectations-in-Music
-permalink: /2015/07/06/on-expectations-in-music/
 categories:
-  - Uncategorized
+  - Music
 ---
-<p>I remember a conversation I was having with a couple of friends a few years ago about a particular jazz(-esque) artist (I honestly can’t remember who it was). One friend was a big fan of their interesting take on jazz. The other, not so much. When asked why he wasn’t as into them, he mentioned his experience seeing them live. He had heard this artist was particularly good, and so went to the jazz venue in the area to check them out. The house lights dimmed and the set began quietly and subtly, building slowly. He expected that they would break out into some kind of swing number eventually. But it never came. Their entire set was strange and ambient, tangentially related to his idea of jazz. He was rather disappointed; he came there to hear some <em>jazz</em>, for crying out loud!</p>
+<p>I remember a conversation I was having with a couple of friends a few years ago about a particular jazz(-esque) artist (I honestly can’t remember who it was). One friend was a big fan of their interesting take on jazz. The other, not so much. When asked why he wasn’t as into them, he mentioned his experience seeing them live.<!--more--> He had heard this artist was particularly good, and so went to the jazz venue in the area to check them out. The house lights dimmed and the set began quietly and subtly, building slowly. He expected that they would break out into some kind of swing number eventually. But it never came. Their entire set was strange and ambient, tangentially related to his idea of jazz. He was rather disappointed; he came there to hear some <em>jazz</em>, for crying out loud!</p>
 
 <p>Something similar happened just over a hundred years ago in Paris. The Ballet Russe was preparing its third ballet with the young hotshot Russian composer Igor Stravinsky, collaborating with one of the most respected dancers in ballet, Vaslav Nijinsky. The title of the ballet, <em>Le Sacre du Printemps</em> (<em>The Rite of Spring</em>) implied something beautiful, lush, and sonorous. The aristocratic art crowd of Paris likely expected a beautiful, rather traditional dance piece with clear, easy to follow music. What they got was something quite different.</p>
 

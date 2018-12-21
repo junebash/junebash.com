@@ -1,17 +1,12 @@
 ---
-id: 278
 title: 'Neverending Nightmares &#8211; a review'
 date: 2014-09-28T17:00:00+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.github.io/blog/reviews/2014/09/29/Neverending-Nightmares-a-review
-permalink: /2014/09/28/neverending-nightmares-a-review/
+image: https://s3.amazonaws.com/ksr/projects/622450/photo-main.jpg
 categories:
-  - Uncategorized
+  - "Games & Films"
 ---
-<p><img src="https://s3.amazonaws.com/ksr/projects/622450/photo-main.jpg" alt="Neverending Nightmares" /></p>
 
-<p>Let me get the general ruling out of the way first: this is a great game from a new and promising voice in the indie horror game scene. It tries new things and often does them by its own rules (quite effectively, I must say), while also following in the footsteps of tried and true horror classics. It’s not for everyone, but fans of personal, artistic, exploratory games as well as fans of atmospheric horror (as opposed to action/survival-based horror) should buy, enjoy, and support it. You can currently <a href="http://store.steampowered.com/app/253330/">buy it on Steam for PC/Mac/Linux</a> or on Ouya (haha…).</p>
+<p>Let me get the general ruling out of the way first: this is a great game from a new and promising voice in the indie horror game scene. <!--more--> It tries new things and often does them by its own rules (quite effectively, I must say), while also following in the footsteps of tried and true horror classics. It’s not for everyone, but fans of personal, artistic, exploratory games as well as fans of atmospheric horror (as opposed to action/survival-based horror) should buy, enjoy, and support it. You can currently <a href="http://store.steampowered.com/app/253330/">buy it on Steam for PC/Mac/Linux</a> or on Ouya (haha…).</p>
 
 <p>That said, the game is not without its flaws, and a number of them have to do with pacing.</p>
 
