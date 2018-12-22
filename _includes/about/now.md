@@ -1,4 +1,6 @@
-## Now <small>- a short overview of how I'm spending my time</small>
+## Now
+{: .display-4}
+### <small>a short overview of how I'm spending my time</small>
 
 - A feature-length **horror film score** (release date TBA)
 - Keeping my eyes and ears open for the right game to come my way
@@ -11,5 +13,5 @@
 - Various other microprojects here and there
 - Meditating lots
 
-[updated 2018-11-05]
+*[updated 2018-11-05]*
 

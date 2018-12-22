@@ -7,10 +7,9 @@ sass:
   load_paths:
     - _sass
     - node_modules
-exclude: []
 assets: /assets
 images: /assets/images
-permalink: /:categories/:year/:month/:day/:slug/index.html
+permalink: /blog/:slug/index.html
 defaults:
   -
     scope:
@@ -35,3 +34,4 @@ exclude:
   - node_modules
   - .DS_Store
   - .gitignore
+  - wp-content

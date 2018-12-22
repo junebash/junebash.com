@@ -1,4 +1,5 @@
 ## Services
+{: .display-4}
 
 ### Dynamic music composition and sound design
 {: .service-heading}

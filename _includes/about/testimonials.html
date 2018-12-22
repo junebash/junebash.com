@@ -1,6 +1,7 @@
 <!-- engine:django -->
-<h2>Testimonials</h2>
+<h2 class="display-4">Testimonials</h2>
 
+<hr/>
 {% for test in site.data.testimonials %}
   <blockquote class="blockquote">
     {{ test.text | markdownify }}
@@ -8,4 +9,5 @@
   <p class="quote-source">
     {{ test.source | markdownify }}
   </p>
+  <hr/>
 {% endfor %}

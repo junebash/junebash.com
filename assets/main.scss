@@ -82,6 +82,7 @@ figcaption {
 div.main {
     margin-bottom: 0;
     padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 
 //------
@@ -183,9 +184,9 @@ div.jumbotron {
     }
 }
 
-//------------
-// ABOUT PAGE
-//------------
+//-------
+// ABOUT
+//-------
 
 .service-heading {
     text-decoration: underline;
@@ -228,7 +229,22 @@ h1.title small {
 
 p.post-date {
     padding-left: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.3em;
     font-style: italic;
-    font-size: 1em;
+    font-size: 0.8em;
+}
+
+a.blog-link {
+    color: $white;
+}
+
+p.read-more {
+    font-style: italic;
+    font-size: 0.8em;
+    padding-left: 1rem;
+}
+
+h2.post-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
