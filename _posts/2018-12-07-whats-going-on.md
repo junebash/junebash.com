@@ -30,7 +30,7 @@ And of course I'm still writing music… and even enjoying it most of the time. 
 
 ## As For the Future
 
-I'm also still co-organizing the semi-annual Audio Bash event, in which the Seattle and Vancouver game audio communities meet in Bellingham. I still help out with the Full Indie Summit in Vancouver every year. I'm still have a significant interest in games, game music, and game audio. I'll still continue to develop my skills in that area at a comfortable pace. Perhaps this makes me unprofessional, a ~~ _hobbyist_ at best.
+I'm also still co-organizing the semi-annual Audio Bash event, in which the Seattle and Vancouver game audio communities meet in Bellingham. I still help out with the Full Indie Summit in Vancouver every year. I'm still have a significant interest in games, game music, and game audio. I'll still continue to develop my skills in that area at a comfortable pace. Perhaps this makes me unprofessional, a ~_hobbyist_~ at best.
 
 I don't care.
 
@@ -41,3 +41,6 @@ I also know that, despite my lack of success as I once envisioned it, my current
 Rather than ramble on any further, I'll just end with this quote by Jon Kabat-Zinn:
 
 > The only time you ever have in which to learn anything or see anything or feel anything, or express any feeling or emotion, or respond to an event, or grow, or heal, is this moment, because this is the only moment any of us ever gets. You're here now; you're only alive in this moment.
+
+[1]: https://twitter.com/JonBash/status/1059942909020196864
+[2]: https://twitter.com/JonBash/status/1062521937107181569

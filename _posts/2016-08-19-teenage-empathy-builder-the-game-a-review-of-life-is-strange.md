@@ -1,10 +1,6 @@
 ---
 title: 'Teenage Empathy Builder: The Game — A Review of “Life is Strange”'
 date: 2016-08-19T04:30:44+00:00
-author: jonbash
-layout: post
-guid: http://jonbash.com/?p=423
-permalink: /2016/08/19/teenage-empathy-builder-the-game-a-review-of-life-is-strange/
 image: /assets/images/life-is-strange.jpg
 categories:
   - "Games & Films"

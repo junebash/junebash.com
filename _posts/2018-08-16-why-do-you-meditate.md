@@ -1,12 +1,7 @@
 ---
-id: 545
 title: '&#8220;Why Do You Meditate?&#8221;'
 date: 2018-08-16T20:14:40+00:00
-author: jonbash
 excerpt: "This isn't a religious faith about some heavenly realm I'll supposedly go to when I die. It's about this one life I have and making it the best it can be for me and for the rest of the world."
-layout: post
-guid: http://jonbash.com/?p=545
-permalink: /2018/08/16/why-do-you-meditate/
 categories:
   - Dharma
 ---
