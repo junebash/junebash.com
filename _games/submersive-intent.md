@@ -1,8 +1,8 @@
 ---
 title: Submersive Intent
 dev: Tim Cooper
-image:
-released: 2015
+image: submersive-intent.png
+released: 2015-05
 link: https://bacongamejam.org/jams/bacongamejam-09/390/
 ---
 
