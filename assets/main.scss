@@ -60,6 +60,9 @@ main {
 ul {
     margin-bottom: 0;
     padding-bottom: 1rem;
+    li ul {
+        padding-bottom: 0;
+    }
 }
 
 /* img.no-padding, div.no-padding, iframe.no-padding { */
@@ -216,6 +219,14 @@ p.quote-source {
 
 .instrumentation {
     list-style-type: none;
+}
+
+//---------------------
+// GAME AND FILM MUSIC
+//---------------------
+
+iframe#game-playlist {
+    max-width: 800px;
 }
 
 //------
