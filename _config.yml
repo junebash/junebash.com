@@ -1,6 +1,10 @@
 title: "Jon Bash -- composer, sound designer, etc"
 author: Jon Bash
 email: Jon@JonBash.com
+twitter: "@jonbash"
+mastodon: "@jonbash@mastodon.social"
+youtube: jonbashjonbash
+github: jonbash
 baseurl: null
 excerpt_separator: <!--more-->
 sass:
@@ -9,7 +13,7 @@ sass:
     - node_modules
 assets: /assets
 images: /assets/images
-permalink: /blog/:slug/index.html
+permalink: /blog/:slug/
 defaults:
   -
     scope:
@@ -28,7 +32,7 @@ collections:
   - concert-music
   - other-music
 plugins:
-  - jekyll-email-protect
+  - jekyll-feed
 exclude:
   - temp_assets
   - node_modules

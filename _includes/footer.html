@@ -1,22 +1,25 @@
 <!-- -*- engine:django -*- -->
 <footer class="footer" id="footer">
-    <div class="container" >
-        <div class="d-flex bd-highlight mb-3 flex-wrap">
-            <div class="p-2 bd-highlight">
-              <small><i>made with love by Jon using Jekyll and Bootstrap</i></small>
-            </div>
-            <div class="ml-auto p-2 bd-highlight">
-                <ul class="list-inline">
-                    <li class="list-inline-item">#</li>
-                    <li class="list-inline-item">#</li>
-                    <li class="list-inline-item">#</li>
-                    <li class="list-inline-item">#</li>
-                    <li class="list-inline-item">#</li>
-                </ul>
-            </div>
-            <div class="p-2 bd-highlight">
-              © 2018 Jon Bash
-            </div>
-        </div>
+  <div class="container" >
+    <div class="d-flex bd-highlight mb-3 flex-wrap">
+      <div class="p-2 bd-highlight">
+        <small><i>made with love by Jon using Jekyll and Bootstrap</i></small>
+      </div>
+      <div class="ml-auto p-2 bd-highlight">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="mailto:{{ site.email }}" data-toggle="tooltip" title="Email me! ({{ site.email }})"><i class="far fa-envelope"></i></a></li> <!-- email -->
+          <li class="list-inline-item"><a href="http://jonbash.bandcamp.com/" data-toggle="tooltip" title="Bandcamp!" target="_blank"><i class="fab fa-bandcamp"></i></a></li> <!-- bandcamp -->
+          <li class="list-inline-item"><a href="http://twitter.com/jonbash" data-toggle="tooltip" title="Twitter! ({{ site.twitter }})" target="_blank"><i class="fab fa-twitter"></i></a></li> <!-- twitter -->
+          <li class="list-inline-item"><a href="http://mastodon.social/@jonbash" data-toggle="tooltip" title="Mastodon! ({{ site.mastodon }})" target="_blank"><i class="fab fa-mastodon"></i></a></li> <!-- mastodon -->
+          <li class="list-inline-item"><a href="http://github.com/jonbash" data-toggle="tooltip" title="Github! ({{ site.github }})" target="_blank"><i class="fab fa-github"></i></a></li> <!-- github -->
+          <li class="list-inline-item"><a href="http://youtube.com/user/jonbashjonbash" data-toggle="tooltip" title="YouTube! ({{ site.youtube }})" target="_blank"><i class="fab fa-youtube"></i></a></li> <!-- youtube -->
+          <li class="list-inline-item"><a href="/feed.xml" data-toggle="tooltip" title="Blog RSS feed!"><i class="fas fa-rss"></i></a></li> <!-- rss -->
+          <li class="list-inline-item"><a href="#newsletter-modal" data-toggle="modal" role="button" title="Email Newsletter!" data-target="#newsletter-modal"><i class="fas fa-mail-bulk"></i></a></li> <!-- mailchimp -->
+        </ul>
+      </div>
+      <div class="p-2 bd-highlight">
+        © 2018 Jon Bash
+      </div>
     </div>
+  </div>
 </footer>
