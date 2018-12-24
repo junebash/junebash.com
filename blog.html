@@ -4,6 +4,11 @@ title: Blog Posts
 permalink: /blog/
 ---
 
+<div id="blog-intro">
+  <p class="lead">This space is for news and ponderings about music, games, meditation, life, and stuff. It's updated erratically.</p>
+</div>
+{% include subscribe.html %}
+<hr/>
 {% for post in site.posts %}
   <h2 class="post-title">
     <a href="{{ post.url }}">
