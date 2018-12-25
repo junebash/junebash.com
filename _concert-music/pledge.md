@@ -1,0 +1,18 @@
+---
+title: The Pledge of Allegiance
+ensemble-type: vocal quartet
+completed: 2012
+premiered: 2013
+youtube: '<iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/aKSFngArucs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+length: "2'"
+instrumentation:
+  - 4 voices (SATB)
+---
+
+> I pledge allegiance to my Flag and the Republic for which it stands, one nation indivisible, with liberty and justice for all.
+
+Thus read the original text written by Francis Bellamy, a Christian socialist and Baptist minister in 1892. The text has since gone through several transformations to reach its modern form, including the most famous addition of the phrase “under God,” which began to see usage in the late 40s and early 50s.
+
+The current text of the Pledge, and the version you (more or less) hear here, reads as such:
+
+> I pledge allegiance to the Flag of the United States of America, and to the Republic for which it stands, one Nation under God, indivisible, with liberty and justice for all.

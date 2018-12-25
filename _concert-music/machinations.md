@@ -1,7 +1,7 @@
 ---
 title: Machinations
 ensemble-type: wind symphony
-completed: 2012
+completed: 2015
 premiered: 2015
 soundcloud: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/166553282&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
 length: "5'"

@@ -235,6 +235,20 @@ p.quote-source {
     list-style-type: none;
 }
 
+h3.piece-title {
+    font-size: 19px;
+    button {
+        font-size: 25px;
+        //color: $white;
+        small {
+            font-size: 0.6em;
+        }
+        &:hover {
+            //color: $off-white;
+        }
+    }
+}
+
 //---------------------
 // GAME AND FILM MUSIC
 //---------------------
