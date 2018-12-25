@@ -2,6 +2,7 @@ SHELL := /bin/bash
 NPM := npm
 VENDOR_DIR = assets/vendor/
 JEKYLL := bundle exec jekyll
+PUBLIC_WWW := /home/public
 
 PROJECT_DEPS := package.json
 
@@ -38,3 +39,6 @@ build: include-npm-deps
 
 serve: include-npm-deps
 	$(JEKYLL) serve
+
+deploy: include-npm-deps
+	JEKYLL_ENV=production $(JEKYLL) build --destination $(PUBLIC_WWW)
