@@ -11,7 +11,9 @@ permalink: /games-films/
 <div id="games">
   <h2 class="display-4">Games</h2>
   <p class="lead">Here's a playlist of music I've made for games or that could work well in games...</p>
-  <iframe id="game-playlist" class="no-padding" src="https://www.orfium.com/embedded/playlist/267962/video-game-music-jon-bash/?ref=undefined" width="100%" height="405px" style="border: none;"></iframe>
+  <div class="mx-auto" style="max-width: 600px;">
+    <iframe id="game-playlist" class="no-padding" src="https://www.orfium.com/embedded/playlist/267962/video-game-music-jon-bash/?ref=undefined" width="100%" height="405px" style="border: none;"></iframe>
+  </div>
   <p class="lead">... and these are games I've made music and/or sounds for!</p>
   <hr/>
   {% assign games = site.games | sort: 'released' | reverse %}
@@ -25,7 +27,7 @@ permalink: /games-films/
         <p class="game-dev lead">by {{ game.dev }}</p>
         {{ game.content | markdownify }}
         {% if game.link %}
-          <a href="{{ game.link }}"><button class="btn btn-primary" type="submit">Play the game!</button></a>
+          <a href="{{ game.link }}" class="btn btn-primary" role="button">Play the game!</a>
         {% endif %}
       </div>
     </div>
@@ -33,10 +35,42 @@ permalink: /games-films/
   {% endfor %}
 </div>
 <div id="films">
+  <h2 class="display-4">Films</h2>
   {% assign films = site.films | sort: 'released' | reverse %}
-  {% for film in site.films %}
-    <div class="film" id="{{ film.slug }}">
-      <h2>{{ film.title }}</h2>
+  {% for film in films %}
+    <div class="film row" id="{{ film.slug }}">
+      <div class="film-vid col-md">
+        <div class="youtube-embed no-padding">
+          {{ film.video }}
+        </div>
+      </div>
+      <div class="film-info col-md">
+        <h3 class="film-title">{{ film.title }}{% if film.feature != true %} <small>(short)</small>{% endif %}{% if film.promo == true %} <small>(promo)</small>{% endif %}</h2>
+          <p class="lead film-prod-co">
+            by {{ film.company }}
+          </p>
+          {{ film.content | markdownify }}
+          {% if film.amazon %}
+            <a class="btn btn-primary" href="{{ film.amazon }}" role="button">Watch on Amazon!</a>
+          {% endif %}
+          {% if film.itunes %}
+            <a class="btn btn-primary" href="{{ film.itunes }}" role="button">Watch on iTunes!</a>
+          {% endif %}
+          {% if film.play %}
+            <a class="btn btn-primary" href="{{ film.play }}" role="button">Watch on Google!</a>
+          {% endif %}
+          <br/>
+          {% if film.imdb %}
+            <a class="btn btn-outline-primary" href="{{ film.imdb }}" role="button">IMDB</a>
+          {% endif %}
+          {% if film.film-site %}
+            <a class="btn btn-outline-primary" href="{{ film.imdb }}" role="button">Film website</a>
+          {% endif %}
+          {% if film.co-site %}
+            <a class="btn btn-outline-primary" href="{{ film.co-site }}" role="button">{{ film.company }} website</a>
+          {% endif %}
+      </div>
     </div>
+    <hr/>
   {% endfor %}
 </div>
