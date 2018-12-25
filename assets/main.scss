@@ -65,6 +65,10 @@ ul {
     }
 }
 
+.btn {
+    margin-bottom: 5px;
+}
+
 /* img.no-padding, div.no-padding, iframe.no-padding { */
 /*     padding-left: 0; */
 /*     padding-right: 0; */
@@ -154,6 +158,16 @@ main {
 
 header, main, footer {
     flex-shrink: 0;
+}
+
+ul.social-buttons {
+    font-size: 2em;
+    li a {
+        color: $white;
+        &:hover {
+            color: $off-white;
+        }
+    }
 }
 
 //------------

@@ -1,12 +1,15 @@
 <!-- -*- engine:django -*- -->
 <footer class="footer" id="footer">
   <div class="container" >
-    <div class="d-flex bd-highlight mb-3 flex-wrap">
-      <div class="p-2 bd-highlight">
-        <small><i>made with love by Jon using Jekyll and Bootstrap</i></small>
+    <div class="row">
+      <div class="col">
+        <p><small><i>made with love by Jon using Jekyll and Bootstrap</i></small></p>
+        <p>
+          © 2018 Jon Bash
+        </p>
       </div>
-      <div class="ml-auto p-2 bd-highlight">
-        <ul class="list-inline">
+      <div class="col">
+        <ul class="list-inline social-buttons text-right">
           <li class="list-inline-item"><a href="mailto:{{ site.email }}" data-toggle="tooltip" title="Email me! ({{ site.email }})"><i class="far fa-envelope"></i></a></li> <!-- email -->
           <li class="list-inline-item"><a href="http://jonbash.bandcamp.com/" data-toggle="tooltip" title="Bandcamp!" target="_blank"><i class="fab fa-bandcamp"></i></a></li> <!-- bandcamp -->
           <li class="list-inline-item"><a href="http://twitter.com/jonbash" data-toggle="tooltip" title="Twitter! ({{ site.twitter }})" target="_blank"><i class="fab fa-twitter"></i></a></li> <!-- twitter -->
@@ -16,9 +19,6 @@
           <li class="list-inline-item"><a href="/feed.xml" data-toggle="tooltip" title="Blog RSS feed!"><i class="fas fa-rss"></i></a></li> <!-- rss -->
           <li class="list-inline-item"><a href="#newsletter-modal" data-toggle="modal" role="button" title="Email Newsletter!" data-target="#newsletter-modal"><i class="fas fa-mail-bulk"></i></a></li> <!-- mailchimp -->
         </ul>
-      </div>
-      <div class="p-2 bd-highlight">
-        © 2018 Jon Bash
       </div>
     </div>
   </div>
