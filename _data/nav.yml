@@ -5,8 +5,8 @@
       url: /concert-music/
     - title: Games & Films
       url: /games-films/
-    - title: Other Music (PENDING)
-      url: '#'
+    - title: Other Music
+      url: /other-music/
 - title: About
   url: /about/
 - title: Blog
