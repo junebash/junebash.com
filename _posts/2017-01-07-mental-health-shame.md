@@ -3,10 +3,9 @@ title: Diminishing the Shame of My Mental Health
 date: 2017-01-07
 categories:
   - Personal
-excerpt: "The fun adventures of trying to get off anti-depressants and deal with discontinuation side-effects, and the importance of the normalization of mental health"
 ---
 
-As I think I've mentioned before here, I struggle with ADHD, but have only had a formal diagnosis for just over a year. During that year, with the advising of my doctor, I've been taking a small dosage of venlafaxine (aka Effexor), which is usually used for treatment of anxiety and depression.
+As I think I've mentioned before here, I struggle with ADHD, but have only had a formal diagnosis for just over a year.<!--more--> During that year, with the advising of my doctor, I've been taking a small dosage of venlafaxine (aka Effexor), which is usually used for treatment of anxiety and depression.
 
 This seemed to be helping a little for awhile (with the strange but manageable side-effect of making my whole body itch intermittently), but its effectiveness seems to have waned over the past several months. At first we tried increasing the dosage, which didn't seem to help. 
 

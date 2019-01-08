@@ -3,10 +3,9 @@ title: "On Humanizing Donald Trump"
 date: 2016-09-25
 categories:
   - Dharma
-excerpt: "Is Donald Trump worth our empathy?"
 ---
 
-Somewhat recently (as of this writing), presidential candidate Donald Trump went on *The Tonight Show*, where Jimmy Fallon ultimately played political softball with him, culminating in Jimmy playfully tussling Donald’s hair. It didn’t take long for a plethora of Twitter tirades and blogger think-pieces to respond to this, decrying Fallon’s humanization of Donald Trump, how he didn’t press him with any tough questions and simply allowed him to be his gross self.
+Somewhat recently (as of this writing), presidential candidate Donald Trump went on *The Tonight Show*, where Jimmy Fallon ultimately played political softball with him, culminating in Jimmy playfully tussling Donald’s hair.<!--more--> It didn’t take long for a plethora of Twitter tirades and blogger think-pieces to respond to this, decrying Fallon’s humanization of Donald Trump, how he didn’t press him with any tough questions and simply allowed him to be his gross self.
 
 I definitely see where these folks are coming from. I am *certainly* not a fan of Trump and his flagrant misogyny, racism, lack of compassion, disregard for the truth, and manipulation of vulnerable populations. But there’s something about this attack on Jimmy Fallon for humanizing him that rubs me the wrong way.
 

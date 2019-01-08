@@ -1,12 +1,11 @@
 ---
 title: "On Tony Robbins"
 date: 2016-09-10
-excerpt: "Tony Robbins is an interesting, successful, and sometimes genuinely helpful guy... but the keyword there is 'sometimes.'"
 categories:
   - Productivity
 ---
 
-Tony Robbins is... an interesting guy. To say the self-help guru is successful would, by most common standards, be an understatement. He makes [oodles and oodles of money][how much] (which is not surprising considering how much his [products][] and [seminars][] cost). Very famous and successful folks [attribute at least some of their success][testimonials] to his coaching. He seems pretty happy. And though it's incredibly easy to get incredibly turned off by his in-your-face, over-enthusiastic, mega-extrovert, never-shuts-the-hell-up style, it's clear that at least *some* of his ideas work *some* of the time.
+Tony Robbins is... an interesting guy. To say the self-help guru is successful would, by most conventional standards, be an understatement.<!--more--> He makes [oodles and oodles of money][how much] (which is not surprising considering how much his [products][] and [seminars][] cost). Very famous and successful folks [attribute at least some of their success][testimonials] to his coaching. He seems pretty happy. And though it's incredibly easy to get incredibly turned off by his in-your-face, over-enthusiastic, mega-extrovert, never-shuts-the-hell-up style, it's clear that at least *some* of his ideas work *some* of the time.
 
 The keyword there is "some." A lot of his techniques are based on *neuro-linguistic programming* (or NLP) ([a therapy technique that has been all-but-proven to be bullshit][nlp]), which Robbins has spun into *neuro-associative conditioning* (NAC). The *conditioning* part of that buzzword salad basically means that you can't just "program" drastic changes and then be done with it; you have to condition it so that it stays in shape like a muscle. And wouldn't you know, this is *great* news for [Tony and his empire of expensive life coaches][life coaches]!
 

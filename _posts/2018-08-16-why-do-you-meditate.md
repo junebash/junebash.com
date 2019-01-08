@@ -1,11 +1,11 @@
 ---
 title: '&#8220;Why Do You Meditate?&#8221;'
 date: 2018-08-16T20:14:40+00:00
-excerpt: "This isn't a religious faith about some heavenly realm I'll supposedly go to when I die. It's about this one life I have and making it the best it can be for me and for the rest of the world."
 categories:
   - Dharma
 ---
-This is a complicated question to answer, but I think it’s worth answering for those that care. I worry that it will come across as preachy, but my point is not to convince you to meditate and become a Buddhist; I just want to explain why in the hell I would bother to spend so many hours sitting on my ass doing nothing. Also I enjoy talking about it and don't get many opportunities to do so, so here's an explosion of words.
+
+This is a complicated question to answer, but I think it’s worth answering for those that care.<!--more--> I worry that it will come across as preachy, but my point is not to convince you to meditate and become a Buddhist; I just want to explain why in the hell I would bother to spend so many hours sitting on my ass doing nothing. Also I enjoy talking about it and don't get many opportunities to do so, so here's an explosion of words.
 
 <hr />
 

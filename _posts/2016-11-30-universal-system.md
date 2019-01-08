@@ -3,10 +3,9 @@ title: A Universal System
 date: 2016-11-30
 categories:
   - Dharma
-excerpt: "The universe seems to be self-correcting. Not in an intelligent way; more like in a programmatic way."
 ---
 
-A lot of this post is going to be me merely thinking on paper, or attempting to follow ideas to their logical conclusions, even though they may seem a bit wacky at first. I *desperately* encourage anyone with more knowledge or wisdom in these areas than me to chime in down in the comments section. I'll update the post with appropriate attribution if there are any important corrections or additions to be made.
+A lot of this post is going to be me merely thinking on paper, or attempting to follow ideas to their logical conclusions, even though they may seem a bit wacky at first.<!--more--> I *desperately* encourage anyone with more knowledge or wisdom in these areas than me to chime in down in the comments section. I'll update the post with appropriate attribution if there are any important corrections or additions to be made.
 
 ---
 

@@ -1,12 +1,11 @@
 ---
 title: "The Value of Friends -- a love letter"
-excerpt: Every one of you is a goddamned miracle.
 categories:
   - Personal
 date: 2017-02-13
 ---
 
-In the past, I've found it very difficult to speak openly about how much I appreciate people without my tongue planted firmly in my cheek. Call it a patriarchal, hypermasculinized upbringing in the modern world, call it a manifestation of a culture of unending irony... overcoming it is difficult, and I have a lot of work left to do.
+In the past, I've found it very difficult to speak openly about how much I appreciate people without my tongue planted firmly in my cheek.<!--more--> Call it a patriarchal, hypermasculinized upbringing in the modern world, call it a manifestation of a culture of unending irony... overcoming it is difficult, and I have a lot of work left to do.
 
 This weekend I listened to an episode of the fascinating podcast *On Being*, [a conversation between Krista Tippett and Alain de Botton about love][1]. To say the least, it was a breath of fresh air. In listening I started thinking about all of the people I know--- the people I rarely see because they live over an hour away, the people I see several times a day, the people I haven't seen in years, and the people I pass by and with whom I share a few words (if that)--- every one of you is a **goddamned miracle**.
 
@@ -62,4 +61,4 @@ And to all of my friends, I love you. And maybe this is a weird and convoluted w
 
 
 [1]: http://onbeing.org/programs/alain-de-botton-the-true-hard-work-of-love-and-relationships/
-[2]: http://jonbash.com/2017/02/09/on-synthwave/
+[2]: http://jonbash.com/blog/on-synthwave/
