@@ -1,12 +1,11 @@
 ---
 title: 'To Be "Secularly Spiritual"'
-excerpt: Spirituality does not require believing anything that cannot be proven.
 categories:
   - Dharma
 date: 2017-03-24
 ---
 
-The word "spiritual" has a really icky connotation among folks that consider themselves to be any matter of skeptical, agnostic, atheist, serious, secular, scientific, or even just modern. It conjures images of the those hippie stores that sell lots of Deepak Chopra books, New Age synth meditation soundtracks, and Chakra-improving tea; of upper middle class white people that say "Namaste" without a hint of self-awareness or irony; or of religious folk who wear said spirituality rather loudly on their sleeves.
+The word "spiritual" has a really icky connotation among folks that consider themselves to be any matter of skeptical, agnostic, atheist, serious, secular, scientific, or even just modern.<!--more--> It conjures images of the those hippie stores that sell lots of Deepak Chopra books, New Age synth meditation soundtracks, and Chakra-improving tea; of upper middle class white people that say "Namaste" without a hint of self-awareness or irony; or of religious folk who wear said spirituality rather loudly on their sleeves.
 
 But before modern times, before the 20th century cracked the whole concept of religion wide open (particularly in Europe), spirituality had a practical function as well. Spirituality was a *practice* that brought peace to people's lives in a way that their more "worldly" activities could not. We now know that many of the various religious systems of beliefs still widely held today around the world are deeply flawed and at odds with the scientific understanding of the universe. The general impression seems to be that science has supplanted religion. However, science and rationality alone have thus far largely failed to provide peace to a large portion of skeptics (or the more doubtful religious).
 
@@ -16,7 +15,7 @@ And yet, science sometimes cannot yet be directly experienced in the same way th
 
 Finding any kind of meaning in all of this is quite possibly an entirely futile endeavor. Still, finding some sense of peace (or ease, or acceptance, or perhaps righteousness... or yes, even *spirituality*) seems to remain necessary in order to determine our best actions as we work our ways forward in this world. The past several months have been trying times in the USA (and elsewhere, I'm sure) for people that are not used to trying times. We don't have to find solace in religious dogmas, in unsustainable and untrue belief systems.
 
-Perhaps the word "spiritual" is a bit doomed for now (perhaps I could have chosen a better name for this website); it's still difficult to separate it from its woo-woo connotations. Perhaps it's high time the word be reclaimed. Or perhaps we can disregard the language and focus on what it points to.
+Perhaps the word "spiritual" is a bit doomed for now; it's still difficult to separate it from its woo-woo connotations. Perhaps it's high time the word be reclaimed. Or perhaps we can disregard the language and focus on what it points to.
 
 Regardless, spirituality remains a very personal, even intimate endeavor. I don't blame anyone for getting a little bit cagey around the subject. I find it fascinating. You don't have to. You don't have to even pursue any kind of spiritual practice if it doesn't interest you, so long as you're trying to act well in the world. If it *does* interest you though, I encourage you to delve into whatever secular spiritual practices you can find.
 

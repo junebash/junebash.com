@@ -1,12 +1,11 @@
 ---
 title: Bringing a Bit of Mindfulness to Social Media
-excerpt: "This idea isn't particularly new or exciting, but for me at least, a reminder is well overdue."
 date: 2017-03-05
 categories:
   - Dharma
 ---
 
-When I wake up in the morning, I often find myself somewhat mindlessly picking up my phone and scrolling through social media. I don't think this is terribly uncommon. If I don't have a strict agenda, I can sometimes find myself doing this for over an hour. I tell myself I'm letting my mind wake up to the day, catching up... but I really don't think there's a lot of value to it. Sure, there are often small delights that friends share, or something particularly noteworthy, or a news story that I should be aware of. More often that not, it's just chatter. There is sometimes value to chatter, but I'm not sure it should be the first thing my waking mind experiences every morning.
+When I wake up in the morning, I often find myself somewhat mindlessly picking up my phone and scrolling through social media. I don't think this is terribly uncommon.<!--more--> If I don't have a strict agenda, I can sometimes find myself doing this for over an hour. I tell myself I'm letting my mind wake up to the day, catching up... but I really don't think there's a lot of value to it. Sure, there are often small delights that friends share, or something particularly noteworthy, or a news story that I should be aware of. More often that not, it's just chatter. There is sometimes value to chatter, but I'm not sure it should be the first thing my waking mind experiences every morning.
 
 Worst of all is the state of my mind while doing this though, or perhaps the lack of any mind state. It's usually completely mindless. I do it without really realizing it. Before long, I'll have spent a good portion of my morning reading the idle thoughts of others. At the same time I find myself rushing to find a spare moment to compose, to think, to relax, to do anything I care about.
 
