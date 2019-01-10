@@ -2,6 +2,7 @@
 title: "What's Going On?"
 categories:
   - News
+  - Personal
 ---
 
 I want to use this space to give a bit of an update on where my life and career are at, for anyone that happens across this for any reason. <!--more-->
