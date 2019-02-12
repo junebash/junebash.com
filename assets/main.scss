@@ -144,6 +144,7 @@ body {
 div.social-stuff ul {
     float: right;
 }
+
 html, body {
     width: 100%;
     height: 100%;
@@ -169,6 +170,7 @@ ul.social-buttons {
             color: $off-white;
         }
     }
+    text-rendering: optimizeLegibility;
 }
 
 //------------
