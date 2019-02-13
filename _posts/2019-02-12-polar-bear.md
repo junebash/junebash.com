@@ -4,6 +4,7 @@ date: 2019-02-12 15:11
 categories:
   - News
   - Music
+  - Micro
 ---
 
 A couple of years ago, my friend Silas Stewart recorded an EP of classical music featuring percussion. He wrote one of the pieces, I wrote two, and he performed on everything with a slew of friends. One of the engineers for that session recently asked if he could sample one of my pieces, [*Evocations* for alto saxophone and percussion](http://jonbash.com/concert-music/), for a track by his hip-hop group [Lamarr Family Values](https://soundcloud.com/lamarr-family-values). I'm pretty stoked about how it turned out! Check it out.
