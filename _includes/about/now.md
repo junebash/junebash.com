@@ -6,8 +6,9 @@
 - **Teaching music classes** at Western Washington University
 - [Trying to stay focused on less rather than more](https://sivers.org/subtract){:target="_blank"}
 - Co-organizing the semiannual **[Game Audio Bash](http://eepurl.com/cAOEzH){:target="_blank"}** in Bellingham, WA every January and July
-- Various other microprojects here and there
+- Various other microprojects here and there, along with some to-be-announced things
 - [Meditating lots](https://www.goodreads.com/book/show/25942786-the-mind-illuminated){:target="_blank"}
+- [Exercising lots](https://www.fitnessblender.com){:target="_blank"}
 
-*[updated 2019-01-15]*
+*[updated 2019-02-17]*
 
