@@ -18,27 +18,17 @@ check:
 		--assume-extension \
 		_site
 
-install: $(PROJECT_DEPS)
-	$(NPM) install
+install:
 	bundle install
 
-update: $(PROJECT_DEPS)
-	$(NPM) update
+update:
 	bundle update
 
-include-npm-deps:
-	mkdir -p $(VENDOR_DIR)
-	cp node_modules/jquery/dist/jquery.min.js $(VENDOR_DIR)
-	cp node_modules/popper.js/dist/umd/popper.min.js $(VENDOR_DIR)
-	cp node_modules/popper.js/dist/umd/popper.min.js.map $(VENDOR_DIR)
-	cp node_modules/bootstrap/dist/js/bootstrap.min.js $(VENDOR_DIR)
-	cp node_modules/bootstrap/dist/js/bootstrap.min.js.map $(VENDOR_DIR)
-
-build: include-npm-deps
+build:
 	JEKYLL_ENV=production $(JEKYLL) build
 
-serve: include-npm-deps
+serve:
 	$(JEKYLL) serve
 
-deploy: include-npm-deps
+deploy:
 	JEKYLL_ENV=production $(JEKYLL) build --destination $(PUBLIC_WWW)
