@@ -25,7 +25,7 @@ update:
 	bundle update
 
 build:
-	JEKYLL_ENV=production $(JEKYLL) build
+	JEKYLL_ENV=production $(JEKYLL) build -I
 
 serve:
 	$(JEKYLL) serve
