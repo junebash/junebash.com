@@ -1,10 +1,6 @@
 SHELL := /bin/bash
-NPM := npm
-VENDOR_DIR = assets/vendor/
 JEKYLL := bundle exec jekyll
 PUBLIC_WWW := /home/public
-
-PROJECT_DEPS := package.json
 
 .PHONY: all clean install update
 
