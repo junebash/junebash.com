@@ -28,5 +28,5 @@ serve:
 	$(JEKYLL) serve
 
 deploy:
-	bundle install --gemfile=$(DEPLOY_REPO)
+	# bundle install --gemfile=$(DEPLOY_REPO)
 	JEKYLL_ENV=production $(JEKYLL) build --source $(DEPLOY_REPO) --destination $(PUBLIC_WWW)
