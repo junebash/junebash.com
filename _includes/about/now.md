@@ -3,10 +3,9 @@
 ### <small>a short overview of how I'm spending my time</small>
 
 - Preparing to [transition to a career in **software development**]({{ "/blog/career-change/" | absolute_url }})
-- Slowly beginning the process of writing a **new piece for wind ensemble**
-- Editing scores and parts for my friend and mentor [Roger Briggs](http://rogerbriggs.com){:target="_blank"}
+- In the midst of writing *two* pieces for wind ensemble!
 - Playing with **[LOVE2D](https://love2d.org){:target="_blank"}**, building my first game as a developer/designer (in addition to sound & music)
-- Co-organizing the semiannual **[Game Audio Bash](http://eepurl.com/cAOEzH){:target="_blank"}** in Bellingham, WA every January and July
-- [Meditating lots](https://www.goodreads.com/book/show/25942786-the-mind-illuminated){:target="_blank"}
+- Meditating lots
+- Co-organizing the annual **[Game Audio Bash](http://eepurl.com/cAOEzH){:target="_blank"}** in Bellingham, WA every summer
 
-*[updated 2019-06-17]*
+*[updated 2019-08-13]*
