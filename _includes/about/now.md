@@ -1,6 +1,6 @@
 ## Now
 {: .display-4}
-### <small>a short overview of how I'm spending my time</small>
+### <small>a short overview of how I'm currently spending my time</small>
 
 - Preparing to [transition to a career in **software development**]({{ "/blog/career-change/" | absolute_url }})
 - Slowly beginning the process of writing a **new piece for wind ensemble**
