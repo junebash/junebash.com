@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 JEKYLL := bundle exec jekyll
 PUBLIC_WWW := /home/public
+DEPLOY_REPO := /home/private/site.git
 
 .PHONY: all clean install update
 
@@ -27,4 +28,5 @@ serve:
 	$(JEKYLL) serve
 
 deploy:
-	JEKYLL_ENV=production $(JEKYLL) build --destination $(PUBLIC_WWW)
+	# bundle install --gemfile=$(DEPLOY_REPO)
+	JEKYLL_ENV=production $(JEKYLL) build --source $(DEPLOY_REPO) --destination $(PUBLIC_WWW)
