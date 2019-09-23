@@ -18,6 +18,9 @@ permalink: /about/
         <li class="nav-item">
             <a class="nav-link" id="now-tab" data-toggle="pill" href="#now" role="tab" aria-controls="now" aria-selected="false">Now</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" id="acknowl-tab" data-toggle="pill" href="#acknowl" role="tab" aria-controls="acknowl" aria-selected="false">Acknowledgments</a>
+        </li>
     </ul>
 </div>
 
@@ -36,6 +39,10 @@ permalink: /about/
   <div class="tab-pane fade" id="now" role="tabpanel" aria-labelledby="now-tab">
     {% capture now_include %}{% include about/now.md %}{% endcapture %}
     {{ now_include | markdownify }}
+  </div>
+  <div class="tab-pane fade" id="acknowl" role="tabpanel" aria-labelledby="acknowl-tab">
+    {% capture acknowl_include %}{% include about/acknowl.md %}{% endcapture %}
+    {{ acknowl_include | markdownify }}
   </div>
 </div>
 
