@@ -18,5 +18,5 @@ Without the following people, my life would certainly not be where it is today.
 - The Tuggyloop gang, who has provided friendship, entertainment, and inspiration for years
 - My dear Friends of Satan, who have showed me what infallible strength, friendship, and support looks like, and believed in me and in each other
 - eSangha, who since welcoming me in have been a beautiful anchor in times good and bad
-- More folks than I can possibly remember in the game development and game audio communities, especially in Seattle and Vancouver; I'll name all of the folks I can think of in a reasonable amount of time: Matthew M, Gordon M, Ryan I, Akash T, Em H, Maris T, Damian K, Carlye N, Andrew N, Luca, Tammy D, Fern, Ryro, Rachel S, Greg L, Piers, Patch... and many, many, many more that I can't recall
-- Any and everyone else who has been kind to me, done something helpful for me (and/or not for me), or believed in me... thank you sincerely.
+- More folks than I can possibly remember in the game development and game audio communities, especially in Seattle and Vancouver; I'll name all of the folks I can think of in a reasonable amount of time: Matthew M, Gordon M, Ryan I, Akash T, Em H, Maris T, Damian K, Carlye N, Andrew N, Megan C, Josie B, Shannon M, Adrien T, Luca, Tammy D, Fern, Ryro, Rachel S, Greg L, Piers, Patch... and many, many, many more that I can't recall
+- Any and every other person who has been kind to me, done something helpful for me (and/or not for me), or believed in me... thank you sincerely.
