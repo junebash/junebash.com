@@ -8,9 +8,6 @@
 // GENERAL
 //---------
 
-body {
-}
-
 .content {
     font-size: $custom-font-size;
 }
@@ -225,8 +222,14 @@ blockquote {
     color: #777777;
     font-style: italic;
 }
-p.quote-source {
 
+#about-navdiv {
+    margin-bottom: 0em;
+    padding-bottom: 0em;
+    #about-nav {
+        margin-bottom: 0em;
+        padding-bottom: 0em;
+    }
 }
 
 
@@ -245,9 +248,6 @@ h3.piece-title {
         //color: $white;
         small {
             font-size: 0.6em;
-        }
-        &:hover {
-            //color: $off-white;
         }
     }
 }
