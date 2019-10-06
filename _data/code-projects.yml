@@ -1,7 +1,7 @@
 - title: JonBash.com (this website!)
   image: jonbashcom-mobile.png
   source: https://github.com/jonbash/jonbash.com
-  description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money."
+  description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money. I'm hosting it on NearlyFreeSpeech.net, which is *insanely*, especially for cheap for simple, static websites like this one."
   tech-used:
     - name: Jekyll
       url: http://jekyllrb.com
