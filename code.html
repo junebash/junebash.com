@@ -1,0 +1,36 @@
+---
+title: Code & Development
+permalink: /code/
+---
+
+<p class=lead>These are some projects on which I've done code and stuff. Expect this section to grow in the coming months/years!</p>
+<div id="code-projects">
+  {% assign projects = site.data.code-projects %}
+  {% for project in projects %}
+  <div class="code-project border rounded">
+    <h2>{{ project.title }}</h2>
+    <div class="row">
+      <div class="col">
+        <img src="{{ site.images }}/{{ project.image }}" class="rounded float-left border" height="auto" width="auto" />
+      </div class="col">
+      <div class="col">
+        <p>{{ project.description }}</p>
+        {% if project.source %}<a href="{{ project.source }}" target="_blank" class="lead"><i class="fas fa-code-branch"></i> Check out the source</a>{% endif %}
+        <h3>Tech Used:</h3>
+        <ul class="list-group">
+          {% for i in project.tech-used %}
+          <li class="list-group-item"><a href="{{ i.url }}">{{ i.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<p>I currently am proficient in or am learning (marked **) the following languages/frameworks/technologies:</p>
+<ul class="list-group">
+  <li class="list-group-item">HTML/CSS/Javascript, Bootstrap, SCSS, Markdown, Jekyll</li>
+  <li class="list-group-item">Swift/iOS/macOS development **</li>
+  <li class="list-group-item">Unity & C# **</li>
+  <li class="list-group-item">LOVE2D & Lua</li>
+</ul>

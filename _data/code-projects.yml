@@ -1,0 +1,13 @@
+- title: JonBash.com (this website!)
+  image: jonbashcom-mobile.png
+  source: https://github.com/jonbash/jonbash.com
+  description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money."
+  tech-used:
+    - name: Jekyll
+      url: http://jekyllrb.com
+    - name: Markdown
+      url: https://www.markdownguide.org
+    - name: Bootstrap
+      url: http://getbootstrap.com
+    - name: NearlyFreeSpeech.net
+      url: http://nearlyfreespeech.net
