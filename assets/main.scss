@@ -223,6 +223,12 @@ blockquote {
     font-style: italic;
 }
 
+.blockquote-footer {
+    em {
+        text-decoration: underline;
+    }
+}
+
 #about-navdiv {
     margin-bottom: 0em;
     padding-bottom: 0em;

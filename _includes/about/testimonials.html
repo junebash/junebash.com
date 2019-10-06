@@ -1,12 +1,10 @@
 <h2 class="display-4">Testimonials</h2>
 
 <hr/>
-{% for test in site.data.testimonials %}
+{% for quote in site.data.testimonials %}
   <blockquote class="blockquote">
-    {{ test.text | markdownify }}
+    {{ quote.text | markdownify }}
+    <footer class="blockquote-footer"><cite>{{ quote.source }}</cite></footer>
   </blockquote>
-  <p class="quote-source">
-    {{ test.source | markdownify }}
-  </p>
   <hr/>
 {% endfor %}
