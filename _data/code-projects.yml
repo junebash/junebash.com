@@ -1,3 +1,12 @@
+- title: Super Countdown Tracker
+  image: super-countdown-tracker.png
+  source: https://github.com/jonbash/CountdownTracker
+  description: "This was my first Build Week project at Lambda School. It's a simple, lightweight does one thing very well—it tells you how much time is left until the dates you give it. It also sorts and filters your events, archives them, and holds notes related to them. Some related features will continue to be added. I'm so satisfied with how it came out, it will be coming to the App Store in the not-too-distant future!"
+  tech-used:
+    - name: Xcode
+      url: https://developer.apple.com/xcode/
+    - name: Swift 5
+      url: https://swift.org
 - title: JonBash.com (this website!)
   image: jonbashcom-mobile.png
   source: https://github.com/jonbash/jonbash.com
