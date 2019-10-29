@@ -96,14 +96,19 @@ div.main {
 
 nav.navbar div ul {
     padding-bottom: 0rem;
-    li div.dropdown-menu a.dropdown-item {
-        color: $white;
+    li {
+        padding-left: 1rem;
+        padding-right: 0.5rem;
+        font-size: 130%;
+        div.dropdown-menu a.dropdown-item {
+            color: $white;
+            font-size: 120%;
+        }
     }
-}
-
-nav.navbar div ul li div.dropdown-menu a.dropdown-item:hover {
-    color: $white;
-    background: #666666
+    li div.dropdown-menu a.dropdown-item:hover {
+        color: $white;
+        background: #666666
+    }
 }
 
 //---------
