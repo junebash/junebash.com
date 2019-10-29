@@ -13,15 +13,17 @@ permalink: /code/
       <div class="col-5">
         <img src="{{ site.images }}/{{ project.image }}" class="rounded float-left border" height="auto" width="auto" />
       </div>
-      <div class="col">
+      <div class="col code-project-info">
         <p>{{ project.description | markdownify }}</p>
-        {% if project.source %}<a href="{{ project.source }}" target="_blank" class="lead"><i class="fas fa-code-branch"></i> Check out the source</a>{% endif %}
-        <h3>Tech Used:</h3>
-        <ul class="list-group">
-          {% for i in project.tech-used %}
-          <li class="list-group-item"><a href="{{ i.url }}">{{ i.name }}</a></li>
-          {% endfor %}
-        </ul>
+        {% if project.source %}<a class="btn btn-primary" href="{{ project.source }}" target="_blank" class="lead"><i class="fas fa-code-branch"></i> Check out the source</a>{% endif %}
+        <div class="tech-used">
+          <h3>Tech Used:</h3>
+          <ul class="list-group">
+            {% for i in project.tech-used %}
+            <li class="list-group-item"><a href="{{ i.url }}">{{ i.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
