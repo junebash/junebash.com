@@ -214,6 +214,9 @@ div.jumbotron {
     padding-top: 1.15rem;
 }
 
+// .code-project {
+//     @extend .col-lg-6, .col-sm-12, .mx-auto;
+// }
 
 //-------
 // ABOUT
@@ -317,16 +320,4 @@ h2.post-title {
 
 span.asterisk {
     font-size: 1.5em;
-}
-
-//------------------
-// CODE PROJECTS
-//------------------
-
-#code-projects {
-    @extend .row, .justify-content-center;
-}
-
-.code-project {
-    @extend .col-lg-6, .col-sm-12, .mx-auto;
 }
