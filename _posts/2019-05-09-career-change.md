@@ -3,6 +3,7 @@ title: A Change of Career
 date: 2019-05-09 14:46
 categories:
   - Personal
+  - News
 ---
 
 This is a decision I've been wrestling with for awhile now. For the past few years at least I've been developing a "backup plan" to attend a coding school and transition into software development if I found my current path wasn't working out for me for one reason or another.
