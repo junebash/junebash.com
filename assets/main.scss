@@ -210,13 +210,18 @@ div.jumbotron {
 // CODE
 //-------
 
-.code-project .row .code-project-info .tech-used {
-    padding-top: 1.15rem;
-}
+// .code-project .row .code-project-info .tech-used {
+//     padding-top: 1.15rem;
+// }
 
 // .code-project {
 //     @extend .col-lg-6, .col-sm-12, .mx-auto;
 // }
+
+.project-source-button {
+    margin-top: 1.15rem;
+    margin-bottom: 1.15rem;
+}
 
 //-------
 // ABOUT
@@ -320,4 +325,16 @@ h2.post-title {
 
 span.asterisk {
     font-size: 1.5em;
+}
+
+//-------------------
+// carousel countrols
+//-------------------
+
+ol.carousel-indicators {
+    li {
+        color: $off-black;
+        background-color: $off-black;
+    }
+    
 }
