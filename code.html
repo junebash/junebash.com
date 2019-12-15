@@ -11,10 +11,21 @@ permalink: /code/
     <div class="card">
       {%- if project.page -%}
       <a href="/{{ project.page }}" target="_blank">
-        <h2 class="card-header">{{ project.title }}</h2>
+        <h2 class="card-header">
+            {%- if project.icon -%}
+            <img src="{{ site.images }}/{{ project.icon }}" alt="{{ project.title }} icon" class="border rounded-lg code-pg-project-icon" height="50px">
+            {%- endif -%}
+          {{ project.title }}
+        </h2>
       </a>
       {%- else -%}
-      <h2 class="card-header">{{ project.title }}</h2> 
+      
+      <h2 class="card-header">
+          {%- if project.icon -%}
+          <img src="{{ site.images }}/{{ project.icon }}" alt="{{ project.title }} icon" class="border rounded-lg code-pg-project-icon" height="50px">
+          {%- endif -%}
+        {{ project.title }}
+      </h2> 
       {%- endif -%}
       <div class="row card-body">
         <div class="col-5">
