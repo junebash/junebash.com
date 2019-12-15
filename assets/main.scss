@@ -328,7 +328,7 @@ span.asterisk {
 }
 
 //-------------------
-// carousel countrols
+// APP PAGES
 //-------------------
 
 ol.carousel-indicators {
@@ -337,4 +337,9 @@ ol.carousel-indicators {
         background-color: $off-black;
     }
     
+}
+
+div.page-app-store-button {
+    text-align: center;
+    padding-bottom: 2em;
 }
