@@ -23,3 +23,12 @@
       url: http://getbootstrap.com
     - name: NearlyFreeSpeech.net
       url: http://nearlyfreespeech.net
+- title: Snackify
+  image: snackify.png
+  source: https://github.com/jonbash/Snackify-iOS
+  description: "**Snackify** is a prototype app built for a service that allows companies to easily manage their staff launge snack table needs, as well as for employees to request new snacks for the table. [Wilmari Rodriguez](https://www.linkedin.com/in/wilmari-rodriguez-2317aa194/) and I built this app over the course of a week at Lambda School as part of a cross-disciplinary team."
+  tech-used:
+    - name: Swift 5
+      url: https://swift.org
+    - name: Xcode
+      url: https://developer.apple.com/xcode/
