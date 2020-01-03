@@ -1,5 +1,5 @@
 ---
-title: "Super Countdown Tracker"
+title: "Super Countdown Tracker: A Post-Mortem of My First iOS App"
 date: 2020-01-02 11:50
 image: 
 categories:
@@ -153,7 +153,172 @@ The strings here are displayed to the user on the pickers of the sort/filter scr
 
 It would probably have been "better" (in terms of modularity, separation of concerns, and simplicity of types) to separate the enums' logical cases from the UI text that the user sees. We could instead instead simply adopt `Int` as the enums' raw value type, which would also mean we don't necessarily have to use the `CaseIterable` protocol.
 
+## Sort Logic
+
+The sorting and filtering of events happens in the `EventController`. First, `sort`:
+
+```swift
+/// Sort the lists of active & archived events by the given style.
+func sort(_ events: [Event], by style: SortStyle) -> [Event] {
+    return events.sorted {
+        switch style {
+        case .soonToLate: return $0.dateTime < $1.dateTime
+        case .lateToSoon: return $0.dateTime > $1.dateTime
+        case .numberOfTags: return $0.tags.count < $1.tags.count
+        case .numberOfTagsReversed: return $0.tags.count > $1.tags.count
+        case .creationDate: return $0.creationDate < $1.creationDate
+        case .creationDateReversed: return $0.creationDate > $1.creationDate
+        case .modifiedDate: return $0.modifiedDate < $1.modifiedDate
+        case .modifiedDateReversed: return $0.modifiedDate > $1.modifiedDate
+        }
+    }
+}
+```
+
+As you might be able to tell, this simply takes in a list of events and a sort style, switches on that enum, sorts it in one of a few different ways depending on that style, and returns the newly sorted array. I think I'm pretty happy with the simplicity of this, but since there's essentially twice as many cases as we actually need (every other one is just the opposite of the previous one), there are ways we could restructure this.
+
+```swift
+enum SortStyle {
+    // bool for ascending or descending
+    case endDate(Bool)
+    case creationDate(Bool)
+    case modifiedDate(Bool)
+    case numberOfTags(Bool)
+}
+```
+
+Unfortunately doing this means refactoring a number of other spots of the app (since the enum can no longer have a raw value or easily conform to `CaseIterable`), but for this specific use case it works quite nicely.
+
+To make it even more clear, we could also implement a second enum:
+
+```swift
+enum SortDirection {
+    case ascending, descending
+}
+```
+
+...and use that as the argument of the `SortStyle`, so one doesn't have to look at the type's declaration to figure out what that Bool is supposed to be for.
+
+Or, we could even make a struct that takes a `SortStyle` and `SortDirection`:
+
+```swift
+struct Sorter {
+    var sortStyle: SortStyle
+    var sortDirection: SortDirection
+}
+```
+
+...and perhaps a helper function in our SortStyle enum:
+
+```swift
+enum SortStyle {
+    case endDate
+    case creationDate
+    case modifiedDate
+    case numberOfTags
+
+    func eventOrderShouldRemain(for lhs: Event, _ rhs: Event) -> Bool {
+        switch self {
+        case .endDate: return lhs.dateTime < rhs.dateTime
+        case .creationDate: return lhs.tags.count < rhs.tags.count
+        case .modifiedDate: return lhs.creationDate < rhs.creationDate
+        case .numberOfTags: return lhs.modifiedDate < rhs.modifiedDate
+        }
+    }
+}
+```
+
+...And so by abstracting at the different elements of the sorting, we repeat ourselves less and simplify the sort method:
+
+```swift
+func sort(_ events: [Event], with sorter: Sorter) -> [Event] {
+    let isAscending = (sorter.sortDirection == .ascending)
+    return events.sorted {
+        let shouldRemain = sorter.sortStyle.eventOrderShouldRemain(for: $0, $1)
+        return isAscending ? shouldRemain : !shouldRemain
+    }
+}
+```
+
+Again, though, this means refactoring other parts of the app, and the initial version really wasn't *that* bad to begin with. Lessons learned for the future perhaps?
+
+## Filter Logic
+
+The filter method is a tad more complicated:
+
+```swift
+/// Returns an array of events filtered by the provided filter settings
+/// from the provided events array.
+func filter(
+    _ events: [Event], 
+    by style: FilterStyle, 
+    with filterInfo: (date: Date?, tag: Tag?)?
+) -> [Event] {
+    return events.filter {
+        switch style {
+        case .none:
+            return true
+        case .tag:
+            if let tag = filterInfo?.tag, tags.contains(tag) {
+                if tag == "" {
+                    return $0.tags.isEmpty
+                } else {
+                    return $0.tags.contains(tag)
+                }
+            } else {
+                return false
+            }
+        case .noLaterThanDate:
+            guard let date = filterInfo?.date else { return true }
+            return $0.dateTime < date
+        case .noSoonerThanDate:
+            guard let date = filterInfo?.date else { return true }
+            return $0.dateTime > date
+        }
+    }
+}
+```
+
+This method is actually very similar in basic structure to the `sort` function; it takes in an array of `Event`s, filters them using an array method and a switch, and spits the new array out.
+
+Again, there are some things we can do to improve it:
+
+1. That `filterInfo` tuple is pretty ugly. One way to fix it would be to make it its own type (probably a struct). There's arguably an even better alternative, though...
+2. Again, a shift in the enum could simplify things a bit. Along with that, we can, again, pass what *was* in our `filterInfo` as arguments *of* the enum!
+3. We don't actually need to check if `tags` (that is, `eventController.tags`) `.contains(tag)`; `eventController.tags` is a computed property that returns all tags used by all events. Therefore, if *any* events have that tag, then it'll be there. And we're already checking all these events. It's a redundant check, so we can get rid of it.
+4. With that out of the way, we can drastically simplify the `.tag` case. In fact, it's a perfect spot for another ternary operator (which, despite how weird they look, I really quite love).
+
+```swift
+enum FilterStyle {
+    case none
+    case endDate(Date, Bool) // isBefore
+    case tag(Tag)
+}
+
+//...
+
+func filter(
+    _ events: [Event],
+    by style: FilterStyle
+) -> [Event] {
+    return events.filter {
+        switch style {
+        case .none:
+            return true
+        case .tag(let tag):
+            return tag == "" ? $0.tags.isEmpty : $0.tags.contains(tag)
+        case .endDate(let referenceDate, let showingDatesBeforeReference):
+            return $0.dateTime < referenceDate && showingDatesBeforeReference
+        }
+    }
+}
+```
+
+Much simpler! Again, we could also add a second enum in place of the `.endDate` bool so it's clearer to the caller what it's actually doing.
+
 ### Sort/Filter Pickers
+
+Let's take a look at the UI for sorting and filtering.
 
 Here's the setup for the sort-style picker:
 
@@ -163,11 +328,18 @@ class SortPickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDelegate
         return 1
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        numberOfRowsInComponent component: Int
+    ) -> Int {
         return EventController.SortStyle.allCases.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
         return EventController.SortStyle.allCases[row].rawValue
     }
 }
@@ -263,141 +435,6 @@ extension SortFilterViewController: FilterPickerDelegate {
 In this case we don't even need the `filterPicker` argument at all, but in the future we might want to, in turn, modify that picker depending on some factor of the `FilterPickerDelegate`.
 
 I'm sure there are other, better ways to fix this as well.
-
-## Sort/Filter Logic
-
-The actual filtering and sorting of events happens in the `EventController`. First, `sort`:
-
-```swift
-/// Sort the lists of active & archived events by the given style.
-func sort(_ events: [Event], by style: EventController.SortStyle) -> [Event] {
-    return events.sorted {
-        switch style {
-        case .soonToLate: return $0.dateTime < $1.dateTime
-        case .lateToSoon: return $0.dateTime > $1.dateTime
-        case .numberOfTags: return $0.tags.count < $1.tags.count
-        case .numberOfTagsReversed: return $0.tags.count > $1.tags.count
-        case .creationDate: return $0.creationDate < $1.creationDate
-        case .creationDateReversed: return $0.creationDate > $1.creationDate
-        case .modifiedDate: return $0.modifiedDate < $1.modifiedDate
-        case .modifiedDateReversed: return $0.modifiedDate > $1.modifiedDate
-        }
-    }
-}
-```
-
-As you might be able to tell, this simply takes in a list of events and a sort style, switches on that enum, sorts it in one of a few different ways depending on that style, and returns the newly sorted array. I think I'm pretty happy with the simplicity of this, but I could see using a modification of the enum making it a tad simpler.
-
-```swift
-enum SortStyle {
-    // bool for ascending or descending
-    case endDate(Bool)
-    case creationDate(Bool)
-    case modifiedDate(Bool)
-    case numberOfTags(Bool)
-}
-
-//...
-
-func sort(_ events: [Event], by style: EventController.SortStyle) -> [Event] {
-    return events.sorted {
-        switch style {
-        case .endDate(let ascending):
-            return $0.dateTime < $1.dateTime && ascending
-        case .numberOfTags(let ascending):
-            return $0.tags.count < $1.tags.count && ascending
-        case .creationDate(let ascending):
-            return $0.creationDate < $1.creationDate && ascending
-        case .modifiedDate(let ascending):
-            return $0.modifiedDate < $1.modifiedDate && ascending
-        }
-    }
-}
-```
-
-Unfortunately doing this means refactoring a number of other spots of the app (since the enum can no longer have a raw value or easily conform to `CaseIterable`), but for this specific use case it works quite nicely.
-
-To make it even more clear, we could also implement a second enum:
-
-```swift
-enum SortDirection {
-    case ascending, descending
-}
-```
-
-...and use that as the argument of the `SortStyle`, so one doesn't have to look at the type's declaration to figure out what that Bool is supposed to be for.
-
-The filter method is a tad more complicated:
-
-```swift
-/// Returns an array of events filtered by the provided filter settings
-/// from the provided events array.
-func filter(
-    _ events: [Event], 
-    by style: FilterStyle, 
-    with filterInfo: (date: Date?, tag: Tag?)?
-) -> [Event] {
-    return events.filter {
-        switch style {
-        case .none:
-            return true
-        case .tag:
-            if let tag = filterInfo?.tag, tags.contains(tag) {
-                if tag == "" {
-                    return $0.tags.isEmpty
-                } else {
-                    return $0.tags.contains(tag)
-                }
-            } else {
-                return false
-            }
-        case .noLaterThanDate:
-            guard let date = filterInfo?.date else { return true }
-            return $0.dateTime < date
-        case .noSoonerThanDate:
-            guard let date = filterInfo?.date else { return true }
-            return $0.dateTime > date
-        }
-    }
-}
-```
-
-This method is actually very similar in basic structure to the `sort` function; it takes in an array of `Event`s, filters them using an array method and a switch, and spits the new array out.
-
-Again, there are some things we can do to improve it:
-
-1. That `filterInfo` tuple is pretty ugly. One way to fix it would be to make it its own type (probably a struct). There's arguably an even better alternative, though...
-2. Again, a shift in the enum could simplify things a bit. Along with that, we can, again, pass what *was* in our `filterInfo` as arguments *of* the enum!
-3. We don't actually need to check if `tags` (that is, `EventController.tags`) `.contains(tag)`; `EventController.tags` is a computed property that returns all tags used by all events. Therefore, if *any* events have that tag, then it'll be there. And we're already checking all these events. It's a redundant check, so we can get rid of it.
-4. With that out of the way, we can drastically simplify the `.tag` case. In fact, it's a perfect spot for a ternary operator (which, despite how weird they look, I really quite love).
-
-```swift
-enum FilterStyle {
-    case none
-    case endDate(Date, Bool) // before
-    case tag(Tag)
-}
-
-//...
-
-func filter(
-    _ events: [Event],
-    by style: FilterStyle
-) -> [Event] {
-    return events.filter {
-        switch style {
-        case .none:
-            return true
-        case .tag(let tag):
-            return tag == "" ? $0.tags.isEmpty : $0.tags.contains(tag)
-        case .endDate(let referenceDate, let showingDatesBeforeReference):
-            return $0.dateTime < referenceDate && showingDatesBeforeReference
-        }
-    }
-}
-```
-
-Much simpler! Again, we could also add a second enum in place of the `.endDate` bool so it's clearer to the caller what it's actually doing.
 
 ---
 
