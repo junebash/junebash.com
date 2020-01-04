@@ -1,5 +1,5 @@
 ---
-title: "Super Countdown Tracker: A Post-Mortem of My First iOS App"
+title: "Super Countdown Tracker: Sorting and Filtering Objects in Swift"
 date: 2020-01-02 11:50
 image: 
 categories:
@@ -42,59 +42,9 @@ As for the title? Well, "Countdowns" wasn't available. Adding a "super" in front
 
 I don't want to go through the entire app, so I'll highlight a couple of things I was excited about, that I think or interesting, or that I think I should have done better.
 
-### Persistence
+### EventController Singleton
 
-Since we hadn't yet learned about Core Data in our regular classes, I opted for persisting on disk using basic plist files.
-
-While writing this post, I found several things in the code I could clean up (print statements, extraneous intermediate `var`/`let` assignments). However, since it's already much longer than I intially intended, in this case I'll just show you the slightly cleaner version (it's still not fantastic).
-
-```swift
-private var eventsURL: URL? = FileManager.default
-    .urls(for: .documentDirectory, in: .userDomainMask).first?
-    .appendingPathComponent("Events.plist")
-
-/// Encodes and saves events list to plist.
-private func saveEventsToPersistenceStore() {
-    guard let url = eventsURL else {
-        NSLog("Invalid url for events list.")
-        return
-    }
-
-    do {
-        try PropertyListEncoder().encode(activeEvents)
-            .write(to: url)
-    } catch {
-        NSLog("Error saving events list data: \(error)")
-    }
-}
-
-/// Decodes and loads events list from plist.
-private func loadEventsFromPersistenceStore() -> [Event]? {
-    guard let url = eventsURL else {
-        NSLog("Invalid url for events list.")
-        return nil
-    }
-    if !FileManager.default.fileExists(atPath: url.path) {
-        NSLog("Event list data file does not yet exist!")
-        return nil
-    }
-
-    do {
-        return try PropertyListDecoder().decode(
-            [Event].self,
-            from: try Data(contentsOf: url))
-    } catch {
-        NSLog("Error loading items list data: \(error)")
-        return nil
-    }
-}
-```
-
-*(This works just fine for a small number of events, though if someone used the app really heavily for a long time, performance might begin to lag a bit, so if the app gains any kind of traction at all I'll likely be updating to Core Data or Realm.)*
-
-### Event Controller Singleton
-
-The above code is part of the EventController class, which, as you might imagine, controls the handling of events throughout the app. Since at the time I didn't know any better, I implemented it as a singleton in a kinda weird way I learned from some C# tutorials I'd been watching for Unity.
+At the center of the app is the `EventController` class, which, as you might imagine, controls the handling of events throughout the app. Since at the time I didn't know any better, I implemented it as a singleton in a kinda weird way I learned from some C# tutorials I'd been watching for Unity.
 
 ```swift
 private static var _shared: EventController?
@@ -125,6 +75,8 @@ private init() {
 
 Not only is this a *lot* simpler, but by using a private initializer, we ensure that only the `EventController` class can access the initializer, thus ensuring that there will only ever be one instance of it.
 
+An even better solution would probably be to use dependency injection and pass an `EventController` instance around the app as needed.
+
 ### Sort/Filter Enums
 
 For sorting and filtering the list of countdowns, I wanted the user to have a set number of ways they could sort and/or filter. This is a perfect use case for `enum`s.
@@ -151,9 +103,9 @@ enum FilterStyle: String, CaseIterable {
 
 The strings here are displayed to the user on the pickers of the sort/filter screen. The `CaseIterable` protocol is adopted for counting and indexing the different styles for use in setting up the `UIPickerViews`.
 
-It would probably have been "better" (in terms of modularity, separation of concerns, and simplicity of types) to separate the enums' logical cases from the UI text that the user sees. We could instead instead simply adopt `Int` as the enums' raw value type, which would also mean we don't necessarily have to use the `CaseIterable` protocol.
+It would probably have been "better" (in terms of modularity, separation of concerns, and simplicity of types) to separate the enums' logical cases from the UI text that the user sees. We could instead instead simply adopt `Int` as the enums' raw value type, which would also mean we don't necessarily have to use the `CaseIterable` protocol. I'll come back to that idea later...
 
-## Sort Logic
+### Sort Logic
 
 The sorting and filtering of events happens in the `EventController`. First, `sort`:
 
@@ -242,7 +194,7 @@ func sort(_ events: [Event], with sorter: Sorter) -> [Event] {
 
 Again, though, this means refactoring other parts of the app, and the initial version really wasn't *that* bad to begin with. Lessons learned for the future perhaps?
 
-## Filter Logic
+### Filter Logic
 
 The filter method is a tad more complicated:
 
@@ -315,6 +267,80 @@ func filter(
 ```
 
 Much simpler! Again, we could also add a second enum in place of the `.endDate` bool so it's clearer to the caller what it's actually doing.
+
+### Filter UI Text
+
+You might remember that previously, `FilterStyle` had a raw value that was used in the pickers. Well, we can't use both associated values and raw values, and like I said, UI text probably doesn't really belong with the logic anyways.
+
+We could, like with the `Sorter` previously, make a separate struct that holds our possible reference date and possible tag.
+
+```swift
+enum FilterStyle: Hashable {
+    case none, endDateIsBeforeReference(Bool), includesTag
+}
+
+struct Filter: Hashable {
+    var style: FilterStyle
+
+    var referenceDate: Date?
+    var tag: Tag?
+}
+```
+
+...And then put a dictionary like this with the UI code.
+
+```swift
+var filterText: [FilterStyle: String] = [
+    .none: "(none)",
+    .endDateIsBeforeReference(true): "Now → ...",
+    .endDateIsBeforeReference(false): "... → ∞",
+    .includesTag: "Tag..."
+]
+```
+
+Although if we want it to stay in order, it might be better to use an array of info.
+
+```swift
+typealias FilterUIInfo = (style: FilterStyle, text: String)
+
+let filterUIInfo: [FilterUIInfo] = [
+    (style: .none, text: "(none)"),
+    (style: .endDateIsBeforeReference(true), text: "Now → ..."),
+    (style: .endDateIsBeforeReference(false), text: "... → ∞"),
+    (style: .includesTag, text: "Tag...")
+]
+```
+
+Using a tuple can be a little quick and dirty, but it could lead to annoying problems down the line, so a small struct might work a little better.
+
+```swift
+struct FilterUIInfo {
+    var style: FilterStyle
+    var text: String
+}
+
+var filterUIInfo: [FilterUIInfo] = [
+    FilterUIInfo(style: .none, text: "(none)"),
+    FilterUIInfo(style: .endDateIsBeforeReference(true), text: "Now → ..."),
+    FilterUIInfo(style: .endDateIsBeforeReference(false), text: "... → ∞"),
+    FilterUIInfo(style: .includesTag, text: "Tag...")
+]
+```
+
+...but I think the best, simplest, and clearest way to go might just be to make a function that takes in a filter style and returns a string for the filter text.
+
+```swift
+func filterUIText(for style: FilterStyle) -> String {
+    switch style {
+    case .none:
+        return "(none)"
+    case .endDateIsBeforeReference(let isBeforeReference):
+        return isBeforeReference ? "Now → ..." : "... → ∞"
+    case .includesTag:
+        return "Tag..."
+    }
+}
+```
 
 ### Sort/Filter Pickers
 
