@@ -202,8 +202,8 @@ The filter method is a tad more complicated:
 /// Returns an array of events filtered by the provided filter settings
 /// from the provided events array.
 func filter(
-    _ events: [Event], 
-    by style: FilterStyle, 
+    _ events: [Event],
+    by style: FilterStyle,
     with filterInfo: (date: Date?, tag: Tag?)?
 ) -> [Event] {
     return events.filter {
