@@ -32,3 +32,18 @@
       url: https://swift.org
     - name: Xcode
       url: https://developer.apple.com/xcode/
+- title: Lambdi Pet
+  image: lambdipet.png
+  source: https://github.com/jonbash/LambdiPet-iOS
+  description: "**Lambdi Pet** is a prototype app built for a service for parents to motivate their children to eat healthily by mirroring their eating in feeding a cute digital pet avatar. This is a very basic app that I would have loved to have several weeks to build on to do some sound design and animation for the pet to make it even more motivating, but I'm quite proud of what I was able to accomplish in the short timeframe!"
+  tech-used:
+    - name: Swift 5
+      url: https://swift.org
+    - name: Xcode
+      url: https://developer.apple.com/xcode/
+    - name: SwiftLint
+      url: https://github.com/realm/SwiftLint
+    - name: Charts (framework)
+      url: https://github.com/danielgindi/Charts
+    - name: KeychainAccess (framework)
+      url: https://github.com/kishikawakatsumi/KeychainAccess
