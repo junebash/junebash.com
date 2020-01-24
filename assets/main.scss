@@ -211,13 +211,9 @@ div.jumbotron {
 // CODE
 //-------
 
-// .code-project .row .code-project-info .tech-used {
-//     padding-top: 1.15rem;
-// }
-
-// .code-project {
-//     @extend .col-lg-6, .col-sm-12, .mx-auto;
-// }
+div.code-project {
+    margin-bottom: 1.5rem;
+}
 
 .project-source-button {
     margin-top: 1.15rem;
