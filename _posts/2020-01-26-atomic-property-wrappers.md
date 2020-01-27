@@ -39,7 +39,7 @@ struct Atomic<Value> {
 
 The `DispatchQueue` essentially makes a "checkout line," where anything that tries to either `get` or `set` the value first has to wait in line behind anything else that's queued up to try to access it. I label it with the name of the app and its type for easier debugging purposes[^1].
 
-The underlying `_value` is only accessible to this class, so there's no danger of it being accessed by something outside without going through the queue (unless we were to re-write it and mess up somewhere, but prefixing with the underscore makes that less likely).
+The underlying `_value` is only accessible within this struct, so there's no danger of it being accessed by something outside without going through the queue (unless we were to re-write/add to it and mess up somewhere, but prefixing with the underscore makes that less likely).
 
 It's a little strange that we need to mark the getter of `value` with `mutating`; that's because, as I understand it, adding something to the queue actually changes the queue, which changes the struct, and anything that does so must be marked `mutating` so the compiler knows whether certain actions can be taken when using `let` vs. `var` instances of this struct.
 
@@ -52,7 +52,7 @@ var x: Atomic<Int> = Atomic(1)
 x.value = 2
 print(x.value)
 
-// on another queue somewhere else at the same time...
+// on another thread somewhere else at the same time...
 x.value = 3
 print(x.value)
 ```
@@ -105,7 +105,7 @@ As for having to type more... well, check this out:
 x = 2
 print(x)
 
-// on another queue somewhere else at the same time...
+// on another thread somewhere else at the same time...
 x = 3
 print(x)
 ```
