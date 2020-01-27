@@ -220,6 +220,10 @@ div.code-project {
     margin-bottom: 1.15rem;
 }
 
+pre.highlight {
+    padding: 1rem;
+}
+
 //-------
 // ABOUT
 //-------
@@ -314,6 +318,13 @@ p.read-more {
 h2.post-title {
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+div.footnotes {
+    margin-top: 2em;
+    padding-top: 0.8em;
+    padding-bottom: 1px;
+    background-color: whitesmoke;
 }
 
 //------------------
