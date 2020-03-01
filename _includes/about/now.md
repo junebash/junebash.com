@@ -2,10 +2,10 @@
 {: .display-4}
 ### <small>a short overview of how I'm currently spending my time</small>
 
-- Enjoying the heck out of training in iOS Development at [Lambda School](https://lambdaschool.com){:target="_blank"}. I'm currently in my second week of Objective-C; not nearly as bad as I anticipated!
+- Working as a team lead (TL) at [Lambda School](https://lambdaschool.com){:target="_blank"}. It's a paid intership similar to a TA at a traditional college, but full-time (my classes are temporarily on hold).
 - Building various frameworks and apps and such.
 - Starting the process of applying for software development jobs!
-- Playing through *Bloodborne* again with a friend after having just finished *Dark Souls* for the first time. After this I'll be going on to *Sekiro*.
+- Playing through *Bloodborne* again, as well as playing through *The Witcher 3* for the first time. I recently (finally) played *Untitiled Goose Game*, which was delightful.
 - Sitting down at the piano or drumset and just playing, every now and then.
 
-*[updated 2020-01-26]*
+*[updated 2020-03-01]*
