@@ -72,13 +72,13 @@ class RealmRepository: PersistentRepository {
 
 The problem may not be immediately obvious unless you know how Realm works or try to compile this. `Realm.objects(_:)` expects a subclass of `Object`, Realm's equivalent of Core Data's `NSManagedObject` from which any persisted object must inherit. But there's no restriction in this method that `T` must inherit from anything; it just has to conform to `PersistentModel`. `deleteAll(_:)` ends up having the same problem.
 
-"No worries," you might be thinking. "Just make `Object` conform to `PersistentModel` and we're golden." Not so fast! Our `fetch` method still expects *any* object that conforms to `PersistentModel`, so what we get might not be an `Object` subclass. 
+"No worries," you might be thinking. "Just make `Object` conform to `PersistentModel` and we're golden." Not so fast! Our `fetch` method still expects *any* object that conforms to `PersistentModel`, so what we get might not be an `Object` subclass. The compiler requires that the method accept any `PersistentModel`.
 
-"Then just downcast it as an `Object`." No can do, friend. As soon as we do that, `Realm.objects(_:)` thinks we want every ol' `Object` that's being persisted, rather than the specific type we asked for.
+"Then just downcast it as an `Object`." No can do, friend. As soon as we do that, `Realm.objects(_:)` thinks we want every ol' `Object` that's being persisted, rather than the specific type we asked for. We seem to be out of luck.
 
 ## Solving the Fetch Challenge
 
-It took me several weeks to find the solution to this issue, with several diversions into type erasure and protocol associated types (which cannot be conformed to or inherited from, because they can be structs/enums), but I accidentally stumbled upon the solution when I remembered that Core Data's `NSManagedObject` fetches can be performed from a static method on the subclass itself.
+It took me several weeks to find the solution to this issue, with several diversions into type erasure and protocol associated types (which cannot be conformed to or inherited from, because they can be structs/enums). Ultimately, the solution required literally thinking outside the box. While working through a related issue, I remembered that Core Data's `NSManagedObject` fetches can be performed from a static method on the subclass itself.
 
 This was fairly straightforward to accomplish using a couple of adjustments and extensions.
 
