@@ -176,9 +176,6 @@ extension PersistentModel where Self: Object {
         in context: PersistentContext,
         options: FetchOptions?
     ) throws -> AnyCollection<Self> {
-        guard let realm = context as? Realm else {
-            return AnyCollection([])
-        }
         //...(same as before)...
         return AnyCollection(results)
     }
