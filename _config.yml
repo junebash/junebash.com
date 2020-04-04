@@ -7,6 +7,7 @@ mastodon: "@jonbash@mastodon.social"
 youtube: jonbashjonbash
 github: jonbash
 baseurl: null
+image: /assets/images/jon-front.jpg
 excerpt_separator: <!--more-->
 highlighter: rouge
 sass:
@@ -23,11 +24,20 @@ defaults:
       type: pages
     values:
       layout: default
-  - scope:
+      author: Jon Bash
+  - 
+    scope:
       type: posts
       path: ""
     values:
       layout: post
+  - 
+    scope:
+      path: ""
+      type: "now-updates"
+    values:
+      layout: "now-update"
+      description: "a brief summary of how I've been spending my time lately"
 collections:
   games:
   films:
@@ -35,7 +45,7 @@ collections:
   other-music:
   now-updates:
     output: true
-    permalink: /now/:name
+    permalink: /now/:name/
 plugins:
   - jekyll-feed
 exclude:

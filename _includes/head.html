@@ -14,50 +14,57 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     
-    {% if page.title != "" %}
-    <title>{{ page.title }} | {{ site.title }}</title>
+    {%- capture title -%}
+    {% if page.layout == "now-update" %}
+    'now' archive - {{ page.date | date: "%Y-%m-%d" }} | {{ site.title }}
+    {% elsif page.title != "" %}
+    {{ page.title }} | {{ site.title }}
     {% else %}
-    <title>{{ site.title }}</title>
+    {{ site.title }}
     {% endif %}
+    {%- endcapture -%}
+
+    {%- capture author -%}
+    {%- if page.author -%}
+        {{ page.author }}
+    {%- else -%}
+        {{ site.author }}
+    {%- endif -%}
+    {%- endcapture -%}
+
+    <title>{{ title | strip }}</title>
+
+    {%- capture description -%}
+    {% if page.description %}
+    {{ page.description }}
+    {% elsif page.summary %}
+    {{ page.summary }}
+    {% elsif page.excerpt %}
+    {{ page.excerpt}}
+    {% else %}
+    {{ site.description }}
+    {% endif %}
+    {%- endcapture -%}
+
+    {%- capture stripped-description -%}
+    {{ description | strip_html | strip_newlines | truncatewords: 50, '...' | escape_once | strip }}
+    {%- endcapture -%}
 
     <!-- other meta -->
-    {% if page.description %}
-    <meta name="description" content="{{ page.description }}">
-    {% elsif page.summary %}
-    <meta name="description" content="{{ page.summary }}">
-    {% elsif page.excerpt %}
-    <meta name="description" content="{{ page.excerpt }}">
-    {% else %}
-    <meta name="description" content="{{ site.description }}">
-    {% endif %}
-    
-    {% if page.author %}
-    <meta name="author" content="{{ page.author }}"> 
-    {% else %}
-    <meta name="author" content="{{ site.author }}"> 
-    {% endif %}
-    
-    <!-- Twitter cards -->
-    <meta name="twitter:site"    content="@{{ site.twitter_username }}">
-    <meta name="twitter:creator" content="@{{ page.author }}">
-    <meta name="twitter:title"   content="{{ page.title }}">
+    <meta name="description" content="{{ stripped-description }}">
+    <meta name="author" content="{{ author }}"> 
 
-    {% if page.description %}
-    <meta name="twitter:description" content="{{ page.description }}">
-    {% elsif page.summary %}
-    <meta name="twitter:description" content="{{ page.summary }}">
-    {% elsif page.excerpt %}
-    <meta name="twitter:description" content="{{ page.excerpt }}">
-    {% else %}
-    <meta name="twitter:description" content="{{ site.description }}">
-    {% endif %}
-    
+    <!-- Twitter cards -->
+    <meta name="twitter:site"    content="{{ site.twitter }}">
+    <meta name="twitter:creator" content="{{ author }}">
+    <meta name="twitter:title"   content="{{ title | strip }}">
+    <meta name="twitter:description" content="{{ stripped-description }}">
     {% if page.image %}
     <meta name="twitter:card"  content="summary_large_image">
     <meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
     {% else %}
     <meta name="twitter:card"  content="summary">
-    <meta name="twitter:image" content="{{ site.title_image }}">
+    <meta name="twitter:image" content="{{ site.image }}">
     {% endif %}
     <!-- end of Twitter cards -->
     

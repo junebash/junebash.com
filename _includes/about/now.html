@@ -1,8 +1,8 @@
 <h2 class="display-4">Now</h2>
 <h3><small>a short overview of how I'm currently spending my time</small></h3>
-<article>
-  {{ site.now-updates | last | content }}
-</article>
+{% assign last-update=site.now-updates | last %}
+<p><em>[updated {{ last-update.date | date: "%A, %B %-d, %Y" }}]</em></p>
+{{ last-update.content }}
 
 <hr />
 
@@ -18,7 +18,7 @@
       <div class="card-body">
         <ul>
           {% for update in site.now-updates reversed %}
-          <li><a href="{{ update.permalink }}">{{ update.date | date: "%A, %B %-d, %Y" }}</a></li>
+          <li><a href="{{ update.url }}">{{ update.date | date: "%A, %B %-d, %Y" }}</a></li>
           {% endfor %}
         </ul>
       </div>

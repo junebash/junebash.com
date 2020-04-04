@@ -1,7 +1,14 @@
 <!-- -*- engine:django -*- -->
 <header>
     {% include nav.html %}
-    {% if page.title != "" and page.layout != "post" %}
+    {% if page.layout == "now-update" %}
+        <div class="container page-title">
+            <h1 class="title display-4">
+                <small><a href="/about/#now" class="blog-link">'now' archives</a></small><br />
+                {{ page.date | date: "%A, %B %-d, %Y"}}
+            </h1>
+        </div>
+    {% elsif page.title != "" and page.layout != "post" %}
         <div class="container page-title">
             <h1 class="title display-2">{{ page.title }}</h1>
         </div>
@@ -11,7 +18,6 @@
             <small><a href="/blog/" class="blog-link">Blog</a></small><br />
             {{ page.title }}
           </h1>
-        </div>
     {% else %}
         {% include home-jumbotron.html %}
     {% endif %}
