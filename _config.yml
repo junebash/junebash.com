@@ -29,10 +29,13 @@ defaults:
     values:
       layout: post
 collections:
-  - games
-  - films
-  - concert-music
-  - other-music
+  games:
+  films:
+  concert-music:
+  other-music:
+  now-updates:
+    output: true
+    permalink: /now/:name
 plugins:
   - jekyll-feed
 exclude:

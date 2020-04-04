@@ -1,0 +1,27 @@
+<h2 class="display-4">Now</h2>
+<h3><small>a short overview of how I'm currently spending my time</small></h3>
+<article>
+  {{ site.now-updates | last | content }}
+</article>
+
+<hr />
+
+<div class="accordion" id="previous-updates">
+  <div class="card">
+    <div class="card-header" id="previous-updates-header">
+      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#previous-updates-list" aria-expanded="false" aria-controls="previous-updates-list">
+        <h3>'now' archive:</h3>
+      </button>
+    </div>
+
+    <div id="previous-updates-list" class="collapse" aria-labelledby="previous-updates-header" data-parent="#previous-updates">
+      <div class="card-body">
+        <ul>
+          {% for update in site.now-updates reversed %}
+          <li><a href="{{ update.permalink }}">{{ update.date | date: "%A, %B %-d, %Y" }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

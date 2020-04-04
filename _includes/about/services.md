@@ -1,5 +1,14 @@
-## Services
+## What I do
 {: .display-4}
+
+
+### Software development
+{: .service-heading}
+
+...for iOS, macOS, web, games, and more
+{: .lead}
+
+Trained at Lambda School in a natively remote environment, I can help you achieve your code goals no matter where you are!
 
 ### Dynamic music composition and sound design
 {: .service-heading}
@@ -17,14 +26,6 @@ Music and sound can enhance the story you’re dying to tell. That’s what I’
 
 Need some string and horn arrangements for your band? Need an extra hand for orchestration, engraving, or copy-work on your parts? Just need someone with formal musical training to round out your project? Get in touch!
 
-### Lessons, coaching, classes, and workshops
-{: .service-heading}
-
-...music theory, composition, digital audio, and more
-{: .lead}
-
-Classical, electronic, folk, rock, pop, somewhere in between… I’m eclectic & versatile, and can help you be, too!
-
 ---
 
-<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#contactModal">Interested in hiring me? Shoot me a message!</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#contactModal">Interested in working with me? Shoot me a message!</button>
