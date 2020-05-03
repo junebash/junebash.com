@@ -112,7 +112,11 @@ print(x)
 
 All we need to do now when we want to make something atomic is put the `@Atomic` keyword before it, and then anything else that accesses it doesn't even need to know that it's a wrapped value, and you never need to access `.wrappedValue` (in fact, I don't think you can at least without a few more steps). I don't know about you, but I found this to be awesome.
 
-Nowe the only danger is avoiding the temptation to needlessly use it everywhere...
+Now the only danger is avoiding the temptation to needlessly use it everywhere...
+
+### <UPDATE 2020-04-25>
+
+Donny Wals made [a great post](https://www.donnywals.com/why-your-atomic-property-wrapper-doesnt-work-for-collection-types/) about why this will not work with collections in Swift. Worth a reading and worth keeping in mind.
 
 [^1]: Theoretically, at least; honestly, I've never needed to make use of this.
 [^2]: If you include the `shift` for the capital `V`.
