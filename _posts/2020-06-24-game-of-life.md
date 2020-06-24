@@ -317,6 +317,8 @@ The rest of the views are fairly straightforward SwiftUI; having not worked much
 
 -----
 
+In the end, for a 25x25 grid (the minimum required by the assignment), the simulation easily runs at 20 generations per second, which is already too fast to really keep track of. It starts to lag a bit around 50x50, but it's still quite usable even at 100x100.
+
 I'm certain that there are many, many ways I could improve upon this (I wanted to implement the [HashLife][] algorithm, but that's going to take a bit more research than I have time for). I'm happy with how it turned out, though, as it gave me an excuse to practice working with these sorts of custom structures and algorithms and game-dev-like concepts in a very encapsulated way. I'm excited to take these lessons into future projects.
 
 
