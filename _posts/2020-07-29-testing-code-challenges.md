@@ -217,3 +217,5 @@ CodeChallengeTestCases(
 ```
 
 There are of course more improvements we could make (giving a title to our test cases, measuring time and space used, comparing different solutions, etc), but at this point I've probably spent more time writing this "simple" helper than I have actually working on the code challenges, so let's get back to work on those!
+
+p.s., Here's [a gist with the CodeChellengeTestCases code](https://gist.github.com/jonbash/6da6efdd3a1bd9e62a994ef72bdcea67) for you to play with, use, and/or extend!
