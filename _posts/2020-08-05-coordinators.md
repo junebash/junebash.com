@@ -5,7 +5,7 @@ categories:
   - Code
 ---
 
-_(Note: This post uses Swift 5.2)_
+_(Note: This post uses Swift 5.2 and the iOS13 SDK)_
 
 The **coordinator pattern** is probably my favorite "unofficial" design pattern in semi-common usage in the iOS community.
 
