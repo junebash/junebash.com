@@ -13,15 +13,15 @@ There's a lot of great articles out there about what it is and why it's benefici
 
 There's a lot of variations on the coordinator pattern; you can use one coordinator, you can use several conforming to a protocol, you can have the view controllers hold weak references to directly, you can have them interact only through custom delegate protocols, you can have one storyboard that contains all your view controllers, you can have one storyboard for each view controller, or anything between those extremes... so on and so forth. So for this example, I'll stick to the basic commonalities that are required to get started, and let you figure out the details of how you'd like to use the pattern with your app.
 
-First, when you make a new project, you'll need to go to your project settings, and under the "General" tab, under "Deployment Info," you'll find a setting called "Main Interface". By default this is set to "Main," meaning that behind the scenes, your app will magically start up with the initial view controller of the `Main.storyboard` file. **We want to delete this**; we're going to handle setup of the window and the initial view controller ourselves in code.
+The best way to demonstrate this is to start off with a shiny new "Single View" iOS app. As an optional step, you might want to add a 'Hello world!' label to the view controller that comes with the default Xcode project just so you know that things are working as intended.
+
+Next, you'll need to go to your project settings, and under the "General" tab, under "Deployment Info," you'll find a setting called "Main Interface". By default this is set to "Main," meaning that behind the scenes, your app will magically start up with the initial view controller of the `Main.storyboard` file. **We want to delete this**; we're going to handle setup of the window and the initial view controller ourselves in code.
 
 The settings should look like the image below.
 
 ![Make sure `Main Interface` is blank in your project settings](/assets/images/coordinator_deleteMainInterface.png)
 
 I seem to remember at some point having to remove some other things from the project settings and/or `Info.plist` file (other things that reference storyboards or `Main.storyboard`, basically), but this seems to be enough to get us going from my testing today.
-
-As an optional step, you might want to add a 'Hello world!' label to the view controller that comes with the default Xcode project just so you know that things are working as intended.
 
 Next, you'll want to create a new Swift file with the following content:
 
