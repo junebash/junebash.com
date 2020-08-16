@@ -34,12 +34,14 @@ Trained at Lambda School in a natively remote environment, I can help you achiev
 - GCD
 - Combine
 - URLSession
-- Foundation
+- AVFoundation
+- Core Graphics
 - CocoaPods
 - Carthage
 - SPM
 - Git
 - GitHub
+- Firebase
 - Bootstrap
 - Jekyll
 - Agile
@@ -52,19 +54,20 @@ Trained at Lambda School in a natively remote environment, I can help you achiev
 - Unit Testing
 - UI Testing
 - REST APIs
-- Firebase
 - OOP
 - Data Structures
 - Algorithms
 - Memory Management
 - Multithreading
 - Coordinator pattern
+- Functional programming
+- Reactive programming (FRP)
 - Design Patterns
   - MVC
   - MVVM
   - ad hoc architectures
 
-- ...and more!
+...and more!
 
 ---
 
