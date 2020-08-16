@@ -7,7 +7,7 @@ permalink: /about/
   <div class="card-header" id="about-navdiv">
     <ul class="nav nav-tabs card-header-tabs" id="about-nav" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="services-tab" data-toggle="pill" href="#services" role="tab" aria-controls="services" aria-selected="true">What I Do</a>
+        <a class="nav-link active" id="services-tab" data-toggle="pill" href="#services" role="tab" aria-controls="services" aria-selected="true">Skills</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="bio-tab" data-toggle="pill" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Bio</a>
@@ -23,7 +23,7 @@ permalink: /about/
 
   <div class="tab-content card-body" id="about-tab-content">
     <div class="tab-pane fade show active" id="services" role="tabpanel" aria-labelledby="services-tab">
-      {% capture services_include %}{% include about/services.md %}{% endcapture %}
+      {% capture services_include %}{% include about/skills.md %}{% endcapture %}
       {{ services_include | markdownify }}
     </div>
     <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
