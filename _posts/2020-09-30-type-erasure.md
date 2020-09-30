@@ -1,15 +1,15 @@
 ---
 title: How to Type-Erase Protocols in Swift
-date: 2020-09-30 10:01
+date: 2020-09-30 08:25
 categories:
   - Code
 ---
 
 _(Note: This post uses Swift 5.3)_
 
-Type erasure is what allows us classes like `AnyCollection<Element>`; the interface of the `Collection` protocol is the same except for the `Element` used, we have this wrapper type that can wrap any collection and allow us to swap one in for the other.
+Type erasure is what allows us types like `AnyCollection`. For any type that conforms to the `Collection` protocol, their interfaces will be exactly the same (except of course for the type of `Element` used). `AnyCollection` allows us to wrap up any collection and swap in one (e.g., an `Array`) for another (e.g., a `Set`, or even a custom collection type).
 
-Unfortunately, writing a type-erased instance of a protocol is far more complicated than it has any right to be, and I avoid it where at all possible. Still, it's sort of interesting from a mere curiosity perspective. So let's take a look at how we can do it! <!--more-->
+Unfortunately, writing a type-erased instance of a protocol is far more complicated than it has any right to be, and personally I avoid it where at all possible. Still, there are instances where it can be very useful, and it's sort of interesting from a mere curiosity perspective. So let's take a look at how we can write a type-erased implementation of a protocol! <!--more-->
 
 ## Setup
 
@@ -75,7 +75,27 @@ struct FetchEventCreator: QueryInput {
 }
 ```
 
-Our goal is to be able to make an array
+Our goal is to be able to make an array of queries that happen to have the same `Output`. Right now, if we try to do that using just our protocol, we'll get an error about `Self` or `associatedType`.
+
+```swift
+// This won't compile!
+let queries: [QueryInput] = [
+    FetchEventCreator(eventID: myEvent.id),
+    FetchPersonWithName(name: "Jon Bash")
+]
+```
+
+We don't have any way to tell the compiler that we just `QueryInput`s with an `Output` of `Person`. Our solution will be to implement a type that conforms to `QueryInput`, but for each of its requirements, it simply "forwards" from another type of query input that has the `Output` we want. So in the end it'll look something like this:
+
+```swift
+let fetchMyEventCreator = FetchEventCreator(eventID: myEvent.id)
+let fetchJon = FetchPersonWithName(name: "Jon Bash")
+
+let queries: [AnyQuery] = [
+    AnyQuery(fetchMyEventCreator),
+    AnyQuery(fetchJon)
+]
+```
 
 ## Gener(ic)ally Speaking
 
@@ -107,9 +127,7 @@ Here's what our abstract base class looks like for our queries:
 fileprivate class _AnyQueryBase<Output: Decodable>: QueryInput {
     var queryString: String { fatalError("must use subclass") }
 
-    init() {
-        fatalError("must use subclass")
-    }
+    private init() { fatalError("must use subclass init") }
 
     func encode(to encoder: Encoder) throws {
         fatalError("must use subclass") // maybe use more descriptive messages
@@ -117,7 +135,7 @@ fileprivate class _AnyQueryBase<Output: Decodable>: QueryInput {
 }
 ```
 
-Your first impression might be "Ahhh! Everything causes a fatal error!" But remember, we won't ever be using an instance of this base class; we'll only be using the subclass, which will override everything.
+Your first impression might be "Ahhh! Everything causes a fatal error!" But remember, we won't ever be using an instance of this base class (and since the initializer is private, we _can't_ even initialize it). We'll only be using the subclass, which will override everything.
 
 What's more important is that this base class matches the signature we're after: it's generic over the _output_, and it conforms to `QueryInput`. That may not _seem_ important yet, so let's move on to the subclass:
 
@@ -141,9 +159,11 @@ fileprivate final class _AnyQueryBox<Input: QueryInput>: _AnyQueryBase<Input.Out
 
 Now we're getting somewhere. We're "forwarding" requirements of the protocol (i.e., the `queryString` property and the `encode` method) to our wrapped input, so no more fatal errors. But the magic is again in the generics.
 
-Our box is now generic over the _Input_ of the query... but it subclasses from _that_ input's _Output_. So anywhere we might ask for an _AnyQueryBase<Person>, we could feed this Box any query where the output is Person, and use it in place of the Person base.
+Our box is now generic over the _Input_ of the query... but it subclasses from a base generic over _that_ input's _Output_. So anywhere we might ask for an `_AnyQueryBase<Person>`, we could feed this Box any query where the output is Person, and use it in place of the subclass.
 
-"So why don't we just use these two classes?" you might ask. "Why do we have to wrap it in yet _another_ class?" Essentially to make it easier for the the end user; I don't want to have to remember to never instantiate this base class, to use its signature all over but always instantiate only its subclass.
+"So why don't we just use these two classes?" you might ask. "Why do we have to wrap it in yet _another_ class?"
+
+Essentially, it's to make it easier for anyone using this API. I don't want to have to remember to never instantiate this base class, to use its signature all over but always instantiate only its subclass. Especially if we were to leave a codebase and come back, it would simply be harder to reason about and use if we're counting on us to remember that all or even read all the documentation that we left. So we're doing more work up front to save ourselves time and energy later, which I think is one of our primary duties as programmers.
 
 ## The Final Class
 
@@ -165,24 +185,27 @@ final class AnyQuery<Output: Decodable>: QueryInput {
 }
 ```
 
-Now, as intended, our final class is generic over just the output type, and the only place where we consider our input is in the initializer, where the compiler determine's the type of the instance's `Output` based on the input's `Output`. After that, we wrap it in our box, but then we stop caring that it's a box or what the input is; we just know that it's some kind of `_AnyQueryBase` (or in this case, a subclaass thereof).
+Now, as intended, our final class is generic over just the output type. The only place where we consider our input is in the initializer.
 
-Normally the initializers of generic types aren't generic themselves; as we saw with our `_AnyQueryBox`, if the generic type is used in the initializer, it can infer the rest. With our `AnyQuery` though, we had to tell it explicitly that it would be some kind of concrete type (a generic `I`) that conforms to `QueryInput` (because again, we can't use the protocol itself due to Self/associatedtype requirements).
+`I` here is simply the actual type of the `Query` we're wrapping (e.g. `FetchPersonWithName` or `FetchEventCreator`). The `_AnyQueryBox` we use (which, again is a subclass of `_AnyQueryBase`) will be generic over this query type `I`. The `Output` of our `AnyQuery` and of our `_AnyQueryBase` will be generic over the `Output` of `I`. Once we set the `box` property to the box we make in the initializer, our `AnyQuery` forgets all about `I`; all it knows is that `box` is an `_AnyQueryBase<Output>` (or in this case, a subclass of it).
+
+This all might look very confusing, I know. I didn't really get it until I made my own protocol with an associated type and made my own type-erased box around it. I'd highly recommend giving this a try if you'd like to understand it better!
 
 ## In Practice
 
 Now, _finally_, we can make an array of different queries that spit out a `Person`.
 
 ```swift
-let queries: [AnyQuery<Person>] = [
-    AnyQuery(FetchPersonWithName("Jon Bash")),
-    AnyQuery(FetchEventCreator(eventID: UUID())),
-    AnyQuery(FetchPersonWithName("Jim Bash")),
-//    AnyQueryInput(FetchPersonIDWithName("Chrumbus Krample")) // won't work; output isn't `Person`
+let fetchMyEventCreator = FetchEventCreator(eventID: myEvent.id)
+let fetchJon = FetchPersonWithName(name: "Jon Bash")
+
+let queries: [AnyQuery] = [
+    AnyQuery(fetchMyEventCreator),
+    AnyQuery(fetchJon)
 ]
 ```
 
-...and we can, of course, use it our old query method from last time.
+...and we can, of course, use it in our query method.
 
 ```swift
 for q in queries {
@@ -203,14 +226,13 @@ queries.publisher
         }
     } receiveValue: { people in
         print(people)
-    }
-    .store(in: &cancellables)
+    }.store(in: &cancellables)
 ```
 
 ...But maybe that's best saved for another time.
 
 ## Why It's Not Ideal
 
-[My previous post](/blog/protocol-witnesses) talks about a better solution to this issue, but suffice to say, having to wrap everything in `AnyQuery` is pretty tedious, not to mention that whole rigamarole we went through just to implement the type-erasure.
+[In my previous post](/blog/protocol-witnesses), we discussed a better solution to for this particular problem; having to wrap everything in `AnyQuery` is pretty tedious, not to mention that whole rigamarole we went through just to implement the type-erasure.
 
-But hey, we had some fun, and we learned more about how protocols, generics, and subclassing work in Swift! Even if this may not be an ideal solution, now we can see clearly why, and we can better handle ourselves with similar challenges in the future.
+However, writing a struct in place of a protocol won't always be the most effective way to go, in and some cases it may not even be possible. And hey, we had some fun, and we got more comfortable with how protocols, generics, and subclassing work in Swift! Even if this may not be an ideal solution, now we can see clearly why, and we're better equipped to handle similar challenges in the future.
