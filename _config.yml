@@ -1,12 +1,12 @@
-title: "Jon Bash -- developer, musician, etc"
+title: "Jon Bash -- software developer, etc"
 author: Jon Bash
 email: jon@jonbash.com
-description: "Jon Bash is a software developer and musician living in Bellingham, WA."
+description: "Jon Bash is a software developer (iOS, games, generalist) and musician living in Bellingham, WA."
 twitter: "@jonbash"
 mastodon: "@jonbash@mastodon.social"
 youtube: jonbashjonbash
 github: jonbash
-baseurl: null
+baseurl: nil
 image: /assets/images/jon-front.jpg
 excerpt_separator: <!--more-->
 highlighter: rouge
@@ -25,13 +25,13 @@ defaults:
     values:
       layout: default
       author: Jon Bash
-  - 
+  -
     scope:
       type: posts
       path: ""
     values:
       layout: post
-  - 
+  -
     scope:
       path: ""
       type: "now-updates"
