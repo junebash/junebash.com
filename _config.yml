@@ -6,7 +6,7 @@ twitter: "@jonbash"
 mastodon: "@jonbash@mastodon.social"
 youtube: jonbashjonbash
 github: jonbash
-baseurl: nil
+# baseurl:
 image: /assets/images/jon-front.jpg
 excerpt_separator: <!--more-->
 highlighter: rouge
