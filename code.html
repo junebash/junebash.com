@@ -3,7 +3,6 @@ title: Code & Development
 permalink: /code/
 ---
 
-<p class=lead>These are some projects on which I've done code and stuff. Expect this section to grow in the coming months/years!</p>
 <div id="code-projects" class="row">
   {% assign projects = site.data.code-projects %}
   {% for project in projects %}
@@ -19,13 +18,13 @@ permalink: /code/
         </h2>
       </a>
       {%- else -%}
-      
+
       <h2 class="card-header">
           {%- if project.icon -%}
           <img src="{{ site.images }}/{{ project.icon }}" alt="{{ project.title }} icon" class="border rounded-lg code-pg-project-icon" height="50px">
           {%- endif -%}
         {{ project.title }}
-      </h2> 
+      </h2>
       {%- endif -%}
       <div class="row card-body">
         <div class="col-5">
@@ -57,11 +56,9 @@ permalink: /code/
   </div>
   {% endfor %}
 </div>
-<p>Languages & technologies I use:</p>
-<ul class="list-group">
-  <li class="list-group-item">Swift, iOS, Objective-C, Xcode</li>
-  <li class="list-group-item">HTML/CSS/Javascript, Bootstrap, Jekyll, SCSS, Markdown</li>
-  <li class="list-group-item">Unity, C#</li>
-  <li class="list-group-item">LOVE2D, Lua</li>
-  <li class="list-group-item">Git/GitHub, of course</li>
-</ul>
+
+<div class="row justify-content-center">
+  <a href="/about/" target="_blank" class="lead btn btn-primary" role="button">
+    <h3>Read more about me and what I do!</h3>
+  </a>
+</div>
