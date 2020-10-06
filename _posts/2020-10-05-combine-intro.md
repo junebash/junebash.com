@@ -186,7 +186,7 @@ stringSignal
     }
 ```
 
-Since we can't merge these two publishers without addressing the difference in `Failure` types, we have to adjust one of the errors. It makes the most sense to map the error of the `Just` publisher; since it will never fail, that `mapError` closure will never actually run, but it signals to the compiler that their failure types are now equivalent.
+Since we can't merge these two publishers without addressing the difference in `Failure` types, we have to adjust one of the errors. It makes the most sense to map the error of the `Just` publisher; since it will never fail, that `mapError` closure will never actually run, but it signals to the compiler that their failure types are now equivalent.*
 
 I'd highly recommend just browsing through the various operators you can perform on publishers; I feel like I'm still learning new operators and usages for them every time I use Combine!
 
@@ -364,3 +364,37 @@ If you want to read more on Combine, here's a few resources:
 - ["Combine: Getting Started" (article from Ray Wenderlich)](https://www.raywenderlich.com/7864801-combine-getting-started)
 - [_Combine: Asynchronous Programming with Swift_ (book from Ray Wenderlich)](https://store.raywenderlich.com/products/combine-asynchronous-programming-with-swift)
 - [_Practical Combine_ (book from Donny Wals)](https://practicalcombine.com)
+
+--------
+
+### *UPDATE: 2020-10-06 07:16
+
+As I mentioned earlier, I seem to learn new Combine stuff every time I use it. Today was no exception!
+
+It turns out that this code from earlier...
+
+```swift
+stringSignal
+    .merge(with: justAString.mapError { _ in SimpleError() })
+    .sink { completion in
+        print(completion)
+    } receiveValue: { str in
+        print("merged publisher says: \(str)")
+    }
+```
+
+...has a simpler solution.
+
+Since `justAstring`'s error type is `Never`, we have to make its `Failure` type to match `stringSignal`'s `SimpleError` in order to perform the `merge` operation, even though that `mapError` closure will never actuall run. There's a simpler way to do this though.
+
+```swift
+stringSignal
+    .merge(with: justAString.setFailureType(to: SimpleError.self))
+    .sink { completion in
+        print(completion)
+    } receiveValue: { str in
+        print("merged publisher says: \(str)")
+    }
+```
+
+This will essentially get the same result, but `setFailureType` was explicitly meant for this type of scenario. The previous version was using a sledgehammer where a regular hammer would suffice.
