@@ -5,6 +5,8 @@ categories:
   - Code
 ---
 
+
+
 In [my last post][last post], we looked at using Combine to refactor networking code. Before that, I looked at [refactoring bloated networking functions][refactoring]. Today I'd like to take another stab at refactoring. This time, however, we'll be using a style that _looks_ a lot like Combine, but uses a more "traditional" functional style without using Combine at all. <!--more-->
 
 Like last time, we'll be starting with the following basic network code.

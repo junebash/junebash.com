@@ -5,6 +5,8 @@ categories:
   - Code
 ---
 
+_(Note: This post uses Swift 5.3 and the iOS 14 SDK)_
+
 As I mentioned in my [previous post][previous post], using the Combine framework might require somewhat of a paradigm shift. In some ways, the best way to accomplish this might be to jump all in feet first and use it for all your networking and reactive code. However, this may not be entirely necessary, as Apple has also made it easy to gradually transition your codebase over to using Combine. <!--more-->
 
 ## Wrapping at the Call Site

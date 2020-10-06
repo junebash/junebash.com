@@ -1,6 +1,6 @@
 ---
 title: A Crash Course in Swift Combine
-date: 2020-10-05 07:55
+date: 2020-10-05 17:03
 categories:
   - Code
 ---
@@ -11,11 +11,11 @@ Combine is Apple's new-ish framework for **functional reactive programming**, a 
 
 ## "Functional Reactive Programming"?!
 
-Let's talk briefly about "functional reactive programming." We hopefully already know what "programming" means, but what about the other two words in there?
+Let's parse out what that phrase actually means. We hopefully already know what "programming" means, but what about the other two words in there?
 
-"Functional" basically means that it tends to prefer pure functions to accomplish a lot of its work; functions take something in and spit something out, without any side effects. Often functions will take in other functions (i.e., closures). If you've ever used `map`, `filter`, `reduce`, etc on arrays, other sequences, or other types, then you've used functional programming. If you haven't, it might help to read up on the topic ([this article](https://matteomanferdini.com/swift-functional-programming/) is a great, comprehensive start).
+"Functional" basically means a style of programming that prefers getting its jobs done in a way that uses lots of functions working together. Pure functions, meaning one that simply takes something in and spits something out (with the same output for any input every time) without any side effects, are especially preferred. Often functions will take in other functions (i.e., closures), making them "higher order functions." (If you've ever used `map`, `filter`, `reduce`, etc on arrays, other sequences, or other types, then you've used higher-order functions.)
 
-"Reactive" in this context means that we can _react_ to changes in something. As a simplified example, have you ever put a `didSet` observer on a class's property?
+"Reactive" in this context means that we can _react_ to changes. As a simplified example, have you ever put a `didSet` observer on a property?
 
 ```swift
 var models: [Model] {
@@ -25,7 +25,7 @@ var models: [Model] {
 }
 ```
 
-This is essentially a kind of "reactive" programming. We're reacting to changes in the models array; when the models change, we do something.
+This is, more or less, a kind of "reactive" programming. We're reacting to changes in the models array; when the models change, we do something.
 
 Put together, "functional reactive programming" is using this functional style of programming to react to changes. But what does that look like in practice?
 
@@ -33,9 +33,9 @@ Before we answer that question, let's look at how Combine accomplishes all of th
 
 ## Combine Conceptually
 
-The `Publisher` is a protocol that _publishes_ a specific type, its `Output`. It may publish once and finish, or it may go on publishing values forever. It may publish immediately, or it may wait for a network response. It may wrap another publisher, mutate its output, and republish it. What matters is that at some point it spits out a value (or a stream of values). If it can fail for some reason, it may also spit out an error (its `Failure`). A publisher might also be guaranteed not to fail, in which case its `Failure` will be `Never`.
+The `Publisher` is a protocol that _publishes_ an `Output`. It may publish once and finish, or it may go on publishing values forever. It may publish immediately, or it may wait for a network response. It may wrap another publisher, mutate its output, and republish it. What matters is that at some point it spits out a value (or a stream of values). If it can fail for some reason, it may also spit out an error (its `Failure`). A publisher might also be guaranteed not to fail, in which case its `Failure` will be `Never`.
 
-When a publisher fails, it "completes"; it won't send any more values after that. It might also complete successfully. For example, for fetching data from the internet, a publisher might publish a single value (the data it was asked to fetch), and then signal that it completed successfully. This `Completion` signal is modeled as an enum very similar to the `Result` type, but its `finished` case has no associated value; only its `failure` case does.
+When a publisher fails, it "completes," signaling that anything subscribed to it will no longer receive more values. It might also complete successfully. For example, for fetching data from the internet, a publisher might publish a single value (the data it was asked to fetch), and then signal that it completed successfully. This `Completion` signal is modeled as an enum very similar to the `Result` type, but its `finished` case has no associated value; only its `failure` case does.
 
 ```swift
 extension Subscribers {
@@ -46,7 +46,16 @@ extension Subscribers {
 }
 ```
 
-To work with these publishers, you can also attach _operators_ to publishers. Technically most of these are also publishers in their own right, but most of them are implemented as extensions on the `Publisher` protocol so that you can use dot-syntax to chain operators one after the other, performing powerful transformations like `map`, `flatMap`, filtering, merging with other publishers, waiting for another publisher, receiving on specific threads, and more.
+To work with these publishers, you can also attach _operators_ to them. Technically most of these are also publishers in their own right, but we call them operators when they're implemented as extensions on the `Publisher` protocol. You can therefore use dot-syntax to chain operators one after the other, performing powerful transformations like `map`, `flatMap`, filtering, merging with other publishers, waiting for another publisher, receiving on specific threads, and more.
+
+```swift
+URLSession.shared.dataTaskPublisher(for: request)
+    .tryMap { (d, r) in try Result(data: d, response: r).get() }
+    .decode(type: T.self, decoder: JSONDecoder())
+    .mapError(NetworkError.init)
+    .receive(on: DispatchQueue.main)
+    .eraseToAnyPublisher()
+```
 
 We get the values published by these using a `Subscriber`, another protocol. Like operators, most subscribers are implemented as extensions on the `Publisher` protocol, and are usually accessed via dot syntax. Subscribing to a publisher produces a `Subscription`, which you'll need to hold a strong reference to if you want to continue to receive values. Usually you'll have access to this via an `AnyCancellable` instance. You can explicitly `cancel` this subscription, or it will be auto-cancelled if you let it die by letting go of all strong references to it.
 
@@ -72,7 +81,7 @@ let stringSignal = PassthroughSubject<String, SimpleError>()
 stringSignal.send("Hello, world!")
 ```
 
-Of course, nothing happens yet, because we haven't subscribed to it yet. Let's do that! The easiest way is via the `sink` operator. This allows you to pass in two closures; the first will be run when the publisher "completes", and the second anytime it publishes a value.
+Of course, nothing happens yet, because we haven't subscribed to it yet. Let's do that! The easiest way is via the `sink` operator. This allows you to pass in two closures; the first will be run when the publisher "completes", and the second anytime the publisher publishes a value.
 
 Add the following below our previous code:
 
@@ -129,7 +138,7 @@ stringSignal.send("123.333")
 stringSignal.send("bwup")
 ```
 
-If you run this, you'll see that the previous subscription still does its thing. Let's add another subscriber though. Somewhere before these signals are sent (remember we need to set up the subscription _before_ the value is published, or else we'll miss it), add the following code:
+If you run this, you'll see that the previous subscription still does its thing. Let's add another subscriber. Somewhere before these signals are sent (remember we need to set up the subscription _before_ the value is published, or else we'll miss it), add the following code:
 
 ```swift
 stringSignal
@@ -343,7 +352,7 @@ subscriptions.insert(
 )
 ```
 
-...which feels a lot weirder to write. In any case, we are now holding on to the subscription, so it'll keep doing its thing until we call `cancel` on it or it gets deallocated when we let go of all strong references to the list view instance holding the subscription.
+...which feels a lot weirder to write. In any case, we are now holding on to the subscription, so it'll keep doing its thing until we call `cancel` on it or it gets deallocated when we let go of all strong references to the list view holding the subscription.
 
 ## Conclusions
 
