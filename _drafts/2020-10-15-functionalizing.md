@@ -107,16 +107,9 @@ extension Result {
     func tryMap<NewSuccess>(
         _ transform: (Success) throws -> NewSuccess
     ) -> Result<NewSuccess, Error> {
-        switch self {
-        case .failure(let e):
-            return .failure(e)
-        case .success(let s):
-            do {
-                return .success(try transform(s))
-            } catch {
-                return .failure(error)
-            }
-        }
+        Result<NewSuccess, Error> {
+			try transform(try self.get())
+		}
     }
 }
 

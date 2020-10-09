@@ -1,6 +1,6 @@
 ---
 title: Functional-izing Network Code with Swift Combine
-date: 2020-10-09 08:00
+date: 2020-10-09 12:29
 categories:
   - Code
 ---
@@ -22,6 +22,10 @@ enum NetworkError: Error {
     case noData
     case other(Error)
     case unknown
+
+    init(_ error: Error?) {
+        // transform error into NetworkError
+    }
 }
 
 class Networker {
@@ -119,19 +123,33 @@ That was easy! Now we can take our time transitioning over to using this impleme
 Let's say that down the line, we've stopped using the old fetch method entirely, and the rest of our team has given us the okay to replace the old networking method with a publisher. Once again, Apple has made things pretty easy for us; `URLSession` has a `dataTaskPublisher` whose `Output` is a tuple containing both `Data` and a `URLResponse`, with any `Error` as the `Failure` type. Now we can really leverage Combine to write our fetch method.
 
 ```swift
+extension Result where Success == Data, Failure == NetworkError {
+    init(data: Data?, response: URLResponse?) {
+        // check data and response, etc
+    }
+}
+
 extension Networker {
     func fetch<T: Decodable>(
         _ type: T.Type,
         with request: URLRequest
     ) -> AnyPublisher<T, NetworkError> {
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { (d, r) in try Result(data: d, response: r).get() }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .mapError(NetworkError.init)
-            .eraseToAnyPublisher()
+        URLSession.shared.dataTaskPublisher(for: request)                // 1
+            .tryMap { (d, r) in try Result(data: d, response: r).get() } // 2
+            .decode(type: T.self, decoder: JSONDecoder())                // 3
+            .mapError(NetworkError.init)                                 // 4
+            .eraseToAnyPublisher()                                       // 5
     }
 }
 ```
+
+Let's walk through each of those lines:
+
+1. Initialize the data task publisher using the provided `URLRequest`.
+2. Most of the work here is being delegated to a custom `Result` initializer whose main purpose is to check that our data and response are both valid, otherwise throw an error. We could instead create a custom `validate` method if we wanted to.
+3. Decode our custom type from the JSON data. This could throw a `DecodingError` if it's unsuccessful.
+4. If we got an error at any point, we map over that and wrap it in our `NetworkError` from earlier.
+5. We erase the specific, complicated type of the publisher by wrapping it in an `AnyPublisher` to vastly simplify our method's return type.
 
 If we wanted to be lazy, we could have just done what we did at first with our call site code and wrap our old code in a `Future`...
 
@@ -150,7 +168,7 @@ extension Networker {
 
 ...but where's the fun in that?! (Of course this is a very reasonable option, especially if you still have legacy code to support.)
 
-The callsite will now look almost exactly the same as before. I've reformatted it here to be all inline & declarative.
+Either way, the callsite will now look almost exactly the same as before. I've reformatted it here to be all inline & declarative.
 
 ```swift
 extension HabitStore {
@@ -167,7 +185,7 @@ extension HabitStore {
 }
 ```
 
-So if things are generally the same in the end, was there any purpose to all of this? Well, it basically depends on your preferences and how your networking code will be used. Here's a basic fake view class with a couple of methods; one uses the old fetch that takes in a closure, and the other uses the new fetch that returns a publisher.
+So if things are generally the same in the end, was there any purpose to all of this?! Well, it basically depends on your preferences and how your networking code will be used. Here's a basic fake view class with a couple of methods; one uses the old fetch that takes in a closure, and the other uses the new fetch that returns a publisher.
 
 ```swift
 class HabitListView {
@@ -206,7 +224,7 @@ class HabitListView {
 }
 ```
 
-In this case, the Combine version adds the need to hang on to the subscription. Really you could also pass along the `dataTask` that is returned using the old URLSession method, so you would also have something you could cancel, but in that case we don't _need_ to hang on to the data task like we do with the subscription.
+In this case, the Combine version adds the need to hang on to the subscription. Really you could also pass along the `dataTask` that is returned using the old URLSession method, so you would also have something you could cancel, but we don't _need_ to hang on to the data task like we do with the subscription.
 
 The ability to easily map, merge, and perform other operations on publishers is one potential upside of using Combine. For example, we may want to merge with another publisher that fetches persisted objects from on device, or from another server.
 
