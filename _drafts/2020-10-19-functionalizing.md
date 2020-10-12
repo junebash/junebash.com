@@ -1,6 +1,6 @@
 ---
 title: Functional-izing Swift Code
-date: 2020-10-15 08:00
+date: 2020-10-19 08:00
 categories:
   - Code
 ---
