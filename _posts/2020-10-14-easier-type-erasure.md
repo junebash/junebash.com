@@ -1,6 +1,6 @@
 ---
 title: An Alternative Type-Erasure with Swift Using Closures
-date: 2020-10-14 07:59
+date: 2020-10-15 06:34
 categories:
   - Code
 ---
@@ -19,7 +19,7 @@ Let's start with a simple example.
 var number = 42
 
 let provideNumber: () -> Int = {
-	return number / 2
+   return number / 2
 }
 
 provideNumber() // 21
@@ -29,11 +29,11 @@ This seems pretty normal and expected. We wrote this closure expression that sim
 
 ```swift
 struct NumberProvider {
-	let get: () -> Int
+   let get: () -> Int
 
-	init(_ get: @escaping () -> Int) {
-		self.get = get
-	}
+   init(_ get: @escaping () -> Int) {
+      self.get = get
+   }
 }
 
 let numProvider = NumberProvider(provideNumber)
@@ -68,33 +68,33 @@ Let's use the same protocol we did last time for simplicity's sake, and some rea
 
 ```swift
 protocol Query: Encodable {
-	associatedtype Output: Decodable
+   associatedtype Output: Decodable
 
-	var queryString: String { get }
+   var queryString: String { get }
 }
 
 struct GetPersonWithID: Query {
-	typealias Output = Person
+   typealias Output = Person
 
-	let id: UUID
-	let queryString: String
+   let id: UUID
+   let queryString: String
 
-	init(id: UUID) {
-		self.id = id
-		self.queryString = "get person with id \(id)"
-	}
+   init(id: UUID) {
+      self.id = id
+      self.queryString = "get person with id \(id)"
+   }
 }
 
 struct GetPersonWithName: Query {
-	typealias Output = Person
+   typealias Output = Person
 
-	let name: String
-	let queryString: String
+   let name: String
+   let queryString: String
 
-	init(name: String) {
-		self.name = name
-		self.queryString = "get person with name \(name)"
-	}
+   init(name: String) {
+      self.name = name
+      self.queryString = "get person with name \(name)"
+   }
 }
 ```
 
@@ -102,9 +102,9 @@ Recall that our purpose with type erasure is to have a solid implementation of `
 
 ```swift
 let queries: [AnyQuery<Person>] = [
-	AnyQuery(GetPersonWithID(id: UUID())),
-	AnyQuery(GetPersonWithName(name: "Jon Bash")),
-	AnyQuery(GetPersonWithID(id: UUID()))
+   AnyQuery(GetPersonWithID(id: UUID())),
+   AnyQuery(GetPersonWithName(name: "Jon Bash")),
+   AnyQuery(GetPersonWithID(id: UUID()))
 ]
 ```
 
@@ -112,18 +112,18 @@ Last time we had to have a wrapper type, a base type, and a box type that inheri
 
 ```swift
 struct AnyQuery<Output: Decodable>: Query {
-	let queryString: String
+   let queryString: String
 
-	private var _encode: (Encoder) throws -> Void
+   private var _encode: (Encoder) throws -> Void
 
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		self.queryString = query.queryString
-		self._encode = query.encode
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      self.queryString = query.queryString
+      self._encode = query.encode
+   }
 
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   func encode(to encoder: Encoder) throws {
+      try _encode(encoder)
+   }
 }
 ```
 
@@ -135,21 +135,14 @@ Another mostly-unrelated cool thing we can do is actually sort of keep track of 
 
 ```swift
 struct AnyQuery<Output: Decodable>: Query {
-	let queryString: String
+   //...
+   let wrappedType: Any.Type
 
-    let wrappedType: Any.Type
-
-	private var _encode: (Encoder) throws -> Void
-
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		self.queryString = query.queryString
-		self._encode = query.encode
-        self.wrappedType = Q.self
-	}
-
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      //...
+      self.wrappedType = Q.self
+   }
+   //...
 }
 ```
 
@@ -165,34 +158,34 @@ Let's say, for some bizarre reason, our `Query` protocol allowed mutating the `q
 
 ```swift
 protocol Query: Encodable {
-	associatedtype Output: Decodable
+   associatedtype Output: Decodable
 
-	var queryString: String { get set }
+   var queryString: String { get set }
 }
 
 
 struct GetPersonWithID: Query {
-	typealias Output = Person
+   typealias Output = Person
 
-	let id: UUID
-	var queryString: String
+   let id: UUID
+   var queryString: String
 
-	init(id: UUID) {
-		self.id = id
-		self.queryString = "get person with id \(id)"
-	}
+   init(id: UUID) {
+      self.id = id
+      self.queryString = "get person with id \(id)"
+   }
 }
 
 struct GetPersonWithName: Query {
-	typealias Output = Person
+   typealias Output = Person
 
-	let name: String
-	var queryString: String
+   let name: String
+   var queryString: String
 
-	init(name: String) {
-		self.name = name
-		self.queryString = "get person with name \(name)"
-	}
+   init(name: String) {
+      self.name = name
+      self.queryString = "get person with name \(name)"
+   }
 }
 ```
 
@@ -200,18 +193,18 @@ Our `AnyQuery` wrapper has to adjust a bit. We might be tempted to start off wit
 
 ```swift
 struct AnyQuery<Output: Decodable>: Query {
-	var queryString: String
+   var queryString: String
 
-	private var _encode: (Encoder) throws -> Void
+   private var _encode: (Encoder) throws -> Void
 
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		self.queryString = query.queryString
-		self._encode = query.encode
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      self.queryString = query.queryString
+      self._encode = query.encode
+   }
 
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   func encode(to encoder: Encoder) throws {
+      try _encode(encoder)
+   }
 }
 ```
 
@@ -219,25 +212,25 @@ There's a major problem here, though. If our wrapped query's `encode` method rel
 
 ```swift
 struct AnyQuery<Output: Decodable>: Query2 {
-	var queryString: String {
-		get { _getQueryString() }
-		set { _setQueryString(newValue) }
-	}
+   var queryString: String {
+      get { _getQueryString() }
+      set { _setQueryString(newValue) }
+   }
 
-	private var _getQueryString: () -> String
-	private var _setQueryString: (String) -> Void
-	private var _encode: (Encoder) throws -> Void
+   private var _getQueryString: () -> String
+   private var _setQueryString: (String) -> Void
+   private var _encode: (Encoder) throws -> Void
 
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		var copy = query
-		self._getQueryString = { copy.queryString }
-		self._setQueryString = { copy.queryString = $0 }
-		self._encode = copy.encode
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      var copy = query
+      self._getQueryString = { copy.queryString }
+      self._setQueryString = { copy.queryString = $0 }
+      self._encode = copy.encode
+   }
 
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   func encode(to encoder: Encoder) throws {
+      try _encode(encoder)
+   }
 }
 ```
 
@@ -261,61 +254,61 @@ It works!
 
 ```swift
 protocol Query: Encodable {
-	associatedtype Output: Decodable
+   associatedtype Output: Decodable
 
-	var queryString: String { get set }
-	func speak()
+   var queryString: String { get set }
+   func speak()
 }
 
 extension Query {
-	func speak() {
-		print("Self: \(Self.self)\nOutput: \(Output.self)\nqueryString: \(queryString)")
-	}
+   func speak() {
+      print("Self: \(Self.self)\nOutput: \(Output.self)\nqueryString: \(queryString)")
+   }
 }
 
 struct AnyQuery<Output: Decodable>: Query {
-	var queryString: String {
-		get { _getQueryString() }
-		set { _setQueryString(newValue) }
-	}
+   var queryString: String {
+      get { _getQueryString() }
+      set { _setQueryString(newValue) }
+   }
 
-	private var _getQueryString: () -> String
-	private var _setQueryString: (String) -> Void
-	private var _encode: (Encoder) throws -> Void
-	private var _speak: () -> Void
+   private var _getQueryString: () -> String
+   private var _setQueryString: (String) -> Void
+   private var _encode: (Encoder) throws -> Void
+   private var _speak: () -> Void
 
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		var copy = query
-		self._getQueryString = { copy.queryString }
-		self._setQueryString = { copy.queryString = $0 }
-		self._encode = copy.encode
-		self._speak = copy.speak
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      var copy = query
+      self._getQueryString = { copy.queryString }
+      self._setQueryString = { copy.queryString = $0 }
+      self._encode = copy.encode
+      self._speak = copy.speak
+   }
 
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   func encode(to encoder: Encoder) throws {
+      try _encode(encoder)
+   }
 
-	func speak() {
-		_speak()
-	}
+   func speak() {
+      _speak()
+   }
 }
 ```
 
 Now let's test it really quick. If it's working as expected, when we mutate the query string, it should be reflected when we call `speak()`.
 
 ```swift
-var anyquery = AnyQuery(GetPersonWithName2(name: "Jon"))
+var anyquery = AnyQuery(GetPersonWithName(name: "Jon"))
 anyquery.speak()
-    // Self: GetPersonWithName
-    // Output: Person
-    // queryString: get person with name Jon
+// Self: GetPersonWithName
+// Output: Person
+// queryString: get person with name Jon
 
 anyquery.queryString = "HI THERE"
 anyquery.speak()
-    // Self: GetPersonWithName
-    // Output: Person
-    // queryString: get person with name Jon
+// Self: GetPersonWithName
+// Output: Person
+// queryString: get person with name Jon
 ```
 
 Uh oh. The `speak()` method isn't reflecting the mutations we make as we expect. How do we fix this?
@@ -324,31 +317,31 @@ Recall that by using `copy` within a closure, we hang on to a "reference" to the
 
 ```swift
 struct AnyQuery<Output: Decodable>: Query {
-	var queryString: String {
-		get { _getQueryString() }
-		set { _setQueryString(newValue) }
-	}
+   var queryString: String {
+      get { _getQueryString() }
+      set { _setQueryString(newValue) }
+   }
 
-	private var _getQueryString: () -> String
-	private var _setQueryString: (String) -> Void
-	private var _encode: (Encoder) throws -> Void
-	private var _speak: () -> Void
+   private var _getQueryString: () -> String
+   private var _setQueryString: (String) -> Void
+   private var _encode: (Encoder) throws -> Void
+   private var _speak: () -> Void
 
-	init<Q: Query>(_ query: Q) where Q.Output == Output {
-		var copy = query
-		self._getQueryString = { copy.queryString }
-		self._setQueryString = { copy.queryString = $0 }
-		self._encode = { try copy.encode(to: $0) }
-		self._speak = { copy.speak() }
-	}
+   init<Q: Query>(_ query: Q) where Q.Output == Output {
+      var copy = query
+      self._getQueryString = { copy.queryString }
+      self._setQueryString = { copy.queryString = $0 }
+      self._encode = { try copy.encode(to: $0) }
+      self._speak = { copy.speak() }
+   }
 
-	func encode(to encoder: Encoder) throws {
-		try _encode(encoder)
-	}
+   func encode(to encoder: Encoder) throws {
+      try _encode(encoder)
+   }
 
-	func speak() {
-		_speak()
-	}
+   func speak() {
+      _speak()
+   }
 }
 
 var anyquery = AnyQuery(GetPersonWithName(name: "Jon"))
