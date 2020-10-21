@@ -5,7 +5,7 @@ categories:
   - Code
 ---
 
-In [a recent post][Combine networking], we looked at using Combine to refactor networking code. Before that, I looked at [refactoring bloated networking functions][refactoring]. Today I'd like to take another stab at refactoring. This time, however, we'll be using a style that _looks_ a lot like Combine, but uses a more "traditional" functional style without using Combine at all. <!--more-->
+In [a recent post](/blog/combine-networking), we looked at using Combine to refactor networking code. Before that, I looked at [refactoring bloated networking functions](/blog/refactoring-functions). Today I'd like to take another stab at refactoring. This time, however, we'll be using a style that _looks_ a lot like Combine, but uses a more "traditional" functional style without using Combine at all. <!--more-->
 
 Like previously, we'll be starting with the following basic network code.
 
@@ -168,8 +168,4 @@ URLSession.shared.dataTask(with: request) { d, r, e in
 
 Looking at this, the "order of operations" is very clear; we take this network result, try mapping it, map any error, and pipe that into the completion closure.
 
-We could go further by writing some "functional types" to essentially wrap various kinds of methods, but I'll leave that to the fellows at [PointFree][PointFree]!
-
-[combine networking]: /blog/combine-networking
-[refactoring]: /blog/refactoring-functions
-[PointFree]: http://pointfree.co
+We could go further by writing some "functional types" to essentially wrap various kinds of methods, but I'll leave that to the fellows at [PointFree](http://pointfree.co)!
