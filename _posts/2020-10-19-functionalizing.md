@@ -5,6 +5,8 @@ categories:
   - Code
 ---
 
+_(Note: This post uses Swift 5.3 and the iOS 14 SDK)_
+
 In [a recent post](/blog/combine-networking), we looked at using Combine to refactor networking code. Before that, I looked at [refactoring bloated networking functions](/blog/refactoring-functions). Today I'd like to take another stab at refactoring. This time, however, we'll be using a style that _looks_ a lot like Combine, but uses a more "traditional" functional style without using Combine at all. <!--more-->
 
 Like previously, we'll be starting with the following basic network code.
