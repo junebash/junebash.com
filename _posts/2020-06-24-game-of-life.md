@@ -330,5 +330,5 @@ I'm certain that there are many, many ways I could improve upon this (I wanted t
 [Retro Rampage]: https://github.com/nicklockwood/RetroRampage
 [objc.io]: https://objc.io/
 [RR videos]: https://talk.objc.io/collections/retro-rampage
-[source code]: https://github.com/jonbash/GameOfLife
+[source code]: https://github.com/junebash/GameOfLife
 [HashLife]: https://en.wikipedia.org/wiki/Hashlife

@@ -1,7 +1,7 @@
 ---
 title: "Super Countdown Tracker: Sorting and Filtering Objects in Swift"
 date: 2020-01-02 11:50
-image: 
+image:
 categories:
   - Code
 ---
@@ -472,4 +472,4 @@ Okay, I'd say that's more than enough for now. Be sure to [check out Super Count
 
 [app website]: http://jonbash.com/apps/supercountdowntracker/
 [app store link]: https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1
-[source code]: https://github.com/jonbash/CountdownTracker
+[source code]: https://github.com/junebash/CountdownTracker

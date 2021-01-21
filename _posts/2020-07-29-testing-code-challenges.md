@@ -7,7 +7,7 @@ categories:
 
 _(Note: This post uses Swift 5.3)_
 
-Lately I've been doing a lot of "code challenges" as part of the conclusion of the computer science portion of my time at Lambda School. Testing my solutions using the often clunky web "IDE" interfaces of these code-challenge websites quickly becomes a subtle source of pain when I'm doing a lot of these every day. 
+Lately I've been doing a lot of "code challenges" as part of the conclusion of the computer science portion of my time at Lambda School. Testing my solutions using the often clunky web "IDE" interfaces of these code-challenge websites quickly becomes a subtle source of pain when I'm doing a lot of these every day.
 
 So naturally, I wrote some code to solve this.<!--more-->
 
@@ -53,7 +53,7 @@ extension CodeChallengeTestCases {
       let expectedOutput: Output
       let actualOutput: Output
    }
-   
+
    func evaluate() -> [Failure] {
       expected.compactMap { ioPair -> Failure? in
          let o = output(for: ioPair.key)
@@ -73,7 +73,7 @@ Here we define a basic `Failure` struct (nested within the `CodeChallengeTestCas
 
 However, you'll notice that if you tried to run this, you'll get an error: `Binary operator '==' cannot be applied to two 'Output' operands`. What's going on there?
 
-It turns out, our `Output` type needs to conform to `Equatable` if we want to test equality. Most types in Swift's standard library already do, but our type has no way of knowing that by default. We could make `Output` be _required_ to conform to `Equatable`, but in the heat of working on a code challenge, I don't want to have to worry about this. 
+It turns out, our `Output` type needs to conform to `Equatable` if we want to test equality. Most types in Swift's standard library already do, but our type has no way of knowing that by default. We could make `Output` be _required_ to conform to `Equatable`, but in the heat of working on a code challenge, I don't want to have to worry about this.
 
 Instead, we could have `evaluate` take in a closure that evaluates equality for us, and then use that in an overloaded version of this method for the cases `where Output: Equatable`.
 
@@ -100,7 +100,7 @@ extension CodeChallengeTestCases where Output: Equatable {
 }
 ```
 
-Now we're getting somewhere! 
+Now we're getting somewhere!
 
 The `outputEqualsExpected` closure also ends up being useful with some code challenges even when the `Output` _does_ conform to equatable. For example, some problems will expect you to return an array, but its order won't matter. If you just tested for basic equality, our test would think it failed. Instead, we can pass in a closure that checks if the expected output simply contains the same _members_ as the actual output, without checking if they're each at the "correct" index.
 
@@ -130,7 +130,7 @@ extension CodeChallengeTestCases {
       }
       print("\n----------------\n")
    }
-   
+
    private func printEvaluation(
       for input: Input,
       expected: Output,
@@ -218,4 +218,4 @@ CodeChallengeTestCases(
 
 There are of course more improvements we could make (giving a title to our test cases, measuring time and space used, comparing different solutions, etc), but at this point I've probably spent more time writing this "simple" helper than I have actually working on the code challenges, so let's get back to work on those!
 
-p.s., Here's [a gist with the CodeChellengeTestCases code](https://gist.github.com/jonbash/6da6efdd3a1bd9e62a994ef72bdcea67) for you to play with, use, and/or extend!
+p.s., Here's [a gist with the CodeChellengeTestCases code](https://gist.github.com/junebash/6da6efdd3a1bd9e62a994ef72bdcea67) for you to play with, use, and/or extend!

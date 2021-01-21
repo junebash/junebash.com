@@ -1,7 +1,7 @@
 - title: Eco-Soap Bank
   image: eco-soap-bank-screenshot.png
   icon: esbicon.png
-  source: https://github.com/jonbash/Labs25-Ecosoap-TeamA-IOS
+  source: https://github.com/junebash/Labs25-Ecosoap-TeamA-IOS
   description: "This was a project for the [non-profit organization **Eco-Soap Bank**](http://ecosoapbank.org), which employees women local to developing areas around the world to distribute recycled soap and other products from hotels. This app is for hotel partners to track shipments and payments. It was made with a mix of UIKit and SwiftUI, utilizing the coordinator design pattern. We also notably opted to interface with GraphQL without using the usually-recommended Apollo framework, which actually worked out quite well."
   tech-used:
     - name: Swift 5 (& iOS SDK)
@@ -12,7 +12,7 @@
   page: apps/supercountdowntracker/
   image: super-countdown-tracker.png
   icon: sct-icon-sm.png
-  source: https://github.com/jonbash/CountdownTracker
+  source: https://github.com/junebash/CountdownTracker
   description: "My first \"real\" iOS app, **Super Countdown Tracker** began life as a Lambda School build week project, and I liked it so much I decided to polish it up and put it on the app store. It's a simple, lightweight app that does one thing very well—it tells you how much time is left until the events you feed it. It also features tags, notes, sorting, filtering, auto-archive, and a custom, automatic, adaptive light/dark theme. Find it [on the iOS App Store](https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1)!"
   ios-store: https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1
   tech-used:
@@ -20,7 +20,7 @@
       url: https://swift.org
 - title: Game of Life
   image: game-of-life.png
-  source: https://github.com/jonbash/GameOfLife
+  source: https://github.com/junebash/GameOfLife
   description: "This is a simple implementation of [**Conway's Game of Life**](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using SwiftUI (with a bit of UIKit under the hood). It includes controls for map size, generation speed, randomization, manual cell input. [You can read more about it on my blog here](http://www.jonbash.com/blog/game-of-life/)."
   tech-used:
     - name: Swift 5 (& iOS SDK)
@@ -29,7 +29,7 @@
       url: https://developer.apple.com/xcode/swiftui/
 - title: JonBash.com (this website!)
   image: jonbashcom-mobile.png
-  source: https://github.com/jonbash/jonbash.com
+  source: https://github.com/junebash/jonbash.com
   description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money. I'm hosting it on [NearlyFreeSpeech.net](https://www.nearlyfreespeech.net), which is *very* inexpensive (especially for simple, static websites like this one)."
   tech-used:
     - name: Jekyll
@@ -42,14 +42,14 @@
       url: http://nearlyfreespeech.net
 - title: Snackify
   image: snackify.png
-  source: https://github.com/jonbash/Snackify-iOS
+  source: https://github.com/junebash/Snackify-iOS
   description: "**Snackify** is a prototype app built for a service that allows companies to easily manage their staff launge snack table needs, as well as for employees to request new snacks for the table. [Wilmari Rodriguez](https://www.linkedin.com/in/wilmari-rodriguez-2317aa194/) and I built this app over the course of a week at Lambda School as part of a cross-disciplinary team."
   tech-used:
     - name: Swift 5 (& iOS SDK)
       url: https://swift.org
 - title: Lambdi Pet
   image: lambdipet.png
-  source: https://github.com/jonbash/LambdiPet-iOS
+  source: https://github.com/junebash/LambdiPet-iOS
   description: "**Lambdi Pet** is a prototype app built for a service for parents to motivate their children to eat healthily by mirroring their eating in feeding a cute digital pet avatar. This is a very basic app that I would have loved to have several weeks to build on to do some sound design and animation for the pet to make it even more motivating, but I'm quite proud of what I was able to accomplish in the short timeframe!"
   tech-used:
     - name: Swift 5 (& iOS SDK)
