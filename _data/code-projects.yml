@@ -1,13 +1,16 @@
+- title: Redzone
+  image: redzonescreenshot.png
+  icon: redzoneappicon.png
+  description: "Redzone is a complex app ecosystem used for management, productivity, and several other facets of work in factories. I've worked on many parts of it across platforms (namely iOS, iPadOS, and AppleTV), from UI to networking to architecture to dependency management to algorithms and developer tools."
+- title: Rekor Go
+  image: rekorgoscreenshot.jpeg
+  icon: rekorgoicon.png
+  description: "I worked as a contractor with Rekor for a few months, during which time I worked on various aspects of this app, refinining the UI, fixing memory leaks and other issues, adding additional networking logic, and more. I also worked on another app, writing the entire project from scratch using in-house frameworks, SwiftUI, [Composable Architecture](http://github.com/pointfreeco/swift-composable-architecture), and more."
 - title: Eco-Soap Bank
   image: eco-soap-bank-screenshot.png
   icon: esbicon.png
   source: https://github.com/junebash/Labs25-Ecosoap-TeamA-IOS
   description: "This was a project for the [non-profit organization **Eco-Soap Bank**](http://ecosoapbank.org), which employees women local to developing areas around the world to distribute recycled soap and other products from hotels. This app is for hotel partners to track shipments and payments. It was made with a mix of UIKit and SwiftUI, utilizing the coordinator design pattern. We also notably opted to interface with GraphQL without using the usually-recommended Apollo framework, which actually worked out quite well."
-  tech-used:
-    - name: Swift 5 (& iOS SDK)
-      url: https://swift.org
-    - name: SwiftUI
-      url: https://developer.apple.com/xcode/swiftui/
 - title: Super Countdown Tracker
   page: apps/supercountdowntracker/
   image: super-countdown-tracker.png
@@ -15,46 +18,19 @@
   source: https://github.com/junebash/CountdownTracker
   description: "My first \"real\" iOS app, **Super Countdown Tracker** began life as a Lambda School build week project, and I liked it so much I decided to polish it up and put it on the app store. It's a simple, lightweight app that does one thing very well—it tells you how much time is left until the events you feed it. It also features tags, notes, sorting, filtering, auto-archive, and a custom, automatic, adaptive light/dark theme. Find it [on the iOS App Store](https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1)!"
   ios-store: https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1
-  tech-used:
-    - name: Swift 5 (& iOS SDK)
-      url: https://swift.org
 - title: Game of Life
   image: game-of-life.png
   source: https://github.com/junebash/GameOfLife
   description: "This is a simple implementation of [**Conway's Game of Life**](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using SwiftUI (with a bit of UIKit under the hood). It includes controls for map size, generation speed, randomization, manual cell input. [You can read more about it on my blog here](http://www.Junebash.com/blog/game-of-life/)."
-  tech-used:
-    - name: Swift 5 (& iOS SDK)
-      url: https://swift.org
-    - name: SwiftUI
-      url: https://developer.apple.com/xcode/swiftui/
 - title: JuneBash.com (this website!)
   image: jonbashcom-mobile.png
   source: https://github.com/junebash/junebash.com
-  description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money. I'm hosting it on [NearlyFreeSpeech.net](https://www.nearlyfreespeech.net), which is *very* inexpensive (especially for simple, static websites like this one)."
-  tech-used:
-    - name: Jekyll
-      url: http://jekyllrb.com
-    - name: Markdown
-      url: https://www.markdownguide.org
-    - name: Bootstrap
-      url: http://getbootstrap.com
-    - name: NearlyFreeSpeech.net
-      url: http://nearlyfreespeech.net
+  description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money. So, I rewrote the website using Jekyll, Markdown, Bootstrap, and of course the usuals (HTML, CSS, Javascript). I started out hosting it on [NearlyFreeSpeech.net](https://www.nearlyfreespeech.net), but have recently moved to Netlify."
 - title: Snackify
   image: snackify.png
   source: https://github.com/junebash/Snackify-iOS
-  description: "**Snackify** is a prototype app built for a service that allows companies to easily manage their staff launge snack table needs, as well as for employees to request new snacks for the table. [Wilmari Rodriguez](https://www.linkedin.com/in/wilmari-rodriguez-2317aa194/) and I built this app over the course of a week at Lambda School as part of a cross-disciplinary team."
-  tech-used:
-    - name: Swift 5 (& iOS SDK)
-      url: https://swift.org
+  description: "**Snackify** is a prototype app built for a service that allows companies to easily manage their staff launge snack table needs, as well as for employees to request new snacks for the table. [Wilmari Rodriguez](https://www.linkedin.com/in/wilmari-rodriguez/) and I built this app over the course of a week at Lambda School as part of a cross-disciplinary team."
 - title: Lambdi Pet
   image: lambdipet.png
   source: https://github.com/junebash/LambdiPet-iOS
   description: "**Lambdi Pet** is a prototype app built for a service for parents to motivate their children to eat healthily by mirroring their eating in feeding a cute digital pet avatar. This is a very basic app that I would have loved to have several weeks to build on to do some sound design and animation for the pet to make it even more motivating, but I'm quite proud of what I was able to accomplish in the short timeframe!"
-  tech-used:
-    - name: Swift 5 (& iOS SDK)
-      url: https://swift.org
-    - name: Charts (framework)
-      url: https://github.com/danielgindi/Charts
-    - name: KeychainAccess (framework)
-      url: https://github.com/kishikawakatsumi/KeychainAccess
