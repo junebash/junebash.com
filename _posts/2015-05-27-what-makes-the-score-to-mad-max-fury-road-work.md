@@ -30,8 +30,6 @@ categories:
 
 <p><strong><em>THE DOOF WARRIOR.</em></strong></p>
 
-<p><img src="http://jonbash.github.io/images/Doof-Warrior_002.jpg" alt="THE DOOF WARRIOR." /></p>
-
 <p>This absurd monstrosity, along with a legion of drummers on the truck’s back, acts as a sort of demented, post-apocalyptic war cry throughout the film. And their sound blends seemlessly into the score, to the point where, most of the time, it’s difficult to determine what’s supposed to be being played by on-screen characters and what’s supposed to be “score.” This feeling is enhanced by filtering and stereo/surround effects in the theater, where the sound actually follows where the performers are visually, especially with regards to the guitar.</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/g8lebbgyopg?t=2m14s" frameborder="0" allowfullscreen=""></iframe>

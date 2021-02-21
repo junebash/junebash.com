@@ -10,8 +10,6 @@ categories:
 
 <h2 id="recording">Recording</h2>
 
-<p><img src="http://jonbash.github.io/blog/assets/images/custom-instrument-recording-setup.jpg" alt="My very shmancy recording setup" /></p>
-
 <p>This was definitely the most amateur-y part of it all. I think I ended up using the source from my Zoom H1, which is not exactly the greatest field recorder out there. Somehow, though, it got a nicer sound than the other mics I tested out. It was also recorded in my apartment bedroom, which does not have a fantastic sound. Still, I’ve been recording in there for about 5 years now and I’ve gotten very accustomed to getting a decent sound out of the less-than-ideal space.</p>
 
 <p>The recording itself was a bit tedious. I set up the mics, grabbed a drum stick, and hit the drum as softly as I could. I waited a few seconds to let the sound decay. I hit it again at a similar volume. I waited. I repeated this over and over, gradually getting louder. Not all the hits were great. It ended after I hit the drum as hard as I could a few times. Then I took another couple of passes at volumes where I didn’t feel like I had enough hits.</p>

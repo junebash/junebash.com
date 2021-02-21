@@ -21,15 +21,15 @@
 - title: Game of Life
   image: game-of-life.png
   source: https://github.com/junebash/GameOfLife
-  description: "This is a simple implementation of [**Conway's Game of Life**](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using SwiftUI (with a bit of UIKit under the hood). It includes controls for map size, generation speed, randomization, manual cell input. [You can read more about it on my blog here](http://www.jonbash.com/blog/game-of-life/)."
+  description: "This is a simple implementation of [**Conway's Game of Life**](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using SwiftUI (with a bit of UIKit under the hood). It includes controls for map size, generation speed, randomization, manual cell input. [You can read more about it on my blog here](http://www.Junebash.com/blog/game-of-life/)."
   tech-used:
     - name: Swift 5 (& iOS SDK)
       url: https://swift.org
     - name: SwiftUI
       url: https://developer.apple.com/xcode/swiftui/
-- title: JonBash.com (this website!)
+- title: JuneBash.com (this website!)
   image: jonbashcom-mobile.png
-  source: https://github.com/junebash/jonbash.com
+  source: https://github.com/junebash/junebash.com
   description: "I made this very website you're now reading! This was a major redesign coming from Wordpress, which I'd opted to quit using because: a. I don't like PHP; b. Wordpress was starting to feel like overkill for my needs; c. I wanted to improve my programming skills; d. I wanted to save money. I'm hosting it on [NearlyFreeSpeech.net](https://www.nearlyfreespeech.net), which is *very* inexpensive (especially for simple, static websites like this one)."
   tech-used:
     - name: Jekyll

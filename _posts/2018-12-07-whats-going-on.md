@@ -43,5 +43,5 @@ Rather than ramble on any further, I'll just end with this quote by Jon Kabat-Zi
 
 > The only time you ever have in which to learn anything or see anything or feel anything, or express any feeling or emotion, or respond to an event, or grow, or heal, is this moment, because this is the only moment any of us ever gets. You're here now; you're only alive in this moment.
 
-[1]: https://twitter.com/JonBash/status/1059942909020196864
-[2]: https://twitter.com/JonBash/status/1062521937107181569
+[1]: https://twitter.com/JuneBash/status/1059942909020196864
+[2]: https://twitter.com/JuneBash/status/1062521937107181569

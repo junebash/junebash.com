@@ -470,6 +470,6 @@ Okay, I'd say that's more than enough for now. Be sure to [check out Super Count
 - [iOS App Store page][app store link]
 - [Github page][source code]
 
-[app website]: http://jonbash.com/apps/supercountdowntracker/
+[app website]: http://Junebash.com/apps/supercountdowntracker/
 [app store link]: https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1
 [source code]: https://github.com/junebash/CountdownTracker

@@ -1,5 +1,3 @@
-[Read my resumè](/assets/other-files/resume-JonBash-iOSDev.pdf){: .btn .btn-primary .btn-large}
-
 ## Skills
 {: .display-4}
 

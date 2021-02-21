@@ -81,7 +81,7 @@ Our goal is to be able to make an array of queries that happen to have the same 
 // This won't compile!
 let queries: [QueryInput] = [
     FetchEventCreator(eventID: myEvent.id),
-    FetchPersonWithName(name: "Jon Bash")
+    FetchPersonWithName(name: "June Bash")
 ]
 ```
 
@@ -89,11 +89,11 @@ We don't have any way to tell the compiler that we just `QueryInput`s with an `O
 
 ```swift
 let fetchMyEventCreator = FetchEventCreator(eventID: myEvent.id)
-let fetchJon = FetchPersonWithName(name: "Jon Bash")
+let fetchJune = FetchPersonWithName(name: "June Bash")
 
 let queries: [AnyQuery] = [
     AnyQuery(fetchMyEventCreator),
-    AnyQuery(fetchJon)
+    AnyQuery(fetchJune)
 ]
 ```
 
@@ -197,11 +197,11 @@ Now, _finally_, we can make an array of different queries that spit out a `Perso
 
 ```swift
 let fetchMyEventCreator = FetchEventCreator(eventID: myEvent.id)
-let fetchJon = FetchPersonWithName(name: "Jon Bash")
+let fetchJune = FetchPersonWithName(name: "June Bash")
 
 let queries: [AnyQuery] = [
     AnyQuery(fetchMyEventCreator),
-    AnyQuery(fetchJon)
+    AnyQuery(fetchJune)
 ]
 ```
 

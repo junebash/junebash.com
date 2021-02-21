@@ -1,10 +1,9 @@
-title: "Jon Bash -- software developer, etc"
-author: Jon Bash
-email: jon@jonbash.com
-description: "Jon Bash is a software developer (iOS, games, generalist) and musician living in Bellingham, WA."
-twitter: "@jonbash"
-mastodon: "@jonbash@mastodon.social"
-youtube: jonbashjonbash
+title: "June Bash -- software developer, etc"
+author: June Bash
+email: junebash@pm.me
+description: "June Bash is a software developer (iOS, games, generalist) and musician living in Bellingham, WA."
+twitter: "@Junebash"
+youtube: https://www.youtube.com/channel/UC2y-Ro0-_h4YW6dkJFegSWw
 github: junebash
 # baseurl:
 image: /assets/images/jon-front.jpg
@@ -24,7 +23,7 @@ defaults:
       type: pages
     values:
       layout: default
-      author: Jon Bash
+      author: June Bash
   -
     scope:
       type: posts

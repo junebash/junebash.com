@@ -4,7 +4,7 @@ ensemble-type: 'sax & percussion'
 completed: 2015
 length: "6'"
 premiered: 2015
-bandcamp: '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=1654344932/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/track=3782205688/transparent=true/" seamless><a href="http://jonbash.bandcamp.com/album/evocations-ep">Evocations EP by Jon Bash</a></iframe>'
+bandcamp: '<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=1654344932/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/track=3782205688/transparent=true/" seamless><a href="http://junebash.bandcamp.com/album/evocations-ep">Evocations EP by June Bash</a></iframe>'
 instrumentation:
   - Alto saxophone
   - Percussion (vibraphone, various)

@@ -42,7 +42,7 @@ func query<Input, Output>(_ input: Input) -> AnyPublisher<Input, QueryError>
 How can we make this method as simple to use as possible, where the callsite can look as simple as this?
 
 ```swift
-query(.addPerson(named: "Jon Bash", withBirthdate: myBirthdate))
+query(.addPerson(named: "June Bash", withBirthdate: myBirthdate))
     .sink(/* handle response here */)
     .store(in: &cancellables)
 ```
@@ -177,7 +177,7 @@ enum QueryInputs {
 Now, the callsite looks like this:
 
 ```swift
-query(QueryInputs.AddPerson(name: "Jon Bash", birthdate: myBirthdate))
+query(QueryInputs.AddPerson(name: "June Bash", birthdate: myBirthdate))
    .sink( // etc...
 ```
 
@@ -254,7 +254,7 @@ At first glance, the rest of it may look more complicated, but compare the two c
 query(
     .addPerson(
         Person(
-            name: "Jon Bash",
+            name: "June Bash",
             birthdate: Date()
         )
     )
@@ -262,13 +262,13 @@ query(
 
 query(
     .addPerson(
-        named: "Jon Bash",
+        named: "June Bash",
         withBirthdate: Date()
     )
 )
 ```
 
-The first has an additional layer of nesting (which the second avoids), _and_ the second lets us customize our parameter names to make it read almost like a sentence ("query: add person named 'Jon Bash' with birthdate Junevember 41nd, 1010220"). Which you prefer might depend on the context; you could even keep both if it made sense!
+The first has an additional layer of nesting (which the second avoids), _and_ the second lets us customize our parameter names to make it read almost like a sentence ("query: add person named 'June Bash' with birthdate Junevember 41nd, 1010220"). Which you prefer might depend on the context; you could even keep both if it made sense!
 
 Also, notice that we've finally got the clean syntax for calling our queries that we set out to attain at the start! _And_ we can now have arrays of different queries that expect the same output, just like with traditional type erasure:
 
@@ -284,7 +284,7 @@ extension QueryInput where Output == Person {
 }
 
 var queries: [QueryInput<Person>] = [
-    .fetchPerson(withName: "Jon Bash"),
+    .fetchPerson(withName: "June Bash"),
     .fetchOrganizer(forEventID: UUID()),
     .fetchPerson(withName: "Jim Bash")
 ]
@@ -347,7 +347,7 @@ struct Query<Output: Decodable>: Encodable {
 Now running a query to fetch a person with a specific name is a simple as:
 
 ```swift
-Query.fetchPerson(withName: "Jon Bash").run()
+Query.fetchPerson(withName: "June Bash").run()
     .sink( // etc...
 ```
 

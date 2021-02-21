@@ -1,7 +1,7 @@
 ---
 title: "Writing an Atomic Property Wrapper in Swift"
 date: 2020-01-26 15:48
-image: 
+image:
 categories:
   - Code
 ---
@@ -92,7 +92,7 @@ The only things we've changed from before are:
 - We've added the `@propertyWrapper` keyword immediately before the declaration of our type
 - We've renamed some variables (`_value` to `value`, `value` to `wrappedValue`)
 
-That's it! Now you might be thinking, "Okay Jon, but now I have to type *even more* characters every time I access it; `.wrappedValue` has 8 more key-presses than `.value`![^2] Why would you do that to me?!"
+That's it! Now you might be thinking, "Okay June, but now I have to type *even more* characters every time I access it; `.wrappedValue` has 8 more key-presses than `.value`![^2] Why would you do that to me?!"
 
 Fear not, my dear, lazy reader. Firstly, `@propertyWrapper` is sort of like a protocol that requires a non-private var `.wrappedValue`, so we're required to use that name exactly.
 
@@ -121,7 +121,7 @@ Donny Wals made [a great post](https://www.donnywals.com/why-your-atomic-propert
 [^1]: Theoretically, at least; honestly, I've never needed to make use of this.
 [^2]: If you include the `shift` for the capital `V`.
 
-[framework source]: https://github.com/jonbash/networker
+[framework source]: https://github.com/Junebash/networker
 [atomic definition]: https://en.wikipedia.org/wiki/Linearizability#Atomic
 [race condition definition]: https://en.wikipedia.org/wiki/Race_condition
 [property wrapper post]: https://www.vadimbulavin.com/swift-5-property-wrappers/

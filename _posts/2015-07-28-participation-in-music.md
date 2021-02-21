@@ -20,8 +20,6 @@ categories:
 
 <h2 id="the-ghost-of-music-present">The Ghost of Music Present</h2>
 
-<p><img src="http://jonbash.github.io/blog/assets/images/earphones.jpg" alt="Modern music participation" /></p>
-
 <p>Today, the most common form of participating in any kind of musical activity is putting on a pair of headphones and zoning out. In classical music especially, a thick fourth wall divides the music-makers and the audience. Arcane rules about clapping between music and referring to the conductor as Maestro completely turn many audiences off even stepping into concert halls around the world. For most, the general impression of the classical community is one of stuffy, wine-drinking snobs.</p>
 
 <p>It’s true that music education still costed a great deal of money and was reserved for the upper-middle class in previous centuries, but I would venture to bet (I’m definitely not a musicologist, so this is, indeed, a bet, not a claim) that a hell of a lot more upper-middle class folks were educated in music back then than are today.</p>

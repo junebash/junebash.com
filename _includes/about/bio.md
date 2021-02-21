@@ -1,4 +1,4 @@
-## About Jon
+## About June
 {: .display-4}
 <div class="row">
 <div class="col-lg-9" markdown="1">

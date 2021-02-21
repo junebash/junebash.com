@@ -61,4 +61,4 @@ And to all of my friends, I love you. And maybe this is a weird and convoluted w
 
 
 [1]: http://onbeing.org/programs/alain-de-botton-the-true-hard-work-of-love-and-relationships/
-[2]: http://jonbash.com/blog/on-synthwave/
+[2]: http://Junebash.com/blog/on-synthwave/

@@ -103,7 +103,7 @@ Recall that our purpose with type erasure is to have a solid implementation of `
 ```swift
 let queries: [AnyQuery<Person>] = [
    AnyQuery(GetPersonWithID(id: UUID())),
-   AnyQuery(GetPersonWithName(name: "Jon Bash")),
+   AnyQuery(GetPersonWithName(name: "June Bash")),
    AnyQuery(GetPersonWithID(id: UUID()))
 ]
 ```
@@ -242,8 +242,8 @@ We've done two important things here:
 Remember earlier with the `NumberProvider` closure and how it kept referring back to the original method? By initializing `var copy` and using that within these closures, we're keeping that `copy` alive and continuing to refer to it. Let's test this:
 
 ```swift
-var anyquery2 = AnyQuery2(GetPersonWithName2(name: "Jon"))
-print(anyquery2.queryString) // "get person with name Jon"
+var anyquery2 = AnyQuery2(GetPersonWithName2(name: "June"))
+print(anyquery2.queryString) // "get person with name June"
 anyquery2.queryString = "HI THERE"
 print(anyquery2.queryString) // "HI THERE"
 ```
@@ -298,17 +298,17 @@ struct AnyQuery<Output: Decodable>: Query {
 Now let's test it really quick. If it's working as expected, when we mutate the query string, it should be reflected when we call `speak()`.
 
 ```swift
-var anyquery = AnyQuery(GetPersonWithName(name: "Jon"))
+var anyquery = AnyQuery(GetPersonWithName(name: "June"))
 anyquery.speak()
 // Self: GetPersonWithName
 // Output: Person
-// queryString: get person with name Jon
+// queryString: get person with name June
 
 anyquery.queryString = "HI THERE"
 anyquery.speak()
 // Self: GetPersonWithName
 // Output: Person
-// queryString: get person with name Jon
+// queryString: get person with name June
 ```
 
 Uh oh. The `speak()` method isn't reflecting the mutations we make as we expect. How do we fix this?
@@ -344,7 +344,7 @@ struct AnyQuery<Output: Decodable>: Query {
    }
 }
 
-var anyquery = AnyQuery(GetPersonWithName(name: "Jon"))
+var anyquery = AnyQuery(GetPersonWithName(name: "June"))
 anyquery.speak()
 
 anyquery.queryString = "HI THERE"
