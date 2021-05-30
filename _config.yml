@@ -6,7 +6,6 @@ twitter: "@Junebash"
 youtube: https://www.youtube.com/channel/UC2y-Ro0-_h4YW6dkJFegSWw
 github: junebash
 # baseurl:
-image: /assets/images/jon-front.jpg
 excerpt_separator: <!--more-->
 highlighter: rouge
 sass:

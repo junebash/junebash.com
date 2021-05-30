@@ -18,8 +18,6 @@ categories:
 
 <h2 id="editing">Editing</h2>
 
-<p><img src="http://jonbash.github.io/blog/assets/images/Reaper-instrument-sample-edit.png" alt="Editing the file in Reaper" /></p>
-
 <p>First, I listened through the long, boring audio file in <a href="http://www.reaper.fm">Reaper (my DAW of choice)</a> and got rid of any hits where I flammed or hit the drum in a weird spot or that otherwise didn’t fit in.</p>
 
 <p>At this point, I normalized the file using <code class="highlighter-rouge">Item properties: Normalize multiple items to common gain</code> (shortcut: Shift-N) (since I had cut out sections of the original file) and then used the action <code class="highlighter-rouge">Item: Dynamic split items...</code> (shortcut: D) to split the items at their transients. I had to do quite a bit of tweaking and adjusting, but it was still faster than splitting everything manually.</p>
@@ -29,8 +27,6 @@ categories:
 <p>I then applied a bit of processing to the samples on the track; just some subtle compression and EQing to make it sound a bit cleaner. I used the action <code class="highlighter-rouge">Markers: Insert regions for each selection item</code> to create a separate region for each sample, and then rendered out each sample into a separate file named numerically by volume.</p>
 
 <h2 id="making-kontakt-ha">Making Kontakt (Ha)</h2>
-
-<p><img src="http://jonbash.github.io/blog/assets/images/Kontakt-instrument-edit.png" alt="Making the instrument in Kontakt" /></p>
 
 <p>At this point I moved into Kontakt and made a new instrument (<code class="highlighter-rouge">Files-&gt;New Instrument</code>) and dragged the samples into the Mapping Editor. Contrary to how most samples are laid out (but in exactly the same way Junkie XL does it), I arranged the samples by volume across the keyboard. Most sampler instruments put one drum on one key and control volume with velocity, and often have some randomization involved to make it sound more human. But here, instead of the samples increasing in pitch as you move up the keyboard, they increase in volume. This way, I think, gives you a bit more control over the sound once you start using the instrument in a piece of music. I did decide, additionally, to keep velocity control of each sample, partly because it does that by default, but also just to have that extra level of control.</p>
 
