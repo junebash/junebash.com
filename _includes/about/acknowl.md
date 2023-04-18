@@ -3,6 +3,7 @@
 
 Without the following people, my life would certainly not be where it is today.
 
+- My partner Tori, who brings immense joy and love to my life every day
 - My best friend, Elie, who was supported me through absolutely everything, has believed in me when even I haven't, has inspired me... I can't possibly say enough about how wonderful her presence has been in my life
 - My parents, who raised me to be kind, work hard, reach high, do good, and love
 - Sarah & Carl, who put up with my (perhaps inevitable) brattiness as a child and today welcome me into their lives at every opportunity
