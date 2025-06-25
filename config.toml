@@ -9,9 +9,16 @@ taxonomies = [{ name = "tags" }]
 theme = "auto"
 socials = [
   # Configure socials here
+  { name = "bluesky", url = "https://bsky.app/profile/junebash.bsky.social", icon = "bluesky" },
+  { name = "github", url = "https://github.com/junebash", icon = "github" },
+  { name = "bandcamp", url = "https://junebash.bandcamp.com", icon = "bandcamp" }
 ]
 menu = [
   # Configure menu bar here
+  { name = "JuneBash.com | ", url = "/", weight = 0 },
+  { name = "projects", url = "/projects", weight = 1 },
+  { name = "about", url = "/about", weight = 2 },
+  { name = "posts", url = "/posts", weight = 3 },
 ]
 
 # See this for more options: https://github.com/not-matthias/apollo/blob/main/config.toml#L14
