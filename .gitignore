@@ -1,6 +1,16 @@
-_site
-.sass-cache
-.sass-cache/*
-*/.DS_Store
+# Zola build output
+public/
+
+# Development files
 .DS_Store
-.jekyll-cache
+*.tmp
+*.swp
+*.swo
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+Thumbs.db
