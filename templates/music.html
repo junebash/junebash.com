@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<div class="content">
+    <h1 class="title">{{ page.title }}</h1>
+    
+    {{ page.content | safe }}
+    
+    <style>
+    .music-section {
+        margin: 3rem 0;
+    }
+    
+    .music-section h2 {
+        border-bottom: 2px solid var(--accent-color, #3498db);
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .music-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .music-item {
+        padding: 1.5rem;
+        background: var(--bg-secondary, #f8f9fa);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent-color, #3498db);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .music-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    
+    .music-item h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--text-primary, #2c3e50);
+    }
+    
+    .music-meta {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary, #6c757d);
+    }
+    
+    .music-meta .label {
+        font-weight: 600;
+        color: var(--text-primary, #2c3e50);
+    }
+    
+    .instrumentation {
+        margin: 1rem 0;
+    }
+    
+    .instrumentation ul {
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+    }
+    
+    .embedded-player {
+        margin: 1rem 0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .embedded-player iframe {
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+    }
+    
+    .music-description {
+        margin-top: 1rem;
+        line-height: 1.6;
+    }
+    
+    .external-link {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background: var(--accent-color, #3498db);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        transition: background 0.2s ease;
+    }
+    
+    .external-link:hover {
+        background: var(--accent-color-hover, #2980b9);
+        color: white;
+    }
+    </style>
+    
+    <!-- Concert Music Section -->
+    <div class="music-section">
+        <h2>🎼 Concert Music</h2>
+        <p>Classical and contemporary compositions for acoustic instruments and ensembles.</p>
+        
+        <div class="music-grid">
+            <!-- Sample concert music item - will be populated during migration -->
+            <div class="music-item">
+                <h3>Evocations</h3>
+                <div class="music-meta">
+                    <span class="label">Ensemble:</span>
+                    <span>Saxophone & Percussion</span>
+                    <span class="label">Length:</span>
+                    <span>6'</span>
+                    <span class="label">Completed:</span>
+                    <span>2015</span>
+                    <span class="label">Premiered:</span>
+                    <span>2015</span>
+                </div>
+                <div class="instrumentation">
+                    <span class="label">Instrumentation:</span>
+                    <ul>
+                        <li>Alto saxophone</li>
+                        <li>Percussion (vibraphone, various)</li>
+                    </ul>
+                </div>
+                <div class="embedded-player">
+                    <!-- Bandcamp player will go here -->
+                    <p><em>Audio player coming soon</em></p>
+                </div>
+                <div class="music-description">
+                    <p>An excessively fun piece exploring rhythmic and spectral contrapuntal interplay...</p>
+                </div>
+            </div>
+            
+            <!-- Additional concert music items will be added during migration -->
+            <div class="music-item">
+                <h3>More Concert Music</h3>
+                <p>Additional classical compositions will be migrated here from the Jekyll collections.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Music for Games & Films Section -->
+    <div class="music-section">
+        <h2>🎮 Music for Games & Films</h2>
+        <p>Soundtracks and scores for interactive media and film projects.</p>
+        
+        <div class="music-grid">
+            <div class="music-item">
+                <h3>Game & Film Scores</h3>
+                <p>Music for various game and film projects will be consolidated here during migration.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Solo Projects & Bands Section -->
+    <div class="music-section">
+        <h2>🎸 Solo Projects & Bands</h2>
+        <p>Personal musical projects and collaborative work.</p>
+        
+        <div class="music-grid">
+            <div class="music-item">
+                <h3>Solo & Band Projects</h3>
+                <p>Personal music projects and band collaborations will be featured here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

@@ -1,6 +1,7 @@
 +++
 title = "Now"
 sort_by = "date"
+template = "now.html"
 
 [extra]
 comment = false

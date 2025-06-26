@@ -2,6 +2,17 @@
 base_url = "https://junebash.com"
 
 theme = "apollo"
+# Taxonomy system - migrated and enhanced from Jekyll categories
+# Original Jekyll categories → New Zola tags mapping:
+# Code → programming, swift, ios, combine, swiftui, tutorial
+# Music → music, composition, sound-design, music-theory  
+# Dharma → meditation, philosophy, spirituality, mindfulness
+# Personal → personal, life, updates
+# Games & Films → gamedev, film, review, entertainment
+# Productivity → productivity, workflow, habits
+# News → news, updates, announcements  
+# Micro → microblog, short, quick-thoughts
+# Quotes → quotes, wisdom, inspiration
 taxonomies = [{ name = "tags" }]
 
 [extra]

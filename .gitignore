@@ -1,6 +1,13 @@
 # Zola build output
 public/
 
+# Python virtual environment and cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
 # Development files
 .DS_Store
 *.tmp

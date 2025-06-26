@@ -1,5 +1,6 @@
 +++
 title = "Music"
+template = "music.html"
 
 [extra]
 comment = false

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<div class="content">
+    <h1 class="title">{{ section.title }}</h1>
+    
+    {{ section.content | safe }}
+    
+    <style>
+    .now-updates {
+        margin-top: 3rem;
+    }
+    
+    .now-update {
+        margin: 2rem 0;
+        padding: 2rem;
+        background: var(--bg-secondary, #f8f9fa);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent-color, #3498db);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    
+    .now-update:before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 2rem;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--accent-color, #3498db);
+        border: 3px solid var(--bg-primary, white);
+    }
+    
+    .update-date {
+        margin: 0 0 1rem 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--accent-color, #3498db);
+        border-bottom: 1px solid var(--border-color, #e1e8ed);
+        padding-bottom: 0.5rem;
+    }
+    
+    .update-content {
+        line-height: 1.6;
+        color: var(--text-primary, #2c3e50);
+    }
+    
+    .update-content p {
+        margin: 1rem 0;
+    }
+    
+    .update-content p:first-child {
+        margin-top: 0;
+    }
+    
+    .update-content p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .timeline {
+        position: relative;
+        padding-left: 1rem;
+    }
+    
+    .timeline:before {
+        content: "";
+        position: absolute;
+        left: -2px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--accent-color, #3498db), transparent);
+    }
+    
+    .no-updates {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-secondary, #6c757d);
+        font-style: italic;
+    }
+    </style>
+    
+    {% if section.pages %}
+    <div class="timeline">
+        <div class="now-updates">
+            {% for page in section.pages %}
+            <article class="now-update">
+                <header>
+                    <h2 class="update-date">{{ page.date | date(format="%B %d, %Y") }}</h2>
+                </header>
+                <div class="update-content">
+                    {{ page.content | safe }}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="no-updates">
+        <p>No updates yet. Check back soon!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock main_content %}
