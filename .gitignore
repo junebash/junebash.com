@@ -21,3 +21,7 @@ __pycache__/
 
 # OS files
 Thumbs.db
+
+# Development artifacts
+uploads/
+usage_tracking*.json
