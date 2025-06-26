@@ -17,8 +17,10 @@ menu = [
   # Configure menu bar here
   { name = "JuneBash.com | ", url = "/", weight = 0 },
   { name = "projects", url = "/projects", weight = 1 },
-  { name = "about", url = "/about", weight = 2 },
-  { name = "posts", url = "/posts", weight = 3 },
+  { name = "music", url = "/music", weight = 2 },
+  { name = "about", url = "/about", weight = 3 },
+  { name = "posts", url = "/posts", weight = 4 },
+  { name = "now", url = "/now", weight = 5 },
 ]
 
 # See this for more options: https://github.com/not-matthias/apollo/blob/main/config.toml#L14
