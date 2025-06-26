@@ -80,20 +80,165 @@
         color: var(--text-secondary, #6c757d);
         font-style: italic;
     }
+    
+    /* Featured latest post styling */
+    .now-update.featured {
+        background: linear-gradient(135deg, var(--bg-secondary, #f8f9fa), var(--bg-primary, white));
+        border-left: 6px solid var(--accent-color, #3498db);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .latest-badge {
+        display: inline-block;
+        background: var(--accent-color, #3498db);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 1rem;
+    }
+    
+    /* Navigation styling */
+    .now-navigation {
+        margin-top: 4rem;
+        padding: 2rem;
+        background: var(--bg-secondary, #f8f9fa);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent-color, #3498db);
+    }
+    
+    .nav-title {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--accent-color, #3498db);
+        border-bottom: 1px solid var(--border-color, #e1e8ed);
+        padding-bottom: 0.5rem;
+    }
+    
+    .now-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .now-nav-item {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        background: var(--bg-primary, white);
+        transition: all 0.2s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .now-nav-item:hover:not(.latest) {
+        background: var(--bg-hover, #f0f8ff);
+        transform: translateX(4px);
+    }
+    
+    .now-nav-item.latest {
+        background: var(--accent-color, #3498db);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .nav-date {
+        text-decoration: none;
+        color: var(--text-primary, #2c3e50);
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+    
+    .nav-date:hover {
+        color: var(--accent-color, #3498db);
+    }
+    
+    .nav-date.current-page {
+        color: white;
+    }
+    
+    .current-indicator {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    /* Dark mode adjustments */
+    @media (prefers-color-scheme: dark) {
+        .now-navigation {
+            background: var(--bg-secondary-dark, #2d3748);
+        }
+        
+        .now-nav-item {
+            background: var(--bg-primary-dark, #1a202c);
+        }
+        
+        .now-nav-item:hover:not(.latest) {
+            background: var(--bg-hover-dark, #2d3748);
+        }
+        
+        .nav-date {
+            color: var(--text-primary-dark, #e2e8f0);
+        }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .now-navigation {
+            margin: 2rem -1rem 0;
+            border-radius: 0;
+            border-left: none;
+            border-top: 4px solid var(--accent-color, #3498db);
+        }
+        
+        .now-nav-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
+        
+        .current-indicator {
+            align-self: flex-end;
+        }
+        
+        .latest-badge {
+            margin-left: 0;
+            margin-top: 0.5rem;
+        }
+    }
     </style>
     
     {% if section.pages %}
+    {# Show the most recent post prominently #}
+    {% set latest_post = section.pages | first %}
     <div class="timeline">
-        <div class="now-updates">
-            {% for page in section.pages %}
-            <article class="now-update">
+        <div class="latest-update">
+            <article class="now-update featured">
                 <header>
-                    <h2 class="update-date">{{ page.date | date(format="%B %d, %Y") }}</h2>
+                    <h2 class="update-date">{{ latest_post.date | date(format="%B %d, %Y") }}</h2>
+                    <span class="latest-badge">Latest Update</span>
                 </header>
                 <div class="update-content">
-                    {{ page.content | safe }}
+                    {{ latest_post.content | safe }}
                 </div>
             </article>
+        </div>
+    </div>
+    
+    {# Navigation section with all now posts #}
+    <div class="now-navigation">
+        <h2 class="nav-title">Previous Updates</h2>
+        <div class="now-nav-list">
+            {% for nav_page in section.pages %}
+            <div class="now-nav-item {% if loop.first %}latest{% endif %}">
+                {% if loop.first %}
+                <span class="nav-date current-page">{{ nav_page.date | date(format="%B %d, %Y") }}</span>
+                <span class="current-indicator">← Latest</span>
+                {% else %}
+                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%B %d, %Y") }}</a>
+                {% endif %}
+            </div>
             {% endfor %}
         </div>
     </div>
