@@ -1,0 +1,221 @@
+/* Custom CSS overrides for JuneBash.com */
+
+/* Compact list layout for project cards */
+.card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+    min-height: 120px !important;
+    padding: 1.5rem !important;
+}
+
+.card-image {
+    flex-shrink: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 8px !important;
+    border: 2px solid var(--border-color) !important;
+}
+
+.card-info {
+    flex: 1 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+}
+
+.card-title {
+    margin: 0 !important;
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+}
+
+.card-description {
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Responsive adjustments for mobile */
+@media all and (max-width: 640px) {
+    .card {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        text-align: center !important;
+    }
+    
+    .card-image {
+        align-self: center !important;
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+/* Modal overlay and container */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--bg-1);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 600px;
+    padding: 2rem;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modal-close:hover {
+    background: var(--bg-2);
+    color: var(--text-primary);
+}
+
+.modal-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.modal-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+}
+
+.modal-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.modal-description {
+    margin: 0 0 1.5rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.modal-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-2);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.modal-link:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: white;
+}
+
+/* Card clickable styling */
+.card {
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Responsive modal adjustments */
+@media all and (max-width: 640px) {
+    .modal-content {
+        width: 95vw;
+        padding: 1.5rem;
+    }
+    
+    .modal-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .modal-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .modal-links {
+        justify-content: center;
+    }
+}
