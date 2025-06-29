@@ -31,6 +31,7 @@
             <hr class="footer-divider">
             <div class="footer-content">
                 <div class="footer-made-with">Made with love by June and Claude using Zola</div>
+                <div class="footer-source"><a href="https://github.com/junebash/junebash.com" target="_blank" rel="noopener">View source code</a></div>
                 <div class="footer-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
             </div>
         </footer>
@@ -62,6 +63,22 @@
     color: var(--text-primary, #2c3e50);
 }
 
+.footer-source {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-source a {
+    color: var(--text-secondary, #6c757d);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-source a:hover {
+    color: var(--text-primary, #2c3e50);
+    text-decoration: underline;
+}
+
 .footer-copyright {
     font-size: 0.8rem;
     opacity: 0.8;
@@ -75,6 +92,10 @@
     
     .footer-made-with {
         font-size: 0.9rem;
+    }
+    
+    .footer-source {
+        font-size: 0.8rem;
     }
     
     .footer-copyright {
