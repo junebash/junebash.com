@@ -1,8 +1,0 @@
-## About June
-{: .display-4}
-
-With over a decade of programming experience, I specialize in crafting bespoke UI & architecture for iOS and macOS apps in a remote work environment. I have programmed apps, games, and websites using Swift/Objective-C, HTML/CSS (+ Bootstrap, Jekyll, & Markdown), Unity & C#, Godot, Lua, Python, LOVE2D, and Max/MSP. In 2019, after many years of programming as a hobbyist, I began formally training remotely with Lambda School in software development (iOS emphasis). I soon developed a reputation for being a sharp, detailed programmer and a voracious learner, able to adapt swiftly (no pun intended) to new technologies, architectures, and environments. After internships as a Lambda School team lead and later an iOS developer with non-profit Eco-Soap Bank, I am currently working as an iOS developer at Redzone Software, where I've been since January 2021.
-
-I also worked as a musician for nearly two decades, composing, arranging, and performing an eclectic variety of polystylistic music. I studied music composition at Western Washington University under Roger Briggs, Bruce Hamilton, and Lesley Sommer, graduating magna cum laude in March 2013 with a Bachelor of Music and in June 2015 with a Master of Music. I have written music for games, short & feature-length films, dance, and performers & ensembles such as the WWU Wind Symphony, Equus Sax Quartet, Bellingham Chamber Music Society, Whatcom Wind Ensemble, Jostaberry, and more. My music has been featured in films played at festivals across the US, most prominently in the cult horror films *Hunting Grounds* (*Valley of the Sasquatch* outside the US) and *The Last Laugh*.
-
-I currently live with my partner and two cats (Hazel and Vincent) in Bellingham, WA.
