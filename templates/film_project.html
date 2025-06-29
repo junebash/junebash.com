@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>{{ page.title }}</h1>
+    
+    <div class="film-metadata">
+        {% if page.extra.company %}
+        <div class="metadata-item">
+            <strong>Company:</strong> {{ page.extra.company }}
+        </div>
+        {% endif %}
+        
+        {% if page.date %}
+        <div class="metadata-item">
+            <strong>Released:</strong> {{ page.date | date(format="%Y") }}
+        </div>
+        {% endif %}
+        
+        {% if page.extra.feature %}
+        <div class="metadata-item">
+            <span class="badge">Feature Film</span>
+        </div>
+        {% endif %}
+        
+        {% if page.extra.promo %}
+        <div class="metadata-item">
+            <span class="badge">Promotional</span>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if page.extra.video_embed %}
+    <div class="film-video">
+        {{ page.extra.video_embed | safe }}
+    </div>
+    {% endif %}
+    
+    {% if page.content %}
+    <div class="film-description">
+        {{ page.content | safe }}
+    </div>
+    {% endif %}
+    
+    {% if page.extra.links %}
+    <div class="film-links">
+        <h3>Watch & Learn More</h3>
+        <div class="links-grid">
+            {% if page.extra.links.imdb %}
+            <a href="{{ page.extra.links.imdb }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                IMDb
+            </a>
+            {% endif %}
+            
+            {% if page.extra.links.amazon %}
+            <a href="{{ page.extra.links.amazon }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                Amazon
+            </a>
+            {% endif %}
+            
+            {% if page.extra.links.itunes %}
+            <a href="{{ page.extra.links.itunes }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                Apple TV
+            </a>
+            {% endif %}
+            
+            {% if page.extra.links.play %}
+            <a href="{{ page.extra.links.play }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                Google Play
+            </a>
+            {% endif %}
+            
+            {% if page.extra.links.film_site %}
+            <a href="{{ page.extra.links.film_site }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                Film Website
+            </a>
+            {% endif %}
+            
+            {% if page.extra.links.co_site %}
+            <a href="{{ page.extra.links.co_site }}" target="_blank" rel="noopener noreferrer" class="film-link">
+                Production Company
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="back-to-music">
+        <a href="/music/">← Back to Music</a>
+    </div>
+</div>
+
+<style>
+.film-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+    padding: 1rem;
+    background-color: var(--bg-color-secondary);
+    border-radius: 0.5rem;
+}
+
+.metadata-item {
+    display: flex;
+    align-items: center;
+}
+
+.badge {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.film-video {
+    margin: 2rem 0;
+}
+
+.film-video iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 0.5rem;
+}
+
+.film-description {
+    margin: 2rem 0;
+    line-height: 1.6;
+}
+
+.film-links {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--bg-color-secondary);
+    border-radius: 0.5rem;
+}
+
+.film-links h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+}
+
+.film-link {
+    display: block;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.film-link:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.back-to-music {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.back-to-music a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.back-to-music a:hover {
+    text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+    .film-metadata,
+    .film-links {
+        background-color: var(--bg-color-tertiary, #2a2a2a);
+    }
+}
+
+@media (max-width: 768px) {
+    .film-metadata {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .film-video iframe {
+        height: 250px;
+    }
+    
+    .links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+    }
+    
+    .film-link {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+</style>
+{% endblock main_content %}

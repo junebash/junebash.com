@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>{{ page.title }}</h1>
+    
+    <div class="game-metadata">
+        {% if page.extra.developer %}
+        <div class="metadata-item">
+            <strong>Developer:</strong> {{ page.extra.developer }}
+        </div>
+        {% endif %}
+        
+        {% if page.date %}
+        <div class="metadata-item">
+            <strong>Released:</strong> {{ page.date | date(format="%Y") }}
+        </div>
+        {% endif %}
+        
+        {% if page.extra.link %}
+        <div class="metadata-item">
+            <a href="{{ page.extra.link }}" target="_blank" rel="noopener noreferrer" class="game-link">
+                Play Game →
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if page.extra.image %}
+    <div class="game-image">
+        <img src="/images/{{ page.extra.image }}" alt="{{ page.title }}" />
+    </div>
+    {% endif %}
+    
+    {% if page.content %}
+    <div class="game-description">
+        {{ page.content | safe }}
+    </div>
+    {% endif %}
+    
+    <div class="back-to-music">
+        <a href="/music/">← Back to Music</a>
+    </div>
+</div>
+
+<style>
+.game-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+    padding: 1rem;
+    background-color: var(--bg-color-secondary);
+    border-radius: 0.5rem;
+}
+
+.metadata-item {
+    display: flex;
+    align-items: center;
+}
+
+.game-link {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.game-link:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.game-image {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.game-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-description {
+    margin: 2rem 0;
+    line-height: 1.6;
+}
+
+.back-to-music {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.back-to-music a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.back-to-music a:hover {
+    text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+    .game-metadata {
+        background-color: var(--bg-color-tertiary, #2a2a2a);
+    }
+    
+    .game-image img {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 768px) {
+    .game-metadata {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+</style>
+{% endblock main_content %}

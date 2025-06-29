@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+    {% if section.extra.section_path -%}
+        {% set section = get_section(path=section.extra.section_path) %}
+    {% endif -%}
+
+    {{ post_macros::page_header(title=section.title) }}
+
+    <main>
+        {%- if paginator %}
+            {%- set show_pages = paginator.pages -%}
+        {% else %}
+            {%- set show_pages = section.pages -%}
+        {% endif -%}
+
+        <!-- Unified code project cards with music-style appearance -->
+        <div class="music-grid">
+        {%- for page in show_pages %}
+            <div class="music-item code-card-link" data-code-index="{{ loop.index0 }}" 
+                 data-code-title="{{ page.title }}"
+                 data-code-description="{{ page.description | default(value='') }}"
+                 data-code-content="{{ page.content | default(value='') | striptags }}"
+                 {% if page.extra.icon %}data-code-icon="{{ page.extra.icon }}"{% endif %}
+                 {% if page.extra.ios_store %}data-code-ios-store="{{ page.extra.ios_store }}"{% endif %}
+                 {% if page.extra.source %}data-code-source="{{ page.extra.source }}"{% endif %}
+                 {% if page.extra.screenshots %}data-code-screenshots="{{ page.extra.screenshots | join(sep=',') }}"{% endif %}
+                 {% if page.extra.features %}data-code-features="{{ page.extra.features | join(sep='|') }}"{% endif %}
+                 {% if page.extra.planned_features %}data-code-planned-features="{{ page.extra.planned_features | join(sep='|') }}"{% endif %}>
+                <h3>{{ page.title }}</h3>
+                {% if page.description %}
+                <div class="project-description">
+                    <p>{{ page.description }}</p>
+                </div>
+                {% endif %}
+                <div class="read-more">
+                    <span>Click to view details →</span>
+                </div>
+            </div>
+        {% endfor -%}
+        </div>
+    </main>
+
+    {% if paginator %}
+        <ul class="pagination">
+            {% if paginator.previous %}
+                <span class="page-item page-prev">
+                    <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
+                </span>
+            {% endif %}
+
+            {% if paginator.next %}
+                <span class="page-item page-next">
+                    <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
+                </span>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+    <!-- Include code project modal JavaScript -->
+    <script src="{{ get_url(path='js/code-modal.js') }}"></script>
+{% endblock main_content %}
