@@ -204,9 +204,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add full description
         if (codeProject.content) {
+            // Decode HTML entities and create a proper HTML element
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = codeProject.content;
+            const decodedContent = tempDiv.innerHTML;
+            
             fullDescriptionContainer.innerHTML = `
                 <div class="code-section">
-                    <div class="code-content-text">${codeProject.content}</div>
+                    <div class="code-content-text">${decodedContent}</div>
                 </div>
             `;
         } else {

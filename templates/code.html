@@ -21,7 +21,7 @@
             <div class="music-item code-card-link" data-code-index="{{ loop.index0 }}" 
                  data-code-title="{{ page.title }}"
                  data-code-description="{{ page.description | default(value='') }}"
-                 data-code-content="{{ page.content | default(value='') | striptags }}"
+                 data-code-content="{{ page.content | default(value='') }}"
                  {% if page.extra.icon %}data-code-icon="{{ page.extra.icon }}"{% endif %}
                  {% if page.extra.ios_store %}data-code-ios-store="{{ page.extra.ios_store }}"{% endif %}
                  {% if page.extra.source %}data-code-source="{{ page.extra.source }}"{% endif %}
