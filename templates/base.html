@@ -1,0 +1,86 @@
+{% import "macros/macros.html" as post_macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<html class="dark light">
+
+{% include "partials/header.html" %}
+
+<body>
+    <div class="content">
+        {% include "partials/nav.html" %}
+
+        {# Post page is the default #}
+        {% block main_content %}
+            Nothing here?!
+        {% endblock main_content %}
+
+        {% if page.extra.comment is defined  %}
+            {% set show_comment = page.extra.comment %}
+        {% else %}
+            {% set show_comment = false %}
+        {% endif %}
+
+        {% if show_comment %}
+        <div class="giscus"></div>
+        {% include "_giscus_script.html" %}
+        {% endif %}
+        
+        <!-- Custom Footer -->
+        <footer class="site-footer">
+            <hr class="footer-divider">
+            <div class="footer-content">
+                <div class="footer-made-with">Made with love by June and Claude using Zola</div>
+                <div class="footer-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<style>
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem 0 3rem 0;
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-color, #e9ecef), transparent);
+    margin: 0 0 2rem 0;
+}
+
+.footer-content {
+    text-align: center;
+    color: var(--text-secondary, #6c757d);
+}
+
+.footer-made-with {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary, #2c3e50);
+}
+
+.footer-copyright {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        margin-top: 3rem;
+        padding: 1.5rem 0 2rem 0;
+    }
+    
+    .footer-made-with {
+        font-size: 0.9rem;
+    }
+    
+    .footer-copyright {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+</html>

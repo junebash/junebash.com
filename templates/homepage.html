@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+<main>
+    <article>
+        <section class="body">
+            {{post_macros::page_header(title=section.title)}}
+            {{ section.content | safe }}
+        </section>
+    </article>
+
+    {# Recent Posts Section #}
+    {% set posts_section = get_section(path="posts/_index.md") %}
+    {% if posts_section.pages %}
+    <section class="recent-posts">
+        <h2>Recent Posts</h2>
+        <div class="list">
+            {{ post_macros::list_posts(pages=posts_section.pages | slice(end=4)) }}
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="/posts" class="readmore">View all posts ⟶</a>
+        </div>
+    </section>
+    {% endif %}
+</main>
+
+<script src="/js/contact.js"></script>
+<script>
+// Set up contact link on homepage when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const contactLink = document.getElementById('contact-link');
+    if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            revealEmail();
+        });
+    }
+});
+</script>
+{% endblock main_content %}
