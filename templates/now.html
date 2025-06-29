@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
 
 {% block main_content %}
 <div class="content">
-    <h1 class="title">{{ section.title }}</h1>
+    {{ post_macros::page_header(title=section.title) }}
     
     {{ section.content | safe }}
     
@@ -216,7 +217,7 @@
         <div class="latest-update">
             <article class="now-update featured">
                 <header>
-                    <h2 class="update-date">{{ latest_post.date | date(format="%B %d, %Y") }}</h2>
+                    <h2 class="update-date">{{ latest_post.date | date(format="%Y-%m-%d") }}</h2>
                     <span class="latest-badge">Latest Update</span>
                 </header>
                 <div class="update-content">
@@ -233,10 +234,10 @@
             {% for nav_page in section.pages %}
             <div class="now-nav-item {% if loop.first %}latest{% endif %}">
                 {% if loop.first %}
-                <span class="nav-date current-page">{{ nav_page.date | date(format="%B %d, %Y") }}</span>
+                <span class="nav-date current-page">{{ nav_page.date | date(format="%Y-%m-%d") }}</span>
                 <span class="current-indicator">← Latest</span>
                 {% else %}
-                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%B %d, %Y") }}</a>
+                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%Y-%m-%d") }}</a>
                 {% endif %}
             </div>
             {% endfor %}

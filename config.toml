@@ -1,5 +1,6 @@
 # The URL the site will be built for
 base_url = "https://junebash.com"
+title = "June Bash"
 
 theme = "apollo"
 # Taxonomy system - migrated and enhanced from Jekyll categories
@@ -21,13 +22,14 @@ theme = "auto"
 socials = [
   # Configure socials here
   { name = "bluesky", url = "https://bsky.app/profile/junebash.bsky.social", icon = "bluesky" },
+  { name = "mastodon", url = "https://mastodon.social/@junebash", icon = "mastodon" },
   { name = "github", url = "https://github.com/junebash", icon = "github" },
   { name = "bandcamp", url = "https://junebash.bandcamp.com", icon = "bandcamp" }
 ]
 menu = [
   # Configure menu bar here
   { name = "JuneBash.com | ", url = "/", weight = 0 },
-  { name = "projects", url = "/projects", weight = 1 },
+  { name = "code", url = "/code", weight = 1 },
   { name = "music", url = "/music", weight = 2 },
   { name = "about", url = "/about", weight = 3 },
   { name = "posts", url = "/posts", weight = 4 },

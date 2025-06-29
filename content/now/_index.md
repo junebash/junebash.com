@@ -2,13 +2,12 @@
 title = "Now"
 sort_by = "date"
 template = "now.html"
+page_template = "now_page.html"
 
 [extra]
 comment = false
 +++
 
-# What I'm Up To Now
+What I've been up to recently.
 
-A chronological record of life updates and current happenings.
-
-*Inspired by [Derek Sivers' now page movement](https://nownownow.com/about).*
+*(Inspired by [the concept from Derek Sivers](https://nownownow.com/about))*

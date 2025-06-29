@@ -4,8 +4,19 @@
 {% block main_content %}
 <div class="content">
     
-    {# Display the individual now post content #}
-    {{ post_macros::content(page=page) }}
+    {# Auto-generate title from filename date #}
+    {% if page.title %}
+        {{ post_macros::page_header(title=page.title) }}
+    {% else %}
+        {% set formatted_date = page.date | date(format="%Y-%m-%d") %}
+        {{ post_macros::page_header(title=formatted_date) }}
+    {% endif %}
+    
+    <div class="now-update">
+        <div class="update-content">
+            {{ page.content | safe }}
+        </div>
+    </div>
     
     {# Navigation section with all now posts #}
     <div class="now-navigation">
@@ -18,10 +29,10 @@
             {% for nav_page in now_section.pages %}
             <div class="now-nav-item {% if nav_page.slug == page.slug %}current{% endif %}">
                 {% if nav_page.slug == page.slug %}
-                <span class="nav-date current-page">{{ nav_page.date | date(format="%B %d, %Y") }}</span>
+                <span class="nav-date current-page">{{ nav_page.date | date(format="%Y-%m-%d") }}</span>
                 <span class="current-indicator">← Current</span>
                 {% else %}
-                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%B %d, %Y") }}</a>
+                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%Y-%m-%d") }}</a>
                 {% endif %}
             </div>
             {% endfor %}
@@ -31,6 +42,47 @@
 </div>
 
 <style>
+.now-update {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--bg-secondary, #f8f9fa);
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-color, #3498db);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .now-update {
+        background: var(--surface, #2a2d36);
+        color: var(--on-surface, #e1e5e9);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        border-left-color: #5a9fd4;
+    }
+}
+
+.update-content {
+    line-height: 1.6;
+    color: var(--text-primary, #2c3e50);
+}
+
+@media (prefers-color-scheme: dark) {
+    .update-content {
+        color: var(--on-surface, #e1e5e9);
+    }
+}
+
+.update-content p {
+    margin: 1rem 0;
+}
+
+.update-content p:first-child {
+    margin-top: 0;
+}
+
+.update-content p:last-child {
+    margin-bottom: 0;
+}
+
 /* Navigation styling */
 .now-navigation {
     margin-top: 4rem;
@@ -40,6 +92,13 @@
     border-left: 4px solid var(--accent-color, #3498db);
 }
 
+@media (prefers-color-scheme: dark) {
+    .now-navigation {
+        background: var(--surface, #2a2d36);
+        border-left-color: #5a9fd4;
+    }
+}
+
 .nav-title {
     margin: 0 0 1.5rem 0;
     font-size: 1.5rem;
@@ -47,6 +106,13 @@
     color: var(--accent-color, #3498db);
     border-bottom: 1px solid var(--border-color, #e1e8ed);
     padding-bottom: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .nav-title {
+        color: #5a9fd4;
+        border-bottom-color: var(--border-color-dark, #4a5568);
+    }
 }
 
 .now-nav-list {
@@ -65,15 +131,33 @@
     align-items: center;
 }
 
+@media (prefers-color-scheme: dark) {
+    .now-nav-item {
+        background: var(--bg-primary-dark, #1a202c);
+    }
+}
+
 .now-nav-item:hover:not(.current) {
     background: var(--bg-hover, #f0f8ff);
     transform: translateX(4px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .now-nav-item:hover:not(.current) {
+        background: var(--bg-hover-dark, #2d3748);
+    }
 }
 
 .now-nav-item.current {
     background: var(--accent-color, #3498db);
     color: white;
     font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .now-nav-item.current {
+        background: #5a9fd4;
+    }
 }
 
 .nav-date {
@@ -83,8 +167,20 @@
     transition: color 0.2s ease;
 }
 
+@media (prefers-color-scheme: dark) {
+    .nav-date {
+        color: var(--text-primary-dark, #e2e8f0);
+    }
+}
+
 .nav-date:hover {
     color: var(--accent-color, #3498db);
+}
+
+@media (prefers-color-scheme: dark) {
+    .nav-date:hover {
+        color: #5a9fd4;
+    }
 }
 
 .nav-date.current-page {
@@ -96,25 +192,6 @@
     opacity: 0.9;
 }
 
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-    .now-navigation {
-        background: var(--bg-secondary-dark, #2d3748);
-    }
-    
-    .now-nav-item {
-        background: var(--bg-primary-dark, #1a202c);
-    }
-    
-    .now-nav-item:hover:not(.current) {
-        background: var(--bg-hover-dark, #2d3748);
-    }
-    
-    .nav-date {
-        color: var(--text-primary-dark, #e2e8f0);
-    }
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
     .now-navigation {
@@ -122,6 +199,12 @@
         border-radius: 0;
         border-left: none;
         border-top: 4px solid var(--accent-color, #3498db);
+    }
+    
+    @media (max-width: 768px) and (prefers-color-scheme: dark) {
+        .now-navigation {
+            border-top-color: #5a9fd4;
+        }
     }
     
     .now-nav-item {

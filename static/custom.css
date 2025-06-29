@@ -1,59 +1,153 @@
 /* Custom CSS overrides for JuneBash.com */
 
-/* Compact list layout for project cards */
-.card {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 1.5rem !important;
-    min-height: 120px !important;
-    padding: 1.5rem !important;
-}
-
-.card-image {
-    flex-shrink: 0 !important;
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    border-radius: 8px !important;
-    border: 2px solid var(--border-color) !important;
-}
-
-.card-info {
-    flex: 1 !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-}
-
-.card-title {
-    margin: 0 !important;
-    font-size: 1.25rem !important;
-    line-height: 1.3 !important;
-}
-
-.card-description {
-    margin: 0 !important;
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    color: var(--text-secondary) !important;
-}
-
-/* Responsive adjustments for mobile */
-@media all and (max-width: 640px) {
-    .card {
-        flex-direction: column !important;
-        gap: 1rem !important;
-        text-align: center !important;
+/* Use subtle color shift instead of bright red in dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #7a9cc6 !important; /* Subtle blue-gray for borders and accents */
+        --accent-color: #7a9cc6 !important; /* Also override accent color */
+        --bg-secondary: #333640 !important; /* Secondary background for code pages */
+        --bg-tertiary: #3a3d48 !important; /* Tertiary background for code pages */
+        --bg-color-secondary: #333640 !important; /* Also cover the other naming */
+        --bg-color-tertiary: #3a3d48 !important; /* Tertiary background for dark mode */
+        --text-primary: #e1e5e9 !important; /* Light text for dark backgrounds */
+        --text-secondary: #a8b3c1 !important; /* Muted light text */
     }
     
-    .card-image {
-        align-self: center !important;
-        width: 100px !important;
-        height: 100px !important;
+    /* Force override for music cards specifically */
+    .music-item {
+        border-left-color: #6b8bb3 !important; /* Slightly muted for borders */
     }
+    
+    /* Override section headers */
+    .music-section h2 {
+        border-bottom-color: #6b8bb3 !important;
+    }
+    
+    /* Much more subtle hover background - just a slight shift */
+    a:hover {
+        background-color: rgba(106, 139, 179, 0.15) !important; /* Very subtle blue tint */
+    }
+    
+    /* Specifically target music card links for even more subtle hover */
+    .music-card-link:hover .music-item {
+        background-color: rgba(106, 139, 179, 0.08) !important; /* Barely perceptible shift */
+    }
+    
+    /* Fix bright white boxes in dark mode - use semantic backgrounds */
+    .game-metadata,
+    .film-metadata,
+    .film-links,
+    .metadata-container,
+    .code-info,
+    .info-box,
+    .code-metadata,
+    .code-description,
+    .youtube-video,
+    .streaming-link,
+    div[style*="background-color: white"],
+    div[style*="background: white"],
+    div[style*="background-color: #fff"],
+    div[style*="background: #fff"] {
+        background-color: transparent !important;
+        color: var(--text-primary, #e1e5e9) !important;
+    }
+    
+    /* Ensure labels and secondary text are readable */
+    .meta-item .label,
+    .music-meta-item .label {
+        color: var(--text-secondary, #a8b3c1) !important;
+    }
+}
+
+/* Unified music-style card layout for code projects */
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.music-item {
+    padding: 1.5rem;
+    background: var(--surface, var(--bg-secondary, #f8f9fa));
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-color, #3498db);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .music-item {
+        background: var(--surface, #2a2d36);
+        color: var(--on-surface, #e1e5e9);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        border-left-color: #5a9fd4; /* Muted blue instead of bright accent */
+    }
+}
+
+.music-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+    .music-item:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+}
+
+.music-item h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #2c3e50);
+}
+
+@media (prefers-color-scheme: dark) {
+    .music-item h3 {
+        color: var(--on-surface, #e1e5e9);
+    }
+}
+
+.code-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.code-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.project-description {
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+}
+
+.project-description p {
+    margin: 0;
+    color: var(--text-secondary, #6c757d);
+    line-height: 1.4;
+}
+
+@media (prefers-color-scheme: dark) {
+    .project-description p {
+        color: var(--on-surface-variant, #a8b3c1);
+    }
+}
+
+.read-more {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color, #e9ecef);
+    text-align: center;
+}
+
+.read-more span {
+    color: var(--accent-color, #3498db);
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 /* Modal overlay and container */
@@ -182,15 +276,245 @@
     color: white;
 }
 
-/* Card clickable styling */
-.card {
-    cursor: pointer !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+
+/* Enhanced Code Project Modal Styles */
+.code-modal-content {
+    width: 90vw;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-.card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+.code-modal-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.code-icon-container {
+    flex-shrink: 0;
+}
+
+.code-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    border: 2px solid var(--border-color);
+}
+
+.code-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.code-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.code-description {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.code-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.app-store-button {
+    display: inline-block;
+}
+
+.app-store-image {
+    height: 50px;
+    width: auto;
+    transition: transform 0.2s ease;
+}
+
+.app-store-button:hover .app-store-image {
+    transform: scale(1.05);
+}
+
+.github-link {
+    background: var(--bg-2);
+    color: var(--text-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.github-link:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.code-content {
+    margin-top: 2rem;
+}
+
+.code-section {
+    margin-bottom: 2rem;
+}
+
+.code-section h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Screenshot Carousel */
+.screenshot-carousel {
+    position: relative;
+    max-width: 100%;
+    margin: 1rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-2);
+    border: 1px solid var(--border-color);
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.screenshot-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    pointer-events: auto;
+    margin: 0 10px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 1rem;
+    background: var(--bg-1);
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.indicator.active {
+    background: var(--primary-color);
+    transform: scale(1.3);
+}
+
+/* Features Lists */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.features-list li {
+    padding: 0.75rem;
+    background: var(--bg-2);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    position: relative;
+}
+
+.features-list li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.code-content-text {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Dark mode adjustments for code modal */
+@media (prefers-color-scheme: dark) {
+    .carousel-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--text-primary);
+    }
+    
+    .carousel-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .app-store-image {
+        filter: brightness(0.9);
+    }
 }
 
 /* Responsive modal adjustments */
@@ -217,5 +541,31 @@
     
     .modal-links {
         justify-content: center;
+    }
+    
+    .code-modal-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .code-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .code-title {
+        font-size: 1.4rem;
+    }
+    
+    .code-links {
+        justify-content: center;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        margin: 0 5px;
     }
 }
