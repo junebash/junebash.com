@@ -11,24 +11,24 @@ comment = true
 
 I wrote a poem. I've never really been one for poetry.
 
-> Birthed from resentment   
-> Repeated and frantic   
-> While waltzing through trenches     
-> Withholding compassion   
->
-> Beaches of glass   
-> Oh, what wicked companions   
-> Allayed at my feet   
-> Extolled and expanded   
+> birthed from resentment   
+> repeated and frantic   
+> while waltzing through trenches    
+> withholding compassion   
 > 
-> What love could be given   
+> beaches of glass   
+> oh, what wicked companions   
+> allay through their seething   
+> extolling, expanded   
+> 
+> what love could be given   
 > I've taken and stabbed at   
-> You've held me back bravely   
-> But strayed at the outset   
+> you've held me back bravely   
+> but strayed at the outset   
 > 
-> This barking of rage   
-> Responded with sadness   
-> Just one drop of shame   
-> A gaze in the balance   
+> this barking of rage   
+> responded with sadness   
+> just one drop of shame   
+> a gaze in the balance   
 
 (...I know the website footer says made with Claude, but not this. Art is never for AI.)
