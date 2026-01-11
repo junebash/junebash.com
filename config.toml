@@ -1,6 +1,7 @@
 # The URL the site will be built for
 base_url = "https://junebash.com"
 title = "June Bash"
+generate_feeds = true
 
 theme = "apollo"
 # Taxonomy system - migrated and enhanced from Jekyll categories
