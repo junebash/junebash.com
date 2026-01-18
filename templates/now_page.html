@@ -20,18 +20,21 @@
     
     {# Navigation section with all now posts #}
     <div class="now-navigation">
-        <h2 class="nav-title">Other Now Updates</h2>
+        <h2 class="nav-title">All Now Updates</h2>
         
         {# Get all pages from the now section #}
         {% set now_section = get_section(path="now/_index.md") %}
         {% if now_section.pages %}
         <div class="now-nav-list">
             {% for nav_page in now_section.pages %}
-            <div class="now-nav-item {% if nav_page.slug == page.slug %}current{% endif %}">
+            <div class="now-nav-item {% if nav_page.slug == page.slug %}current{% endif %} {% if loop.first %}latest{% endif %}">
                 {% if nav_page.slug == page.slug %}
                 <span class="nav-date current-page">{{ nav_page.date | date(format="%Y-%m-%d") }}</span>
                 {% else %}
                 <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%Y-%m-%d") }}</a>
+                {% endif %}
+                {% if loop.first %}
+                <span class="current-indicator">← Latest</span>
                 {% endif %}
             </div>
             {% endfor %}
