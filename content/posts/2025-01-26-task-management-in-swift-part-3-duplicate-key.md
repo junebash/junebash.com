@@ -248,11 +248,15 @@ struct MyView: View {
 }
 ```
 
-And that’s it![^2] This also makes it much easier to test; you can assert on what the state looks like while it’s loading, and then await its result, and assert on its state again (of course mocking out your dependencies along the way, becaue you are a very good smart programmer yes you are).
+And that’s it![^2] This also makes it much easier to test; you can assert on what the state looks like while it’s loading, and then await its result, and assert on its state again (of course mocking out your dependencies along the way, because you are a very good smart programmer yes you are).
 
 There are of course more extensions you can write on this type, but I leave that as an exercise to the viewer. I’ve thought of making this type an open-source package, but honestly, I don’t want to deal with the maintenance cost of that. Just use this in your projects and see if it works for you. Give me a shout-out if it does! Or doesn’t. Whatever you feel like!
 
 You can find the complete code for what we made in this series of posts [here](https://gist.github.com/junebash/396ddd158becd1001fd9e4da3887620c).
+
+## **EDIT**: This is a library now!
+
+I decided to release this as a library after all. You can find it [here](https://github.com/junebash/swift-task-store).
 
 [^1]: It’s possible there are other possibilities, but these are the ones that have been relevant to me.
 [^3]: We probably don’t _need_ this to be `Hashable` or `Sendable`, but I like to add those conformances where it makes sense and there’s no reason not to.
