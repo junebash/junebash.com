@@ -22,25 +22,22 @@
         position: relative;
     }
     
-    .now-update:before {
-        content: "";
-        position: absolute;
-        left: -8px;
-        top: 2rem;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: var(--accent-color, #3498db);
-        border: 3px solid var(--bg-primary, white);
-    }
     
+    .now-update header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color, #e1e8ed);
+        padding-bottom: 0.5rem;
+    }
+
     .update-date {
-        margin: 0 0 1rem 0;
+        margin: 0;
         font-size: 1.2rem;
         font-weight: 600;
         color: var(--accent-color, #3498db);
-        border-bottom: 1px solid var(--border-color, #e1e8ed);
-        padding-bottom: 0.5rem;
     }
     
     .update-content {
@@ -97,7 +94,6 @@
         border-radius: 20px;
         font-size: 0.8rem;
         font-weight: 600;
-        margin-left: 1rem;
     }
     
     /* Navigation styling */
@@ -203,10 +199,6 @@
             align-self: flex-end;
         }
         
-        .latest-badge {
-            margin-left: 0;
-            margin-top: 0.5rem;
-        }
     }
     </style>
     
@@ -218,7 +210,7 @@
             <article class="now-update featured">
                 <header>
                     <h2 class="update-date">{{ latest_post.date | date(format="%Y-%m-%d") }}</h2>
-                    <span class="latest-badge">Latest Update</span>
+                    <span class="latest-badge">latest update</span>
                 </header>
                 <div class="update-content">
                     {{ latest_post.content | safe }}

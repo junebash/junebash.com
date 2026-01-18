@@ -1,5 +1,24 @@
 /* Custom CSS overrides for JuneBash.com */
 
+/* Slightly smaller body font sizes */
+@media all and (min-width: 640px) {
+    html {
+        font-size: 15.5px;
+    }
+}
+
+@media all and (min-width: 720px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media all and (min-width: 960px) {
+    html {
+        font-size: 17px;
+    }
+}
+
 /* Use subtle color shift instead of bright red in dark mode */
 @media (prefers-color-scheme: dark) {
     :root {

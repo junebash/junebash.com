@@ -30,7 +30,6 @@
             <div class="now-nav-item {% if nav_page.slug == page.slug %}current{% endif %}">
                 {% if nav_page.slug == page.slug %}
                 <span class="nav-date current-page">{{ nav_page.date | date(format="%Y-%m-%d") }}</span>
-                <span class="current-indicator">← Current</span>
                 {% else %}
                 <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%Y-%m-%d") }}</a>
                 {% endif %}
