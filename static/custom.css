@@ -1,5 +1,10 @@
 /* Custom CSS overrides for JuneBash.com */
 
+/* Fix light mode link hover - override theme's white hover color */
+:root.light {
+    --hover-color: #1a1a1a !important; /* Dark text for readability on light background */
+}
+
 /* Slightly smaller body font sizes */
 @media all and (min-width: 640px) {
     html {
