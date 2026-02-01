@@ -37,12 +37,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Extract code project data from data attributes
     function extractCodeProjectData() {
-        const cards = document.querySelectorAll('.music-item[data-code-title]');
-        cards.forEach((card, index) => {
+        const cards = document.querySelectorAll('.code-card-link[data-code-index]');
+        cards.forEach((card) => {
+            const index = parseInt(card.getAttribute('data-code-index'), 10);
             const screenshots = card.getAttribute('data-code-screenshots');
             const features = card.getAttribute('data-code-features');
             const plannedFeatures = card.getAttribute('data-code-planned-features');
-            
+
             codeProjects[index] = {
                 title: card.getAttribute('data-code-title') || '',
                 description: card.getAttribute('data-code-description') || '',
@@ -288,10 +289,11 @@ document.addEventListener('DOMContentLoaded', function() {
     extractCodeProjectData();
     
     // Add click listeners to cards
-    const cards = document.querySelectorAll('.music-item');
-    cards.forEach((card, index) => {
+    const cards = document.querySelectorAll('.code-card-link[data-code-index]');
+    cards.forEach((card) => {
         card.addEventListener('click', function(e) {
             e.preventDefault();
+            const index = parseInt(card.getAttribute('data-code-index'), 10);
             openModal(index);
         });
     });
