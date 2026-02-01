@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+    <main>
+        <article>
+            <div class="title">
+                {{ post_macros::page_header(title=section.title) }}
+
+                {% if section.description %}
+                <div class="meta">
+                    {{ section.description }}
+                </div>
+                {% endif %}
+            </div>
+
+            {% if section.extra.icon %}
+            <div class="app-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <img src="{{ get_url(path=section.extra.icon) }}"
+                     alt="{{ section.title }} icon"
+                     style="width: 128px; height: 128px; border-radius: 22.5%; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+                <div>
+                    {% if section.extra.ios_store and section.extra.ios_store != "" %}
+                    <a href="{{ section.extra.ios_store }}" class="app-store-link" style="display: inline-block; margin-top: 0.5rem;">
+                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                             alt="Download on the App Store"
+                             style="height: 40px;" />
+                    </a>
+                    {% else %}
+                    <p style="margin: 0; opacity: 0.7; font-style: italic;">Coming soon to the App Store</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <section class="body">
+                {{ section.content | safe }}
+            </section>
+
+            {% if section.extra.screenshots %}
+            <div class="app-screenshots" style="margin-top: 2rem;">
+                <h2>Screenshots</h2>
+                <div style="display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 0;">
+                    {% for screenshot in section.extra.screenshots %}
+                    <img src="{{ get_url(path=screenshot) }}"
+                         alt="Screenshot {{ loop.index }}"
+                         style="height: 400px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+        </article>
+    </main>
+{% endblock main_content %}

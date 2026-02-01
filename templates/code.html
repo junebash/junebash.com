@@ -17,8 +17,25 @@
 
         <!-- Unified code project cards with music-style appearance -->
         <div class="music-grid">
+        {# First, show any subsections (like app showcases with their own pages) #}
+        {%- for subsection_path in section.subsections %}
+            {%- set subsection = get_section(path=subsection_path) %}
+            <a href="{{ subsection.permalink }}" class="code-card-page">
+                <h3>{{ subsection.title }}</h3>
+                {% if subsection.description %}
+                <div class="project-description">
+                    <p>{{ subsection.description }}</p>
+                </div>
+                {% endif %}
+                <div class="read-more">
+                    <span>View details →</span>
+                </div>
+            </a>
+        {% endfor -%}
+
+        {# Then show regular pages #}
         {%- for page in show_pages %}
-            <div class="music-item code-card-link" data-code-index="{{ loop.index0 }}" 
+            <div class="music-item code-card-link" data-code-index="{{ loop.index0 }}"
                  data-code-title="{{ page.title }}"
                  data-code-description="{{ page.description | default(value='') }}"
                  data-code-content="{{ page.content | default(value='') }}"
