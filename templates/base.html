@@ -30,7 +30,7 @@
         <footer class="site-footer">
             <hr class="footer-divider">
             <div class="footer-content">
-                <div class="footer-made-with">Made with love by June and Claude using Zola</div>
+                <div class="footer-made-with">Made with love using Zola</div>
                 <div class="footer-source"><a href="https://github.com/junebash/junebash.com" target="_blank" rel="noopener">View source code</a></div>
                 <div class="footer-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
             </div>
@@ -103,5 +103,35 @@
     }
 }
 </style>
+
+<script>
+// Make footnote labels clickable to return to the reference in the text
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.footnote-definition-label').forEach(function(label) {
+        const footnoteId = label.closest('.footnote-definition').id;
+        if (footnoteId) {
+            label.setAttribute('role', 'link');
+            label.setAttribute('tabindex', '0');
+            label.setAttribute('title', 'Return to reference');
+
+            const scrollToRef = function() {
+                const ref = document.querySelector('.footnote-reference a[href="#' + footnoteId + '"]');
+                if (ref) {
+                    ref.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    ref.focus();
+                }
+            };
+
+            label.addEventListener('click', scrollToRef);
+            label.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    scrollToRef();
+                }
+            });
+        }
+    });
+});
+</script>
 
 </html>

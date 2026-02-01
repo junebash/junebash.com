@@ -1,5 +1,62 @@
 /* Custom CSS overrides for JuneBash.com */
 
+/* Footnote styling - add divider to first footnote only */
+.footnote-definition {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.9em;
+    margin-bottom: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    position: relative;
+}
+
+/* Gradient divider matching footer style */
+.footnote-definition::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-color, #e9ecef), transparent);
+}
+
+/* Remove divider/margin from footnotes after the first one */
+.footnote-definition ~ .footnote-definition {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.footnote-definition ~ .footnote-definition::before {
+    display: none;
+}
+
+.footnote-definition-label {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--primary-color, #3498db);
+    cursor: pointer;
+}
+
+.footnote-definition-label:hover {
+    text-decoration: underline;
+}
+
+/* Add back-reference arrow after the label */
+.footnote-definition-label::after {
+    content: " \2191";  /* ↑ arrow */
+    font-size: 0.8em;
+    margin-left: 0.1em;
+}
+
+/* Remove default paragraph margins in footnotes */
+.footnote-definition p {
+    margin: 0;
+    flex: 1;
+}
+
 /* Fix light mode link hover - override theme's white hover color */
 :root.light {
     --hover-color: #1a1a1a !important; /* Dark text for readability on light background */
