@@ -1,13 +1,12 @@
 +++
 title = "Super Countdown Tracker"
-description = "Personal iOS app for countdown tracking, available on the App Store"
-weight = 4
+description = "My first iOS app, a simple countdown tracker (no longer available)"
+weight = 99
 
 [extra]
 local_image = "images/super-countdown-tracker.png"
 icon = "images/sct-icon-sm.png"
 source = "https://github.com/junebash/CountdownTracker"
-ios_store = "https://apps.apple.com/us/app/super-countdown-tracker/id1484864299?ls=1"
 screenshots = [
     "images/sct/1-list.png",
     "images/sct/2-sort-filter.png", 
@@ -26,15 +25,8 @@ features = [
     "Auto-archive completed events",
     "Adaptive dark/light themes"
 ]
-planned_features = [
-    "Edit completed events (un-archive/reset)",
-    "Recurring countdowns",
-    "Custom date/time formatting",
-    "Custom event images", 
-    "Opt out of auto-archiving"
-]
 +++
 
-Add the dates/times of important events in the near or distant future, and Super Countdown Tracker will tell you how much time is left.
+*Note: This app is no longer available on the App Store.*
 
-My first "real" iOS app, **Super Countdown Tracker** began life as a Lambda School build week project, and I liked it so much I decided to polish it up and put it on the app store. It's a simple, lightweight app that does one thing very well—it tells you how much time is left until the events you feed it.
+My first "real" iOS app, **Super Countdown Tracker** began life as a Lambda School build week project, and I liked it so much I decided to polish it up and put it on the App Store. It was a simple, lightweight app that did one thing well—telling you how much time was left until the events you added.

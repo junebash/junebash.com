@@ -1,7 +1,7 @@
 +++
 title = "Swift Tarot MCP"
 description = "Model Context Protocol server for tarot card readings, providing reliable randomness for AI assistants"
-weight = 2
+weight = 98
 
 [extra]
 source = "https://github.com/junebash/swift-tarot-mcp"
