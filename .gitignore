@@ -25,3 +25,6 @@ Thumbs.db
 # Development artifacts
 uploads/
 usage_tracking*.json
+
+# Rust build artifacts
+tools/*/target/
