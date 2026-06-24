@@ -76,16 +76,14 @@
 /* Portrait of June (pixel-art avatar) */
 .home-portrait {
   aspect-ratio: 1 / 1;
-  border-radius: 22px;
-  border: 1px solid var(--card-border);
-  overflow: hidden;
 }
 .home-portrait-img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  border-radius: 22px;
+  border: 1px solid var(--card-border);
   image-rendering: pixelated;
 }
 
