@@ -144,24 +144,40 @@
   color: var(--ink);
   margin: 0 0 14px;
 }
-.about-skill-group {
-  margin-bottom: 18px;
+/* Rendered from skills.md: intro, group headings → labels, lists → chips,
+   trailing availability note → inset card. */
+.about-skills-content > h2 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin: 0 0 6px;
 }
-.about-skill-group:last-of-type {
-  margin-bottom: 28px;
+.about-skills-content > p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 16px;
 }
-.about-skill-label {
+.about-skills-content h3 {
+  font-family: var(--font-mono);
+  font-weight: 600;
   font-size: 11px;
+  text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--faint);
-  margin-bottom: 9px;
+  margin: 20px 0 9px;
 }
-.about-chips {
+.about-skills-content ul {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  padding: 0;
+  margin: 0 0 6px;
 }
-.about-chip {
+.about-skills-content li {
   font-family: var(--font-body);
   font-size: 13.5px;
   color: var(--ink-prose);
@@ -169,32 +185,35 @@
   padding: 6px 13px;
   border-radius: 8px;
 }
+.about-skills-content hr {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 24px 0 18px;
+}
+.about-skills-content hr:last-child { display: none; }
 
-/* Inset note card */
-.about-note {
+/* The two trailing note paragraphs read as one inset card */
+.about-skills-content hr + p,
+.about-skills-content hr + p + p {
   background: var(--footer);
-  border-radius: 14px;
-  padding: 22px 24px;
-}
-.about-note-cta {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 6px;
-  cursor: pointer;
-}
-.about-note-cta:hover {
-  color: var(--contact-chip);
-  text-decoration: none;
-}
-.about-note-body {
-  font-size: 14.5px;
-  color: var(--muted);
-  line-height: 1.5;
   margin: 0;
+  padding: 4px 20px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
 }
-.about-note-body strong { color: var(--ink-prose); }
+.about-skills-content hr + p {
+  border-radius: 14px 14px 0 0;
+  padding-top: 18px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.about-skills-content hr + p em { font-style: normal; }
+.about-skills-content hr + p + p {
+  border-radius: 0 0 14px 14px;
+  padding-bottom: 18px;
+}
+.about-skills-content hr + p + p strong { color: var(--ink-prose); }
 
 /* --------------------------------------------------------------- Responsive */
 @media (max-width: 860px) {

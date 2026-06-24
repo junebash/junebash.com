@@ -49,47 +49,13 @@
 
       <h2 class="about-skills-title">What I work with</h2>
 
-      <div class="about-skill-group">
-        <div class="rd-mono about-skill-label">Languages</div>
-        <div class="about-chips">
-          <span class="about-chip">Swift</span>
-          <span class="about-chip">Objective-C</span>
-          <span class="about-chip">Rust</span>
-          <span class="about-chip">C++</span>
-          <span class="about-chip">Python</span>
-          <span class="about-chip">Lua</span>
-        </div>
-      </div>
-
-      <div class="about-skill-group">
-        <div class="rd-mono about-skill-label">Frameworks &amp; patterns</div>
-        <div class="about-chips">
-          <span class="about-chip">SwiftUI</span>
-          <span class="about-chip">UIKit</span>
-          <span class="about-chip">Combine</span>
-          <span class="about-chip">Core Data</span>
-          <span class="about-chip">AVFoundation</span>
-          <span class="about-chip">TCA</span>
-          <span class="about-chip">Structured Concurrency</span>
-          <span class="about-chip">Snapshot Testing</span>
-          <span class="about-chip">&hellip;and more!</span>
-        </div>
-      </div>
-
-      <div class="about-note">
-        <a href="#" id="about-contact-link" class="about-note-cta">Interested in working with me? Shoot me a message!</a>
-        <p class="about-note-body"><strong>Note:</strong> I am <strong>not</strong> currently available for music or sound work (except in rare circumstances on a case-by-case basis).</p>
+      {# Content-driven: renders the full skills.md (groups become labels, #}
+      {# bullet lists become chips, trailing note styled as an inset card). #}
+      {% set skills_page = get_page(path="about/skills.md") %}
+      <div class="about-skills-content">
+        {{ skills_page.content | safe }}
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var c = document.getElementById('about-contact-link');
-    if (c && typeof revealEmail === 'function') {
-      c.addEventListener('click', function (e) { e.preventDefault(); revealEmail(); });
-    }
-  });
-</script>
 {% endblock main_content %}
