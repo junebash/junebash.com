@@ -12,11 +12,10 @@
         Bellingham, WA &middot; she/her
       </div>
       <h1 id="greeting" class="home-greeting">Hi! I'm June!</h1>
-      <p class="home-intro">I write Swift for a living, wrote symphonies for free, and spent a few years managing engineers &mdash; which quietly rewired how I think about the work. These days I'm a principal iOS engineer. Failed composer, occasional writer, Buddhist meditator, trans lady, and a bunch of other stuff.</p>
-      <p class="home-intro-muted">Welcome to my little corner of the internet &mdash; poke around at my thoughts, my code, my music, and whatever I'm up to.</p>
+      <div class="home-intro">{{ section.content | safe }}</div>
     </div>
-    <div class="home-portrait" aria-hidden="true">
-      <span class="home-portrait-label">portrait of June</span>
+    <div class="home-portrait">
+      <img class="home-portrait-img" src="{{ get_url(path='images/june-portrait.png') }}" alt="Portrait of June" />
     </div>
   </section>
 
