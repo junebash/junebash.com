@@ -1,0 +1,140 @@
+/* ============================================================================
+   app.css — App showcase detail page (e.g. /code/papanca)
+   Discipline: CODE (coral). Token-driven; loaded after redesign.css.
+   ========================================================================== */
+
+.app {
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.app-back {
+  display: inline-block;
+  color: var(--code-chip);
+  margin-bottom: 22px;
+}
+.app-back:hover { text-decoration: none; color: var(--ink); }
+
+/* ---------------------------------------------------------------- Header -- */
+.app-head {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 34px;
+}
+.app-icon {
+  flex: 0 0 auto;
+  width: 112px;
+  height: 112px;
+  border-radius: 25%;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-rest);
+}
+.app-head-text { min-width: 0; }
+.app-title {
+  font-size: 46px;
+  margin: 12px 0 0;
+}
+.app-lede {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.app-action {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+.app-action--store {
+  background: var(--code);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.app-action--store:hover { text-decoration: none; opacity: .92; }
+.app-action--soon {
+  color: var(--faint);
+  font-style: italic;
+}
+.app-action--source { color: var(--code-chip); }
+
+/* ------------------------------------------------------------------ Body -- */
+.app-body {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-prose);
+  max-width: 720px;
+}
+.app-body h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--ink);
+  margin: 34px 0 12px;
+}
+.app-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 26px 0 10px;
+}
+.app-body p { margin: 0 0 16px; }
+.app-body ul { padding-left: 22px; margin: 0 0 16px; }
+.app-body li { margin: 0 0 7px; }
+.app-body a {
+  color: var(--code-chip);
+  border-bottom: 1px solid var(--code-wash);
+}
+.app-body a:hover { text-decoration: none; border-bottom-color: var(--code-chip); }
+.app-body strong { color: var(--ink); }
+.app-body code {
+  font-family: var(--font-mono);
+  font-size: .9em;
+  background: var(--code-wash);
+  padding: .12em .35em;
+  border-radius: 5px;
+}
+
+/* ----------------------------------------------------------- Screenshots -- */
+.app-shots { margin-top: 40px; }
+.app-shots-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.app-shots-scroller {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+.app-shot {
+  flex: 0 0 auto;
+  height: 420px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-rest);
+  scroll-snap-align: start;
+}
+
+/* --------------------------------------------------------------- Mobile -- */
+@media (max-width: 720px) {
+  .app-head { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .app-icon { width: 88px; height: 88px; }
+  .app-title { font-size: 36px; }
+  .app-shot { height: 320px; }
+}
