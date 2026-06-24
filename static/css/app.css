@@ -70,11 +70,12 @@
 
 /* Official App Store badge (black on light, white on dark) */
 .app-badge { display: inline-block; line-height: 0; }
-.app-badge img { height: 46px; width: auto; display: block; }
+.app-badge img { height: 46px; width: auto; }
 .app-badge:hover { opacity: .9; }
-.app-badge-dark { display: none; }
-:root.dark .app-badge-light { display: none; }
-:root.dark .app-badge-dark { display: block; }
+.app-badge img.app-badge-light { display: block; }
+.app-badge img.app-badge-dark { display: none; }
+:root.dark .app-badge img.app-badge-light { display: none; }
+:root.dark .app-badge img.app-badge-dark { display: block; }
 
 /* ------------------------------------------------------------------ Body -- */
 .app-body {

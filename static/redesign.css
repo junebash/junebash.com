@@ -192,8 +192,25 @@ a:hover { text-decoration: underline; }
 .rd-bubble.contact { background: var(--contact); }
 
 /* Eyebrow pill for inside-page headers */
+/* Apollo's theme ships a global `header { display:flex; flex-direction:row }`.
+   Our page headers are <header> elements, so that rule would row out the
+   eyebrow/title/intro stack AND stretch the eyebrow pill vertically into a
+   capsule (default align-items:stretch). Reset our stacked headers to block.
+   (app-head / mdetail-head keep their own intentional icon+text flex layout.) */
+.code-head,
+.postlist-head,
+.now-head,
+.now-page-head,
+.music-head,
+.about-head,
+.concert-head {
+  display: block;
+  padding: 0;
+}
+
 .rd-eyebrow {
   display: inline-block;
+  align-self: flex-start;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -202,6 +219,7 @@ a:hover { text-decoration: underline; }
   color: #fff;
   padding: 5px 13px;
   border-radius: 999px;
+  margin-bottom: 16px;
 }
 .rd-eyebrow.posts   { background: var(--posts); }
 .rd-eyebrow.code    { background: var(--code); }
