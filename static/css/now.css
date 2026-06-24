@@ -46,6 +46,17 @@
   color: var(--ink-prose);
 }
 
+/* Back link (entry page) */
+.now-back {
+  display: inline-block;
+  color: var(--now-chip);
+  margin-bottom: 16px;
+}
+.now-back:hover {
+  text-decoration: none;
+  color: var(--ink);
+}
+
 /* ------------------------------------------------------------- Featured -- */
 .now-featured {
   background: var(--now-wash);
@@ -168,6 +179,24 @@
   background: var(--now);
 }
 
+/* Current entry (timeline on an individual /now/{date} page) */
+.now-row.is-current {
+  background-color: var(--now-wash);
+  padding-left: 12px;
+  cursor: default;
+}
+.now-row.is-current .now-dot { background: var(--now); }
+.now-row.is-current .now-row-date { color: var(--ink); }
+
+.now-current-pill {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--now-chip);
+}
+
 .now-row-date {
   font-family: var(--font-mono);
   font-size: 14px;
@@ -181,10 +210,6 @@
   color: var(--muted);
 }
 
-.now-row-teaser:empty::before {
-  content: "\2014";
-  color: var(--faint);
-}
 
 .now-row-chip {
   justify-self: end;

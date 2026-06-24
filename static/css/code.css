@@ -85,15 +85,6 @@
   transform: scale(1.05) rotate(-2deg);
 }
 
-/* Diagonal-stripe placeholder when no real icon is provided */
-.code-icon--ph {
-  background-image: repeating-linear-gradient(
-    135deg,
-    rgba(0, 0, 0, .05) 0 8px,
-    transparent 8px 16px
-  );
-}
-
 /* ----------------------------------------------------------------- Body -- */
 .code-body {
   min-width: 0;
