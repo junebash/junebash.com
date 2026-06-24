@@ -28,7 +28,7 @@
         <!-- Redesign Footer -->
         <footer class="rd-footer">
             <div class="rd-footer-inner">
-                <div class="rd-copyright">© {{ now() | date(format="%Y") }} June Bash — Bellingham, WA</div>
+                <div class="rd-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
                 <div class="rd-socials">
                     {% for social in config.extra.socials %}
                         <a href="{{ social.url }}" class="rd-social" rel="me" target="_blank">{{ social.name }}</a>

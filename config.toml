@@ -49,6 +49,7 @@ stylesheets = [
   "css/post.css",
   "css/now.css",
   "css/concert.css",
+  "css/posts.css",
 ]
 
 # See this for more options: https://github.com/not-matthias/apollo/blob/main/config.toml#L14

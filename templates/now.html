@@ -8,8 +8,7 @@
   <header class="now-head">
     <span class="rd-eyebrow now">Now</span>
     <h1 class="rd-page-title now-title">{{ section.title }}</h1>
-    <p class="now-intro">What I've been up to recently.</p>
-    <p class="now-note">(Inspired by <a href="https://nownownow.com/about">the concept from Derek Sivers</a>)</p>
+    <div class="now-intro-content">{{ section.content | safe }}</div>
   </header>
 
   {% if section.pages %}

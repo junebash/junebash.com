@@ -57,5 +57,13 @@
       </div>
     </div>
   </div>
+
+  <section class="about-ack">
+    <h2 class="about-ack-title">Acknowledgments</h2>
+    {% set ack_page = get_page(path="about/acknowledgments.md") %}
+    <div class="about-ack-content">
+      {{ ack_page.content | safe }}
+    </div>
+  </section>
 </div>
 {% endblock main_content %}

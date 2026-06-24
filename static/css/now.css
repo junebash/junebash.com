@@ -46,6 +46,29 @@
   color: var(--ink-prose);
 }
 
+/* Intro rendered from now/_index.md content (lede + Sivers note) */
+.now-intro-content p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 4px;
+  max-width: 600px;
+}
+.now-intro-content p:last-child {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--faint);
+  margin: 0;
+}
+.now-intro-content a {
+  color: inherit;
+  border-bottom: 1px solid var(--hairline-2);
+}
+.now-intro-content a:hover {
+  text-decoration: none;
+  color: var(--ink-prose);
+}
+
 /* Back link (entry page) */
 .now-back {
   display: inline-block;

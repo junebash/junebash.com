@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+    {% if section.extra.section_path -%}
+        {% set section = get_section(path=section.extra.section_path) %}
+    {% endif -%}
+
+    {%- if paginator %}
+        {%- set show_pages = paginator.pages -%}
+    {% else %}
+        {%- set show_pages = section.pages -%}
+    {% endif -%}
+
+    <main class="rd-wrap postlist">
+
+        {# ---- Page header ---- #}
+        <header class="postlist-head">
+            <span class="rd-eyebrow posts">{{ section.title }}</span>
+            <h1 class="rd-page-title postlist-title">{{ section.title }}</h1>
+            {% if section.description %}
+            <p class="postlist-intro">{{ section.description }}</p>
+            {% endif %}
+        </header>
+
+        {# ---- Post list ---- #}
+        <div class="postlist-list">
+            {%- for page in show_pages %}
+            <a class="postlist-row" href="{{ page.permalink }}">
+                <span class="postlist-row-title">{{ page.title }}</span>
+                <span class="postlist-row-leader" aria-hidden="true"></span>
+                <span class="postlist-row-meta">
+                    {%- if page.taxonomies.tags and page.taxonomies.tags | length > 0 -%}
+                    <span class="postlist-row-tag">{{ page.taxonomies.tags | first }}</span>
+                    {%- endif -%}
+                    <span class="postlist-row-date">{{ page.date | date(format="%Y&middot;%m") | safe }}</span>
+                </span>
+            </a>
+            {% endfor -%}
+        </div>
+
+        {# ---- Pagination ---- #}
+        {% if paginator %}
+            <ul class="pagination postlist-pagination">
+                {% if paginator.previous %}
+                    <span class="page-item page-prev">
+                        <a href="{{ paginator.previous }}" class="page-link" aria-label="Previous"><span aria-hidden="true">&larr; Prev</span></a>
+                    </span>
+                {% endif %}
+                {% if paginator.next %}
+                    <span class="page-item page-next">
+                        <a href="{{ paginator.next }}" class="page-link" aria-label="Next"><span aria-hidden="true">Next &rarr;</span></a>
+                    </span>
+                {% endif %}
+            </ul>
+        {% endif %}
+
+    </main>
+{% endblock main_content %}

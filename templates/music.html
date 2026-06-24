@@ -6,10 +6,9 @@
   <div class="rd-wrap">
 
     <header class="music-head">
-      <div class="rd-mono music-eyebrow-row">page &mdash; music</div>
       <span class="rd-bubble music music-bubble">Music</span>
       <h1 class="rd-page-title music-title">{{ page.title }}</h1>
-      <p class="music-lede">Concert pieces, band stuff, and film scores.</p>
+      <div class="music-lede">{{ page.content | safe }}</div>
     </header>
 
     {# ----------------------------------------- Solo Projects &amp; Bands #}

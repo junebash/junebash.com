@@ -215,6 +215,51 @@
 }
 .about-skills-content hr + p + p strong { color: var(--ink-prose); }
 
+/* Acknowledgments (rendered from acknowledgments.md) */
+.about-ack {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+.about-ack-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.about-ack-content > p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-prose);
+  margin: 0 0 18px;
+  max-width: 760px;
+}
+.about-ack-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 760px;
+}
+.about-ack-content li {
+  position: relative;
+  padding: 12px 0 12px 22px;
+  border-top: 1px solid var(--hairline);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-prose);
+}
+.about-ack-content li:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+.about-ack-content li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--contact-chip);
+}
+
 /* --------------------------------------------------------------- Responsive */
 @media (max-width: 860px) {
   .about-grid {
