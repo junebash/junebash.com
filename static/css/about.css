@@ -1,1 +1,222 @@
-/* about — page styles (redesign) */
+/* ============================================================================
+   about.css — About page (loaded after redesign.css; wins cascade)
+   Prefix: .about-  ·  All themable colors come from redesign.css tokens.
+   ========================================================================== */
+
+.rd-wrap.about {
+  padding-top: 56px;
+  padding-bottom: 44px;
+}
+
+/* ----------------------------------------------------------------- Header -- */
+.about-head {
+  margin-bottom: 36px;
+}
+.about-head .rd-eyebrow.about {
+  margin-bottom: 22px;
+}
+.about-title {
+  font-size: 56px;
+  line-height: 1;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------- Grid -- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ------------------------------------------------------------- Left aside -- */
+.about-aside {
+  position: sticky;
+  top: 24px;
+}
+
+/* Diagonal-stripe portrait placeholder (no real image available) */
+.ph-stripe {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, .05) 0 8px,
+    transparent 8px 16px
+  );
+}
+:root.dark .ph-stripe {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .05) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.about-portrait {
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  background-color: var(--code-wash);
+  border: 1px solid var(--hairline-2);
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  margin-bottom: 22px;
+}
+.about-portrait-tag {
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--faint);
+  background: var(--paper);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* Quick facts */
+.about-facts {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.about-fact {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--hairline);
+  margin: 0;
+}
+.about-fact-label {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--faint);
+}
+.about-fact-value {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+}
+
+/* Social pills */
+.about-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.about-social {
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: lowercase;
+  color: var(--muted);
+  background: var(--footer);
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: color .15s ease, background-color .15s ease;
+}
+.about-social:hover {
+  color: var(--ink);
+  background: var(--skill-chip-bg);
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------------- Right -- */
+.about-main {
+  max-width: 620px;
+}
+
+.about-prose p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-prose);
+  margin: 0 0 16px;
+}
+.about-prose p:last-child {
+  margin-bottom: 28px;
+}
+.about-prose em { font-style: italic; }
+.about-prose a {
+  color: var(--code-chip);
+  border-bottom: 1px solid var(--code-wash);
+}
+.about-prose a:hover { text-decoration: none; }
+
+/* Skills */
+.about-skills-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.about-skill-group {
+  margin-bottom: 18px;
+}
+.about-skill-group:last-of-type {
+  margin-bottom: 28px;
+}
+.about-skill-label {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--faint);
+  margin-bottom: 9px;
+}
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.about-chip {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--ink-prose);
+  background: var(--skill-chip-bg);
+  padding: 6px 13px;
+  border-radius: 8px;
+}
+
+/* Inset note card */
+.about-note {
+  background: var(--footer);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.about-note-cta {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+.about-note-cta:hover {
+  color: var(--contact-chip);
+  text-decoration: none;
+}
+.about-note-body {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.about-note-body strong { color: var(--ink-prose); }
+
+/* --------------------------------------------------------------- Responsive */
+@media (max-width: 860px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .about-aside {
+    position: static;
+    max-width: 360px;
+  }
+  .about-main { max-width: none; }
+}
+
+@media (max-width: 720px) {
+  .about-title { font-size: 40px; }
+}

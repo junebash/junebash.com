@@ -6,75 +6,100 @@
         {% set section = get_section(path=section.extra.section_path) %}
     {% endif -%}
 
-    {{ post_macros::page_header(title=section.title) }}
+    {%- if paginator %}
+        {%- set show_pages = paginator.pages -%}
+    {% else %}
+        {%- set show_pages = section.pages -%}
+    {% endif -%}
 
-    <main>
-        {%- if paginator %}
-            {%- set show_pages = paginator.pages -%}
-        {% else %}
-            {%- set show_pages = section.pages -%}
-        {% endif -%}
+    <main class="rd-wrap code-page">
 
-        <!-- Unified code project cards with music-style appearance -->
-        <div class="music-grid">
-        {# First, show any subsections (like app showcases with their own pages) #}
+        {# ---- Page header ---- #}
+        <header class="code-head">
+            <span class="rd-eyebrow code">Code</span>
+            <h1 class="rd-page-title code-title">Things I&rsquo;ve built</h1>
+            <p class="code-intro">Apps, experiments, and open-source bits.</p>
+        </header>
+
+        {# ---- Card grid ---- #}
+        <div class="code-grid">
+
+        {# Subsections (app showcases with their own pages) come first #}
         {%- for subsection_path in section.subsections %}
             {%- set subsection = get_section(path=subsection_path) %}
-            <a href="{{ subsection.permalink }}" class="code-card-page">
-                <h3>{{ subsection.title }}</h3>
-                {% if subsection.description %}
-                <div class="project-description">
-                    <p>{{ subsection.description }}</p>
-                </div>
+            {%- set icon = subsection.extra.icon | default(value="") %}
+            {%- set status = subsection.extra.status | default(value="store") %}
+            <a class="code-card" href="{{ subsection.permalink }}">
+                {% if icon %}
+                <span class="code-icon" style="background-image:url('{{ get_url(path=icon) }}');"></span>
+                {% else %}
+                <span class="code-icon code-icon--ph"></span>
                 {% endif %}
-                <div class="read-more">
-                    <span>View details →</span>
-                </div>
+                <span class="code-body">
+                    <span class="code-card-head">
+                        <span class="code-name">{{ subsection.title }}</span>
+                        {%- if status == "store" %}<span class="code-tag code-tag--store">App Store</span>
+                        {%- elif status == "work" %}<span class="code-tag code-tag--work">work</span>
+                        {%- elif status == "cli" %}<span class="code-tag code-tag--cli">CLI</span>
+                        {%- elif status == "archived" %}<span class="code-tag code-tag--archived">archived</span>
+                        {%- elif status == "source" %}<span class="code-tag code-tag--source">source &rarr;</span>
+                        {%- endif %}
+                    </span>
+                    {% if subsection.description %}<span class="code-desc">{{ subsection.description }}</span>{% endif %}
+                </span>
             </a>
         {% endfor -%}
 
-        {# Then show regular pages #}
+        {# Regular project pages #}
         {%- for page in show_pages %}
-            <div class="music-item code-card-link" data-code-index="{{ loop.index0 }}"
-                 data-code-title="{{ page.title }}"
-                 data-code-description="{{ page.description | default(value='') }}"
-                 data-code-content="{{ page.content | default(value='') }}"
-                 {% if page.extra.icon %}data-code-icon="{{ page.extra.icon }}"{% endif %}
-                 {% if page.extra.ios_store %}data-code-ios-store="{{ page.extra.ios_store }}"{% endif %}
-                 {% if page.extra.source %}data-code-source="{{ page.extra.source }}"{% endif %}
-                 {% if page.extra.screenshots %}data-code-screenshots="{{ page.extra.screenshots | join(sep=',') }}"{% endif %}
-                 {% if page.extra.features %}data-code-features="{{ page.extra.features | join(sep='|') }}"{% endif %}
-                 {% if page.extra.planned_features %}data-code-planned-features="{{ page.extra.planned_features | join(sep='|') }}"{% endif %}>
-                <h3>{{ page.title }}</h3>
-                {% if page.description %}
-                <div class="project-description">
-                    <p>{{ page.description }}</p>
-                </div>
+            {%- set icon = page.extra.icon | default(value="") %}
+            {%- set has_source = page.extra.source and page.extra.source != "" %}
+            {%- set has_store = page.extra.ios_store and page.extra.ios_store != "" %}
+            {%- if page.extra.status %}
+                {%- set status = page.extra.status %}
+            {%- elif has_store %}
+                {%- set status = "store" %}
+            {%- elif has_source %}
+                {%- set status = "source" %}
+            {%- else %}
+                {%- set status = "work" %}
+            {%- endif %}
+            <a class="code-card" href="{{ page.permalink }}">
+                {% if icon %}
+                <span class="code-icon" style="background-image:url('{{ get_url(path=icon) }}');"></span>
+                {% else %}
+                <span class="code-icon code-icon--ph"></span>
                 {% endif %}
-                <div class="read-more">
-                    <span>Click to view details →</span>
-                </div>
-            </div>
+                <span class="code-body">
+                    <span class="code-card-head">
+                        <span class="code-name">{{ page.title }}</span>
+                        {%- if status == "store" %}<span class="code-tag code-tag--store">App Store</span>
+                        {%- elif status == "work" %}<span class="code-tag code-tag--work">work</span>
+                        {%- elif status == "cli" %}<span class="code-tag code-tag--cli">CLI</span>
+                        {%- elif status == "archived" %}<span class="code-tag code-tag--archived">archived</span>
+                        {%- elif status == "source" %}<span class="code-tag code-tag--source">source &rarr;</span>
+                        {%- endif %}
+                    </span>
+                    {% if page.description %}<span class="code-desc">{{ page.description }}</span>{% endif %}
+                </span>
+            </a>
         {% endfor -%}
         </div>
+
+        {% if paginator %}
+            <ul class="pagination code-pagination">
+                {% if paginator.previous %}
+                    <span class="page-item page-prev">
+                        <a href="{{ paginator.previous }}" class="page-link" aria-label="Previous"><span aria-hidden="true">&larr; Prev</span></a>
+                    </span>
+                {% endif %}
+                {% if paginator.next %}
+                    <span class="page-item page-next">
+                        <a href="{{ paginator.next }}" class="page-link" aria-label="Next"><span aria-hidden="true">Next &rarr;</span></a>
+                    </span>
+                {% endif %}
+            </ul>
+        {% endif %}
+
     </main>
-
-    {% if paginator %}
-        <ul class="pagination">
-            {% if paginator.previous %}
-                <span class="page-item page-prev">
-                    <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
-                </span>
-            {% endif %}
-
-            {% if paginator.next %}
-                <span class="page-item page-next">
-                    <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
-                </span>
-            {% endif %}
-        </ul>
-    {% endif %}
-
-    <!-- Include code project modal JavaScript -->
-    <script src="{{ get_url(path='js/code-modal.js') }}"></script>
 {% endblock main_content %}

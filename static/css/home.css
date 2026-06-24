@@ -1,1 +1,311 @@
-/* home — page styles (redesign) */
+/* ============================================================================
+   home.css — Homepage-specific styling for the junebash.com reskin.
+   Loaded AFTER redesign.css (wins the cascade). All themable colors come from
+   foundation tokens so the light/dark toggle works. Prefixed `.home-*`.
+   ========================================================================== */
+
+.home {
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+
+/* ---------------------------------------------------------------- Hero -- */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 60px 0 56px;
+}
+
+.home-hero-text {
+  min-width: 0;
+}
+
+.home-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: var(--faint);
+  margin-bottom: 24px;
+}
+
+.home-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6F9168;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+:root.dark .home-eyebrow-dot {
+  background: #7FA776;
+}
+
+.home-greeting {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 72px;
+  line-height: .98;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+.home-intro {
+  font-size: 19px;
+  line-height: 1.58;
+  color: var(--ink-prose);
+  margin: 0 0 18px;
+  max-width: 540px;
+}
+
+.home-intro-muted {
+  font-size: 16px;
+  line-height: 1.58;
+  color: var(--muted-2);
+  margin: 0;
+  max-width: 540px;
+}
+
+/* Portrait placeholder (diagonal-stripe tinted block) */
+.home-portrait {
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  background-color: #F1E2D6;
+  background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, .05) 0 8px, transparent 8px 16px);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+:root.dark .home-portrait {
+  background-color: #2A2318;
+  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, .06) 0 8px, transparent 8px 16px);
+}
+
+.home-portrait-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  background: var(--paper);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------------- Sections -- */
+.home-section-head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+/* ------------------------------------------------------------- Explore -- */
+.home-explore {
+  padding: 18px 0 40px;
+}
+
+.home-row {
+  display: grid;
+  grid-template-columns: 152px 1fr 96px;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color .15s ease, padding-left .15s ease;
+}
+
+.home-row--last {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.home-row:hover {
+  text-decoration: none;
+  padding-left: 14px;
+}
+
+.home-row.posts:hover,
+.home-row[href*="posts"]:hover { background-color: var(--posts-wash); }
+.home-row[href*="code"]:hover  { background-color: var(--code-wash); }
+.home-row[href*="music"]:hover { background-color: var(--music-wash); }
+.home-row[href*="now"]:hover   { background-color: var(--now-wash); }
+.home-row.js-contact:hover     { background-color: var(--contact-wash); }
+
+.home-tile {
+  justify-self: start;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.home-row:hover .home-tile {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-hover);
+}
+
+.home-row-desc {
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.home-row-chip {
+  justify-self: end;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .15s ease, transform .15s ease;
+  border: 1px solid var(--hairline-2);
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.home-row:hover .home-row-chip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------- Recent Posts -- */
+.home-recent {
+  padding: 24px 0 48px;
+}
+
+.home-recent-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  gap: 18px;
+}
+
+.home-recent-head .home-section-head {
+  margin: 0;
+}
+
+.home-viewall {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--code-chip);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-viewall:hover {
+  text-decoration: underline;
+}
+
+.home-recent-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 17px 0;
+  border-top: 1px solid var(--hairline);
+  gap: 24px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-post:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.home-post:hover {
+  text-decoration: none;
+}
+
+.home-post-title {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.home-post:hover .home-post-title {
+  color: var(--code-chip);
+}
+
+.home-post-leader {
+  flex: 1;
+  height: 1px;
+  align-self: center;
+  opacity: .7;
+  background: repeating-linear-gradient(90deg, var(--hairline-2) 0 2px, transparent 2px 7px);
+}
+
+.home-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+.home-post-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.home-post-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
+/* ------------------------------------------------------------ Responsive -- */
+@media (max-width: 860px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 0 44px;
+  }
+  .home-portrait {
+    max-width: 340px;
+  }
+  .home-greeting {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-greeting {
+    font-size: 44px;
+  }
+  .home-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .home-row-chip {
+    justify-self: start;
+    opacity: 1;
+    transform: none;
+  }
+  .home-row:hover {
+    padding-left: 8px;
+  }
+  .home-post {
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+  .home-post-leader {
+    display: none;
+  }
+}

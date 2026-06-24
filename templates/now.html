@@ -2,243 +2,55 @@
 {% import "macros/macros.html" as post_macros %}
 
 {% block main_content %}
-<div class="content">
-    {{ post_macros::page_header(title=section.title) }}
-    
-    {{ section.content | safe }}
-    
-    <style>
-    .now-updates {
-        margin-top: 3rem;
-    }
-    
-    .now-update {
-        margin: 2rem 0;
-        padding: 2rem;
-        background: var(--bg-secondary, #f8f9fa);
-        border-radius: 12px;
-        border-left: 4px solid var(--accent-color, #3498db);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        position: relative;
-    }
-    
-    
-    .now-update header {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid var(--border-color, #e1e8ed);
-        padding-bottom: 0.5rem;
-    }
+<div class="rd-wrap now-page">
 
-    .update-date {
-        margin: 0;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--accent-color, #3498db);
-    }
-    
-    .update-content {
-        line-height: 1.6;
-        color: var(--text-primary, #2c3e50);
-    }
-    
-    .update-content p {
-        margin: 1rem 0;
-    }
-    
-    .update-content p:first-child {
-        margin-top: 0;
-    }
-    
-    .update-content p:last-child {
-        margin-bottom: 0;
-    }
-    
-    .timeline {
-        position: relative;
-        padding-left: 1rem;
-    }
-    
-    .timeline:before {
-        content: "";
-        position: absolute;
-        left: -2px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(to bottom, var(--accent-color, #3498db), transparent);
-    }
-    
-    .no-updates {
-        text-align: center;
-        padding: 3rem;
-        color: var(--text-secondary, #6c757d);
-        font-style: italic;
-    }
-    
-    /* Featured latest post styling */
-    .now-update.featured {
-        background: linear-gradient(135deg, var(--bg-secondary, #f8f9fa), var(--bg-primary, white));
-        border-left: 6px solid var(--accent-color, #3498db);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    
-    .latest-badge {
-        display: inline-block;
-        background: var(--accent-color, #3498db);
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-    
-    /* Navigation styling */
-    .now-navigation {
-        margin-top: 4rem;
-        padding: 2rem;
-        background: var(--bg-secondary, #f8f9fa);
-        border-radius: 12px;
-        border-left: 4px solid var(--accent-color, #3498db);
-    }
-    
-    .nav-title {
-        margin: 0 0 1.5rem 0;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--accent-color, #3498db);
-        border-bottom: 1px solid var(--border-color, #e1e8ed);
-        padding-bottom: 0.5rem;
-    }
-    
-    .now-nav-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .now-nav-item {
-        padding: 0.75rem 1rem;
-        border-radius: 8px;
-        background: var(--bg-primary, white);
-        transition: all 0.2s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .now-nav-item:hover:not(.latest) {
-        background: var(--bg-hover, #f0f8ff);
-        transform: translateX(4px);
-    }
-    
-    .now-nav-item.latest {
-        background: var(--accent-color, #3498db);
-        color: white;
-        font-weight: 600;
-    }
-    
-    .nav-date {
-        text-decoration: none;
-        color: var(--text-primary, #2c3e50);
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-    
-    .nav-date:hover {
-        color: var(--accent-color, #3498db);
-    }
-    
-    .nav-date.current-page {
-        color: white;
-    }
-    
-    .current-indicator {
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
-    
-    /* Dark mode adjustments */
-    @media (prefers-color-scheme: dark) {
-        .now-navigation {
-            background: var(--bg-secondary-dark, #2d3748);
-        }
-        
-        .now-nav-item {
-            background: var(--bg-primary-dark, #1a202c);
-        }
-        
-        .now-nav-item:hover:not(.latest) {
-            background: var(--bg-hover-dark, #2d3748);
-        }
-        
-        .nav-date {
-            color: var(--text-primary-dark, #e2e8f0);
-        }
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .now-navigation {
-            margin: 2rem -1rem 0;
-            border-radius: 0;
-            border-left: none;
-            border-top: 4px solid var(--accent-color, #3498db);
-        }
-        
-        .now-nav-item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-        }
-        
-        .current-indicator {
-            align-self: flex-end;
-        }
-        
-    }
-    </style>
-    
-    {% if section.pages %}
-    {# Show the most recent post prominently #}
-    {% set latest_post = section.pages | first %}
-    <div class="timeline">
-        <div class="latest-update">
-            <article class="now-update featured">
-                <header>
-                    <h2 class="update-date">{{ latest_post.date | date(format="%Y-%m-%d") }}</h2>
-                    <span class="latest-badge">latest update</span>
-                </header>
-                <div class="update-content">
-                    {{ latest_post.content | safe }}
-                </div>
-            </article>
-        </div>
+  {# ---- header ---- #}
+  <header class="now-head">
+    <span class="rd-eyebrow now">Now</span>
+    <h1 class="rd-page-title now-title">{{ section.title }}</h1>
+    <p class="now-intro">What I've been up to recently.</p>
+    <p class="now-note">(Inspired by <a href="https://nownownow.com/about">the concept from Derek Sivers</a>)</p>
+  </header>
+
+  {% if section.pages %}
+  {% set latest = section.pages | first %}
+
+  {# ---- featured latest update ---- #}
+  <section class="now-featured">
+    <div class="now-featured-head">
+      <span class="now-featured-date">{{ latest.date | date(format="%Y-%m-%d") }}</span>
+      <span class="now-latest-pill">latest update</span>
     </div>
-    
-    {# Navigation section with all now posts #}
-    <div class="now-navigation">
-        <h2 class="nav-title">All Now Updates</h2>
-        <div class="now-nav-list">
-            {% for nav_page in section.pages %}
-            <div class="now-nav-item {% if loop.first %}latest{% endif %}">
-                {% if loop.first %}
-                <span class="nav-date current-page">{{ nav_page.date | date(format="%Y-%m-%d") }}</span>
-                <span class="current-indicator">← Latest</span>
-                {% else %}
-                <a href="{{ nav_page.permalink }}" class="nav-date">{{ nav_page.date | date(format="%Y-%m-%d") }}</a>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
+    <div class="now-featured-body">
+      {{ latest.content | safe }}
     </div>
-    {% else %}
-    <div class="no-updates">
-        <p>No updates yet. Check back soon!</p>
+  </section>
+
+  {# ---- timeline of all updates ---- #}
+  <section class="now-timeline-section">
+    <h2 class="now-timeline-title">All updates</h2>
+    <div class="now-timeline">
+      <span class="now-spine" aria-hidden="true"></span>
+      {% for page in section.pages %}
+      <a class="now-row{% if loop.first %} is-latest{% endif %}" href="{{ page.permalink }}">
+        <span class="now-dot" aria-hidden="true"></span>
+        <span class="now-row-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+        <span class="now-row-teaser">
+          {%- if page.description -%}
+            {{ page.description }}
+          {%- elif page.summary -%}
+            {{ page.summary | striptags | truncate(length=90) }}
+          {%- endif -%}
+        </span>
+        <span class="now-row-chip rd-chip now">read &rarr;</span>
+      </a>
+      {% endfor %}
     </div>
-    {% endif %}
+  </section>
+
+  {% else %}
+  <p class="now-empty">No updates yet. Check back soon!</p>
+  {% endif %}
+
 </div>
 {% endblock main_content %}

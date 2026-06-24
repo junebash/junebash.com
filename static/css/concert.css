@@ -1,1 +1,145 @@
-/* concert — page styles (redesign) */
+/* Concert-piece detail page — leads SAGE (--music) */
+
+.concert {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
+/* Back link */
+.concert-back {
+  display: inline-block;
+  font-size: 12.5px;
+  color: var(--music-chip);
+  text-decoration: none;
+  margin-bottom: 22px;
+  transition: opacity .15s ease;
+}
+.concert-back:hover { opacity: .7; }
+
+/* Header */
+.concert-head {
+  margin-bottom: 30px;
+}
+.concert-head .rd-eyebrow { margin-bottom: 18px; }
+
+.concert-title {
+  font-size: 56px;
+  line-height: 1;
+  margin: 0 0 22px;
+}
+
+/* Metadata strip */
+.concert-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  padding-bottom: 6px;
+}
+.concert-meta-item { min-width: 0; }
+.concert-meta-label {
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 4px;
+}
+.concert-meta-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Two-column body */
+.concert-body {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+  padding-top: 8px;
+}
+
+/* Program note (left) */
+.concert-note {
+  max-width: 620px;
+  color: var(--ink-prose);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.concert-note p { margin: 0 0 18px; }
+.concert-note p:last-child { margin-bottom: 0; }
+.concert-note em { font-style: italic; }
+.concert-note a {
+  color: var(--music-chip);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Sidebar (right) */
+.concert-side {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Embed placeholder */
+.concert-embed-placeholder {
+  height: 100px;
+  border-radius: 12px;
+  background-color: var(--music-wash);
+  border: 1px solid var(--hairline-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.concert-embed-tag {
+  font-size: 11px;
+  color: var(--music-chip);
+  background: var(--paper);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* Real embed */
+.concert-embed {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.concert-embed iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Instrumentation card */
+.concert-instr-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.concert-instr-label {
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--music-chip);
+  margin-bottom: 12px;
+}
+.concert-instr-list {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--ink-prose);
+}
+.concert-instr-item { display: block; }
+
+/* Responsive: collapse to single column */
+@media (max-width: 860px) {
+  .concert-body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .concert-side { max-width: 420px; }
+  .concert-title { font-size: 44px; }
+}

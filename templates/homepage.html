@@ -2,40 +2,99 @@
 {% import "macros/macros.html" as post_macros %}
 
 {% block main_content %}
-<main>
-    <article>
-        <section class="body">
-            {{post_macros::page_header(title=section.title)}}
-            {{ section.content | safe }}
-        </section>
-    </article>
+<main class="home rd-wrap">
 
-    {# Recent Posts Section #}
-    {% set posts_section = get_section(path="posts/_index.md") %}
-    {% if posts_section.pages %}
-    <section class="recent-posts">
-        <h2>Recent Posts</h2>
-        <div class="list">
-            {{ post_macros::list_posts(pages=posts_section.pages | slice(end=4)) }}
-        </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <a href="/posts" class="readmore">View all posts ⟶</a>
-        </div>
-    </section>
-    {% endif %}
+  {# ============================================================ Hero ==== #}
+  <section class="home-hero">
+    <div class="home-hero-text">
+      <div class="home-eyebrow">
+        <span class="home-eyebrow-dot" aria-hidden="true"></span>
+        Bellingham, WA &middot; she/her
+      </div>
+      <h1 id="greeting" class="home-greeting">Hi! I'm June!</h1>
+      <p class="home-intro">I write Swift for a living, wrote symphonies for free, and spent a few years managing engineers &mdash; which quietly rewired how I think about the work. These days I'm a principal iOS engineer. Failed composer, occasional writer, Buddhist meditator, trans lady, and a bunch of other stuff.</p>
+      <p class="home-intro-muted">Welcome to my little corner of the internet &mdash; poke around at my thoughts, my code, my music, and whatever I'm up to.</p>
+    </div>
+    <div class="home-portrait" aria-hidden="true">
+      <span class="home-portrait-label">portrait of June</span>
+    </div>
+  </section>
+
+  {# ========================================================= Explore ==== #}
+  <section class="home-explore">
+    <h2 class="home-section-head">Explore</h2>
+
+    <a class="home-row" href="{{ get_url(path='/posts/') }}">
+      <span class="rd-bubble posts home-tile">Posts</span>
+      <span class="home-row-desc">Essays, poetry, short stories, and stray thoughts</span>
+      <span class="home-row-chip rd-chip posts">/posts</span>
+    </a>
+
+    <a class="home-row" href="{{ get_url(path='/code/') }}">
+      <span class="rd-bubble code home-tile">Code</span>
+      <span class="home-row-desc">My software and development work</span>
+      <span class="home-row-chip rd-chip code">/code</span>
+    </a>
+
+    <a class="home-row" href="{{ get_url(path='/music/') }}">
+      <span class="rd-bubble music home-tile">Music</span>
+      <span class="home-row-desc">A collection of my musical works</span>
+      <span class="home-row-chip rd-chip music">/music</span>
+    </a>
+
+    <a class="home-row" href="{{ get_url(path='/now/') }}">
+      <span class="rd-bubble now home-tile">Now</span>
+      <span class="home-row-desc">What I'm up to right now</span>
+      <span class="home-row-chip rd-chip now">/now</span>
+    </a>
+
+    <a class="home-row home-row--last js-contact" href="#">
+      <span class="rd-bubble contact home-tile">Contact</span>
+      <span class="home-row-desc">Get in touch with me</span>
+      <span class="home-row-chip rd-chip contact">reveal</span>
+    </a>
+  </section>
+
+  {# ===================================================== Recent Posts ==== #}
+  {% set posts_section = get_section(path="posts/_index.md") %}
+  {% if posts_section.pages %}
+  <section class="home-recent">
+    <div class="home-recent-head">
+      <h2 class="home-section-head">Recent Posts</h2>
+      <a class="home-viewall" href="{{ get_url(path='/posts/') }}">View all posts &#10230;</a>
+    </div>
+
+    <div class="home-recent-list">
+      {% for page in posts_section.pages | slice(end=4) %}
+      <a class="home-post" href="{{ page.permalink }}">
+        <span class="home-post-title">{{ page.title }}</span>
+        <span class="home-post-leader" aria-hidden="true"></span>
+        <span class="home-post-meta">
+          {%- if page.taxonomies.tags and page.taxonomies.tags | length > 0 -%}
+          <span class="home-post-tag">{{ page.taxonomies.tags | first }}</span>
+          {%- endif -%}
+          <span class="home-post-date">{{ page.date | date(format="%Y&middot;%m") | safe }}</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
 </main>
 
-<script src="/js/contact.js"></script>
+<script src="{{ get_url(path='js/greeting.js') }}"></script>
 <script>
-// Set up contact link on homepage when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    const contactLink = document.getElementById('contact-link');
-    if (contactLink) {
-        contactLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            revealEmail();
-        });
-    }
-});
+  // Bind the homepage Contact explore row to the shared revealEmail() helper
+  // (loaded by the global nav partial). Uses a class to avoid duplicate ids.
+  document.addEventListener('DOMContentLoaded', function () {
+    var rows = document.querySelectorAll('.js-contact');
+    rows.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (typeof revealEmail === 'function') revealEmail();
+      });
+    });
+  });
 </script>
 {% endblock main_content %}

@@ -1,1 +1,190 @@
-/* code — page styles (redesign) */
+/* ============================================================================
+   junebash.com — Code index page
+   ----------------------------------------------------------------------------
+   Loaded AFTER redesign.css, so it wins the cascade. All page-specific styling
+   lives here, scoped under .code-page / .code-* to avoid collisions. Everything
+   themable is driven off the foundation tokens so the light/dark toggle works.
+   ========================================================================== */
+
+.code-page {
+  padding-top: 56px;
+  padding-bottom: 88px;
+}
+
+/* ---------------------------------------------------------------- Header -- */
+.code-head {
+  margin-bottom: 36px;
+}
+
+.code-title {
+  font-size: 52px;
+  margin: 18px 0 16px;
+}
+
+.code-intro {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  max-width: 560px;
+}
+
+@media (max-width: 720px) {
+  .code-title { font-size: 38px; }
+}
+
+/* ------------------------------------------------------------ Card grid -- */
+.code-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .code-grid { grid-template-columns: 1fr; }
+}
+
+/* ----------------------------------------------------------------- Card -- */
+.code-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-rest);
+  transition: transform .15s ease, box-shadow .15s ease,
+              background-color .15s ease, border-color .15s ease;
+}
+
+.code-card:hover {
+  transform: translateY(-3px);
+  background-color: var(--code-wash);
+  border-color: var(--code);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ------------------------------------------------------------ Icon tile -- */
+.code-icon {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background-color: var(--code-wash);
+  border: 1px solid var(--code);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform .15s ease;
+}
+
+.code-card:hover .code-icon {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* Diagonal-stripe placeholder when no real icon is provided */
+.code-icon--ph {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, .05) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+/* ----------------------------------------------------------------- Body -- */
+.code-body {
+  min-width: 0;
+  display: block;
+}
+
+.code-card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.code-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.code-desc {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------- Status tags -- */
+.code-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* work — neutral coral wash */
+.code-tag--work {
+  color: var(--code-chip);
+  background: var(--code-wash);
+}
+
+/* App Store — green (kept in both themes for the recognizable cue) */
+.code-tag--store {
+  color: #3a7d52;
+  background: #dfeede;
+}
+:root.dark .code-tag--store {
+  color: #8fcf9f;
+  background: #213027;
+}
+
+/* CLI / archived — muted neutral chip */
+.code-tag--cli,
+.code-tag--archived {
+  color: var(--muted);
+  background: var(--skill-chip-bg);
+}
+
+/* source — borderless mono link cue (no chip background) */
+.code-tag--source {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 11px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--code-chip);
+}
+
+/* ----------------------------------------------------------- Pagination -- */
+.code-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+}
+
+.code-pagination .page-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--code-chip);
+  text-decoration: none;
+}
+
+.code-pagination .page-next { margin-left: auto; }

@@ -1,1 +1,229 @@
-/* now — page styles (redesign) */
+/* ============================================================================
+   now.css — Now (timeline) page
+   Discipline color: GOLD (--now). All themable colors via tokens so the
+   light/dark toggle works. Loaded after redesign.css.
+   ========================================================================== */
+
+.now-page {
+  padding-top: 56px;
+  padding-bottom: 44px;
+}
+
+/* ---------------------------------------------------------------- Header -- */
+.now-head {
+  margin-bottom: 28px;
+}
+
+.now-title {
+  font-size: 52px;
+  line-height: 1;
+  margin: 22px 0 14px;
+}
+
+.now-intro {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 4px;
+  max-width: 600px;
+}
+
+.now-note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--faint);
+  font-style: italic;
+  margin: 0;
+}
+
+.now-note a {
+  color: inherit;
+  border-bottom: 1px solid var(--hairline-2);
+}
+
+.now-note a:hover {
+  text-decoration: none;
+  color: var(--ink-prose);
+}
+
+/* ------------------------------------------------------------- Featured -- */
+.now-featured {
+  background: var(--now-wash);
+  border: 1px solid var(--hairline-2);
+  border-radius: 18px;
+  padding: 30px 32px;
+  margin: 6px 0 10px;
+}
+
+.now-featured-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline-2);
+}
+
+.now-featured-date {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.now-latest-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--now);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.now-featured-body {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-prose);
+}
+
+.now-featured-body :first-child { margin-top: 0; }
+.now-featured-body :last-child { margin-bottom: 0; }
+
+.now-featured-body p {
+  margin: 0 0 15px;
+}
+
+.now-featured-body a {
+  color: var(--code-chip);
+  border-bottom: 1px solid var(--code-wash);
+}
+
+.now-featured-body a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--code-chip);
+}
+
+/* ------------------------------------------------------------- Timeline -- */
+.now-timeline-section {
+  padding-top: 26px;
+}
+
+.now-timeline-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 18px;
+}
+
+.now-timeline {
+  position: relative;
+  padding-left: 26px;
+}
+
+.now-spine {
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--now), var(--hairline));
+}
+
+.now-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px 1fr 84px;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 10px 14px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color .15s ease, padding-left .15s ease;
+}
+
+.now-row:hover {
+  background-color: var(--now-wash);
+  padding-left: 12px;
+  text-decoration: none;
+}
+
+.now-dot {
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--now-chip);
+  border: 2px solid var(--paper);
+}
+
+.now-row.is-latest .now-dot {
+  background: var(--now);
+}
+
+.now-row-date {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.now-row-teaser {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.now-row-teaser:empty::before {
+  content: "\2014";
+  color: var(--faint);
+}
+
+.now-row-chip {
+  justify-self: end;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+.now-row:hover .now-row-chip {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- Empty -- */
+.now-empty {
+  font-size: 16px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+  padding: 48px 0;
+}
+
+/* --------------------------------------------------------------- Mobile -- */
+@media (max-width: 720px) {
+  .now-title { font-size: 40px; }
+
+  .now-featured {
+    padding: 24px 22px;
+  }
+
+  .now-row {
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    align-items: baseline;
+  }
+
+  .now-row-teaser {
+    grid-column: 1 / -1;
+  }
+
+  .now-row-chip {
+    display: none;
+  }
+}
