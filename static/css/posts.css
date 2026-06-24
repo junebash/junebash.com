@@ -28,10 +28,44 @@
   max-width: 600px;
 }
 
+.postlist-back {
+  display: inline-block;
+  color: var(--posts-chip);
+  margin-bottom: 14px;
+}
+.postlist-back:hover { text-decoration: none; color: var(--ink); }
+
 /* --------------------------------------------------------------- List -- */
 .postlist-list {
   display: flex;
   flex-direction: column;
+}
+
+/* ----------------------------------------------------------- Tag cloud -- */
+.tagcloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tagcloud-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--posts-wash);
+  border-radius: 999px;
+  padding: 8px 15px;
+  color: var(--posts-chip);
+  transition: background-color .15s ease;
+}
+.tagcloud-item:hover { text-decoration: none; color: var(--ink); }
+.tagcloud-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.tagcloud-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-2);
 }
 
 .postlist-row {

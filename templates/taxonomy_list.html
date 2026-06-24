@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+<main class="rd-wrap postlist">
+
+  <header class="postlist-head">
+    <span class="rd-eyebrow posts">Tags</span>
+    <h1 class="rd-page-title postlist-title">Tags</h1>
+  </header>
+
+  <div class="tagcloud">
+    {% for term in terms %}
+    <a class="tagcloud-item" href="{{ term.permalink | safe }}">
+      <span class="tagcloud-name">#{{ term.name }}</span>
+      <span class="tagcloud-count">{{ term.pages | length }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+</main>
+{% endblock main_content %}

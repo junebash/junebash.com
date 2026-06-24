@@ -1,0 +1,180 @@
+/* ============================================================================
+   music-detail.css — Detail pages for music projects, film scores, game scores
+   (music_project / film_project / game_project). Discipline: MUSIC (sage).
+   Token-driven; loaded after redesign.css. Prefixed `.mdetail-*`.
+   ========================================================================== */
+
+.mdetail {
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.mdetail-back {
+  display: inline-block;
+  color: var(--music-chip);
+  margin-bottom: 22px;
+}
+.mdetail-back:hover { text-decoration: none; color: var(--ink); }
+
+/* ---------------------------------------------------------------- Header -- */
+.mdetail-head { margin-bottom: 30px; }
+
+.mdetail-title { font-size: 46px; margin: 12px 0 0; }
+
+.mdetail-lede {
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--muted);
+  margin: 12px 0 0;
+  max-width: 640px;
+}
+
+.mdetail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 32px;
+  margin-top: 20px;
+}
+.mdetail-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mdetail-meta-label {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--faint);
+}
+.mdetail-meta-value {
+  font-size: 15px;
+  color: var(--ink-prose);
+}
+
+.mdetail-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.mdetail-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #fff;
+  background: var(--music);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.mdetail-actions { margin-top: 18px; }
+
+/* ----------------------------------------------------------------- Media -- */
+.mdetail-media { margin: 8px 0 30px; }
+
+.mdetail-embed { margin: 0 0 18px; }
+.mdetail-embed iframe {
+  border: none;
+  border-radius: 14px;
+  max-width: 100%;
+}
+.mdetail-embed--video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.mdetail-embed-titled { margin-bottom: 22px; }
+.mdetail-embed-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+/* ------------------------------------------------------------- Image -- */
+.mdetail-image { margin: 8px 0 30px; }
+.mdetail-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-rest);
+}
+
+/* -------------------------------------------------------- Links / chips -- */
+.mdetail-links { margin: 26px 0; }
+.mdetail-subhead {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.mdetail-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.mdetail-chip {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--music-chip);
+  background: var(--music-wash);
+  padding: 8px 15px;
+  border-radius: 999px;
+}
+.mdetail-chip:hover { text-decoration: none; color: var(--ink); }
+.mdetail-chip--solid {
+  background: var(--music);
+  color: #fff;
+  font-weight: 500;
+}
+.mdetail-chip--solid:hover { color: #fff; opacity: .92; }
+
+/* ------------------------------------------------------------------ Body -- */
+.mdetail-body {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-prose);
+  max-width: 720px;
+  margin-top: 6px;
+}
+.mdetail-body h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--ink);
+  margin: 32px 0 12px;
+}
+.mdetail-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 26px 0 10px;
+}
+.mdetail-body p { margin: 0 0 16px; }
+.mdetail-body ul { padding-left: 22px; margin: 0 0 16px; }
+.mdetail-body li { margin: 0 0 7px; }
+.mdetail-body a {
+  color: var(--music-chip);
+  border-bottom: 1px solid var(--music-wash);
+}
+.mdetail-body a:hover { text-decoration: none; border-bottom-color: var(--music-chip); }
+.mdetail-body strong { color: var(--ink); }
+.mdetail-body blockquote {
+  border-left: 3px solid var(--music);
+  margin: 0 0 16px;
+  padding-left: 18px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------- Mobile -- */
+@media (max-width: 720px) {
+  .mdetail-title { font-size: 34px; }
+  .mdetail-meta { gap: 12px 22px; }
+}
