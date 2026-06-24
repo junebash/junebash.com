@@ -91,7 +91,12 @@
     rows.forEach(function (el) {
       el.addEventListener('click', function (e) {
         e.preventDefault();
-        if (typeof revealEmail === 'function') revealEmail();
+        if (typeof revealEmail !== 'function') return;
+        var desc = el.querySelector('.home-row-desc');
+        revealEmail(desc || el);
+        el.setAttribute('href', 'mailto:' + junebashEmail());
+        var chip = el.querySelector('.home-row-chip');
+        if (chip) chip.textContent = 'email →';
       });
     });
   });

@@ -289,6 +289,9 @@ a:hover { text-decoration: underline; }
 }
 .rd-contact-pill:hover { text-decoration: none; opacity: .92; }
 
+/* Email revealed in-place by contact.js — easy to select/copy */
+.email-revealed { user-select: all; }
+
 .rd-theme-toggle {
   width: 34px;
   height: 34px;
