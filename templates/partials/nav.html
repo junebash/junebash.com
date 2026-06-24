@@ -1,0 +1,35 @@
+{# Redesign top nav — overrides Apollo's partials/nav.html #}
+{% set cur = current_path | default(value="/") %}
+{% set is_home = cur == "/" %}
+<nav class="rd-nav{% if not is_home %} rd-nav--inside{% endif %}">
+    <a href="{{ get_url(path='/') }}" class="rd-brand" aria-label="June Bash — home">
+        <span class="rd-logo" aria-hidden="true"></span>
+        <span>June Bash</span>
+    </a>
+
+    <div class="rd-nav-right">
+        <div class="rd-nav-links">
+            {%- for item in config.extra.menu -%}
+                {%- if item.url != "/" -%}
+                    {%- set is_current = cur == item.url or cur == item.url ~ "/" or cur is starting_with(item.url ~ "/") -%}
+                    <a href="{{ get_url(path=item.url) }}"{% if is_current %} class="is-current"{% endif %}>{{ item.name }}</a>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+
+        <a href="#" id="contact-link" class="rd-contact-pill">contact</a>
+
+        <button type="button" class="rd-theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark theme" title="Toggle theme">
+            <span id="moon-icon">☾</span>
+            <span id="sun-icon" style="display:none">☀</span>
+        </button>
+    </div>
+</nav>
+
+<script src="{{ get_url(path='js/contact.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var c = document.getElementById('contact-link');
+    if (c) c.addEventListener('click', function (e) { e.preventDefault(); revealEmail(); });
+  });
+</script>

@@ -1,0 +1,350 @@
+/* ============================================================================
+   junebash.com — Redesign Foundation
+   ----------------------------------------------------------------------------
+   The shared spine for the 2026 reskin: design tokens, base typography, global
+   chrome (nav + footer), and reusable components. Loaded LAST (after Apollo's
+   main.css and custom.css) so it wins the cascade.
+
+   ── CONTRACT for per-page stylesheets ──────────────────────────────────────
+   COLOR TOKENS (CSS custom properties, theme-aware via :root.light/.dark):
+     --paper --surface --ink --ink-prose --muted --muted-2 --faint
+     --hairline --hairline-2 --footer --logo
+   DISCIPLINE TOKENS  (solid / wash / chip per discipline):
+     --posts  --posts-wash  --posts-chip
+     --code   --code-wash    --code-chip
+     --music  --music-wash   --music-chip
+     --now    --now-wash     --now-chip
+     --contact --contact-wash --contact-chip
+   FONTS:
+     --font-display  (Bricolage Grotesque)  — wordmark, titles, bubbles
+     --font-body     (Public Sans)          — body & UI
+     --font-mono     (JetBrains Mono)        — eyebrows, meta, dates, chips
+   LAYOUT:
+     .rd-wrap   — centered page column, 56px gutters (use on inside pages)
+     56px horizontal gutter · page frame radius 3
+   COMPONENTS (defined here, reuse on pages):
+     .rd-bubble.<discipline>      — solid discipline bubble (Bricolage 700)
+     .rd-eyebrow.<discipline>     — eyebrow pill (mono uppercase) for page heads
+     .rd-mono                     — mono label utility (uppercase, tracked)
+     .rd-page-title               — Bricolage 800 page title
+     .rd-chip.<discipline>        — small route/action chip (mono)
+   disciplines = posts | code | music | now | contact
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- Tokens -- */
+:root.light,
+:root:not(.dark) {
+  --paper: #FBF7F2;
+  --surface: #FFFFFF;
+  --ink: #2A2622;
+  --ink-prose: #36302A;
+  --muted: #6B6055;
+  --muted-2: #7A6F60;
+  --faint: #A98E79;
+  --hairline: #ECE2D6;
+  --hairline-2: #E3D8CB;
+  --footer: #F1E7DC;
+  --logo: #E8927C;
+
+  --posts: #5C82A0;   --posts-wash: #DCEAF1;   --posts-chip: #52718A;
+  --code: #CE7C5E;    --code-wash: #F4DFD4;    --code-chip: #B06A52;
+  --music: #6E8A62;   --music-wash: #E2EBD9;   --music-chip: #5F7A55;
+  --now: #AD8C38;     --now-wash: #F2E7C8;     --now-chip: #9C8132;
+  --contact: #9A8B79; --contact-wash: #ECE3D9; --contact-chip: #8A7D6D;
+
+  --contact-pill-bg: var(--ink);
+  --contact-pill-text: var(--paper);
+  --social-chip-bg: #FFFFFF;
+  --card-border: #EFE5DA;
+  --skill-chip-bg: #F4E7DE;
+
+  --shadow-rest: 0 1px 3px rgba(0, 0, 0, .08);
+  --shadow-hover: 0 10px 28px rgba(0, 0, 0, .10);
+}
+
+:root.dark {
+  --paper: #1A1611;
+  --surface: #221D17;
+  --ink: #ECE6DC;
+  --ink-prose: #D4CABB;
+  --muted: #A89C8A;
+  --muted-2: #9D9282;
+  --faint: #8F8472;
+  --hairline: #2E2820;
+  --hairline-2: #322B22;
+  --footer: #221D17;
+  --logo: #E8927C;
+
+  --posts: #5C82A0;   --posts-wash: #232F38;   --posts-chip: #7FA3BE;
+  --code: #CE7C5E;    --code-wash: #33271F;    --code-chip: #D9A189;
+  --music: #6E8A62;   --music-wash: #232E20;   --music-chip: #93AE86;
+  --now: #AD8C38;     --now-wash: #2F2917;     --now-chip: #CBA94F;
+  --contact: #9A8B79; --contact-wash: #2A241D; --contact-chip: #B6A892;
+
+  --contact-pill-bg: #ECE6DC;
+  --contact-pill-text: #1A1611;
+  --social-chip-bg: #2C2519;
+  --card-border: #2E2820;
+  --skill-chip-bg: #2C2519;
+
+  --shadow-rest: 0 1px 3px rgba(0, 0, 0, .3);
+  --shadow-hover: 0 10px 28px rgba(0, 0, 0, .4);
+}
+
+/* Fonts (loaded via <link> in header.html) */
+:root {
+  --font-display: "Bricolage Grotesque", ui-serif, Georgia, serif;
+  --font-body: "Public Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* ------------------------------------------------------------------ Base -- */
+html, body {
+  background: var(--paper);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink-prose);
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+
+/* Override Apollo's narrow container so the redesign owns layout */
+body > .content {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--code-chip);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+::selection { background: var(--now-wash); }
+
+/* Centered page column for inside pages */
+.rd-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 56px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  .rd-wrap { padding: 0 22px; }
+}
+
+/* --------------------------------------------------------------- Utility -- */
+.rd-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.rd-page-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  line-height: 1.02;
+  margin: 0;
+}
+
+/* Solid discipline bubble */
+.rd-bubble {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 13px;
+}
+.rd-bubble.posts   { background: var(--posts); }
+.rd-bubble.code    { background: var(--code); }
+.rd-bubble.music   { background: var(--music); }
+.rd-bubble.now     { background: var(--now); }
+.rd-bubble.contact { background: var(--contact); }
+
+/* Eyebrow pill for inside-page headers */
+.rd-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  padding: 5px 13px;
+  border-radius: 999px;
+}
+.rd-eyebrow.posts   { background: var(--posts); }
+.rd-eyebrow.code    { background: var(--code); }
+.rd-eyebrow.music   { background: var(--music); }
+.rd-eyebrow.now     { background: var(--now); }
+.rd-eyebrow.contact { background: var(--contact); }
+.rd-eyebrow.about   { background: var(--contact); }
+
+/* Small route / action chip (mono) */
+.rd-chip {
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+  letter-spacing: .06em;
+  font-size: 12px;
+  font-weight: 500;
+}
+.rd-chip.posts   { color: var(--posts-chip); }
+.rd-chip.code    { color: var(--code-chip); }
+.rd-chip.music   { color: var(--music-chip); }
+.rd-chip.now     { color: var(--now-chip); }
+.rd-chip.contact { color: var(--contact-chip); }
+
+/* ============================================================ Top nav ==== */
+.rd-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 56px;
+  box-sizing: border-box;
+}
+.rd-nav--inside {
+  border-bottom: 1px solid var(--hairline);
+  max-width: none;
+}
+.rd-nav--inside > * { /* keep inner content aligned to column when full-bleed border */
+}
+
+.rd-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+.rd-brand:hover { text-decoration: none; }
+.rd-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--logo);
+  flex: 0 0 auto;
+}
+
+.rd-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.rd-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.rd-nav-links a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.rd-nav-links a:hover { color: var(--ink); text-decoration: none; }
+.rd-nav-links a.is-current { color: var(--ink); font-weight: 600; }
+
+.rd-contact-pill {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--contact-pill-text);
+  background: var(--contact-pill-bg);
+  border-radius: 999px;
+  padding: 9px 17px;
+  border: none;
+  cursor: pointer;
+}
+.rd-contact-pill:hover { text-decoration: none; opacity: .92; }
+
+.rd-theme-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+.rd-theme-toggle:hover { color: var(--ink); border-color: var(--hairline-2); }
+
+@media (max-width: 720px) {
+  .rd-nav { padding: 16px 22px; flex-wrap: wrap; gap: 14px; }
+  .rd-nav-links { gap: 13px; }
+}
+
+/* ============================================================ Footer ===== */
+.rd-footer {
+  background: var(--footer);
+  margin-top: 72px;
+}
+.rd-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 27px 56px;
+  box-sizing: border-box;
+}
+.rd-copyright {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted-2);
+  letter-spacing: .02em;
+}
+.rd-socials {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.rd-social {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--social-chip-bg);
+  border-radius: 999px;
+  padding: 7px 15px;
+}
+.rd-social:hover { color: var(--ink); text-decoration: none; }
+
+@media (max-width: 720px) {
+  .rd-footer-inner { padding: 22px; }
+}

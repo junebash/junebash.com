@@ -1,8 +1,7 @@
 {% import "macros/macros.html" as post_macros %}
 
 <!DOCTYPE html>
-<html lang="en">
-<html class="dark light">
+<html lang="en" class="light">
 
 {% include "partials/header.html" %}
 
@@ -26,83 +25,19 @@
         {% include "_giscus_script.html" %}
         {% endif %}
         
-        <!-- Custom Footer -->
-        <footer class="site-footer">
-            <hr class="footer-divider">
-            <div class="footer-content">
-                <div class="footer-made-with">Made with love using Zola</div>
-                <div class="footer-source"><a href="https://github.com/junebash/junebash.com" target="_blank" rel="noopener">View source code</a></div>
-                <div class="footer-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
+        <!-- Redesign Footer -->
+        <footer class="rd-footer">
+            <div class="rd-footer-inner">
+                <div class="rd-copyright">© {{ now() | date(format="%Y") }} June Bash — Bellingham, WA</div>
+                <div class="rd-socials">
+                    {% for social in config.extra.socials %}
+                        <a href="{{ social.url }}" class="rd-social" rel="me" target="_blank">{{ social.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
         </footer>
     </div>
 </body>
-
-<style>
-.site-footer {
-    margin-top: 4rem;
-    padding: 2rem 0 3rem 0;
-}
-
-.footer-divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-color, #e9ecef), transparent);
-    margin: 0 0 2rem 0;
-}
-
-.footer-content {
-    text-align: center;
-    color: var(--text-secondary, #6c757d);
-}
-
-.footer-made-with {
-    font-size: 0.95rem;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-    color: var(--text-primary, #2c3e50);
-}
-
-.footer-source {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-}
-
-.footer-source a {
-    color: var(--text-secondary, #6c757d);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-source a:hover {
-    color: var(--text-primary, #2c3e50);
-    text-decoration: underline;
-}
-
-.footer-copyright {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-    .site-footer {
-        margin-top: 3rem;
-        padding: 1.5rem 0 2rem 0;
-    }
-    
-    .footer-made-with {
-        font-size: 0.9rem;
-    }
-    
-    .footer-source {
-        font-size: 0.8rem;
-    }
-    
-    .footer-copyright {
-        font-size: 0.75rem;
-    }
-}
-</style>
 
 <script>
 // Make footnote labels clickable to return to the reference in the text

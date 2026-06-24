@@ -38,8 +38,18 @@ menu = [
   { name = "now", url = "/now", weight = 5 },
 ]
 
-# Custom stylesheets
-stylesheets = ["custom.css"]
+# Custom stylesheets — redesign sheets load after custom.css so they win the cascade
+stylesheets = [
+  "custom.css",
+  "redesign.css",
+  "css/home.css",
+  "css/about.css",
+  "css/code.css",
+  "css/music.css",
+  "css/post.css",
+  "css/now.css",
+  "css/concert.css",
+]
 
 # See this for more options: https://github.com/not-matthias/apollo/blob/main/config.toml#L14
 
