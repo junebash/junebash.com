@@ -6,6 +6,7 @@ page_template = "now_page.html"
 
 [extra]
 comment = false
+headline = "Where I'm at"
 +++
 
 What I've been up to recently.

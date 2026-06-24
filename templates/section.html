@@ -17,7 +17,7 @@
         {# ---- Page header ---- #}
         <header class="postlist-head">
             <span class="rd-eyebrow posts">{{ section.title }}</span>
-            <h1 class="rd-page-title postlist-title">{{ section.title }}</h1>
+            <h1 class="rd-page-title postlist-title">{{ section.extra.headline | default(value=section.title) }}</h1>
             {% if section.description %}
             <p class="postlist-intro">{{ section.description }}</p>
             {% endif %}

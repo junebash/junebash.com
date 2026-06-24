@@ -7,7 +7,7 @@
   {# ---- header ---- #}
   <header class="now-head">
     <span class="rd-eyebrow now">Now</span>
-    <h1 class="rd-page-title now-title">{{ section.title }}</h1>
+    <h1 class="rd-page-title now-title">{{ section.extra.headline | default(value=section.title) }}</h1>
     <div class="now-intro-content">{{ section.content | safe }}</div>
   </header>
 

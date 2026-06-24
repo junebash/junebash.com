@@ -7,7 +7,7 @@
 
     <header class="music-head">
       <span class="rd-eyebrow music">Music</span>
-      <h1 class="rd-page-title music-title">{{ page.title }}</h1>
+      <h1 class="rd-page-title music-title">{{ page.extra.headline | default(value=page.title) }}</h1>
       <div class="music-lede">{{ page.content | safe }}</div>
     </header>
 

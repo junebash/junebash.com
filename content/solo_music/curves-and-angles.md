@@ -1,7 +1,7 @@
 +++
 title = "Curves and Angles"
-date = "2015-01-01"
-weight = 2015
+date = "2018-01-01"
+weight = 2018
 template = "music_project.html"
 
 [extra]
