@@ -52,22 +52,14 @@
 }
 
 .about-portrait {
+  display: block;
+  width: 100%;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 18px;
-  background-color: var(--code-wash);
   border: 1px solid var(--hairline-2);
-  display: flex;
-  align-items: flex-end;
-  padding: 14px;
   margin-bottom: 22px;
-}
-.about-portrait-tag {
-  font-size: 11px;
-  letter-spacing: .04em;
-  color: var(--faint);
-  background: var(--paper);
-  padding: 5px 10px;
-  border-radius: 6px;
+  image-rendering: pixelated;
 }
 
 /* Quick facts */

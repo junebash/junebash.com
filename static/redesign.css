@@ -46,6 +46,10 @@
   --footer: #F1E7DC;
   --logo: #E8927C;
 
+  /* Recolor Apollo's accent token (was a harsh red #ef5350) to warm coral */
+  --primary-color: #CE7C5E;
+  --hover-color: #FFFFFF;
+
   --posts: #5C82A0;   --posts-wash: #DCEAF1;   --posts-chip: #52718A;
   --code: #CE7C5E;    --code-wash: #F4DFD4;    --code-chip: #B06A52;
   --music: #6E8A62;   --music-wash: #E2EBD9;   --music-chip: #5F7A55;
@@ -74,6 +78,9 @@
   --hairline-2: #322B22;
   --footer: #221D17;
   --logo: #E8927C;
+
+  --primary-color: #D9A189;
+  --hover-color: #1A1611;
 
   --posts: #5C82A0;   --posts-wash: #232F38;   --posts-chip: #7FA3BE;
   --code: #CE7C5E;    --code-wash: #33271F;    --code-chip: #D9A189;
@@ -344,3 +351,23 @@ a:hover { text-decoration: underline; }
 @media (max-width: 720px) {
   .rd-footer-inner { padding: 22px; }
 }
+
+/* ============================================ Neutralize Apollo leftovers ==
+   Apollo's stylesheet loads before this one and applies a few opinionated
+   treatments the redesign doesn't want. Switch them off here; redesign
+   components define their own link/heading styles. */
+
+/* The markdown-style "#"/"##" prefixes Apollo prepends to every heading */
+h1::before, h2::before, h3::before,
+h4::before, h5::before, h6::before { content: none !important; }
+
+/* Apollo underlines EVERY <a> with a 3px accent border and fills a solid
+   background on hover (the "harsh red"). Drop both globally. */
+a { border-bottom: none; }
+a:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+/* Apollo's wide top margin on headings fights the redesign's own spacing */
+h1, h2, h3, h4, h5, h6 { margin-top: 0; }
