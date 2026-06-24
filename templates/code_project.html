@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+<div class="rd-wrap app">
+  <a class="app-back rd-mono" href="{{ get_url(path='/code/') }}">&larr; Code</a>
+
+  <header class="app-head">
+    {% if page.extra.icon %}
+    <img class="app-icon" src="{{ get_url(path=page.extra.icon) }}" alt="{{ page.title }} icon" />
+    {% endif %}
+    <div class="app-head-text">
+      <span class="rd-eyebrow code">Code</span>
+      <h1 class="rd-page-title app-title">{{ page.title }}</h1>
+      {% if page.description %}<p class="app-lede">{{ page.description }}</p>{% endif %}
+      <div class="app-actions">
+        {% if page.extra.ios_store and page.extra.ios_store != "" %}
+        <a class="app-badge" href="{{ page.extra.ios_store }}" target="_blank" rel="noopener" aria-label="Download {{ page.title }} on the App Store">
+          <img class="app-badge-light" src="{{ get_url(path='images/app-store-badge.svg') }}" alt="Download on the App Store" />
+          <img class="app-badge-dark" src="{{ get_url(path='images/app-store-badge-white.svg') }}" alt="" aria-hidden="true" />
+        </a>
+        {% endif %}
+        {% if page.extra.source and page.extra.source != "" %}
+        <a class="app-action app-action--source" href="{{ page.extra.source }}" target="_blank" rel="noopener">source &rarr;</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% if page.content %}<div class="app-body">{{ page.content | safe }}</div>{% endif %}
+
+  {% if page.extra.screenshots %}
+  <section class="app-shots">
+    <h2 class="app-shots-title">Screenshots</h2>
+    <div class="app-shots-scroller">
+      {% for screenshot in page.extra.screenshots %}
+      <img class="app-shot app-shot--wide" src="{{ get_url(path=screenshot) }}" alt="{{ page.title }} screenshot {{ loop.index }}" loading="lazy" />
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock main_content %}

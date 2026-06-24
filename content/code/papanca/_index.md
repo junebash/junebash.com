@@ -7,7 +7,7 @@ template = "app_showcase.html"
 
 [extra]
 icon = "images/papanca/icon.png"
-ios_store = ""
+ios_store = "https://apps.apple.com/us/app/papanca/id6758187681"
 source = ""
 screenshots = [
     "images/papanca/1-timer-setup.png",

@@ -68,6 +68,14 @@
 }
 .app-action--source { color: var(--code-chip); }
 
+/* Official App Store badge (black on light, white on dark) */
+.app-badge { display: inline-block; line-height: 0; }
+.app-badge img { height: 46px; width: auto; display: block; }
+.app-badge:hover { opacity: .9; }
+.app-badge-dark { display: none; }
+:root.dark .app-badge-light { display: none; }
+:root.dark .app-badge-dark { display: block; }
+
 /* ------------------------------------------------------------------ Body -- */
 .app-body {
   font-size: 18px;
@@ -130,6 +138,8 @@
   box-shadow: var(--shadow-rest);
   scroll-snap-align: start;
 }
+/* Landscape (e.g. iPad) screenshots read better a touch shorter */
+.app-shot--wide { height: 360px; }
 
 /* --------------------------------------------------------------- Mobile -- */
 @media (max-width: 720px) {

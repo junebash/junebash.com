@@ -15,7 +15,10 @@
       {% if section.description %}<p class="app-lede">{{ section.description }}</p>{% endif %}
       <div class="app-actions">
         {% if section.extra.ios_store and section.extra.ios_store != "" %}
-        <a class="app-action app-action--store" href="{{ section.extra.ios_store }}" target="_blank" rel="noopener">App Store &#8599;</a>
+        <a class="app-badge" href="{{ section.extra.ios_store }}" target="_blank" rel="noopener" aria-label="Download {{ section.title }} on the App Store">
+          <img class="app-badge-light" src="{{ get_url(path='images/app-store-badge.svg') }}" alt="Download on the App Store" />
+          <img class="app-badge-dark" src="{{ get_url(path='images/app-store-badge-white.svg') }}" alt="" aria-hidden="true" />
+        </a>
         {% else %}
         <span class="app-action app-action--soon">Coming soon to the App Store</span>
         {% endif %}
