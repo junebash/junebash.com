@@ -1,7 +1,8 @@
 {# Redesign top nav — overrides Apollo's partials/nav.html #}
 {% set cur = current_path | default(value="/") %}
 {% set is_home = cur == "/" %}
-<nav class="rd-nav{% if not is_home %} rd-nav--inside{% endif %}">
+<div class="rd-navbar{% if not is_home %} rd-navbar--inside{% endif %}">
+<nav class="rd-nav">
     <a href="{{ get_url(path='/') }}" class="rd-brand" aria-label="June Bash — home">
         <span class="rd-logo" aria-hidden="true"></span>
         <span>June Bash</span>
@@ -25,6 +26,7 @@
         </button>
     </div>
 </nav>
+</div>
 
 <script src="{{ get_url(path='js/contact.js') }}"></script>
 <script>

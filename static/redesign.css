@@ -218,6 +218,8 @@ a:hover { text-decoration: underline; }
 .rd-chip.contact { color: var(--contact-chip); }
 
 /* ============================================================ Top nav ==== */
+.rd-navbar { width: 100%; }
+.rd-navbar--inside { border-bottom: 1px solid var(--hairline); }
 .rd-nav {
   display: flex;
   align-items: center;
@@ -227,12 +229,6 @@ a:hover { text-decoration: underline; }
   margin: 0 auto;
   padding: 20px 56px;
   box-sizing: border-box;
-}
-.rd-nav--inside {
-  border-bottom: 1px solid var(--hairline);
-  max-width: none;
-}
-.rd-nav--inside > * { /* keep inner content aligned to column when full-bleed border */
 }
 
 .rd-brand {
