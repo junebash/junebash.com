@@ -75,7 +75,7 @@
 
 /* Portrait of June (pixel-art avatar) */
 .home-portrait {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   border-radius: 22px;
   border: 1px solid var(--card-border);
   overflow: hidden;
