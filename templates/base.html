@@ -42,6 +42,37 @@
 <script>
 // Make footnote labels clickable to return to the reference in the text
 document.addEventListener('DOMContentLoaded', function() {
+    // Heading anchors copy a link to the section instead of navigating away
+    document.querySelectorAll('a.heading-anchor').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var hash = a.getAttribute('href');
+            var url = location.href.split('#')[0] + hash;
+            var done = function() {
+                a.classList.add('copied');
+                a.setAttribute('title', 'Copied!');
+                history.replaceState(null, '', hash);
+                setTimeout(function() {
+                    a.classList.remove('copied');
+                    a.setAttribute('title', 'Copy link to this section');
+                }, 1400);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(done, done);
+            } else {
+                var t = document.createElement('textarea');
+                t.value = url;
+                t.style.position = 'fixed';
+                t.style.opacity = '0';
+                document.body.appendChild(t);
+                t.select();
+                try { document.execCommand('copy'); } catch (err) {}
+                document.body.removeChild(t);
+                done();
+            }
+        });
+    });
+
     document.querySelectorAll('.footnote-definition-label').forEach(function(label) {
         const footnoteId = label.closest('.footnote-definition').id;
         if (footnoteId) {

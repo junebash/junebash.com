@@ -151,6 +151,33 @@
   border-bottom-color: var(--code-chip);
 }
 
+/* Heading anchors — a small copy-link button beside the heading, not a link.
+   Hidden until the heading (or the button itself) is hovered/focused. */
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.post-body h5,
+.post-body h6 { position: relative; }
+.post-body a.heading-anchor {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: baseline;
+  margin-left: .35em;
+  color: var(--faint);
+  border-bottom: none;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity .15s ease, color .15s ease;
+}
+.post-body h2:hover a.heading-anchor,
+.post-body h3:hover a.heading-anchor,
+.post-body h4:hover a.heading-anchor,
+.post-body h5:hover a.heading-anchor,
+.post-body h6:hover a.heading-anchor,
+.post-body a.heading-anchor:focus-visible { opacity: 1; }
+.post-body a.heading-anchor:hover { color: var(--code-chip); border-bottom: none; }
+.post-body a.heading-anchor.copied { color: var(--music); opacity: 1; }
+
 .post-body strong { color: var(--ink); font-weight: 700; }
 .post-body em { font-style: italic; }
 

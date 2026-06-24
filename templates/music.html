@@ -18,24 +18,14 @@
 
       <div class="music-list">
         {% set solo_music = get_section(path="solo_music/_index.md") %}
-        {% for project in solo_music.pages | sort(attribute="date") | reverse %}
+        {% set band_music = get_section(path="band_music/_index.md") %}
+        {% set projects = solo_music.pages | concat(with=band_music.pages) %}
+        {% for project in projects | sort(attribute="date") | reverse %}
         <a class="music-row" href="{{ project.permalink }}">
           <span class="music-row-title">{{ project.title }}</span>
           <span class="music-row-meta">
             {%- if project.extra.type %}{{ project.extra.type }}{% endif -%}
             {%- if project.extra.collaboration %} &middot; with {{ project.extra.collaboration }}{% endif -%}
-            {%- if project.date %} &middot; {{ project.date | date(format="%Y") }}{% endif -%}
-          </span>
-          <span class="music-row-chip rd-chip music">listen &rarr;</span>
-        </a>
-        {% endfor %}
-
-        {% set band_music = get_section(path="band_music/_index.md") %}
-        {% for project in band_music.pages | sort(attribute="date") | reverse %}
-        <a class="music-row" href="{{ project.permalink }}">
-          <span class="music-row-title">{{ project.title }}</span>
-          <span class="music-row-meta">
-            {%- if project.extra.type %}{{ project.extra.type }}{% endif -%}
             {%- if project.extra.band %} &middot; {{ project.extra.band }}{% endif -%}
             {%- if project.date %} &middot; {{ project.date | date(format="%Y") }}{% endif -%}
           </span>
