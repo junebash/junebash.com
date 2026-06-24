@@ -20,7 +20,8 @@ taxonomies = [{ name = "tags" }]
 
 [extra]
 # Put all your custom variables here
-theme = "auto"
+# "toggle" wires up the 3-way light / dark / system switch (static/js/theme.js).
+theme = "toggle"
 socials = [
   # Configure socials here
   { name = "bluesky", url = "https://bsky.app/profile/junebash.bsky.social", icon = "bluesky" },
