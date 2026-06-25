@@ -19,6 +19,7 @@
 .app-head {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 26px;
   margin-bottom: 34px;
 }

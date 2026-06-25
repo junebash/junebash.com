@@ -55,5 +55,23 @@
             </ul>
         {% endif %}
 
+        {# ---- Browse by tag ---- #}
+        {% if section.path is starting_with("/posts") %}
+        {% set tags = get_taxonomy(kind="tags") %}
+        {% if tags.items %}
+        <section class="postlist-tags">
+            <h2 class="postlist-tags-title">Browse by tag</h2>
+            <div class="tagcloud">
+                {% for term in tags.items %}
+                <a class="tagcloud-item" href="{{ term.permalink | safe }}">
+                    <span class="tagcloud-name">#{{ term.name }}</span>
+                    <span class="tagcloud-count">{{ term.pages | length }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% endif %}
+
     </main>
 {% endblock main_content %}
