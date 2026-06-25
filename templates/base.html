@@ -14,17 +14,9 @@
             Nothing here?!
         {% endblock main_content %}
 
-        {% if page.extra.comment is defined  %}
-            {% set show_comment = page.extra.comment %}
-        {% else %}
-            {% set show_comment = false %}
-        {% endif %}
+        {# Comments are disabled site-wide. Per-page `comment = true` flags are
+           left intact so a real comments provider can be reconnected later. #}
 
-        {% if show_comment %}
-        <div class="giscus"></div>
-        {% include "_giscus_script.html" %}
-        {% endif %}
-        
         <!-- Redesign Footer -->
         <footer class="rd-footer">
             <div class="rd-footer-inner">
