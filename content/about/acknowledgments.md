@@ -1,5 +1,5 @@
 +++
-title = "Acknowledgments"
+title = "Acknowledgements"
 template = "acknowledgments.html"
 +++
 
