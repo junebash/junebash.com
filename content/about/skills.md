@@ -4,47 +4,51 @@ title = "Skills"
 
 ## Software Development for iOS, macOS, web, games, and more
 
-Trained at Lambda School in a natively remote environment, I can help you achieve your code goals no matter where you are!
+A long-time natively remote engineer working on worldwide teams, I can help you achieve your coding goals no matter where you are!
 
 ### Languages
 
 - Swift
 - Objective-C
-- C
-- C++
 - Scala
+- Typescript
 - Rust
 - C#
 - Lua
 - Python
+- Go
 
 ### Frameworks & Programs
 
-- iOS SDK
-- Cocoa Touch
+- SwiftUI
+- UIKit
 - Xcode
 - Instruments
-- UIKit
-- SwiftUI
 - Core Data
-- GCD
+- SwiftData
+- PointFree libraries
+- GCD (Grand Central Dispatch)
 - Combine
-- URLSession
 - AVFoundation
-- Core Graphics
+- CoreGraphics
 - CocoaPods
 - Carthage
-- SPM
+- SPM (Swift Package Manager)
 - Git
 - GitHub
 - Firebase
 - Bootstrap
+- Vue
+- React
+- React Native
+- Electron
 - Jekyll
+- Zola
 - Agile
-- Unity
-- Godot
+- Scrum
+- Jira
+- Linear
 - LÖVE2D
-- Max/MSP
 - SDL
 
 ### Concepts & Patterns
@@ -54,29 +58,30 @@ Trained at Lambda School in a natively remote environment, I can help you achiev
 - Snapshot Testing
 - Dependency Injection
 - Structured Concurrency (async/await)
-- SwiftUI
-- UIKit
 - Composable Architecture (TCA)
 - REST APIs
-- OOP
-- Data Structures
-- Algorithms
-- Memory Management
-- Coordinator pattern
 - Functional programming
-- Reactive programming (FRP)
-- Design Patterns
+- Object-oriented programming
+- Data Structures
+- Manual Memory Management
+- Borrow checker
+- Non-copyable types
+- Non-escaping types
+- ADTs (Algebraic Data Types)
+- Web sockets
+- SSE (Server-Sent Events)
+- Event Systems
+- HTTP
+- Coordinator pattern
+- FRP (Functional reactive programming)
 - MVC
 - MVVM
-- VIPER
-- ad hoc architectures
+- AI-Native SDLC / "AIDLC"
 
 ...and more!
 
 ---
 
-*Interested in working with me? Shoot me a message!*
-
-**Note:** I am **not** currently available for music or sound work (except in rare circumstances on a case-by-case basis).
+**Note:** I am _not_ currently available for music or sound work (except in rare circumstances on a case-by-case basis).
 
 ---

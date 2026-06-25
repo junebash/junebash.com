@@ -12,14 +12,14 @@ Without the following people, my life would certainly not be where it is today.
 - Sarah, who put up with my (perhaps inevitable) brattiness as a child and today welcomes me into her and her family's lives at every opportunity
 - Carl, who I wish I had been closer to, and who I miss every day
 - Ann, Tim, & Abel, who were a second family to me for over a decade
-- My music teachers over the years; Vern Fosket, Christopher Bianco, Roger Briggs, Bruce Hamilton, Lesley Sommer, and so many more, who inspired me to live a life of creativity
+- My music teachers over the years: Vern Fosket, Christopher Bianco, Roger Briggs, Bruce Hamilton, Lesley Sommer, and so many more, who inspired me to live a life of creativity
 - The iOS and other programming instructors at Lambda School, such as Spencer Curtis, Paul Solt, Dimitri Bouniol, and Beej Hall, from whom I learned and who helped me make the huge career change from music to software development; and particularly Ben Gohlke, who believed in me enough to hire me on my first job out of school and taught so many valuable lessons
 - My coworkers at Redzone Software, who have helped me grow and kept me sane since 2021
-- Tucker Peck and Upasaka Upali, whose instruction have helped me profoundly change my life for the better
+- Tucker Peck and Upasaka Upali, whose instruction has helped me profoundly change my life for the better
 - The many other lovely meditation teachers and spiritual friends with whom I've sat and studied
 - Simon Grant, who's been a wonderful friend as I learned to navigate late college and adulthood
 - The Tuggyloop gang, who has provided friendship, entertainment, and inspiration for years
 - My dear ol' Friends of Satan, who showed me what infallible strength, friendship, and support looks like, and believed in me and in each other
-- My friends in iOS11 and iOS15, who in each of their own ways inspired me and brought joy to my life while learning software development
+- The many engineering friends I've made over the years of developing
 - More folks than I can possibly remember in the game development and game audio communities, especially in Seattle and Vancouver
 - Any and every other person who has been kind to me, done something helpful for me (and/or not for me), or believed in me... thank you sincerely.
