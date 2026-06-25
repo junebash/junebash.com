@@ -1,5 +1,6 @@
 +++
 title = "Acknowledgments"
+template = "acknowledgments.html"
 +++
 
 Without the following people, my life would certainly not be where it is today.

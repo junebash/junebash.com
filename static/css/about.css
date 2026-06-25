@@ -216,18 +216,50 @@
 .about-skills-content hr + p + p strong { color: var(--ink-prose); }
 
 /* Acknowledgments (rendered from acknowledgments.md) */
-.about-ack {
-  margin-top: 44px;
-  padding-top: 32px;
-  border-top: 1px solid var(--hairline);
+/* CTA at the bottom of the About page linking to the acknowledgments page */
+.about-ack-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 48px;
+  padding: 22px 26px;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--contact-wash);
+  transition: border-color .15s ease, transform .15s ease;
 }
-.about-ack-title {
+.about-ack-cta:hover {
+  text-decoration: none;
+  border-color: var(--contact);
+  transform: translateY(-1px);
+}
+.about-ack-cta-label {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--contact-chip);
+}
+.about-ack-cta-text {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 24px;
-  letter-spacing: -0.01em;
+  font-size: 21px;
   color: var(--ink);
-  margin: 0 0 16px;
+}
+
+/* Dedicated acknowledgments page */
+.ack-page {
+  padding-top: 40px;
+  padding-bottom: 56px;
+}
+.ack-back {
+  display: inline-block;
+  color: var(--contact-chip);
+  margin-bottom: 22px;
+}
+.ack-back:hover { text-decoration: none; color: var(--ink); }
+.ack-title {
+  font-size: 46px;
+  margin: 0 0 10px;
 }
 .about-ack-content > p {
   font-size: 16px;
@@ -239,25 +271,27 @@
 .about-ack-content ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  max-width: 760px;
+  margin: 8px 0 0;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .about-ack-content li {
   position: relative;
-  padding: 12px 0 12px 22px;
-  border-top: 1px solid var(--hairline);
-  font-size: 15.5px;
-  line-height: 1.55;
+  padding-left: 30px;
+  font-size: 16.5px;
+  line-height: 1.62;
   color: var(--ink-prose);
 }
-.about-ack-content li:last-child {
-  border-bottom: 1px solid var(--hairline);
-}
 .about-ack-content li::before {
-  content: "—";
+  content: "\2665"; /* ♥ */
   position: absolute;
   left: 0;
+  top: 0.18em;
+  font-size: 13px;
   color: var(--contact-chip);
+  opacity: 0.75;
 }
 
 /* --------------------------------------------------------------- Responsive */

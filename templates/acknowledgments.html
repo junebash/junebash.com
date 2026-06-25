@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+<main class="rd-wrap ack-page">
+  <a class="ack-back rd-mono" href="{{ get_url(path='/about/') }}">&larr; About</a>
+
+  <h1 class="rd-page-title ack-title">{{ page.title }}</h1>
+
+  <div class="about-ack-content">
+    {{ page.content | safe }}
+  </div>
+</main>
+{% endblock main_content %}

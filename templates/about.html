@@ -58,12 +58,9 @@
     </div>
   </div>
 
-  <section class="about-ack">
-    <h2 class="about-ack-title">Acknowledgments</h2>
-    {% set ack_page = get_page(path="about/acknowledgments.md") %}
-    <div class="about-ack-content">
-      {{ ack_page.content | safe }}
-    </div>
-  </section>
+  <a class="about-ack-cta" href="{{ get_url(path='/about/acknowledgments/') }}">
+    <span class="about-ack-cta-label rd-mono">Gratitude</span>
+    <span class="about-ack-cta-text">The many people I&rsquo;m grateful for <span aria-hidden="true">&rarr;</span></span>
+  </a>
 </div>
 {% endblock main_content %}
