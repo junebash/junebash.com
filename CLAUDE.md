@@ -14,7 +14,7 @@ Personal website built with Zola static site generator using the Apollo theme. C
 
 ## Fancy mode (`fancy/`)
 
-A terminal version of the site, written in Swift and compiled to WebAssembly. It's served at fancy.junebash.com, and at `/fancy/` locally and on deploy previews.
+A terminal version of the site, written in Swift and compiled to WebAssembly. It's served at `/fancy/` everywhere for now. netlify.toml is ready for fancy.junebash.com, but that domain has no DNS yet, so `templates/base.html` links to `/fancy/`.
 
 - `just fancy` builds it into `static/fancy/build/<hash>/` and updates `manifest.toml`. Rerun it after any change in `fancy/Sources` or `fancy/web` (the CSS lives there), then commit the build output. New posts need no rebuild: `templates/fancy.html` embeds the content at Zola build time.
 - `just fancy-test` runs the core tests (`FancyCore`) on macOS.

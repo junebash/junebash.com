@@ -23,8 +23,8 @@
                 <div class="rd-footer-left">
                     <div class="rd-copyright">© {{ now() | date(format="%Y") }} June Bash</div>
                     {%- set here = current_path | default(value="/") %}
-                    {#- Production has its own subdomain; local dev and deploy previews serve it under /fancy. #}
-                    <a class="rd-fancy" href="{% if config.base_url == 'https://junebash.com' %}https://fancy.junebash.com{{ here | safe }}{% else %}{{ config.base_url | safe }}/fancy{{ here | safe }}{% endif %}">fancy mode &#9656;</a>
+                    {#- Under /fancy everywhere until fancy.junebash.com has DNS; then production links there. #}
+                    <a class="rd-fancy" href="{{ config.base_url | safe }}/fancy{{ here | safe }}">fancy mode &#9656;</a>
                 </div>
                 <div class="rd-socials">
                     {% for social in config.extra.socials %}
