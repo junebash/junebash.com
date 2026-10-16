@@ -1,0 +1,137 @@
+{%- set build = load_data(path="static/fancy/build/manifest.toml") -%}
+{%- set posts = get_section(path="posts/_index.md") -%}
+{%- set about = get_page(path="about.md") -%}
+{%- set bio = get_page(path="about/bio.md") -%}
+{%- set skills = get_page(path="about/skills.md") -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0d0f0c">
+  <title>{{ config.title }}</title>
+  {%- set assets = "/fancy/build/" ~ build.hash %}
+  <link rel="stylesheet" href="{{ assets | safe }}/fancy.css">
+  <link rel="preload" href="{{ assets | safe }}/vt323-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ assets | safe }}/app/Fancy.wasm" as="fetch" type="application/wasm" crossorigin>
+  <link rel="modulepreload" href="{{ assets | safe }}/app/index.js">
+</head>
+<body>
+<div class="room">
+  <div class="monitor">
+    <div class="bezel">
+      <div class="screen">
+        <div class="crt">
+          <section id="boot" class="boot" aria-live="polite">
+            <div class="boot-head">JUNEBASH SYSTEMS PERSONAL COMPUTER</div>
+            <div>BIOS v6.3.3  (C) 1984-199<span class="blink">_</span></div>
+            <div>&nbsp;</div>
+            <div class="boot-line"><span>MEMORY TEST .........&nbsp;</span><span class="boot-status">640K OK</span></div>
+            <div class="boot-line"><span>LOADING SYSTEM IMAGE&nbsp;</span><span class="boot-bar"></span></div>
+            <div id="boot-log"></div>
+            <div id="boot-fail" hidden>
+              <div>&nbsp;</div>
+              <div class="boot-error">THIS MACHINE COULD NOT START.</div>
+              <a id="boot-fail-link" href="/">RETURN TO THE SIMPLE SITE</a>
+            </div>
+          </section>
+          <section id="shell" class="shell" hidden>
+            <div id="output" class="output" aria-live="polite"></div>
+            <label class="input-line">
+              <span id="prompt" class="t-prompt"></span><span id="input-mirror"></span>
+              <input id="input" class="input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="command">
+            </label>
+            <span id="probe" class="probe" aria-hidden="true">MMMMMMMMMM</span>
+          </section>
+          <section id="pager" class="pager" hidden>
+            <header class="pager-bar">
+              <span id="pager-title" class="pager-title"></span>
+              <span id="pager-meta" class="pager-meta"></span>
+              <button type="button" class="pager-close" data-action="close-pager">[q] back</button>
+            </header>
+            <div id="pager-body" class="pager-body" tabindex="-1"></div>
+            <footer class="pager-bar pager-foot">
+              <span id="pager-status"></span>
+              <span class="pager-keys">arrows/space scroll · q back</span>
+            </footer>
+          </section>
+        </div>
+        <div class="glass" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="chin">
+      <div class="badge"><span class="stripes" aria-hidden="true"></span><span class="maker">junebash</span></div>
+      <div class="slot" aria-hidden="true"></div>
+      <div class="controls">
+        <button id="menu-button" class="menu-button" type="button" data-action="menu" hidden>MENU</button>
+        <span id="sound-led" class="led led-sound" title="sound"></span>
+        <span class="led led-power is-on" title="power"></span>
+      </div>
+    </div>
+  </div>
+  <nav id="menu" class="menu" aria-label="menu"></nav>
+  <div id="popup" class="popup" hidden>
+    <div class="window" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="window-bar">
+        <button type="button" class="window-close" data-action="close-popup" aria-label="close"></button>
+        <span id="popup-title" class="window-title"></span>
+        <span class="window-fake" aria-hidden="true"><i>&#9662;</i><i>&#9652;</i></span>
+      </div>
+      <div id="popup-body" class="window-body"></div>
+    </div>
+  </div>
+</div>
+<script>
+  window.fancyPrefs = {
+    get(key) { try { return localStorage.getItem("fancy." + key); } catch { return null; } },
+    set(key, value) { try { localStorage.setItem("fancy." + key, value); } catch {} },
+  };
+  window.fancySimpleURL = function () {
+    var host = location.host;
+    var path = location.pathname.replace(/^\/fancy(?=\/|$)/, "") || "/";
+    return host.indexOf("fancy.") === 0 ? location.protocol + "//" + host.slice(6) + path : path;
+  };
+  window.fancyBootFailed = function () {
+    document.getElementById("boot-fail-link").href = window.fancySimpleURL();
+    document.getElementById("boot-fail").hidden = false;
+  };
+</script>
+<script type="module">
+  try {
+    const { init } = await import("{{ assets | safe }}/app/index.js");
+    await init();
+  } catch (error) {
+    console.error(error);
+    window.fancyBootFailed();
+  }
+</script>
+<noscript><p style="padding:2em"><a href="{{ config.base_url }}">This machine needs JavaScript. The simple site doesn't.</a></p></noscript>
+<script type="application/json" id="fancy-data">
+{
+  "sections": [
+    {%- for item in config.extra.menu | slice(start=1) -%}
+    {"name": {{ item.name | json_encode() | replace(from="<", to="\u003c") | safe }}, "path": {{ item.url | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
+    {%- endfor -%}
+  ],
+  "about": {
+    "title": "Hi! I'm June!",
+    "facts": {{ about.extra.facts | json_encode() | replace(from="<", to="\u003c") | safe }},
+    "portrait": "/images/june-portrait.png",
+    "socials": [
+      {%- for s in config.extra.socials -%}
+      {"name": {{ s.name | json_encode() | replace(from="<", to="\u003c") | safe }}, "url": {{ s.url | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
+      {%- endfor -%}
+    ],
+    "bioHTML": {{ bio.content | replace(from="<p>Hi! I'm June!</p>", to="") | json_encode() | replace(from="<", to="\u003c") | safe }},
+    "skillsHTML": {{ skills.content | json_encode() | replace(from="<", to="\u003c") | safe }}
+  },
+  "posts": [
+    {%- for p in posts.pages -%}
+    {"title": {{ p.title | json_encode() | replace(from="<", to="\u003c") | safe }}, "path": {{ p.path | json_encode() | replace(from="<", to="\u003c") | safe }}, "date": {{ p.date | json_encode() | replace(from="<", to="\u003c") | safe }}, "tags": {{ p.taxonomies.tags | default(value=[]) | json_encode() | replace(from="<", to="\u003c") | safe }}, "html": {{ p.content | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
+    {%- endfor -%}
+  ]
+}
+</script>
+</body>
+</html>
