@@ -27,6 +27,8 @@ public final class AppModel {
   public static let commands: [CommandInfo] = [
     CommandInfo(name: "help", usage: "help", summary: "show this list"),
     CommandInfo(name: "ls", usage: "ls [-r] [place]", summary: "list what's here (-r flips the order)"),
+    CommandInfo(name: "head", usage: "head [-n] [place]", summary: "just the first n (or: ls | head -n)"),
+    CommandInfo(name: "tail", usage: "tail [-n] [place]", summary: "just the last n"),
     CommandInfo(name: "cd", usage: "cd <place>", summary: "go somewhere"),
     CommandInfo(name: "open", usage: "open <name>", summary: "read something (or: cat, less)"),
     CommandInfo(name: "menu", usage: "menu", summary: "show a clickable menu"),
@@ -46,6 +48,7 @@ public final class AppModel {
   public private(set) var isMenuOpen = false
   public private(set) var isSoundOn: Bool
   public private(set) var isTyping = false
+  public private(set) var completionMenu: CompletionMenu?
 
   @ObservationIgnored private var history: [String] = []
   @ObservationIgnored private var historyIndex: Int?
@@ -90,10 +93,19 @@ public final class AppModel {
     guard !isTyping, text != input else { return }
     input = text
     historyIndex = nil
+    completionMenu = nil
     play(.key)
   }
 
   public func returnKeyPressed() {
+    if let menu = completionMenu {
+      completionMenu = nil
+      if let selection = menu.selection {
+        input = selection + (selection.hasSuffix("/") ? "" : " ")
+        play(.key)
+        return
+      }
+    }
     let line = input
     input = ""
     historyIndex = nil
@@ -105,21 +117,41 @@ public final class AppModel {
     run(trimmed)
   }
 
+  /// Like zsh: fill in what's certain, then list the candidates, then step through them.
   public func tabKeyPressed() {
+    if completionMenu != nil {
+      stepCompletion(by: 1)
+      return
+    }
     switch site.complete(input, cwd: cwd, commands: Self.commands.map(\.name)) {
     case .none:
       play(.error)
     case .replaced(let text):
       input = text
       play(.key)
-    case .candidates(let names):
+    case .candidates(let base, let names):
       print(.command(cwd: cwd, text: input))
       print(.candidates(names))
+      completionMenu = CompletionMenu(entryID: nextID - 1, base: base, names: names)
       play(.blip)
     }
   }
 
+  public func shiftTabKeyPressed() {
+    stepCompletion(by: -1)
+  }
+
+  private func stepCompletion(by step: Int) {
+    guard var menu = completionMenu else { return }
+    let count = menu.names.count
+    menu.selected = menu.selected.map { ($0 + step + count) % count } ?? (step > 0 ? 0 : count - 1)
+    completionMenu = menu
+    input = menu.selection ?? input
+    play(.key)
+  }
+
   public func upArrowPressed() {
+    completionMenu = nil
     guard !history.isEmpty else { return }
     if historyIndex == nil { draft = input }
     let index = max(0, (historyIndex ?? history.count) - 1)
@@ -128,6 +160,7 @@ public final class AppModel {
   }
 
   public func downArrowPressed() {
+    completionMenu = nil
     guard let index = historyIndex else { return }
     if index + 1 < history.count {
       historyIndex = index + 1
@@ -139,12 +172,14 @@ public final class AppModel {
   }
 
   public func interruptPressed() {
+    completionMenu = nil
     print(.command(cwd: cwd, text: input + "^C"))
     input = ""
     historyIndex = nil
   }
 
   public func clearScreenPressed() {
+    completionMenu = nil
     output = []
   }
 
@@ -225,6 +260,7 @@ public final class AppModel {
     typingGeneration += 1
     let generation = typingGeneration
     isTyping = true
+    completionMenu = nil
     popup = nil
     if pager != nil {
       pager = nil
@@ -245,6 +281,11 @@ public final class AppModel {
   }
 
   private func run(_ line: String) {
+    let stages = line.split(separator: "|", omittingEmptySubsequences: false).map { String($0).trimmingWhitespace }
+    if stages.count > 1 {
+      pipe(stages)
+      return
+    }
     let words = line.split(whereSeparator: \.isWhitespace).map(String.init)
     let command = words[0].lowercased()
     let argument = words.dropFirst().joined(separator: " ")
@@ -252,7 +293,11 @@ public final class AppModel {
     case "help", "?", "man":
       print(.help(Self.commands))
     case "ls", "dir", "ll":
-      list(argument)
+      if let listing = listing(argument) { print(listing) }
+    case "head", "tail":
+      if let parsed = lineCount(argument, command: command), let listing = listing(parsed.rest) {
+        print(limit(listing, to: parsed.count, fromEnd: command == "tail"))
+      }
     case "cd":
       go(argument.isEmpty ? "~" : argument, command: command)
     case "open", "cat", "less", "more", "read", "view":
@@ -333,23 +378,66 @@ public final class AppModel {
     }
   }
 
-  private func list(_ argument: String) {
+  /// Only `ls | head` and `ls | tail` make sense here, so that's all a pipe can be.
+  private func pipe(_ stages: [String]) {
+    let words = stages.map { $0.split(whereSeparator: \.isWhitespace).map(String.init) }
+    guard stages.count == 2, let source = words[0].first?.lowercased(), ["ls", "dir", "ll"].contains(source),
+      let filter = words[1].first?.lowercased(), ["head", "tail"].contains(filter)
+    else {
+      fail("pipes only go one way here: ls | head, or ls | tail.")
+      return
+    }
+    guard let parsed = lineCount(words[1].dropFirst().joined(separator: " "), command: filter) else { return }
+    guard parsed.rest.isEmpty else {
+      fail("\(filter): it's already reading from ls.")
+      return
+    }
+    if let listing = listing(words[0].dropFirst().joined(separator: " ")) {
+      print(limit(listing, to: parsed.count, fromEnd: filter == "tail"))
+    }
+  }
+
+  /// Reads `-5`, `-n 5` or `-n5` off the front, like head and tail do. Defaults to 10.
+  private func lineCount(_ argument: String, command: String) -> (count: Int, rest: String)? {
+    var words = argument.split(whereSeparator: \.isWhitespace).map(String.init)
+    guard let first = words.first, first.hasPrefix("-") else { return (10, argument) }
+    words.removeFirst()
+    var digits = first.dropFirst()
+    if digits.first == "n" {
+      digits = digits.dropFirst()
+      if digits.isEmpty, !words.isEmpty { digits = Substring(words.removeFirst()) }
+    }
+    guard let count = Int(digits), count >= 0 else {
+      fail("\(command): how many? try '\(command) -5'.")
+      return nil
+    }
+    return (count, words.joined(separator: " "))
+  }
+
+  private func limit(_ content: OutputEntry.Content, to count: Int, fromEnd: Bool) -> OutputEntry.Content {
+    guard case .listing(let path, let entries, let order) = content else { return content }
+    return .listing(path, Array(fromEnd ? entries.suffix(count) : entries.prefix(count)), order: order)
+  }
+
+  /// `nil` once it has complained.
+  private func listing(_ argument: String) -> OutputEntry.Content? {
     let words = argument.split(whereSeparator: \.isWhitespace)
     let isFlag = { (word: Substring) in word.hasPrefix("-") && word.count > 1 }
     let flags = words.filter(isFlag).joined().filter { $0 != "-" }
     if let unknown = flags.first(where: { !"rlat1".contains($0) }) {
       fail("ls: no option -\(unknown). try 'ls -r' to flip the order.")
-      return
+      return nil
     }
     let place = words.filter { !isFlag($0) }.joined(separator: " ")
     let target = place.isEmpty ? Node.directory(cwd) : site.lookup(place, from: cwd)
     switch target {
     case .directory(let path), .unbuilt(let path):
-      print(listing(of: path, reversed: flags.contains("r")))
+      return listing(of: path, reversed: flags.contains("r"))
     case .document(let page):
-      print(.listing(page.home, [Entry(path: page.path, kind: .document, title: page.title, date: page.date, note: page.note)]))
+      return .listing(page.home, [Entry(path: page.path, kind: .document, title: page.title, date: page.date, note: page.note)])
     case nil:
       fail("ls: no such place: \(place)")
+      return nil
     }
   }
 

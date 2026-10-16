@@ -65,7 +65,12 @@ struct OutputRenderer {
       return element("div", "t-line t-\(tone)", text: text)
 
     case .candidates(let names):
-      return element("div", "t-line t-candidates", text: names.joined(separator: "   "))
+      let line = element("div", "t-line t-candidates")
+      for (index, name) in names.enumerated() {
+        if index > 0 { _ = line.append!("   ") }
+        line.add(element("span", "t-candidate", text: name))
+      }
+      return line
 
     case .listing(let path, let entries, let order):
       return listing(path, entries, order: order)
@@ -95,7 +100,7 @@ struct OutputRenderer {
       let block = element("div", "t-block t-welcome")
       block.add(element("pre", "t-spinner"))
       let text = element("div", "t-welcome-text")
-      text.add(element("div", "t-bright", text: "JUNEBASH SYSTEMS"))
+      text.add(element("div", "t-bright", text: "BASHWORKS COMPUTER SYSTEMS"))
       text.add(element("div", "t-dim", text: "terminal 7"))
       text.add(element("div", "t-dim", text: "you have been here before"))
       let hint = element("div", "t-hint")

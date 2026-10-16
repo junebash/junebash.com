@@ -58,8 +58,10 @@ final class ShellView {
   let prompt = byID("prompt")
   let mirror = byID("input-mirror")
   let input = byID("input")
+  let moreAbove = byID("more-above")
   let renderer: OutputRenderer
   private var lastRenderedID = -1
+  private var selectedCandidate: JSObject?
 
   init(model: AppModel, layout: Layout) {
     self.model = model
@@ -67,6 +69,7 @@ final class ShellView {
     renderer = OutputRenderer(site: model.site)
 
     observe { [self] in renderOutput(model.output) }
+    observe { [self] in renderCompletion(model.completionMenu) }
     observe { [self] in
       prompt.textContent = .string(model.prompt + " ")
       syncInput(model.input)
@@ -82,6 +85,7 @@ final class ShellView {
     input.listen("focus") { [self] _ in screen.setClass("is-focused", true) }
     input.listen("blur") { [self] _ in screen.setClass("is-focused", false) }
     input.listen("keydown") { [self] event in handleKey(event) }
+    screen.listen("scroll", passive: true) { [self] _ in renderMoreAbove() }
   }
 
   /// Phones are menu-first, so only desktop gets the keyboard focus up front.
@@ -102,6 +106,8 @@ final class ShellView {
     var handled = true
     switch key {
     case "Enter": model.returnKeyPressed()
+    case "Tab" where event.shiftKey.boolean == true:
+      if model.completionMenu == nil { handled = false } else { model.shiftTabKeyPressed() }
     case "Tab": model.tabKeyPressed()
     case "ArrowUp": model.upArrowPressed()
     case "ArrowDown": model.downArrowPressed()
@@ -114,27 +120,28 @@ final class ShellView {
 
   private func renderOutput(_ entries: [OutputEntry]) {
     trim(before: entries.first?.id ?? .max)
-    var command: JSObject?
     for entry in entries where entry.id > lastRenderedID {
       let node = renderer.render(entry)
       output.add(node)
       lastRenderedID = entry.id
-      if case .command = entry.content { command = node }
       if entry.content == .welcome, let spinner = node.querySelector!(".t-spinner").object {
         SpinnerView.start(in: spinner, wide: layout.columns >= 76)
       }
     }
-    scrollToNewest(after: command)
+    screen.scrollTop = screen.scrollHeight
+    renderMoreAbove()
   }
 
-  /// Output too tall for the screen starts at the command that made it, so a long listing keeps its top.
-  private func scrollToNewest(after command: JSObject?) {
-    screen.scrollTop = screen.scrollHeight
-    guard let command else { return }
-    let top = (command.getBoundingClientRect!().top.number ?? 0) - (screen.getBoundingClientRect!().top.number ?? 0)
-    if top < 0 {
-      screen.scrollTop = .number((screen.scrollTop.number ?? 0) + top)
+  private func renderMoreAbove() {
+    moreAbove.setHidden((screen.scrollTop.number ?? 0) < 4)
+  }
+
+  private func renderCompletion(_ menu: CompletionMenu?) {
+    selectedCandidate?.setClass("is-selected", false)
+    selectedCandidate = menu?.selected.flatMap { index in
+      output.querySelector!("[data-id=\"\(menu!.entryID)\"] > .t-candidate:nth-child(\(index + 1))").object
     }
+    selectedCandidate?.setClass("is-selected", true)
   }
 
   private func trim(before id: Int) {

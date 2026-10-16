@@ -1,7 +1,21 @@
 public enum Completion: Equatable, Sendable {
   case none
   case replaced(String)
-  case candidates([String])
+  /// Several names fit and none can be filled in further; each would follow `base`.
+  case candidates(base: String, names: [String])
+}
+
+/// A shell's menu completion: candidates are on screen, and tab steps through them.
+public struct CompletionMenu: Equatable, Sendable {
+  /// The output entry that shows the candidates.
+  public var entryID: Int
+  public var base: String
+  public var names: [String]
+  public var selected: Int?
+
+  var selection: String? {
+    selected.map { base + names[$0] }
+  }
 }
 
 extension Site {
@@ -33,7 +47,7 @@ extension Site {
       if common.count > namePart.count {
         return .replaced(prefix + directoryPart + common)
       }
-      return .candidates(matches)
+      return .candidates(base: prefix + directoryPart, names: matches)
     }
   }
 

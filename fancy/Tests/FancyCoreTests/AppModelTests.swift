@@ -227,3 +227,80 @@ struct AppModelTests {
     #expect(recorder.left == SitePath(["posts"]))
   }
 }
+
+struct ShellExtrasTests {
+  let recorder = Recorder()
+
+  func run(_ model: AppModel, _ line: String) {
+    model.inputChanged(line)
+    model.returnKeyPressed()
+  }
+
+  func listedNames(_ model: AppModel) -> [String]? {
+    guard case .listing(_, let entries, _) = model.output.last?.content else { return nil }
+    return entries.map(\.name)
+  }
+
+  @Test func tabFillsThenListsThenCycles() {
+    let model = recorder.model()
+    model.started(at: SitePath(["posts"]))
+    model.inputChanged("open t")
+    model.tabKeyPressed()
+    #expect(model.output.last?.content == .candidates(["the-very-last-light", "type-erasure"]))
+    #expect(model.input == "open t")
+    model.tabKeyPressed()
+    #expect(model.input == "open the-very-last-light")
+    #expect(model.completionMenu?.selected == 0)
+    model.tabKeyPressed()
+    #expect(model.input == "open type-erasure")
+    model.tabKeyPressed()
+    #expect(model.input == "open the-very-last-light")
+    model.shiftTabKeyPressed()
+    #expect(model.input == "open type-erasure")
+
+    model.returnKeyPressed()
+    #expect(model.input == "open type-erasure ")
+    #expect(model.completionMenu == nil)
+    #expect(model.pager == nil)
+    model.returnKeyPressed()
+    #expect(model.pager?.path == SitePath(["posts", "type-erasure"]))
+  }
+
+  @Test func typingLeavesTheMenu() {
+    let model = recorder.model()
+    model.started(at: SitePath(["posts"]))
+    model.inputChanged("open t")
+    model.tabKeyPressed()
+    model.inputChanged("open ty")
+    #expect(model.completionMenu == nil)
+    model.tabKeyPressed()
+    #expect(model.input == "open type-erasure ")
+  }
+
+  @Test func headAndTailTrimListings() throws {
+    let model = recorder.model()
+    model.started(at: SitePath(["posts"]))
+    let all = try #require(listedNames(model))
+    #expect(all.count >= 3)
+    run(model, "head -2")
+    #expect(listedNames(model) == Array(all.prefix(2)))
+    run(model, "tail -n 1")
+    #expect(listedNames(model) == [all.last!])
+    run(model, "ls | head -n2")
+    #expect(listedNames(model) == Array(all.prefix(2)))
+    run(model, "ls -r | tail -1")
+    #expect(listedNames(model) == [all.first!])
+    run(model, "cd ~")
+    run(model, "head -1 posts")
+    #expect(listedNames(model) == Array(all.prefix(1)))
+  }
+
+  @Test func headComplainsAboutBadCountsAndPipes() {
+    let model = recorder.model()
+    model.started(at: .root)
+    run(model, "head -x")
+    #expect(model.output.last?.content == .text("head: how many? try 'head -5'.", tone: .error))
+    run(model, "cd posts | head")
+    #expect(model.output.last?.content == .text("pipes only go one way here: ls | head, or ls | tail.", tone: .error))
+  }
+}

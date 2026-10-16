@@ -65,11 +65,11 @@ struct SiteTests {
 
   @Test func completesCommandsAndNames() {
     let commands = AppModel.commands.map(\.name)
-    #expect(site.complete("he", cwd: .root, commands: commands) == .replaced("help "))
+    #expect(site.complete("hel", cwd: .root, commands: commands) == .replaced("help "))
     #expect(site.complete("po", cwd: .root, commands: commands) == .replaced("posts/"))
     #expect(site.complete("cd po", cwd: .root, commands: commands) == .replaced("cd posts/"))
     #expect(site.complete("open posts/de", cwd: .root, commands: commands) == .replaced("open posts/decay "))
-    #expect(site.complete("open t", cwd: posts, commands: commands) == .candidates(["the-very-last-light", "type-erasure"]))
+    #expect(site.complete("open t", cwd: posts, commands: commands) == .candidates(base: "open ", names: ["the-very-last-light", "type-erasure"]))
     #expect(site.complete("open x", cwd: posts, commands: commands) == .none)
   }
 
