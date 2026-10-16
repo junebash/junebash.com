@@ -354,6 +354,28 @@ a:hover { text-decoration: underline; }
   color: var(--muted-2);
   letter-spacing: .02em;
 }
+.rd-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.rd-fancy {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  color: var(--muted);
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  padding: 5px 11px;
+}
+.rd-fancy:hover {
+  color: #3dff74;
+  background: #030a05;
+  border-color: #030a05;
+  text-decoration: none;
+  text-shadow: 0 0 6px rgba(61, 255, 116, .55);
+}
 .rd-socials {
   display: flex;
   gap: 9px;
