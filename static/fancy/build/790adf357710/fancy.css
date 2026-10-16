@@ -386,6 +386,32 @@ button {
   scrollbar-color: var(--phosphor-faint) transparent;
 }
 
+.t-candidate.is-selected {
+  background: var(--phosphor);
+  color: var(--screen);
+  text-shadow: none;
+}
+
+/* Sits under the pager, so it only shows over the shell. */
+.more-above {
+  position: absolute;
+  top: 4px;
+  right: 14px;
+  padding: 0 6px;
+  background: var(--screen);
+  color: var(--phosphor-bright);
+  pointer-events: none;
+  animation: more-above 2.4s ease-in-out infinite;
+}
+
+.more-above[hidden] {
+  display: none;
+}
+
+@keyframes more-above {
+  50% { opacity: 0.2; }
+}
+
 .output {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -1110,6 +1136,7 @@ ul.t-list > li::before {
   .window,
   .is-focused .t-cursor,
   .boot-prompt,
+  .more-above,
   .blink {
     animation: none;
   }
