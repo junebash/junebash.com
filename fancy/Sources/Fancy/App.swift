@@ -8,6 +8,7 @@ final class App {
   private var views: [AnyObject] = []
 
   func run() async {
+    boot.systemImageLoaded()
     boot.line("SYSTEM IMAGE ........", status: "OK")
     await boot.beat(120)
 
@@ -47,8 +48,7 @@ final class App {
     listen(model: model, shell: shell, pager: pager, layout: layout)
 
     await boot.waitForGesture { [synth] in
-      synth.unlock()
-      if isSoundOn { synth.play(.boot) }
+      synth.unlock { if isSoundOn { synth.play(.boot) } }
       shell.reveal()
       byID("menu-button").setHidden(false)
     }

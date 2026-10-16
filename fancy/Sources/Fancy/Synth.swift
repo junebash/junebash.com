@@ -8,7 +8,8 @@ final class Synth {
   private var noise: JSObject?
 
   /// Must run synchronously inside a user gesture, or browsers keep audio muted.
-  func unlock() {
+  /// `whenRunning` fires once the context has actually resumed.
+  func unlock(whenRunning: (() -> Void)? = nil) {
     if context == nil, let constructor = (window.AudioContext.function ?? window.webkitAudioContext.function) {
       let context = constructor.new()
       let output = context.createGain!().object!
@@ -18,7 +19,13 @@ final class Synth {
       self.output = output
       noise = makeNoise(context)
     }
-    _ = context?.resume!()
+    guard let resumed = context?.resume!().object.flatMap(JSPromise.init) else { return }
+    if let whenRunning {
+      _ = resumed.then { _ in
+        whenRunning()
+        return .undefined
+      }
+    }
   }
 
   func play(_ effect: SoundEffect) {

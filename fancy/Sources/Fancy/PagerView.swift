@@ -133,7 +133,6 @@ final class PopupView {
       frame.setAttr("src", embed.src)
       frame.setAttr("title", embed.title)
       frame.setAttr("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen")
-      frame.setAttr("allowfullscreen", "")
       frame.setAttr("referrerpolicy", "strict-origin-when-cross-origin")
       body.add(frame)
       let open = element("a", "popup-link", text: "open in a new tab ↗")

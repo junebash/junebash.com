@@ -18,6 +18,10 @@ final class BootScreen {
     }
   }
 
+  func systemImageLoaded() {
+    document.querySelector!(".boot-bar").object?.setClass("is-done", true)
+  }
+
   @discardableResult
   func line(_ label: String, status: String = "") -> Line {
     let row = element("div", "boot-line")

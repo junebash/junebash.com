@@ -39,7 +39,7 @@ public struct Spinner: Sendable {
       for column in 0..<columns {
         let u = (Float(column) + 0.5) / Float(columns) * 2 - 1
         let x = u * Float(columns) * cellAspect / Float(rows)
-        let direction = normalize(Vector(x, v, -2.45))
+        let direction = normalize(Vector(x, v + 0.16, -2.45))
         line.append(shade(origin: origin, direction: direction, rotation: rotation, light: light, row: row, band: band))
       }
       while line.last == " " { line.removeLast() }

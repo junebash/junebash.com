@@ -60,7 +60,8 @@ struct Router {
     return SitePath(urlPath: String(path))
   }
 
+  /// Only root-relative images are same-origin on every host, which canvas reads require.
   static func isLocalAsset(_ src: String) -> Bool {
-    (src.hasPrefix("/") && !src.hasPrefix("//")) || src.hasPrefix("https://junebash.com/")
+    src.hasPrefix("/") && !src.hasPrefix("//")
   }
 }

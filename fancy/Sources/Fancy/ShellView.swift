@@ -84,9 +84,10 @@ final class ShellView {
     input.listen("keydown") { [self] event in handleKey(event) }
   }
 
+  /// Phones are menu-first, so only desktop gets the keyboard focus up front.
   func reveal() {
     screen.setHidden(false)
-    focus()
+    if !isTouchDevice { focus() }
   }
 
   func focus() {
