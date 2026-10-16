@@ -42,8 +42,8 @@ final class PagerView {
     let page = max(line, (body.clientHeight.number ?? 400) - line * 2)
     switch key {
     case "Backspace", "ArrowLeft": model.pagerDismissed()
-    case "ArrowDown", "j": scroll(by: line * 2)
-    case "ArrowUp", "k": scroll(by: -line * 2)
+    case "ArrowDown", "j": scroll(by: line * 2, smoothly: false)
+    case "ArrowUp", "k": scroll(by: -line * 2, smoothly: false)
     case " ", "PageDown", "f": scroll(by: page)
     case "PageUp", "b": scroll(by: -page)
     case "g", "Home": body.scrollTop = .number(0)
@@ -53,10 +53,11 @@ final class PagerView {
     return true
   }
 
-  private func scroll(by amount: Double) {
+  /// Line steps jump, like a real pager; a smooth step would cancel the one before it when keys repeat.
+  private func scroll(by amount: Double, smoothly: Bool = true) {
     let options = JSObject()
     options.top = .number(amount)
-    options.behavior = .string(prefersReducedMotion ? "auto" : "smooth")
+    options.behavior = .string(smoothly && !prefersReducedMotion ? "smooth" : "auto")
     _ = body.scrollBy!(options)
   }
 
