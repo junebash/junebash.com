@@ -130,7 +130,7 @@ final class App {
       if isPlain, isCloseKey, model.popup != nil || model.isMenuOpen || model.pager != nil {
         model.closeKeyPressed()
         _ = event.preventDefault()
-      } else if menu.handleKey(key) || pager.handleKey(key) {
+      } else if menu.handleKey(key) || pager.handleKey(event) {
         _ = event.preventDefault()
       } else if !isTyping, isPlain, key.count == 1, model.pager == nil {
         shell.focus()

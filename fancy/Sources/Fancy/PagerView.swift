@@ -35,19 +35,27 @@ final class PagerView {
     }
   }
 
-  /// Returns whether the pager consumed the key.
-  func handleKey(_ key: String) -> Bool {
-    guard model.pager != nil, model.popup == nil, !model.isMenuOpen else { return false }
+  /// Returns whether the pager consumed the key. Browser shortcuts (cmd-f and friends) pass through.
+  func handleKey(_ event: JSValue) -> Bool {
+    guard model.pager != nil, model.popup == nil, !model.isMenuOpen,
+      event.metaKey.boolean != true, event.altKey.boolean != true
+    else { return false }
+    let key = event.key.string ?? ""
+    let isControl = event.ctrlKey.boolean == true
     let line = 24.0
     let page = max(line, (body.clientHeight.number ?? 400) - line * 2)
-    switch key {
-    case "Backspace", "ArrowLeft": model.pagerDismissed()
-    case "ArrowDown", "j": scroll(by: line * 2, smoothly: false)
-    case "ArrowUp", "k": scroll(by: -line * 2, smoothly: false)
-    case " ", "PageDown", "f": scroll(by: page)
-    case "PageUp", "b": scroll(by: -page)
-    case "g", "Home": body.scrollTop = .number(0)
-    case "G", "End": body.scrollTop = body.scrollHeight
+    switch (key, isControl) {
+    case ("d", true): scroll(by: page)
+    case ("u", true): scroll(by: -page)
+    case (_, true): return false
+    case (" ", _): scroll(by: event.shiftKey.boolean == true ? -page : page)
+    case ("Backspace", _), ("ArrowLeft", _): model.pagerDismissed()
+    case ("ArrowDown", _), ("j", _): scroll(by: line * 2, smoothly: false)
+    case ("ArrowUp", _), ("k", _): scroll(by: -line * 2, smoothly: false)
+    case ("PageDown", _), ("f", _): scroll(by: page)
+    case ("PageUp", _), ("b", _): scroll(by: -page)
+    case ("g", _), ("Home", _): body.scrollTop = .number(0)
+    case ("G", _), ("End", _): body.scrollTop = body.scrollHeight
     default: return false
     }
     return true
