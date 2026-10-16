@@ -54,13 +54,30 @@ struct AppModelTests {
     model.started(at: .root)
     run(model, "cd posts")
     #expect(model.cwd == SitePath(["posts"]))
-    guard case .listing(let path, let entries) = model.output.last?.content else {
+    guard case .listing(let path, let entries, let order) = model.output.last?.content else {
       Issue.record("expected listing")
       return
     }
     #expect(path == SitePath(["posts"]))
     #expect(entries.map(\.name) == ["decay", "the-very-last-light", "type-erasure"])
+    #expect(order == Order(newestFirst: true, flip: "ls -r"))
     #expect(recorder.locations.last! == (SitePath(["posts"]), true))
+  }
+
+  @Test func lsDashRFlipsTheOrder() {
+    let model = recorder.model()
+    model.started(at: .root)
+    run(model, "ls -r posts")
+    guard case .listing(_, let entries, let order) = model.output.last?.content else {
+      Issue.record("expected listing")
+      return
+    }
+    #expect(entries.map(\.name) == ["type-erasure", "the-very-last-light", "decay"])
+    #expect(order == Order(newestFirst: false, flip: "ls ~/posts"))
+    run(model, "ls -la")
+    #expect(model.output.last?.content == .listing(.root, Site.fixture.rootEntries))
+    run(model, "ls -x")
+    #expect(model.output.last?.content == .text("ls: no option -x. try 'ls -r' to flip the order.", tone: .error))
   }
 
   @Test func bareNamesOpenThings() {

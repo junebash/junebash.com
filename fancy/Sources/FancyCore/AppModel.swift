@@ -26,7 +26,7 @@ public final class AppModel {
 
   public static let commands: [CommandInfo] = [
     CommandInfo(name: "help", usage: "help", summary: "show this list"),
-    CommandInfo(name: "ls", usage: "ls [place]", summary: "list what's here"),
+    CommandInfo(name: "ls", usage: "ls [-r] [place]", summary: "list what's here (-r flips the order)"),
     CommandInfo(name: "cd", usage: "cd <place>", summary: "go somewhere"),
     CommandInfo(name: "open", usage: "open <name>", summary: "read something (or: cat, less)"),
     CommandInfo(name: "menu", usage: "menu", summary: "show a clickable menu"),
@@ -331,23 +331,33 @@ public final class AppModel {
   }
 
   private func list(_ argument: String) {
-    let target = argument.isEmpty ? Node.directory(cwd) : site.lookup(argument, from: cwd)
+    let words = argument.split(whereSeparator: \.isWhitespace)
+    let isFlag = { (word: Substring) in word.hasPrefix("-") && word.count > 1 }
+    let flags = words.filter(isFlag).joined().filter { $0 != "-" }
+    if let unknown = flags.first(where: { !"rlat1".contains($0) }) {
+      fail("ls: no option -\(unknown). try 'ls -r' to flip the order.")
+      return
+    }
+    let place = words.filter { !isFlag($0) }.joined(separator: " ")
+    let target = place.isEmpty ? Node.directory(cwd) : site.lookup(place, from: cwd)
     switch target {
     case .directory(let path), .unbuilt(let path):
-      print(listing(of: path))
+      print(listing(of: path, reversed: flags.contains("r")))
     case .document(let page):
       print(.listing(page.path.parent, [Entry(path: page.path, kind: .document, title: page.title, date: page.date)]))
     case nil:
-      fail("ls: no such place: \(argument)")
+      fail("ls: no such place: \(place)")
     }
   }
 
-  private func listing(of path: SitePath) -> OutputEntry.Content {
-    if let entries = site.entries(in: path), !entries.isEmpty {
-      .listing(path, entries)
-    } else {
-      .underConstruction(path)
+  private func listing(of path: SitePath, reversed: Bool = false) -> OutputEntry.Content {
+    guard var entries = site.entries(in: path), !entries.isEmpty else { return .underConstruction(path) }
+    guard let first = entries.first?.date, let last = entries.last?.date, first != last else {
+      return .listing(path, entries)
     }
+    if reversed { entries.reverse() }
+    let place = path == cwd ? "" : " \(path)"
+    return .listing(path, entries, order: Order(newestFirst: (first > last) != reversed, flip: (reversed ? "ls" : "ls -r") + place))
   }
 
   private func sound(_ argument: String) {

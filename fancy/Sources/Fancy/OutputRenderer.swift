@@ -67,8 +67,8 @@ struct OutputRenderer {
     case .candidates(let names):
       return element("div", "t-line t-candidates", text: names.joined(separator: "   "))
 
-    case .listing(let path, let entries):
-      return listing(path, entries)
+    case .listing(let path, let entries, let order):
+      return listing(path, entries, order: order)
 
     case .help(let commands):
       let block = element("div", "t-block t-help")
@@ -131,7 +131,7 @@ struct OutputRenderer {
     }
   }
 
-  private func listing(_ path: SitePath, _ entries: [Entry]) -> JSObject {
+  private func listing(_ path: SitePath, _ entries: [Entry], order: Order?) -> JSObject {
     let block = element("div", "t-block t-listing")
     for entry in entries {
       let row = element("div", "t-row t-entry t-\(entry.kind)")
@@ -147,6 +147,15 @@ struct OutputRenderer {
         row.add(element("span", "t-dim", text: description(of: entry)))
       }
       block.add(row)
+    }
+    if let order {
+      let hint = element("div", "t-dim t-hint")
+      _ = hint.append!("\(order.newestFirst ? "newest" : "oldest") at the top. ")
+      let flip = element("span", "t-click", text: order.flip)
+      flip.setAttr("data-command", order.flip)
+      hint.add(flip)
+      _ = hint.append!(" flips it.")
+      block.add(hint)
     }
     return block
   }
