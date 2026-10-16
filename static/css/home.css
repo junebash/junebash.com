@@ -208,6 +208,8 @@
   gap: 24px;
   text-decoration: none;
   color: inherit;
+  border-radius: 6px;
+  transition: padding .15s ease;
 }
 
 .home-post:last-child {
@@ -216,6 +218,8 @@
 
 .home-post:hover {
   text-decoration: none;
+  padding-left: 14px;
+  padding-right: 14px;
 }
 
 .home-post-title {
