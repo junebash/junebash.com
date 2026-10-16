@@ -51,6 +51,7 @@ public final class AppModel {
   @ObservationIgnored private var historyIndex: Int?
   @ObservationIgnored private var draft = ""
   @ObservationIgnored private var nextID = 0
+  @ObservationIgnored private var typingGeneration = 0
   @ObservationIgnored private let effects: Effects
 
   public init(site: Site, isSoundOn: Bool, effects: Effects) {
@@ -217,8 +218,10 @@ public final class AppModel {
     play(.close)
   }
 
+  /// Types `command` at the prompt, then runs it. A newer click interrupts an older one.
   private func type(_ command: String) async {
-    guard !isTyping else { return }
+    typingGeneration += 1
+    let generation = typingGeneration
     isTyping = true
     popup = nil
     if pager != nil {
@@ -226,12 +229,15 @@ public final class AppModel {
       effects.setLocation(location, false)
     }
     input = ""
+    let perCharacter = max(8, min(38, 380 / max(command.count, 1)))
     for character in command {
       input.append(character)
       play(.key)
-      await effects.pause(Int.random(in: 18...55))
+      await effects.pause(Int.random(in: perCharacter * 2 / 3...perCharacter * 4 / 3))
+      guard generation == typingGeneration else { return }
     }
-    await effects.pause(90)
+    await effects.pause(70)
+    guard generation == typingGeneration else { return }
     isTyping = false
     returnKeyPressed()
   }

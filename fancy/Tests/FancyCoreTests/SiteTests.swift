@@ -55,3 +55,16 @@ struct SiteTests {
     #expect(art.lines(maxColumns: 2) == [" @"])
   }
 }
+
+struct SpinnerTests {
+  @Test func drawsAMonitorThatTurns() {
+    let spinner = Spinner(columns: 34, rows: 15)
+    let first = spinner.frame(time: 0)
+    let later = spinner.frame(time: 1.3)
+    #expect(first.count == 15)
+    #expect(first.allSatisfy { $0.count <= 34 })
+    #expect(first.joined().count { $0 != " " } > 100)
+    #expect(first.joined().contains(":"))
+    #expect(first != later)
+  }
+}

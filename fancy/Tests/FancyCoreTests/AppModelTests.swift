@@ -7,6 +7,8 @@ final class Recorder {
   var sounds: [SoundEffect] = []
   var left: SitePath?
 
+  var pause: (Int) async -> Void = { _ in }
+
   func model(isSoundOn: Bool = true) -> AppModel {
     AppModel(
       site: .fixture,
@@ -16,7 +18,7 @@ final class Recorder {
         play: { self.sounds.append($0) },
         leave: { self.left = $0 },
         saveSound: { _ in },
-        pause: { _ in }
+        pause: { await self.pause($0) }
       )
     )
   }
@@ -108,6 +110,20 @@ struct AppModelTests {
     #expect(model.output.contains { $0.content == .command(cwd: SitePath(["posts"]), text: "open decay") })
     #expect(model.pager?.title == "Decay")
     #expect(recorder.sounds.filter { $0 == .key }.count >= "cd posts".count)
+  }
+
+  @Test func newerClickInterruptsTyping() async {
+    recorder.pause = { _ in await Task.yield() }
+    let model = recorder.model()
+    model.started(at: .root)
+    async let first: Void = model.commandClicked("help")
+    async let second: Void = model.commandClicked("ls")
+    _ = await (first, second)
+    let commands = model.output.compactMap { entry -> String? in
+      if case .command(_, let text) = entry.content { text } else { nil }
+    }
+    #expect(commands == ["ls"])
+    #expect(!model.isTyping)
   }
 
   @Test func backButtonRestoresState() {
