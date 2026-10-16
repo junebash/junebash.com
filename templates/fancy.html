@@ -235,7 +235,7 @@
 {% for p in now.pages -%}
 {#- Rendered content is already escaped, quotes included, so it can sit in an attribute as is. #}
 {%- set teaser = p.content | split(pat="</p>") | first | striptags | trim -%}
-<template data-page="{{ p.path }}" data-title="{{ p.description | default(value=teaser) | safe }}" data-date="{{ p.date }}">{{ p.content | safe }}</template>
+<template data-page="{{ p.path }}" data-title="{% if p.description %}{{ p.description }}{% else %}{{ teaser | safe }}{% endif %}" data-date="{{ p.date }}">{{ p.content | safe }}</template>
 {% endfor -%}
 </div>
 </body>

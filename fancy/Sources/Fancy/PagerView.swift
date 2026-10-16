@@ -156,9 +156,9 @@ final class PopupView {
       if embed.kind == .audio, let height = embed.height {
         let width = "min(\(embed.width ?? 560)px, calc(100vw - 54px))"
         frame.style.width = .string(width)
-        // Bandcamp's big players are square artwork over a fixed-height footer, so they grow with the width.
+        // Bandcamp's big players are square artwork over a footer at least 120px tall, so they grow with the width.
         if let artwork = embed.width, height > artwork, !embed.src.contains("artwork=small") {
-          frame.style.height = .string("calc(\(width) + \(height - artwork)px)")
+          frame.style.height = .string("calc(\(width) + \(max(height - artwork, 120))px)")
         } else {
           frame.style.height = .string("\(height)px")
         }
