@@ -123,17 +123,20 @@ extension SoundEffect {
   var tones: [Tone] {
     switch self {
     case .key:
-      // A damped low thump with a little felt on top: thock, not clack.
+      // Paper-dry and mid-only, with a faint second tick as the key comes back up.
       [
-        Tone(wave: .sine, frequency: Double.random(in: 165...215), glide: 95, duration: 0.05, gain: 0.3, attack: 0.001),
-        Tone(wave: .noise(filter: "bandpass"), frequency: Double.random(in: 420...640), duration: 0.04, gain: 0.55, attack: 0.001, q: 1.3),
-        Tone(wave: .noise(filter: "lowpass"), frequency: 1400, duration: 0.014, gain: 0.07, attack: 0.001),
+        Tone(wave: .noise(filter: "bandpass"), frequency: Double.random(in: 1800...2200), duration: 0.016, gain: 0.5, attack: 0.001, q: 4),
+        Tone(wave: .noise(filter: "bandpass"), frequency: Double.random(in: 700...800), duration: 0.02, gain: 0.25, attack: 0.001, q: 3),
+        Tone(
+          wave: .noise(filter: "bandpass"), frequency: Double.random(in: 1300...1500), duration: 0.012, gain: 0.18, attack: 0.001,
+          delay: Double.random(in: 0.035...0.045), q: 4
+        ),
       ]
     case .enter:
       [
-        Tone(wave: .sine, frequency: 128, glide: 62, duration: 0.09, gain: 0.38, attack: 0.001),
-        Tone(wave: .noise(filter: "bandpass"), frequency: 330, duration: 0.07, gain: 0.7, attack: 0.001, q: 1.1),
-        Tone(wave: .triangle, frequency: 240, glide: 150, duration: 0.035, gain: 0.08, attack: 0.001),
+        Tone(wave: .noise(filter: "bandpass"), frequency: 1500, duration: 0.028, gain: 0.55, attack: 0.001, q: 3.5),
+        Tone(wave: .noise(filter: "bandpass"), frequency: 600, duration: 0.036, gain: 0.35, attack: 0.001, q: 3),
+        Tone(wave: .noise(filter: "bandpass"), frequency: 1100, duration: 0.016, gain: 0.22, attack: 0.001, delay: 0.06, q: 4),
       ]
     case .error:
       [
