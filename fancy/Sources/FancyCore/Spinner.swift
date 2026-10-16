@@ -13,7 +13,7 @@ public struct Spinner: Sendable {
   /// Width of a character cell relative to its height.
   public var cellAspect: Float = 0.5
 
-  static let ramp = Array(" .,-~:;=!*#$@")
+  static let ramp = Array(" .,-:;=+!*#$@")
   typealias Vector = SIMD3<Float>
 
   /// Disc proportions, in units of its radius. Thicker than a real CD so the rim survives edge-on.
