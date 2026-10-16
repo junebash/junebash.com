@@ -37,11 +37,11 @@ final class PagerView {
 
   /// Returns whether the pager consumed the key.
   func handleKey(_ key: String) -> Bool {
-    guard model.pager != nil, model.popup == nil else { return false }
+    guard model.pager != nil, model.popup == nil, !model.isMenuOpen else { return false }
     let line = 24.0
     let page = max(line, (body.clientHeight.number ?? 400) - line * 2)
     switch key {
-    case "q", "Q", "Escape", "Backspace", "ArrowLeft": model.pagerDismissed()
+    case "Backspace", "ArrowLeft": model.pagerDismissed()
     case "ArrowDown", "j": scroll(by: line * 2)
     case "ArrowUp", "k": scroll(by: -line * 2)
     case " ", "PageDown", "f": scroll(by: page)
@@ -135,26 +135,67 @@ final class PopupView {
       frame.setAttr("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen")
       frame.setAttr("referrerpolicy", "strict-origin-when-cross-origin")
       body.add(frame)
+    }
+    let foot = element("div", "popup-foot")
+    let close = element("button", "popup-close", text: "[q] close")
+    close.setAttr("type", "button")
+    close.setAttr("data-action", "close-popup")
+    foot.add(close)
+    if case .embed(let embed) = popup {
       let open = element("a", "popup-link", text: "open in a new tab ↗")
       open.setAttr("href", embed.src)
       open.setAttr("target", "_blank")
       open.setAttr("rel", "noopener noreferrer")
-      body.add(open)
+      foot.add(open)
     }
+    body.add(foot)
     root.setHidden(false)
   }
 }
 
 final class MenuView {
   let model: AppModel
+  let shell: ShellView
   let panel = byID("menu")
 
-  init(model: AppModel) {
+  init(model: AppModel, shell: ShellView) {
     self.model = model
+    self.shell = shell
     for item in MenuItem.allCases {
       panel.add(item.button(className: "menu-item", commandAttribute: "data-menu-command"))
     }
-    observe { [self] in panel.setClass("is-open", model.isMenuOpen) }
+    observe { [self] in
+      panel.setClass("is-open", model.isMenuOpen)
+      moveFocus(isOpen: model.isMenuOpen)
+    }
     observe { byID("sound-led").setClass("is-on", model.isSoundOn) }
+  }
+
+  /// Returns whether the menu consumed the key.
+  func handleKey(_ key: String) -> Bool {
+    guard model.isMenuOpen, !isTouchDevice, key == "ArrowDown" || key == "ArrowUp" else { return false }
+    let items = panel.querySelectorAll!(".menu-item").object!
+    let count = Int(items.length.number ?? 0)
+    var index = -1
+    for candidate in 0..<count where items[candidate] == document.activeElement {
+      index = candidate
+    }
+    let next = key == "ArrowDown" ? (index + 1) % count : (index - 1 + count) % count
+    _ = items[next].object?.focus!()
+    return true
+  }
+
+  /// Keyboard users land in the menu when it opens, and back where they were when it closes.
+  private func moveFocus(isOpen: Bool) {
+    guard !isTouchDevice else { return }
+    if isOpen {
+      _ = panel.querySelector!(".menu-item").object?.focus!()
+    } else if panel.contains!(document.activeElement).boolean == true {
+      if model.pager != nil {
+        _ = byID("pager-body").focus!()
+      } else {
+        shell.focus()
+      }
+    }
   }
 }

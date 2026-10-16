@@ -105,7 +105,6 @@ final class ShellView {
     case "Tab": model.tabKeyPressed()
     case "ArrowUp": model.upArrowPressed()
     case "ArrowDown": model.downArrowPressed()
-    case "Escape": model.escapePressed()
     case "c" where control: model.interruptPressed()
     case "l" where control: model.clearScreenPressed()
     default: handled = false

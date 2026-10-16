@@ -797,17 +797,20 @@ ul.t-list > li::before {
   padding: 0 6px;
   border-bottom: 1px solid var(--window-edge);
   background:
-    repeating-linear-gradient(180deg, var(--window) 0 2px, var(--ink) 2px 3px) 0 6px / 100% 13px no-repeat,
+    repeating-linear-gradient(180deg, var(--window) 0 2px, var(--ink) 2px 3px) 2px 6px / calc(100% - 4px) 13px no-repeat,
     var(--window);
 }
 
+/* The window-coloured ring keeps the title stripes off the boxes, like System 7. */
 .window-close {
   flex: 0 0 auto;
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
+  margin-left: 4px;
   padding: 0;
   border: 1px solid var(--window-edge);
   background: var(--window);
+  box-shadow: 0 0 0 3px var(--window);
   cursor: pointer;
 }
 
@@ -816,7 +819,7 @@ ul.t-list > li::before {
 }
 
 .window-title {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: 0;
   margin: 0 auto;
   padding: 0 10px;
@@ -831,6 +834,9 @@ ul.t-list > li::before {
 .window-fake {
   display: flex;
   gap: 2px;
+  margin-right: 2px;
+  background: var(--window);
+  box-shadow: 0 0 0 3px var(--window);
 }
 
 .window-fake i {
@@ -881,11 +887,33 @@ ul.t-list > li::before {
   height: 166px;
 }
 
-.popup-link {
-  align-self: flex-end;
-  margin-top: 6px;
-  color: var(--ink);
+.popup-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2ch;
+  margin-top: 8px;
   font-size: 18px;
+}
+
+.popup-close {
+  padding: 0 0.5ch;
+  border: 1px solid var(--window-edge);
+  background: var(--window);
+  color: var(--ink);
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.popup-close:hover,
+.popup-close:focus-visible {
+  background: var(--ink);
+  color: var(--window);
+  outline: none;
+}
+
+.popup-link {
+  color: var(--ink);
 }
 
 ::selection {

@@ -44,8 +44,9 @@ final class App {
     let layout = Layout()
     let shell = ShellView(model: model, layout: layout)
     let pager = PagerView(model: model, router: router, layout: layout, art: art, shell: shell)
-    views = [layout, shell, pager, PopupView(model: model), MenuView(model: model)]
-    listen(model: model, shell: shell, pager: pager, layout: layout)
+    let menu = MenuView(model: model, shell: shell)
+    views = [layout, shell, pager, PopupView(model: model), menu]
+    listen(model: model, shell: shell, pager: pager, menu: menu, layout: layout)
 
     await boot.waitForGesture { [synth] in
       synth.unlock { if isSoundOn { synth.play(.boot) } }
@@ -115,7 +116,7 @@ final class App {
     return art
   }
 
-  private func listen(model: AppModel, shell: ShellView, pager: PagerView, layout: Layout) {
+  private func listen(model: AppModel, shell: ShellView, pager: PagerView, menu: MenuView, layout: Layout) {
     window.listen("popstate") { [router] _ in model.locationChanged(to: router.currentPath) }
     window.listen("resize", passive: true) { _ in layout.measure() }
 
@@ -123,14 +124,15 @@ final class App {
     document.listen("keydown") { [synth] event in
       synth.unlock()
       let key = event.key.string ?? ""
-      if model.popup != nil, key == "Escape" {
-        model.escapePressed()
+      let isPlain = event.metaKey.boolean != true && event.ctrlKey.boolean != true && event.altKey.boolean != true
+      let isTyping = event.target.object == shell.input
+      let isCloseKey = key == "Escape" || (!isTyping && (key == "q" || key == "Q"))
+      if isPlain, isCloseKey, model.popup != nil || model.isMenuOpen || model.pager != nil {
+        model.closeKeyPressed()
         _ = event.preventDefault()
-      } else if pager.handleKey(key) {
+      } else if menu.handleKey(key) || pager.handleKey(key) {
         _ = event.preventDefault()
-      } else if event.target.object != shell.input, key.count == 1, event.metaKey.boolean != true,
-        event.ctrlKey.boolean != true, event.altKey.boolean != true, model.pager == nil
-      {
+      } else if !isTyping, isPlain, key.count == 1, model.pager == nil {
         shell.focus()
       }
     }

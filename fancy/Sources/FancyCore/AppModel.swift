@@ -148,7 +148,8 @@ public final class AppModel {
     output = []
   }
 
-  public func escapePressed() {
+  /// Escape or q: closes whatever is on top.
+  public func closeKeyPressed() {
     if popup != nil {
       popupDismissed()
     } else if isMenuOpen {
