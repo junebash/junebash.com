@@ -78,11 +78,16 @@ public struct Embed: Equatable, Sendable {
   public var src: String
   public var kind: Kind
   public var title: String
+  /// The size the simple site gives the frame, in CSS pixels, when it gives one.
+  public var width: Int?
+  public var height: Int?
 
-  public init(src: String, kind: Kind, title: String) {
+  public init(src: String, kind: Kind, title: String, width: Int? = nil, height: Int? = nil) {
     self.src = src
     self.kind = kind
     self.title = title
+    self.width = width
+    self.height = height
   }
 
   public init(src: String, title: String?) {

@@ -58,6 +58,31 @@ struct HTMLConverterTests {
     #expect(blocks == [.embed(Embed(src: "https://www.youtube.com/embed/abc", kind: .video, title: "youtube"))])
   }
 
+  @Test func framesKeepTheirPixelSize() {
+    let blocks = convert(
+      .element("iframe", ["src": "https://bandcamp.com/EmbeddedPlayer/album=1/", "style": "border: 0; width: 100%; height: 786px; max-width: 500px;"])
+    )
+    #expect(blocks == [.embed(Embed(src: "https://bandcamp.com/EmbeddedPlayer/album=1/", kind: .audio, title: "bandcamp", width: 500, height: 786))])
+  }
+
+  @Test func definitionListsBecomeFacts() {
+    let blocks = convert(
+      .element(
+        "dl", [:],
+        .element("dt", [:], .text("type")), .element("dd", [:], .text("Album")),
+        .element("dt", [:], .text("year")), .element("dd", [:], .text("2013"))
+      )
+    )
+    #expect(
+      blocks == [
+        .paragraph([
+          Span("TYPE  ", style: .dim), Span("Album", style: .bold), Span("\n"),
+          Span("YEAR  ", style: .dim), Span("2013", style: .bold),
+        ])
+      ]
+    )
+  }
+
   @Test func listsNestBlocks() {
     let blocks = convert(
       .element(

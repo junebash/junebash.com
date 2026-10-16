@@ -90,9 +90,63 @@ struct AppModelTests {
   @Test func unbuiltSectionsShowConstruction() {
     let model = recorder.model()
     model.started(at: .root)
-    run(model, "cd code")
-    #expect(model.cwd == SitePath(["code"]))
-    #expect(model.output.last?.content == .underConstruction(SitePath(["code"])))
+    run(model, "cd lab")
+    #expect(model.cwd == SitePath(["lab"]))
+    #expect(model.output.last?.content == .underConstruction(SitePath(["lab"])))
+  }
+
+  @Test func musicPagesLiveInOneListingWhateverTheirURL() async {
+    let model = recorder.model()
+    model.started(at: .root)
+    run(model, "cd music")
+    guard case .listing(_, let entries, let order) = model.output.last?.content else {
+      Issue.record("expected listing")
+      return
+    }
+    #expect(entries.map(\.group) == ["solo projects & bands", "concert music"])
+    #expect(order == nil)
+    run(model, "open nonscapes")
+    #expect(model.pager?.path == SitePath(["solo_music", "nonscapes"]))
+    model.pagerDismissed()
+    #expect(model.cwd == SitePath(["music"]))
+    await model.entryClicked(SitePath(["concert_music", "evocations"]))
+    #expect(model.output.contains { $0.content == .command(cwd: SitePath(["music"]), text: "open evocations") })
+  }
+
+  @Test func deepLinksLandInThePageHome() {
+    let model = recorder.model()
+    model.started(at: SitePath(["solo_music", "nonscapes"]))
+    #expect(model.cwd == SitePath(["music"]))
+    #expect(model.pager?.title == "Nonscapes")
+
+    let other = recorder.model()
+    other.started(at: SitePath(["code", "papanca", "privacy-policy"]))
+    #expect(other.cwd == SitePath(["code"]))
+    #expect(other.pager?.title == "Papanca — Privacy Policy")
+  }
+
+  @Test func sectionURLsShowTheirListing() {
+    let model = recorder.model()
+    model.started(at: SitePath(["concert_music"]))
+    #expect(model.cwd == SitePath(["music"]))
+    #expect(recorder.locations.last! == (SitePath(["music"]), false))
+  }
+
+  @Test func onlyDatedListingsOfferToFlip() {
+    let model = recorder.model()
+    model.started(at: .root)
+    run(model, "cd now")
+    guard case .listing(_, _, let order) = model.output.last?.content else {
+      Issue.record("expected listing")
+      return
+    }
+    #expect(order == Order(newestFirst: true, flip: "ls -r"))
+    run(model, "ls ~/code")
+    guard case .listing(_, _, let codeOrder) = model.output.last?.content else {
+      Issue.record("expected listing")
+      return
+    }
+    #expect(codeOrder == nil)
   }
 
   @Test func unknownCommandsFail() {

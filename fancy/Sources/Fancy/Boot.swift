@@ -46,12 +46,14 @@ final class BootScreen {
   func waitForGesture(_ onGesture: @escaping @MainActor () -> Void) async {
     let prompt = element("div", "boot-line boot-prompt", text: isTouchDevice ? "TAP TO BEGIN" : "PRESS ANY KEY TO BEGIN")
     log.add(prompt)
+    var wasTap = false
     await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
       var done = false
       let handler: @MainActor (JSValue) -> Void = { event in
         guard !done else { return }
         if event.metaKey.boolean == true || event.ctrlKey.boolean == true { return }
         done = true
+        wasTap = event.type.string == "pointerup"
         _ = event.preventDefault()
         onGesture()
         continuation.resume()
@@ -60,6 +62,40 @@ final class BootScreen {
       document.listen("pointerup", handler)
     }
     root.setHidden(true)
+    if wasTap { swallowNextClick() }
+  }
+
+  /// A tap's click arrives after its pointerup, so it would land on whatever the revealed shell put under the finger.
+  private func swallowNextClick() {
+    let until = JSDate.now() + 700
+    var swallowed = false
+    document.listen("click", capture: true) { event in
+      guard !swallowed, JSDate.now() < until else { return }
+      swallowed = true
+      _ = event.stopPropagation()
+      _ = event.preventDefault()
+    }
+  }
+}
+
+/// ASCII versions of local photos, each developed at most once.
+final class Darkroom {
+  private(set) var art: [String: AsciiArt] = [:]
+  private var claimed: Set<String> = []
+
+  /// The local photos nobody has started developing yet. They're now the caller's to develop.
+  func claim(_ images: [Image]) -> [String] {
+    var sources: [String] = []
+    for image in images where image.isLocal && claimed.insert(image.src).inserted {
+      sources.append(image.src)
+    }
+    return sources
+  }
+
+  /// Returns whether `src` developed.
+  func develop(_ src: String) async -> Bool {
+    art[src] = await ArtLoader.load(src)
+    return art[src] != nil
   }
 }
 

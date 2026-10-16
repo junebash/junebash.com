@@ -161,8 +161,9 @@ public final class AppModel {
 
   public func entryClicked(_ path: SitePath) async {
     guard let node = site.node(at: path) else { return }
+    let isListedHere = site.entries(in: cwd)?.contains { $0.path == path } == true
     let name =
-      if path.parent == cwd { path.name }
+      if isListedHere { path.name }
       else if path == .root { "~" }
       else if path == cwd.parent { ".." }
       else { path.display }
@@ -308,19 +309,20 @@ public final class AppModel {
   }
 
   private func arrive(at path: SitePath, announce: Bool) {
-    switch site.node(at: path) ?? .unbuilt(path) {
+    let node = site.node(at: path) ?? .unbuilt(path)
+    switch node {
     case .document(let page):
-      let parent = page.path.parent
-      if case .directory = site.node(at: parent), parent != cwd {
-        print(.command(cwd: cwd, text: "cd \(parent.display)"))
-        cwd = parent
-        print(listing(of: parent))
+      if case .directory(let home) = site.node(at: page.home), home != cwd {
+        print(.command(cwd: cwd, text: "cd \(home.display)"))
+        cwd = home
+        print(listing(of: home))
       }
       if pager != page {
         pager = page
         play(.open)
       }
     case .directory, .unbuilt:
+      let path = node.path
       pager = nil
       guard path != cwd || announce else { return }
       if path != cwd {
@@ -345,7 +347,7 @@ public final class AppModel {
     case .directory(let path), .unbuilt(let path):
       print(listing(of: path, reversed: flags.contains("r")))
     case .document(let page):
-      print(.listing(page.path.parent, [Entry(path: page.path, kind: .document, title: page.title, date: page.date)]))
+      print(.listing(page.home, [Entry(path: page.path, kind: .document, title: page.title, date: page.date, note: page.note)]))
     case nil:
       fail("ls: no such place: \(place)")
     }
@@ -353,7 +355,9 @@ public final class AppModel {
 
   private func listing(of path: SitePath, reversed: Bool = false) -> OutputEntry.Content {
     guard var entries = site.entries(in: path), !entries.isEmpty else { return .underConstruction(path) }
-    guard let first = entries.first?.date, let last = entries.last?.date, first != last else {
+    guard entries.allSatisfy({ $0.date != nil && $0.group == nil }),
+      let first = entries.first?.date, let last = entries.last?.date, first != last
+    else {
       return .listing(path, entries)
     }
     if reversed { entries.reverse() }

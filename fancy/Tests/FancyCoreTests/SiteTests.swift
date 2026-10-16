@@ -22,7 +22,9 @@ struct SiteTests {
 
   @Test func nodes() {
     #expect(site.node(at: .root) == .directory(.root))
-    #expect(site.node(at: SitePath(["code"])) == .unbuilt(SitePath(["code"])))
+    #expect(site.node(at: SitePath(["code"])) == .directory(SitePath(["code"])))
+    #expect(site.node(at: SitePath(["lab"])) == .unbuilt(SitePath(["lab"])))
+    #expect(site.node(at: SitePath(["solo_music"])) == .directory(SitePath(["music"])))
     #expect(site.node(at: SitePath(["nope"])) == nil)
     if case .document(let page) = site.node(at: SitePath(["about"])) {
       #expect(page.title == "Hi! I'm June!")
@@ -37,6 +39,28 @@ struct SiteTests {
     #expect(site.lookup("the very last light", from: posts)?.path == SitePath(["posts", "the-very-last-light"]))
     #expect(site.lookup("t", from: posts) == nil)
     #expect(site.lookup("posts/decay", from: .root)?.path == SitePath(["posts", "decay"]))
+  }
+
+  @Test func homeListsBareNames() {
+    let about = site.rootEntries.first { $0.name == "about" }
+    #expect(about?.title == nil)
+    #expect(about?.note == "who's this?")
+    #expect(site.rootEntries.first { $0.name == "music" }?.kind == .directory)
+  }
+
+  @Test func readsListingsFromHTML() {
+    let html = FakeNode.element(
+      "div", [:],
+      .element("a", ["href": "/code/"], .text("code")),
+      .element("h2", [:], .text(" concert music ")),
+      .element("p", [:], .element("a", ["href": "/concert_music/evocations/"], .text("Evocations")))
+    )
+    #expect(
+      Directory.items(in: [html]) == [
+        Directory.Item(path: SitePath(["code"])),
+        Directory.Item(path: SitePath(["concert_music", "evocations"]), group: "concert music"),
+      ]
+    )
   }
 
   @Test func completesCommandsAndNames() {

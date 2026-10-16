@@ -38,13 +38,14 @@ extension JSObject {
     self.textContent = ""
   }
 
-  func listen(_ event: String, passive: Bool = false, _ handler: @escaping @MainActor (JSValue) -> Void) {
+  func listen(_ event: String, passive: Bool = false, capture: Bool = false, _ handler: @escaping @MainActor (JSValue) -> Void) {
     let closure = JSClosure { arguments in
       MainActor.assumeIsolated { handler(arguments[0]) }
       return .undefined
     }
     let options = JSObject()
     options.passive = .boolean(passive)
+    options.capture = .boolean(capture)
     _ = self.addEventListener!(event, closure, options)
   }
 }

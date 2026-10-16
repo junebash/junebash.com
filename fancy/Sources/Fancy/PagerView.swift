@@ -5,7 +5,7 @@ final class PagerView {
   let model: AppModel
   let router: Router
   let layout: Layout
-  let art: [String: AsciiArt]
+  let darkroom: Darkroom
   let shell: ShellView
   let root = byID("pager")
   let title = byID("pager-title")
@@ -15,11 +15,11 @@ final class PagerView {
   private var media: [Popup] = []
   private var shownPath: SitePath?
 
-  init(model: AppModel, router: Router, layout: Layout, art: [String: AsciiArt], shell: ShellView) {
+  init(model: AppModel, router: Router, layout: Layout, darkroom: Darkroom, shell: ShellView) {
     self.model = model
     self.router = router
     self.layout = layout
-    self.art = art
+    self.darkroom = darkroom
     self.shell = shell
 
     observe { [self] in render(model.pager, columns: layout.columns) }
@@ -84,7 +84,7 @@ final class PagerView {
     shownPath = page.path
     title.textContent = .string(page.title)
     meta.textContent = .string(([page.date].compactMap { $0 } + page.tags.map { "#" + $0 }).joined(separator: "  "))
-    var renderer = DocumentRenderer(router: router, art: art, columns: min(columns, 76))
+    var renderer = DocumentRenderer(router: router, art: darkroom.art, columns: min(columns, 76))
     let content = renderer.render(page.document)
     media = renderer.media
     let offset = body.scrollTop
@@ -98,6 +98,20 @@ final class PagerView {
       body.scrollTop = offset
     }
     updateStatus()
+    develop(page)
+  }
+
+  /// Photos appear as links first, then turn into art as each one develops.
+  private func develop(_ page: Page) {
+    let sources = darkroom.claim(page.document.images)
+    guard !sources.isEmpty else { return }
+    Task { [self] in
+      for src in sources {
+        if await darkroom.develop(src), shownPath == page.path, let current = model.pager {
+          render(current, columns: layout.columns)
+        }
+      }
+    }
   }
 
   private func updateStatus() {
@@ -139,6 +153,16 @@ final class PopupView {
       root.setClass("is-video", embed.kind == .video)
       root.setClass("is-audio", embed.kind == .audio)
       let frame = element("iframe", "popup-frame")
+      if embed.kind == .audio, let height = embed.height {
+        let width = "min(\(embed.width ?? 560)px, calc(100vw - 54px))"
+        frame.style.width = .string(width)
+        // Bandcamp's big players are square artwork over a fixed-height footer, so they grow with the width.
+        if let artwork = embed.width, height > artwork, !embed.src.contains("artwork=small") {
+          frame.style.height = .string("calc(\(width) + \(height - artwork)px)")
+        } else {
+          frame.style.height = .string("\(height)px")
+        }
+      }
       frame.setAttr("src", embed.src)
       frame.setAttr("title", embed.title)
       frame.setAttr("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen")

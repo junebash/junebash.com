@@ -1,0 +1,28 @@
+{#- Fancy mode reads each page from an inert <template>. Swift turns <dl> into facts and <iframe> into pop-up players. -#}
+
+{%- macro fact(label, value) -%}
+{%- if value %}<dt>{{ label }}</dt><dd>{{ value }}</dd>{% endif -%}
+{%- endmacro fact -%}
+
+{%- macro link(label, url) -%}
+{%- if url %}<li><a href="{{ url }}">{{ label }}</a></li>{% endif -%}
+{%- endmacro link -%}
+
+{#- Gives a frame from frontmatter the page's title, which becomes the player's name. -#}
+{%- macro frame(html, title) -%}
+{%- set name = title | escape -%}
+{{ html | replace(from="<iframe ", to='<iframe title="' ~ name ~ '" ') | safe }}
+{%- endmacro frame -%}
+
+{#- Code projects are pages, except app showcases, which are sections. Both share these fields. -#}
+{%- macro code(item) -%}
+{%- if item.description %}<p><em>{{ item.description }}</em></p>{% endif -%}
+{{ item.content | safe }}
+{%- if item.extra.ios_store or item.extra.source -%}
+<h2>Links</h2><ul>{{ self::link(label="App Store", url=item.extra.ios_store | default(value="")) }}{{ self::link(label="Source", url=item.extra.source | default(value="")) }}</ul>
+{%- endif -%}
+{%- if item.extra.screenshots -%}
+<h2>Screenshots</h2>
+{%- for shot in item.extra.screenshots %}<img src="/{{ shot | trim_start_matches(pat='/') }}" alt="{{ item.title }} screenshot {{ loop.index }}">{% endfor -%}
+{%- endif -%}
+{%- endmacro code -%}

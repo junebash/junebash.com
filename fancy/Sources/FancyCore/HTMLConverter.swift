@@ -87,7 +87,27 @@ public struct HTMLConverter {
       let source = node.attribute("src") ?? node.attribute("data")
         ?? node.childNodes.first { $0.tagName == "source" }?.attribute("src")
       guard let source, !source.isEmpty else { return }
-      builder.append(.embed(Embed(src: source, title: node.attribute("title"))))
+      var embed = Embed(src: source, title: node.attribute("title"))
+      embed.width = pixels("max-width", of: node) ?? pixels("width", of: node)
+      embed.height = pixels("height", of: node)
+      builder.append(.embed(embed))
+
+    case "dl":
+      var label = ""
+      var lines: [Span] = []
+      for child in node.childNodes {
+        switch child.tagName {
+        case "dt":
+          label = child.textContent.trimmingWhitespace
+        case "dd":
+          if !lines.isEmpty { lines.append(Span("\n")) }
+          lines.append(Span(label.uppercased() + "  ", style: .dim))
+          lines += spans(from: child.childNodes, style: .bold)
+        default:
+          break
+        }
+      }
+      if !lines.isEmpty { builder.append(.paragraph(lines)) }
 
     case "table":
       for row in rows(of: node) {
@@ -100,7 +120,7 @@ public struct HTMLConverter {
       }
 
     case "p", "div", "section", "article", "header", "footer", "main", "aside", "figure",
-      "center", "li", "dl", "dd", "dt", "details", "summary", "nav":
+      "center", "li", "details", "summary", "nav":
       if classes.contains("footnote-definition") {
         builder.append(contentsOf: footnote(node))
         return
@@ -139,6 +159,18 @@ public struct HTMLConverter {
     default:
       children()
     }
+  }
+
+  /// A size in CSS pixels from the inline style, or from the attribute of the same name.
+  private func pixels<Node: HTMLNode>(_ property: String, of node: Node) -> Int? {
+    let style = node.attribute("style") ?? ""
+    for declaration in style.split(separator: ";") {
+      let parts = declaration.split(separator: ":", maxSplits: 1)
+      guard parts.count == 2, String(parts[0]).trimmingWhitespace.lowercased() == property else { continue }
+      let value = String(parts[1]).trimmingWhitespace
+      if value.hasSuffix("px"), let number = Int(value.dropLast(2)) { return number }
+    }
+    return node.attribute(property).flatMap { Int($0) }
   }
 
   private func footnote<Node: HTMLNode>(_ node: Node) -> [Block] {

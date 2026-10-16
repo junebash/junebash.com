@@ -12,17 +12,11 @@ final class App {
     boot.line("SYSTEM IMAGE ........", status: "OK")
     await boot.beat(120)
 
-    let data: SiteData
-    do {
-      let text = byID("fancy-data").textContent.string ?? ""
-      data = try JSValueDecoder().decode(SiteData.self, from: window.JSON.object!.parse!(text))
-    } catch {
+    guard let site = await readContent() else {
       boot.fail("MEMORY CORRUPTED. PLEASE TRY THE SIMPLE SITE.")
       return
     }
-
-    let site = await readContent(data)
-    let art = await developPhotographs(site)
+    let darkroom = await developPhotographs(site)
 
     boot.line("CALIBRATING PHOSPHOR ", status: "OK")
     await boot.beat(160)
@@ -43,7 +37,7 @@ final class App {
     )
     let layout = Layout()
     let shell = ShellView(model: model, layout: layout)
-    let pager = PagerView(model: model, router: router, layout: layout, art: art, shell: shell)
+    let pager = PagerView(model: model, router: router, layout: layout, darkroom: darkroom, shell: shell)
     let menu = MenuView(model: model, shell: shell)
     views = [layout, shell, pager, PopupView(model: model), menu]
     listen(model: model, shell: shell, pager: pager, menu: menu, layout: layout)
@@ -57,63 +51,66 @@ final class App {
     model.started(at: router.currentPath)
   }
 
-  private func readContent(_ data: SiteData) async -> Site {
-    let parser = window.DOMParser.function!.new()
+  /// The shell page carries every page as an inert `<template>`, so nothing in them loads until shown.
+  private func readContent() async -> Site? {
+    let list = document.querySelectorAll!("#fancy-site > template").object!
+    let count = Int(list.length.number ?? 0)
+    guard count > 0 else { return nil }
     let converter = HTMLConverter(isLocal: Router.isLocalAsset)
-    func convert(_ html: String) -> Document {
-      let parsed = parser.parseFromString!(html, "text/html").object!
-      return converter.document(from: DOMNode(parsed.body.object!))
-    }
-
-    let entities = element("textarea")
-    func decodeEntities(_ text: String) -> String {
-      guard text.contains("&") else { return text }
-      entities.innerHTML = .string(text)
-      return entities.value.string ?? text
-    }
-
-    let progress = boot.line("READING POSTS .......", status: "0/\(data.posts.count)")
-    var posts: [Page] = []
-    for (index, post) in data.posts.enumerated() {
-      posts.append(
-        Page(
-          path: SitePath(urlPath: post.path),
-          title: decodeEntities(post.title),
-          date: String(post.date.prefix(10)),
-          tags: post.tags,
-          document: convert(post.html)
+    let progress = boot.line("READING PAGES .......", status: "0/\(count)")
+    var directories: [Directory] = []
+    var pages: [Page] = []
+    for index in 0..<count {
+      let template = list[index].object!
+      func attribute(_ name: String) -> String? {
+        template.getAttribute!(name).string.flatMap { $0.isEmpty ? nil : $0 }
+      }
+      let content = DOMNode(template.content.object!)
+      if let path = attribute("data-dir") {
+        directories.append(
+          Directory(
+            path: SitePath(urlPath: path),
+            note: attribute("data-note"),
+            intro: attribute("data-intro"),
+            aliases: (attribute("data-aliases") ?? "").split(separator: " ").map { SitePath(urlPath: String($0)) },
+            items: Directory.items(in: content.childNodes)
+          )
         )
-      )
+      } else if let path = attribute("data-page").map(SitePath.init(urlPath:)) {
+        pages.append(
+          Page(
+            path: path,
+            home: attribute("data-home").map(SitePath.init(urlPath:)),
+            title: attribute("data-title") ?? path.name,
+            date: attribute("data-date").map { String($0.prefix(10)) },
+            note: attribute("data-note"),
+            tags: (attribute("data-tags") ?? "").split(separator: ",").map(String.init),
+            document: converter.document(from: content)
+          )
+        )
+      }
       if index % 9 == 8 {
-        progress.update("\(index + 1)/\(data.posts.count)")
+        progress.update("\(index + 1)/\(count)")
         await pause(milliseconds: 0)
       }
     }
     progress.update("OK")
-    let about = Page.about(
-      data.about,
-      path: SitePath(["about"]),
-      bio: convert(data.about.bioHTML),
-      skills: convert(data.about.skillsHTML)
-    )
-    return Site(sections: data.sections, about: about, posts: posts)
+    return Site(directories: directories, pages: pages)
   }
 
-  private func developPhotographs(_ site: Site) async -> [String: AsciiArt] {
-    var sources: [String] = []
-    for page in [site.node(at: SitePath(["about"]))].compactMap({ if case .document(let page) = $0 { page } else { nil } }) + site.posts {
-      for image in page.document.images where image.isLocal && !sources.contains(image.src) {
-        sources.append(image.src)
-      }
-    }
+  /// Only the photos a first visit is likely to see; the darkroom develops the rest when they're opened.
+  private func developPhotographs(_ site: Site) async -> Darkroom {
+    let darkroom = Darkroom()
+    let pages = site.pages(under: SitePath(["about"])) + site.pages(under: SitePath(["posts"]))
+    let sources = darkroom.claim(pages.flatMap(\.document.images))
     let progress = boot.line("DEVELOPING PHOTOS ...", status: "0/\(sources.count)")
-    var art: [String: AsciiArt] = [:]
+    var developed = 0
     for (index, src) in sources.enumerated() {
-      art[src] = await ArtLoader.load(src)
+      if await darkroom.develop(src) { developed += 1 }
       progress.update("\(index + 1)/\(sources.count)")
     }
-    progress.update(art.count == sources.count ? "OK" : "\(art.count)/\(sources.count) OK")
-    return art
+    progress.update(developed == sources.count ? "OK" : "\(developed)/\(sources.count) OK")
+    return darkroom
   }
 
   private func listen(model: AppModel, shell: ShellView, pager: PagerView, menu: MenuView, layout: Layout) {

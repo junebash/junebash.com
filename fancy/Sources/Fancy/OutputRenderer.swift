@@ -133,18 +133,28 @@ struct OutputRenderer {
 
   private func listing(_ path: SitePath, _ entries: [Entry], order: Order?) -> JSObject {
     let block = element("div", "t-block t-listing")
+    if let intro = site.directory(at: path)?.intro {
+      block.add(element("div", "t-dim t-intro", text: intro))
+    }
+    var group: String?
     for entry in entries {
+      if let heading = entry.group, heading != group {
+        block.add(element("div", "t-group", text: "-- \(heading) --"))
+      }
+      group = entry.group
       let row = element("div", "t-row t-entry t-\(entry.kind)")
       row.setAttr("data-path", entry.path.urlPath)
       if let date = entry.date {
         row.add(element("span", "t-date", text: date))
       }
       if let title = entry.title {
-        row.add(element("span", "t-click t-title", text: title))
-        row.add(element("span", "t-dim t-slug", text: entry.name))
+        row.add(element("span", "t-click t-title", text: title.count > 64 ? title.prefix(63) + "…" : title))
+        if let aside = entry.note ?? (entry.name == entry.date ? nil : entry.name) {
+          row.add(element("span", "t-dim t-slug", text: aside))
+        }
       } else {
         row.add(element("span", "t-click t-name", text: entry.kind == .document ? entry.name : entry.name + "/"))
-        row.add(element("span", "t-dim", text: description(of: entry)))
+        row.add(element("span", "t-dim", text: entry.kind == .unbuilt ? "under construction" : entry.note ?? ""))
       }
       block.add(row)
     }
@@ -158,14 +168,6 @@ struct OutputRenderer {
       block.add(hint)
     }
     return block
-  }
-
-  private func description(of entry: Entry) -> String {
-    switch entry.kind {
-    case .unbuilt: "under construction"
-    case .document: entry.path == SitePath(["about"]) ? "who's this?" : ""
-    case .directory: entry.path == Site.postsPath ? "\(site.posts.count) things i've written" : ""
-    }
   }
 
   static let sign = #"""

@@ -1,3 +1,4 @@
+{%- import "partials/fancy_macros.html" as fancy -%}
 {%- set build = load_data(path="static/fancy/build/manifest.toml") -%}
 {%- set posts = get_section(path="posts/_index.md") -%}
 {%- set about = get_page(path="about.md") -%}
@@ -131,31 +132,111 @@
   }
 </script>
 <noscript><p style="padding:2em"><a href="{{ config.base_url }}">This machine needs JavaScript. The simple site doesn't.</a></p></noscript>
-<script type="application/json" id="fancy-data">
-{
-  "sections": [
-    {%- for item in config.extra.menu | slice(start=1) -%}
-    {"name": {{ item.name | json_encode() | replace(from="<", to="\u003c") | safe }}, "path": {{ item.url | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
-    {%- endfor -%}
-  ],
-  "about": {
-    "title": "Hi! I'm June!",
-    "facts": {{ about.extra.facts | json_encode() | replace(from="<", to="\u003c") | safe }},
-    "portrait": "/images/june-portrait.png",
-    "socials": [
-      {%- for s in config.extra.socials -%}
-      {"name": {{ s.name | json_encode() | replace(from="<", to="\u003c") | safe }}, "url": {{ s.url | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
-      {%- endfor -%}
-    ],
-    "bioHTML": {{ bio.content | replace(from="<p>Hi! I'm June!</p>", to="") | json_encode() | replace(from="<", to="\u003c") | safe }},
-    "skillsHTML": {{ skills.content | json_encode() | replace(from="<", to="\u003c") | safe }}
-  },
-  "posts": [
-    {%- for p in posts.pages -%}
-    {"title": {{ p.title | json_encode() | replace(from="<", to="\u003c") | safe }}, "path": {{ p.path | json_encode() | replace(from="<", to="\u003c") | safe }}, "date": {{ p.date | json_encode() | replace(from="<", to="\u003c") | safe }}, "tags": {{ p.taxonomies.tags | default(value=[]) | json_encode() | replace(from="<", to="\u003c") | safe }}, "html": {{ p.content | json_encode() | replace(from="<", to="\u003c") | safe }}}{% if not loop.last %},{% endif %}
-    {%- endfor -%}
-  ]
-}
-</script>
+{#- Every page, as inert templates: nothing inside loads until the terminal shows it. Paths are root-relative so images stay same-origin. -#}
+{%- set code = get_section(path="code/_index.md") -%}
+{%- set music = get_page(path="music.md") -%}
+{%- set solo = get_section(path="solo_music/_index.md") -%}
+{%- set band = get_section(path="band_music/_index.md") -%}
+{%- set concert = get_section(path="concert_music/_index.md") -%}
+{%- set games = get_section(path="games/_index.md") -%}
+{%- set films = get_section(path="films/_index.md") -%}
+{%- set now = get_section(path="now/_index.md") -%}
+{%- set projects = solo.pages | concat(with=band.pages) | sort(attribute="date") | reverse -%}
+<div id="fancy-site" hidden>
+<template data-dir="/">{% for item in config.extra.menu | slice(start=1) %}<a href="{{ item.url }}"></a>{% endfor %}</template>
+
+<template data-page="/about/" data-title="Hi! I'm June!" data-note="who's this?">
+<img src="/images/june-portrait.png" alt="Portrait of June Bash">
+<dl>{% for f in about.extra.facts %}{{ fancy::fact(label=f.label, value=f.value) }}{% endfor %}</dl>
+{{ bio.content | replace(from="<p>Hi! I'm June!</p>", to="") | safe }}
+<h2>What I work with</h2>
+{{ skills.content | safe }}
+<h2>Elsewhere</h2>
+<ul>{% for s in config.extra.socials %}<li><a href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}</ul>
+</template>
+
+<template data-dir="/posts/" data-note="{{ posts.pages | length }} things i've written">{% for p in posts.pages %}<a href="{{ p.path }}"></a>{% endfor %}</template>
+{% for p in posts.pages -%}
+<template data-page="{{ p.path }}" data-title="{{ p.title }}" data-date="{{ p.date }}" data-tags="{{ p.taxonomies.tags | default(value=[]) | join(sep=',') }}">{{ p.content | safe }}</template>
+{% endfor %}
+
+<template data-dir="/code/" data-note="things i've built" data-intro="Apps, experiments, and open-source bits.">
+{%- for path in code.subsections %}{% set s = get_section(path=path) %}<a href="{{ s.path }}"></a>{% endfor -%}
+{%- for p in code.pages %}<a href="{{ p.path }}"></a>{% endfor -%}
+</template>
+{% for path in code.subsections -%}
+{%- set s = get_section(path=path) -%}
+<template data-page="{{ s.path }}" data-title="{{ s.title }}" data-note="{{ s.description }}">{{ fancy::code(item=s) }}</template>
+{% for p in s.pages -%}
+<template data-page="{{ p.path }}" data-home="/code/" data-title="{{ p.title }}">{{ p.content | safe }}</template>
+{% endfor -%}
+{% endfor -%}
+{% for p in code.pages -%}
+<template data-page="{{ p.path }}" data-title="{{ p.title }}" data-note="{{ p.description }}">{{ fancy::code(item=p) }}</template>
+{% endfor %}
+
+<template data-dir="/music/" data-note="noise i've made" data-intro="{{ music.content | striptags | trim | safe }}" data-aliases="/solo_music/ /band_music/ /concert_music/ /games/ /films/">
+<h2>solo projects &amp; bands</h2>{% for p in projects %}<a href="{{ p.path }}"></a>{% endfor %}
+<h2>music for games &amp; films</h2>{% for p in games.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}{% for p in films.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}
+<h2>concert music</h2>{% for p in concert.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}
+</template>
+{#- Music dates are only ever years, so pages carry the year in their notes and facts instead of a date. #}
+{% for p in projects -%}
+{%- set year = p.date | date(format="%Y") -%}
+{%- set note = p.extra.type | default(value="") -%}
+{%- if p.extra.collaboration %}{% set note = note ~ " · with " ~ p.extra.collaboration %}{% endif -%}
+{%- if p.extra.band %}{% set note = note ~ " · " ~ p.extra.band %}{% endif -%}
+<template data-page="{{ p.path }}" data-home="/music/" data-title="{{ p.title }}" data-note="{{ note }} · {{ year }}">
+{%- if p.extra.description %}<p><em>{{ p.extra.description }}</em></p>{% endif -%}
+<dl>{{ fancy::fact(label="type", value=p.extra.type | default(value="")) }}{{ fancy::fact(label="band", value=p.extra.band | default(value="")) }}{{ fancy::fact(label="with", value=p.extra.collaboration | default(value="")) }}{{ fancy::fact(label="year", value=year) }}</dl>
+{%- if p.extra.bandcamp_embed %}{{ fancy::frame(html=p.extra.bandcamp_embed, title=p.title) }}{% endif -%}
+{%- if p.extra.youtube_embed %}{{ fancy::frame(html=p.extra.youtube_embed, title=p.title) }}{% endif -%}
+{%- for video in p.extra.youtube_embeds | default(value=[]) %}<iframe src="https://www.youtube.com/embed/{{ video.embed_id }}" title="{{ video.title }}"></iframe>{% endfor -%}
+{%- if p.extra.streaming_links -%}
+<h2>Available on</h2><ul>{% for service, url in p.extra.streaming_links %}<li><a href="{{ url }}">{{ service }}</a></li>{% endfor %}</ul>
+{%- endif -%}
+{{ p.content | safe }}
+</template>
+{% endfor -%}
+{% for p in games.pages -%}
+{%- set year = p.date | date(format="%Y") -%}
+<template data-page="{{ p.path }}" data-home="/music/" data-title="{{ p.title }}" data-note="game · {% if p.extra.developer %}{{ p.extra.developer }} · {% endif %}{{ year }}">
+<dl>{{ fancy::fact(label="developer", value=p.extra.developer | default(value="")) }}{{ fancy::fact(label="released", value=year) }}</dl>
+{%- if p.extra.image %}<img src="/images/{{ p.extra.image }}" alt="{{ p.title }}">{% endif -%}
+{{ p.content | safe }}
+{% if p.extra.link %}<h2>Links</h2><ul><li><a href="{{ p.extra.link }}">Play the game</a></li></ul>{% endif %}
+</template>
+{% endfor -%}
+{% for p in films.pages -%}
+{%- set year = p.date | date(format="%Y") -%}
+{%- set kind = "" -%}
+{%- if p.extra.feature %}{% set kind = "feature film" %}{% elif p.extra.promo %}{% set kind = "promotional" %}{% endif -%}
+<template data-page="{{ p.path }}" data-home="/music/" data-title="{{ p.title }}" data-note="film · {% if p.extra.company %}{{ p.extra.company }} · {% endif %}{{ year }}">
+<dl>{{ fancy::fact(label="company", value=p.extra.company | default(value="")) }}{{ fancy::fact(label="kind", value=kind) }}{{ fancy::fact(label="released", value=year) }}</dl>
+{%- if p.extra.video_embed %}{{ fancy::frame(html=p.extra.video_embed, title=p.title) }}{% endif -%}
+{{ p.content | safe }}
+{%- if p.extra.links -%}
+{%- set l = p.extra.links -%}
+<h2>Watch &amp; learn more</h2><ul>{{ fancy::link(label="IMDb", url=l.imdb | default(value="")) }}{{ fancy::link(label="Amazon", url=l.amazon | default(value="")) }}{{ fancy::link(label="Apple TV", url=l.itunes | default(value="")) }}{{ fancy::link(label="Google Play", url=l.play | default(value="")) }}{{ fancy::link(label="Film website", url=l.film_site | default(value="")) }}{{ fancy::link(label="Production company", url=l.co_site | default(value="")) }}</ul>
+{%- endif %}
+</template>
+{% endfor -%}
+{% for p in concert.pages -%}
+{%- set year = p.date | date(format="%Y") -%}
+<template data-page="{{ p.path }}" data-home="/music/" data-title="{{ p.title }}" data-note="{{ p.extra.ensemble_type | default(value='concert music') }}{% if p.extra.length %} · {{ p.extra.length }}{% endif %} · {{ year }}">
+<dl>{{ fancy::fact(label="ensemble", value=p.extra.ensemble_type | default(value="")) }}{{ fancy::fact(label="length", value=p.extra.length | default(value="")) }}{{ fancy::fact(label="completed", value=p.extra.completed | default(value="")) }}{{ fancy::fact(label="premiered", value=p.extra.premiered | default(value="")) }}{{ fancy::fact(label="instrumentation", value=p.extra.instrumentation | default(value="")) }}</dl>
+{%- if p.extra.bandcamp_embed %}{{ fancy::frame(html=p.extra.bandcamp_embed, title=p.title) }}{% endif -%}
+{%- if p.extra.youtube_embed %}{{ fancy::frame(html=p.extra.youtube_embed, title=p.title) }}{% endif -%}
+{{ p.content | safe }}
+</template>
+{% endfor %}
+
+<template data-dir="/now/" data-note="{{ now.extra.headline | default(value='where i am') | lower }}" data-intro="{{ now.content | striptags | trim | safe }}">{% for p in now.pages %}<a href="{{ p.path }}"></a>{% endfor %}</template>
+{% for p in now.pages -%}
+{#- Rendered content is already escaped, quotes included, so it can sit in an attribute as is. #}
+{%- set teaser = p.content | split(pat="</p>") | first | striptags | trim -%}
+<template data-page="{{ p.path }}" data-title="{{ p.description | default(value=teaser) | safe }}" data-date="{{ p.date }}">{{ p.content | safe }}</template>
+{% endfor -%}
+</div>
 </body>
 </html>

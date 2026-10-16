@@ -114,15 +114,27 @@ final class ShellView {
 
   private func renderOutput(_ entries: [OutputEntry]) {
     trim(before: entries.first?.id ?? .max)
+    var command: JSObject?
     for entry in entries where entry.id > lastRenderedID {
       let node = renderer.render(entry)
       output.add(node)
       lastRenderedID = entry.id
+      if case .command = entry.content { command = node }
       if entry.content == .welcome, let spinner = node.querySelector!(".t-spinner").object {
         SpinnerView.start(in: spinner, wide: layout.columns >= 76)
       }
     }
+    scrollToNewest(after: command)
+  }
+
+  /// Output too tall for the screen starts at the command that made it, so a long listing keeps its top.
+  private func scrollToNewest(after command: JSObject?) {
     screen.scrollTop = screen.scrollHeight
+    guard let command else { return }
+    let top = (command.getBoundingClientRect!().top.number ?? 0) - (screen.getBoundingClientRect!().top.number ?? 0)
+    if top < 0 {
+      screen.scrollTop = .number((screen.scrollTop.number ?? 0) + top)
+    }
   }
 
   private func trim(before id: Int) {
@@ -153,6 +165,6 @@ final class ShellView {
     let cursor = element("span", "t-cursor", text: rest.first.map(String.init) ?? " ")
     mirror.add(cursor)
     _ = mirror.append!(String(rest.dropFirst()))
-    screen.scrollTop = screen.scrollHeight
+    if !text.isEmpty { screen.scrollTop = screen.scrollHeight }
   }
 }
