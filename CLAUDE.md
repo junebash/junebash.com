@@ -12,6 +12,15 @@ Personal website built with Zola static site generator using the Apollo theme. C
 - `zola build` - Build static site to `public/`
 - `zola check` - Validate site without building
 
+## Fancy mode (`fancy/`)
+
+A terminal version of the site, written in Swift and compiled to WebAssembly. It's served at fancy.junebash.com, and at `/fancy/` locally and on deploy previews.
+
+- `just fancy` builds it into `static/fancy/build/<hash>/` and updates `manifest.toml`. Rerun it after any change in `fancy/Sources` or `fancy/web` (the CSS lives there), then commit the build output. New posts need no rebuild: `templates/fancy.html` embeds the content at Zola build time.
+- `just fancy-test` runs the core tests (`FancyCore`) on macOS.
+- The toolchain is swift.org Swift 6.3.3 plus its WASM SDK, run through `~/.swiftly/bin/swiftly`, which is not on PATH. Never `import Foundation` in `fancy/`: it adds about 10MB. The build fails above 3MB of compressed wasm.
+- `zola serve` caches the manifest, so restart it after a build. Deep links under `/fancy/` only work where the Netlify rewrite applies.
+
 ## Architecture
 
 ### Content Structure (`content/`)
