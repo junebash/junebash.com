@@ -10,7 +10,7 @@ image = "/images/lambda-logo.png"
 comment = true
 +++
 
-This week I started orientation at [Lambda School](http://www.lambdaschool.com){:target="_blank"}, where I'll be studying primarily iOS development (and macOS & related techologies). One of my assignments during orientation is to write about why I'm here. Although the cynical part of me rolls my eyes at the very typically "first-day-of-school" style of the assignment, I thought I'd take it at least relatively seriously and make my thoughts public in the case that it happened to be helpful to someone else down the line. <!-- more -->
+This week I started orientation at [Lambda School](http://www.lambdaschool.com), where I'll be studying primarily iOS development (and macOS & related techologies). One of my assignments during orientation is to write about why I'm here. Although the cynical part of me rolls my eyes at the very typically "first-day-of-school" style of the assignment, I thought I'd take it at least relatively seriously and make my thoughts public in the case that it happened to be helpful to someone else down the line. <!-- more -->
 
 ## Then
 

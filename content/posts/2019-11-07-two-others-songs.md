@@ -49,9 +49,9 @@ After finishing, it feels weird to go back to the original tune; it feels differ
 
 If "Here Comes a Thought" marked a period of late-20s angst, this Radiohead tune probably best stands in for some of my late-high school angst. I had a hard time deciding whether to put this first or second, but I opted to start off more cheerfully. Really it could go either way, but I think thematically this tune somehow feels less "mature," which is somewhat ironic seeing as "Here Comes a Thought" comes from an animated family-friendly TV show and "How to Disappear Completely" is a track from arguably one of the most significant albums of the past couple of decades.
 
-I again switched up the time signature, this time in the other direction from 6/8 to 4/4. I had intended to do most of the instruments in this track using [VCV Rack][]{:target="_blank"}, but that ended up proving to be more cumbersome than I had hoped. I still ended up doing the hi-hats, some synth flourishes, some samples, and some glitchy stuff using VCV Rack.
+I again switched up the time signature, this time in the other direction from 6/8 to 4/4. I had intended to do most of the instruments in this track using [VCV Rack][], but that ended up proving to be more cumbersome than I had hoped. I still ended up doing the hi-hats, some synth flourishes, some samples, and some glitchy stuff using VCV Rack.
 
-[Glitch 2](https://illformed.com){:target="_blank"} from Illformed got some heavy use, especially on the drums. My usual workflow for that plugin is generally to put it on the drums, record the output to a new track, and flip between different settings, then find the best bits of that to use as "drum fills" essentially. I might have borrowed this technique from Disasterpeace, who I believe did something similar on the *Fez* soundtrack?
+[Glitch 2](https://illformed.com) from Illformed got some heavy use, especially on the drums. My usual workflow for that plugin is generally to put it on the drums, record the output to a new track, and flip between different settings, then find the best bits of that to use as "drum fills" essentially. I might have borrowed this technique from Disasterpeace, who I believe did something similar on the *Fez* soundtrack?
 
 For most of the synths, I used several instances of [NI Massive](https://www.native-instruments.com/en/products/komplete/synths/massive) (still on the old version). It's an extremely versatile synth, but I often find myself making the same dreamy, vibrato-y, retro-y sawtooth wave, or something derived from that sound.
 
@@ -63,7 +63,7 @@ I couldn't resist throwing in more choir-y vocals. I can't get enough of them.
 
 I had planned to do more tunes and make an EP, but essentially ran out of time. I still thought this put a nice bow on one period of my life, though.
 
-[^1]: Here's [the original version](https://www.youtube.com/watch?v=dHg50mdODFM){:target="_blank"} of "Here Comes a Thought" in its episode, "Mindful Education."
-[^2]: Here's [an especially transcendent performance](https://www.youtube.com/watch?v=If47eIpWWa0){:target="_blank"} featuring several [Ondes Martenot](https://en.wikipedia.org/wiki/Ondes_Martenot){:target="_blank"} players.
-[^3]: [See 1:09](https://youtu.be/YUhj-Bdcyh4?t=69){:target="_blank"}.
+[^1]: Here's [the original version](https://www.youtube.com/watch?v=dHg50mdODFM) of "Here Comes a Thought" in its episode, "Mindful Education."
+[^2]: Here's [an especially transcendent performance](https://www.youtube.com/watch?v=If47eIpWWa0) featuring several [Ondes Martenot](https://en.wikipedia.org/wiki/Ondes_Martenot) players.
+[^3]: [See 1:09](https://youtu.be/YUhj-Bdcyh4?t=69).
 [VCV Rack]: https://www.vcvrack.com

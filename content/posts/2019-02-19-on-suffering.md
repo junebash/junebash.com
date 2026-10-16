@@ -16,4 +16,4 @@ comment = true
 
 * * * * * *
 
-I've decided to start posting really tiny things like this on here a la [micro.blog](https://micro.blog){:target="blank"}. Expect more of this in the future. I may at some point separate the micro-posts out into their own page.
+I've decided to start posting really tiny things like this on here a la [micro.blog](https://micro.blog). Expect more of this in the future. I may at some point separate the micro-posts out into their own page.
