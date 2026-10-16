@@ -506,11 +506,26 @@ a:hover {
   text-decoration: none;
 }
 
+/* Notes give way long before titles do. */
 .t-slug {
-  flex: 0 1 auto;
+  flex: 0 1000 auto;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.t-intro {
+  margin-bottom: 0.4em;
+}
+
+.t-group {
+  margin-top: 0.6em;
+  color: var(--phosphor-bright);
+}
+
+.t-group:first-child {
+  margin-top: 0;
 }
 
 .t-unbuilt .t-name {
@@ -833,7 +848,7 @@ ul.t-list > li::before {
   display: flex;
   flex-direction: column;
   max-width: min(900px, 100%);
-  max-height: 100%;
+  max-height: calc(100dvh - 32px);
   border: 1px solid var(--window-edge);
   background: var(--window);
   color: var(--ink);
