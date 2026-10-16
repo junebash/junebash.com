@@ -163,9 +163,11 @@ extension SoundEffect {
         Tone(wave: .noise(filter: "lowpass"), frequency: 140, duration: 0.45, gain: 0.5, attack: 0.002, q: 4),
         Tone(wave: .sine, frequency: 55, glide: 49, duration: 0.6, gain: 0.25, attack: 0.002),
       ]
-        + [261.63, 329.63, 392.0, 493.88, 571.0].enumerated().map { index, frequency in
+        // Cmaj7 with a #11 a little sharp and a 9th a quarter-tone flat.
+        + [(261.63, 0.09), (329.63, 0.09), (373.2, 0.055), (392.0, 0.09), (493.88, 0.09), (571.0, 0.035)]
+        .enumerated().map { index, note in
           Tone(
-            wave: .sine, frequency: frequency, duration: 2.6, gain: index == 4 ? 0.035 : 0.09, attack: 0.02,
+            wave: .sine, frequency: note.0, duration: 2.6, gain: note.1, attack: 0.02,
             delay: 0.35 + Double(index) * 0.012, fm: (ratio: 2.0, index: 0.9)
           )
         }
