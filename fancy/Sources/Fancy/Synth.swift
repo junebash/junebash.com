@@ -123,14 +123,17 @@ extension SoundEffect {
   var tones: [Tone] {
     switch self {
     case .key:
+      // A damped low thump with a little felt on top: thock, not clack.
       [
-        Tone(wave: .noise(filter: "highpass"), frequency: Double.random(in: 2600...3400), duration: 0.025, gain: 0.25, attack: 0.001),
-        Tone(wave: .square, frequency: Double.random(in: 1500...1900), duration: 0.012, gain: 0.025, attack: 0.001),
+        Tone(wave: .sine, frequency: Double.random(in: 165...215), glide: 95, duration: 0.05, gain: 0.3, attack: 0.001),
+        Tone(wave: .noise(filter: "bandpass"), frequency: Double.random(in: 420...640), duration: 0.04, gain: 0.55, attack: 0.001, q: 1.3),
+        Tone(wave: .noise(filter: "lowpass"), frequency: 1400, duration: 0.014, gain: 0.07, attack: 0.001),
       ]
     case .enter:
       [
-        Tone(wave: .noise(filter: "bandpass"), frequency: 900, duration: 0.05, gain: 0.35, attack: 0.001, q: 2),
-        Tone(wave: .square, frequency: 196, glide: 98, duration: 0.07, gain: 0.05, attack: 0.001),
+        Tone(wave: .sine, frequency: 128, glide: 62, duration: 0.09, gain: 0.38, attack: 0.001),
+        Tone(wave: .noise(filter: "bandpass"), frequency: 330, duration: 0.07, gain: 0.7, attack: 0.001, q: 1.1),
+        Tone(wave: .triangle, frequency: 240, glide: 150, duration: 0.035, gain: 0.08, attack: 0.001),
       ]
     case .error:
       [
