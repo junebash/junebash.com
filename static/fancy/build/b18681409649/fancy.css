@@ -138,40 +138,12 @@ button {
   animation: snow 0.5s infinite steps(1);
 }
 
-/* Scanlines and the tracking band stay on the plastic; the screen sits above them. */
-.tape {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  border-radius: inherit;
-  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0 2px, transparent 2px 5px);
-}
-
-.tape::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 9%;
-  background: linear-gradient(transparent, rgba(236, 229, 205, 0.06) 40%, rgba(255, 255, 255, 0.11) 55%, transparent);
-  transform: translateY(-100%);
-  animation: band 11s infinite linear;
-}
-
 @keyframes snow {
   0% { transform: translate(0, 0); }
   20% { transform: translate(-71px, 43px); }
   40% { transform: translate(37px, -88px); }
   60% { transform: translate(-113px, -19px); }
   80% { transform: translate(59px, 97px); }
-}
-
-@keyframes band {
-  0% { transform: translateY(-100%); }
-  60%, 100% { transform: translateY(1150%); }
 }
 
 .monitor::after {
@@ -1117,7 +1089,6 @@ ul.t-list > li::before {
 
 @media (prefers-reduced-motion: reduce) {
   .vhs::before,
-  .tape::after,
   .glass,
   .glass::after,
   .boot-bar,
