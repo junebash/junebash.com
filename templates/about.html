@@ -18,18 +18,12 @@
       <img class="about-portrait" src="{{ get_url(path='images/june-portrait.png') }}" alt="Portrait of June Bash" />
 
       <dl class="about-facts">
+        {% for fact in page.extra.facts %}
         <div class="about-fact">
-          <dt class="rd-mono about-fact-label">Role</dt>
-          <dd class="about-fact-value">Principal iOS Engineer</dd>
+          <dt class="rd-mono about-fact-label">{{ fact.label }}</dt>
+          <dd class="about-fact-value">{{ fact.value }}</dd>
         </div>
-        <div class="about-fact">
-          <dt class="rd-mono about-fact-label">Based in</dt>
-          <dd class="about-fact-value">Bellingham, WA</dd>
-        </div>
-        <div class="about-fact">
-          <dt class="rd-mono about-fact-label">Pronouns</dt>
-          <dd class="about-fact-value">she/her</dd>
-        </div>
+        {% endfor %}
       </dl>
 
       {% if config.extra.socials %}
