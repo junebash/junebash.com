@@ -1,5 +1,5 @@
 +++
-title = "Habitual Composition &#8211; commit to writing one measure of music every day"
+title = "Habitual Composition – commit to writing one measure of music every day"
 date = "2015-01-30 16:00:00+00:00"
 
 [taxonomies]

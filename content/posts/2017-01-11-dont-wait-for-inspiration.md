@@ -1,5 +1,5 @@
 +++
-title = "Don&#8217;t Wait for Inspiration"
+title = "Don’t Wait for Inspiration"
 date = "2017-01-11 21:05:33+00:00"
 
 [taxonomies]

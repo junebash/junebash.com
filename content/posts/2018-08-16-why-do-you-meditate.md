@@ -1,5 +1,5 @@
 +++
-title = "&#8220;Why Do You Meditate?&#8221;"
+title = "“Why Do You Meditate?”"
 date = "2018-08-16 20:14:40+00:00"
 
 [taxonomies]

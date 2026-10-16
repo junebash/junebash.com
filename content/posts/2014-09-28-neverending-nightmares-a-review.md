@@ -1,5 +1,5 @@
 +++
-title = "Neverending Nightmares &#8211; a review"
+title = "Neverending Nightmares – a review"
 date = "2014-09-28 17:00:00+00:00"
 
 [taxonomies]
