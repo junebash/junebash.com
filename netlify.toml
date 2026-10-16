@@ -15,6 +15,33 @@ command = "zola build --base-url $DEPLOY_PRIME_URL"
 command = "zola build --base-url $DEPLOY_PRIME_URL"
 
 # Redirect rules
+
+# Fancy mode: every path on fancy.junebash.com is the terminal shell page,
+# except the files the terminal itself loads. First match wins, so these come first.
+[[redirects]]
+from = "https://fancy.junebash.com/fancy/build/*"
+to = "/fancy/build/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://fancy.junebash.com/images/*"
+to = "/images/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://fancy.junebash.com/*"
+to = "/fancy/index.html"
+status = 200
+force = true
+
+# Fancy mode on the main domain and deploy previews lives under /fancy/.
+[[redirects]]
+from = "/fancy/*"
+to = "/fancy/index.html"
+status = 200
+
 [[redirects]]
 from = "/blog/*"
 to = "/posts/:splat"
@@ -26,6 +53,11 @@ to = "/code/:splat"
 status = 301
 
 # Headers for better performance
+[[headers]]
+for = "/fancy/build/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
 for = "/*"
 [headers.values]
