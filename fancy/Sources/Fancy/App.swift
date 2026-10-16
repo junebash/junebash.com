@@ -174,11 +174,7 @@ struct DOMNode: HTMLNode {
   }
 
   var tagName: String? {
-    switch object.nodeType.number {
-    case 1: object.tagName.string?.lowercased()
-    case 3: nil
-    default: "#other"
-    }
+    object.nodeType.number == 1 ? object.tagName.string?.lowercased() : nil
   }
 
   var textContent: String {
@@ -188,10 +184,14 @@ struct DOMNode: HTMLNode {
   var childNodes: [DOMNode] {
     let list = object.childNodes.object!
     let count = Int(list.length.number ?? 0)
-    return (0..<count).compactMap { list[$0].object.map(DOMNode.init) }
+    // Comments (older Zola leaves <!-- more --> in) and the like have nothing to show.
+    return (0..<count).compactMap { list[$0].object }
+      .filter { [1, 3].contains($0.nodeType.number) }
+      .map(DOMNode.init)
   }
 
   func attribute(_ name: String) -> String? {
-    object.getAttribute!(name).string
+    guard object.nodeType.number == 1 else { return nil }
+    return object.getAttribute!(name).string
   }
 }

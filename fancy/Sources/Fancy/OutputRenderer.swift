@@ -123,7 +123,6 @@ struct OutputRenderer {
       let leave = element("span", "t-click", text: "see it in simple mode")
       leave.setAttr("data-action", "leave")
       let row = element("div", "t-hint")
-      _ = row.append!("under construction. ")
       row.add(leave)
       _ = row.append!(", or try ")
       let back = element("span", "t-click", text: "cd ~")
