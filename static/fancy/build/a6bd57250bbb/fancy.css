@@ -88,12 +88,15 @@ button {
 }
 
 /* The plastic is a worn tape of a machine; only the screen and the button are really there. */
-.monitor::before,
+.monitor::before {
+  filter: url(#pixels) url(#tape);
+}
+
 .monitor::after,
 .badge,
 .slot,
 .led {
-  filter: url(#vhs);
+  filter: url(#tape);
 }
 
 .monitor::before {
