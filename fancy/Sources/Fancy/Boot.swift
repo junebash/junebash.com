@@ -22,10 +22,14 @@ final class BootScreen {
     document.querySelector!(".boot-bar").object?.setClass("is-done", true)
   }
 
+  /// Dots lead every status to the same column as the lines in fancy.html.
+  static let statusColumn = 24
+
   @discardableResult
-  func line(_ label: String, status: String = "") -> Line {
+  func line(_ label: String, status: String) -> Line {
+    let dots = String(repeating: ".", count: max(2, Self.statusColumn - label.count - 2))
     let row = element("div", "boot-line")
-    row.add(element("span", "", text: label + " "))
+    row.add(element("span", "", text: label + " " + dots + " "))
     let value = element("span", "boot-status", text: status)
     row.add(value)
     log.add(row)
@@ -37,7 +41,7 @@ final class BootScreen {
   }
 
   func fail(_ message: String) {
-    line(message).status.className = .string("boot-status boot-error")
+    log.add(element("div", "boot-error", text: message))
     window.fancyBootFailed.function?()
   }
 

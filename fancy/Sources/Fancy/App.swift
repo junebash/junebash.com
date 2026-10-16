@@ -9,7 +9,7 @@ final class App {
 
   func run() async {
     boot.systemImageLoaded()
-    boot.line("SYSTEM IMAGE ........", status: "OK")
+    boot.line("SYSTEM IMAGE", status: "OK")
     await boot.beat(120)
 
     guard let site = await readContent() else {
@@ -18,9 +18,9 @@ final class App {
     }
     let darkroom = await developPhotographs(site)
 
-    boot.line("CALIBRATING PHOSPHOR ", status: "OK")
+    boot.line("CALIBRATING PHOSPHOR", status: "OK")
     await boot.beat(160)
-    boot.line("LOOKING FOR YOU ......", status: "FOUND")
+    boot.line("LOOKING FOR YOU", status: "FOUND")
     await boot.beat(240)
 
     let isSoundOn = Preferences.get("sound") != "off"
@@ -57,7 +57,7 @@ final class App {
     let count = Int(list.length.number ?? 0)
     guard count > 0 else { return nil }
     let converter = HTMLConverter(isLocal: Router.isLocalAsset)
-    let progress = boot.line("READING PAGES .......", status: "0/\(count)")
+    let progress = boot.line("READING PAGES", status: "0/\(count)")
     var directories: [Directory] = []
     var pages: [Page] = []
     for index in 0..<count {
@@ -103,7 +103,7 @@ final class App {
     let darkroom = Darkroom()
     let pages = site.pages(under: SitePath(["about"])) + site.pages(under: SitePath(["posts"]))
     let sources = darkroom.claim(pages.flatMap(\.document.images))
-    let progress = boot.line("DEVELOPING PHOTOS ...", status: "0/\(sources.count)")
+    let progress = boot.line("DEVELOPING PHOTOS", status: "0/\(sources.count)")
     var developed = 0
     for (index, src) in sources.enumerated() {
       if await darkroom.develop(src) { developed += 1 }

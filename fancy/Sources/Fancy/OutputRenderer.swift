@@ -117,14 +117,13 @@ struct OutputRenderer {
       block.add(text)
       return block
 
-    case .underConstruction(let path):
+    case .underConstruction:
       let block = element("div", "t-block t-construction")
       block.add(element("pre", "t-sign", text: Self.sign))
-      block.add(element("div", "", text: "\(path.display) isn't built yet. the walls are still wet."))
       let leave = element("span", "t-click", text: "see it in simple mode")
       leave.setAttr("data-action", "leave")
       let row = element("div", "t-hint")
-      _ = row.append!("you can ")
+      _ = row.append!("under construction. ")
       row.add(leave)
       _ = row.append!(", or try ")
       let back = element("span", "t-click", text: "cd ~")
