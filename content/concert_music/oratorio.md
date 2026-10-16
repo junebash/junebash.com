@@ -10,6 +10,7 @@ length = "12'"
 completed = 2014
 premiered = 2014
 instrumentation = "• Soprano Saxophone\n• Alto Saxophone\n• Tenor Saxophone\n• Baritone Saxophone"
+youtube_embed = "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube-nocookie.com/embed/t236OYhHVb0\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
 +++
 
 In Spring 2014, Matt Birmingham of the Equus Sax Quartet approached me about writing a piece for the ensemble, and I jumped at the opportunity without hesitation. I sought to write something that would play to the players’ specific strengths & abilities and of the unique timbral qualities & techniques of the saxophone. A special thanks is owed to Soren, Matt, David H., and David D., who played through many drafts and helped guide the direction of the piece.
