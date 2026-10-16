@@ -1,0 +1,14 @@
+{% extends "page.html" %}
+
+{% block main_content %}
+    {#- zola serve has no rewrites, so a fancy deep link lands here; hand it to the shell page. #}
+    <script>
+      if (location.pathname.startsWith("/fancy/")) {
+        location.replace("/fancy/?at=" + encodeURIComponent(location.pathname.slice("/fancy".length)));
+      }
+    </script>
+    <main class="centered-header">
+        {{ post_macros::page_header(title="404") }}
+        <span>Page not found :(</span>
+    </main>
+{% endblock main_content %}

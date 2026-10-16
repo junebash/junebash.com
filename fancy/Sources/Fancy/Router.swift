@@ -21,6 +21,9 @@ struct Router {
   }
 
   var currentPath: SitePath {
+    if let handedOff = JSObject.global.URLSearchParams.function!.new(window.location.search).get!("at").string {
+      return SitePath(urlPath: handedOff)
+    }
     var path = Substring(window.location.pathname.string ?? "/")
     if !base.isEmpty, path.hasPrefix(base) {
       path = path.dropFirst(base.count)
