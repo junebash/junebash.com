@@ -18,6 +18,27 @@
   <link rel="modulepreload" href="{{ assets | safe }}/app/index.js">
 </head>
 <body>
+<svg class="defs" aria-hidden="true" width="0" height="0">
+  <filter id="vhs" color-interpolation-filters="sRGB">
+    <feFlood x="1" y="1" width="1" height="1"/>
+    <feComposite width="3" height="3"/>
+    <feTile result="grid"/>
+    <feComposite in="SourceGraphic" in2="grid" operator="in"/>
+    <feMorphology operator="dilate" radius="1" result="pixels"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.002 0.09" numOctaves="1" seed="7"/>
+    <feColorMatrix values="1 0 0 0 0  0 0 0 0 0.5  0 0 0 0 0  0 0 0 0 1" result="warp"/>
+    <feDisplacementMap in="pixels" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="warped"/>
+    <feColorMatrix in="warped" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+    <feOffset dx="-1" result="red"/>
+    <feColorMatrix in="warped" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+    <feOffset dx="1" result="blue"/>
+    <feColorMatrix in="warped" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+    <feBlend in2="red" mode="screen"/>
+    <feBlend in2="blue" mode="screen"/>
+    <feColorMatrix type="saturate" values="0.8"/>
+  </filter>
+</svg>
+<div class="vhs" aria-hidden="true"></div>
 <div class="room">
   <div class="monitor">
     <div class="bezel">
