@@ -6,15 +6,20 @@
   import Glibc
 #endif
 
-/// A slowly turning CRT monitor, ray-marched into ASCII. Swap `distance(_:)` to change the object.
+/// A compact disc flipping end over end, ray-traced into ASCII.
 public struct Spinner: Sendable {
   public let columns: Int
   public let rows: Int
   /// Width of a character cell relative to its height.
   public var cellAspect: Float = 0.5
 
-  static let ramp = Array(".,-~:;=!*#$@")
+  static let ramp = Array(" .,-~:;=!*#$@")
   typealias Vector = SIMD3<Float>
+
+  /// Disc proportions, in units of its radius. Thicker than a real CD so the rim survives edge-on.
+  static let hole: Float = 0.13
+  static let hub: Float = 0.34
+  static let halfThickness: Float = 0.035
 
   public init(columns: Int, rows: Int, cellAspect: Float = 0.5) {
     self.columns = columns
@@ -22,13 +27,11 @@ public struct Spinner: Sendable {
     self.cellAspect = cellAspect
   }
 
+  /// Every line is exactly `columns` wide, so the frame never changes size.
   public func frame(time: Double) -> [String] {
-    let turn = Float(time * 0.55)
-    let tilt = Float(0.22 + 0.07 * sin(time * 0.6))
-    let rotation = Rotation(yaw: turn, pitch: tilt)
-    let light = normalize(Vector(-0.55, 0.65, 0.75))
-    let origin = Vector(0, 0, 4.6)
-    let band = Int(time * 9)
+    let rotation = Rotation(yaw: Float(time * 0.8), pitch: Float(0.28 + 0.1 * sin(time * 0.45)))
+    let origin = rotation.apply(Vector(0, 0, 4.2))
+    let light = rotation.apply(normalize(Vector(-0.5, 0.75, 0.8)))
 
     var lines: [String] = []
     lines.reserveCapacity(rows)
@@ -39,64 +42,68 @@ public struct Spinner: Sendable {
       for column in 0..<columns {
         let u = (Float(column) + 0.5) / Float(columns) * 2 - 1
         let x = u * Float(columns) * cellAspect / Float(rows)
-        let direction = normalize(Vector(x, v + 0.16, -2.45))
-        line.append(shade(origin: origin, direction: direction, rotation: rotation, light: light, row: row, band: band))
+        let direction = rotation.apply(normalize(Vector(x, v, -3.5)))
+        line.append(shade(origin: origin, direction: direction, light: light))
       }
-      while line.last == " " { line.removeLast() }
       lines.append(line)
     }
     return lines
   }
 
-  private func shade(origin: Vector, direction: Vector, rotation: Rotation, light: Vector, row: Int, band: Int) -> Character {
-    var distanceTravelled: Float = 2.5
-    for _ in 0..<48 {
-      let point = origin + direction * distanceTravelled
-      let local = rotation.apply(point)
-      let distance = Spinner.distance(local)
-      if distance < 0.003 {
-        if Spinner.isScreen(local) {
-          return (row + band) % 7 == 0 ? "=" : (row % 2 == 0 ? ":" : ".")
-        }
-        let normal = rotation.unapply(Spinner.normal(local))
-        let lambert = max(0, dot(normal, light))
-        let level = 0.12 + 0.88 * lambert
-        let index = Int(level * Float(Spinner.ramp.count - 1))
-        return Spinner.ramp[min(max(index, 0), Spinner.ramp.count - 1)]
-      }
-      distanceTravelled += distance
-      if distanceTravelled > 9 { break }
+  /// Everything here is in the disc's own space: it lies in the xy plane, centred on the origin.
+  private func shade(origin: Vector, direction: Vector, light: Vector) -> Character {
+    guard let (point, normal) = Spinner.hit(origin: origin, direction: direction) else { return " " }
+    let diffuse = max(0, dot(normal, light))
+    let radius = (point.x * point.x + point.y * point.y).squareRoot()
+    let level: Float
+    if normal.z == 0 {
+      level = 0.35 + 0.5 * diffuse
+    } else if radius < Spinner.hub {
+      let stackingRing: Float = abs(radius - 0.29) < 0.025 ? 0.3 : 0
+      level = 0.12 + 0.2 * diffuse + stackingRing
+    } else if normal.z > 0 {
+      // Grooves run in circles, so light catches where they cross the half vector: the CD's rainbow streak.
+      let tangent = Vector(-point.y, point.x, 0) / radius
+      let half = normalize(light - direction)
+      let across = dot(tangent, half)
+      let streak = pow(max(0, 1 - across * across), 80)
+      let tracks: Float = radius > 0.93 ? 0.2 : 0.05 * sin(radius * 60)
+      level = 0.18 + 0.3 * diffuse + 0.6 * streak + tracks
+    } else {
+      let band = abs(point.y) < 0.2 && radius > 0.42
+      let rim = radius > 0.78 && radius < 0.9
+      level = (band || rim) ? 0.1 + 0.15 * diffuse : 0.3 + 0.55 * diffuse
     }
-    return " "
+    let index = Int(level * Float(Spinner.ramp.count - 1))
+    return Spinner.ramp[min(max(index, 1), Spinner.ramp.count - 1)]
   }
 
-  static func isScreen(_ p: Vector) -> Bool {
-    p.z > 0.55 && abs(p.x) < 0.66 && abs(p.y - 0.18) < 0.5
-  }
-
-  static func distance(_ p: Vector) -> Float {
-    let body = roundBox(p - Vector(0, 0.1, 0), Vector(0.95, 0.82, 0.7), 0.1)
-    let tube = roundBox(p - Vector(0, 0.16, -0.9), Vector(0.68, 0.55, 0.45), 0.16)
-    let foot = roundBox(p - Vector(0, -0.86, 0.05), Vector(0.62, 0.08, 0.55), 0.04)
-    let screen = roundBox(p - Vector(0, 0.18, 0.8), Vector(0.66, 0.5, 0.18), 0.06)
-    let slot = roundBox(p - Vector(0.42, -0.5, 0.75), Vector(0.24, 0.022, 0.1), 0.01)
-    let shell = min(min(body, tube), foot)
-    return max(max(shell, -screen), -slot)
-  }
-
-  static func normal(_ p: Vector) -> Vector {
-    let e: Float = 0.002
-    let a = Vector(e, -e, -e)
-    let b = Vector(-e, -e, e)
-    let c = Vector(-e, e, -e)
-    let d = Vector(e, e, e)
-    return normalize(a * distance(p + a) + b * distance(p + b) + c * distance(p + c) + d * distance(p + d))
-  }
-
-  static func roundBox(_ p: Vector, _ halfSize: Vector, _ radius: Float) -> Float {
-    let q = Vector(abs(p.x), abs(p.y), abs(p.z)) - halfSize + Vector(repeating: radius)
-    let outside = length(Vector(max(q.x, 0), max(q.y, 0), max(q.z, 0)))
-    return outside + min(max(q.x, max(q.y, q.z)), 0) - radius
+  /// The nearest of the two faces and the outer rim, or nil for a miss.
+  static func hit(origin: Vector, direction: Vector) -> (point: Vector, normal: Vector)? {
+    var best: (distance: Float, point: Vector, normal: Vector)?
+    if abs(direction.z) > 1e-6 {
+      for face in [halfThickness, -halfThickness] {
+        let distance = (face - origin.z) / direction.z
+        guard distance > 0, distance < best?.distance ?? .infinity else { continue }
+        let point = origin + direction * distance
+        let radius = (point.x * point.x + point.y * point.y).squareRoot()
+        if radius <= 1, radius >= hole {
+          best = (distance, point, Vector(0, 0, face > 0 ? 1 : -1))
+        }
+      }
+    }
+    let a = direction.x * direction.x + direction.y * direction.y
+    let b = 2 * (origin.x * direction.x + origin.y * direction.y)
+    let c = origin.x * origin.x + origin.y * origin.y - 1
+    let discriminant = b * b - 4 * a * c
+    if a > 1e-6, discriminant >= 0 {
+      let distance = (-b - discriminant.squareRoot()) / (2 * a)
+      let point = origin + direction * distance
+      if distance > 0, distance < best?.distance ?? .infinity, abs(point.z) <= halfThickness {
+        best = (distance, point, Vector(point.x, point.y, 0))
+      }
+    }
+    return best.map { ($0.point, $0.normal) }
   }
 
   struct Rotation {
@@ -113,12 +120,6 @@ public struct Spinner: Sendable {
     func apply(_ v: Vector) -> Vector {
       let pitched = Vector(v.x, v.y * cp - v.z * sp, v.y * sp + v.z * cp)
       return Vector(pitched.x * cy + pitched.z * sy, pitched.y, -pitched.x * sy + pitched.z * cy)
-    }
-
-    /// Object → world space.
-    func unapply(_ v: Vector) -> Vector {
-      let yawed = Vector(v.x * cy - v.z * sy, v.y, v.x * sy + v.z * cy)
-      return Vector(yawed.x, yawed.y * cp + yawed.z * sp, -yawed.y * sp + yawed.z * cp)
     }
   }
 }

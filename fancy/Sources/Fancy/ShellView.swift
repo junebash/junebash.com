@@ -19,9 +19,9 @@ final class Layout {
 
 enum SpinnerView {
   static func start(in node: JSObject, wide: Bool) {
-    let columns = wide ? 44 : 30
+    let columns = wide ? 36 : 26
     let rows = wide ? 16 : 11
-    node.textContent = .string(Array(repeating: " ", count: rows).joined(separator: "\n"))
+    node.textContent = .string(Array(repeating: String(repeating: " ", count: columns), count: rows).joined(separator: "\n"))
     let characterWidth = (byID("probe").getBoundingClientRect!().object!.width.number ?? 100) / 10
     let lineHeight = (node.getBoundingClientRect!().object!.height.number ?? Double(rows) * 20) / Double(rows)
     let spinner = Spinner(columns: columns, rows: rows, cellAspect: Float(characterWidth / max(lineHeight, 1)))

@@ -57,14 +57,11 @@ struct SiteTests {
 }
 
 struct SpinnerTests {
-  @Test func drawsAMonitorThatTurns() {
+  @Test func drawsADiscThatTurnsWithoutChangingSize() {
     let spinner = Spinner(columns: 34, rows: 15)
-    let first = spinner.frame(time: 0)
-    let later = spinner.frame(time: 1.3)
-    #expect(first.count == 15)
-    #expect(first.allSatisfy { $0.count <= 34 })
-    #expect(first.joined().count { $0 != " " } > 100)
-    #expect(first.joined().contains(":"))
-    #expect(first != later)
+    let frames = stride(from: 0.0, to: 8, by: 0.35).map { spinner.frame(time: $0) }
+    #expect(frames.allSatisfy { $0.count == 15 && $0.allSatisfy { $0.count == 34 } })
+    #expect(frames[0].joined().count { $0 != " " } > 100)
+    #expect(Set(frames).count == frames.count)
   }
 }
