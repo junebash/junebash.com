@@ -16,6 +16,8 @@ public struct Fortune: Equatable, Sendable {
     Fortune("Maybe your song doesn’t need a chorus.", from: "mindful-composition"),
     Fortune("Art and capitalism have a very dubious relationship.", from: "on-art-commercialism-and-elitism"),
     Fortune("Making a machine do all the labor completely defeats the purpose.", from: "maybe-ai-can-be-good-sometimes"),
+    Fortune("Not every gadget in my house has to be artisanally hand-assembled by a human being.", from: "maybe-ai-can-be-good-sometimes"),
+    Fortune("That exclamation point makes me nervous, but sometimes it's necessary.", from: "non-generic-init"),
     Fortune("The previous version was using a sledgehammer where a regular hammer would suffice.", from: "combine-intro"),
     Fortune("Sometimes this lesson is best learned the hard way.", from: "lessons-from-labs"),
     Fortune("Don't wait to feel motivated.", from: "dont-wait-for-inspiration"),
@@ -36,7 +38,10 @@ public struct Fortune: Equatable, Sendable {
     Fortune("Let's build each other up rather than keeping ourselves and each other down.", from: "mental-health-shame"),
     Fortune("But everyone gets their turn at the wheel of the struggle bus.", from: "mental-health-shame"),
     Fortune("By pushing any one person down, you push the whole world down.", from: "insults"),
+    Fortune("So pay me for my work, please, and do the same for others.", from: "free-work"),
     Fortune("Do you think it’s the Bestest Game Ever Like Oh My God?", from: "what-makes-undertale-so-wonderful"),
+    Fortune("This is probably just high grade copium.", from: "predictions"),
     Fortune("A single coal left of the campfire of the universe.", from: "the-very-last-light"),
+    Fortune("Not for lack of want; more for lack of followthrough.", from: "hello"),
   ]
 }
