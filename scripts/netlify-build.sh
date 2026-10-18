@@ -24,8 +24,20 @@ if [[ ! -x "$toolchain/usr/bin/swift" ]]; then
     --exclude='*/usr/lib/libsourcekitdInProc*' --exclude='*/usr/bin/clangd' --exclude='*/usr/bin/docc' \
     --exclude='*/usr/bin/swift-format' --exclude='*/usr/lib/swift_static' --exclude='*/usr/share/docc'
 fi
-export PATH="$toolchain/usr/bin:$PATH"
+
+# PackageToJS skips optimizing without wasm-opt, and the unoptimized wasm busts the size limit.
+binaryen="binaryen-version_133"
+binaryen_checksum="2dc9c7813f5375db93d96ead4b78222fcc3e2677bbb832297af4797782a37489"
+if [[ ! -x "$HOME/$binaryen/bin/wasm-opt" ]]; then
+  curl -fsSL -o "$HOME/$binaryen.tar.gz" "https://github.com/WebAssembly/binaryen/releases/download/${binaryen#binaryen-}/$binaryen-x86_64-linux.tar.gz"
+  echo "$binaryen_checksum  $HOME/$binaryen.tar.gz" | sha256sum -c -
+  tar xzf "$HOME/$binaryen.tar.gz" -C "$HOME" "$binaryen/bin/wasm-opt"
+  rm "$HOME/$binaryen.tar.gz"
+fi
+
+export PATH="$toolchain/usr/bin:$HOME/$binaryen/bin:$PATH"
 swift --version
+wasm-opt --version
 
 swift sdk list | grep -qx "$sdk" || swift sdk install "$sdk_url" --checksum "$sdk_checksum"
 
