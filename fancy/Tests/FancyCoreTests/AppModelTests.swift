@@ -8,6 +8,7 @@ final class Recorder {
   var left: SitePath?
 
   var pause: (Int) async -> Void = { _ in }
+  var now = 0.0
 
   func model(isSoundOn: Bool = true) -> AppModel {
     AppModel(
@@ -18,7 +19,8 @@ final class Recorder {
         play: { self.sounds.append($0) },
         leave: { self.left = $0 },
         saveSound: { _ in },
-        pause: { await self.pause($0) }
+        pause: { await self.pause($0) },
+        now: { self.now }
       )
     )
   }

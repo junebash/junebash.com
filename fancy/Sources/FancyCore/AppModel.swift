@@ -8,19 +8,23 @@ public final class AppModel {
     public var leave: (SitePath) -> Void
     public var saveSound: (Bool) -> Void
     public var pause: (_ milliseconds: Int) async -> Void
+    /// Milliseconds since some fixed moment.
+    public var now: () -> Double
 
     public init(
       setLocation: @escaping (SitePath, Bool) -> Void,
       play: @escaping (SoundEffect) -> Void,
       leave: @escaping (SitePath) -> Void,
       saveSound: @escaping (Bool) -> Void,
-      pause: @escaping (Int) async -> Void
+      pause: @escaping (Int) async -> Void,
+      now: @escaping () -> Double
     ) {
       self.setLocation = setLocation
       self.play = play
       self.leave = leave
       self.saveSound = saveSound
       self.pause = pause
+      self.now = now
     }
   }
 
@@ -39,6 +43,7 @@ public final class AppModel {
   ]
 
   public static let scrollbackLimit = 400
+  public static let catPatience = 5.0 * 60 * 1000
 
   /// What the keyboard is for right now.
   public enum Mode: Equatable, Sendable {
@@ -69,12 +74,15 @@ public final class AppModel {
   @ObservationIgnored private var typingGeneration = 0
   @ObservationIgnored private var waitGeneration = 0
   @ObservationIgnored private var fortunes: [Fortune] = []
+  @ObservationIgnored private var lastActivity: Double
+  @ObservationIgnored private var hasCatVisited = false
   @ObservationIgnored private let effects: Effects
 
   public init(site: Site, isSoundOn: Bool, effects: Effects) {
     self.site = site
     self.isSoundOn = isSoundOn
     self.effects = effects
+    lastActivity = effects.now()
   }
 
   public var location: SitePath {
@@ -296,9 +304,19 @@ public final class AppModel {
     return true
   }
 
-  /// Leave the keyboard alone long enough and a cat will find it.
-  public func idled() async {
-    guard mode == .shell, pager == nil, popup == nil, !isMenuOpen, !isTyping, !isCatWalking else { return }
+  /// Any key, tap or scroll.
+  public func userActed() {
+    lastActivity = effects.now()
+    hasCatVisited = false
+  }
+
+  /// Leave the keyboard alone long enough and a cat will find it, once per quiet stretch.
+  /// Call it every few seconds.
+  public func clockTicked() async {
+    guard !hasCatVisited, effects.now() - lastActivity >= Self.catPatience,
+      mode == .shell, pager == nil, popup == nil, !isMenuOpen, !isTyping, !isCatWalking
+    else { return }
+    hasCatVisited = true
     typingGeneration += 1
     let generation = typingGeneration
     isCatWalking = true

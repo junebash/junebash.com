@@ -32,7 +32,8 @@ final class App {
         play: { [synth] in synth.play($0) },
         leave: { [router] in router.leave(to: $0) },
         saveSound: { Preferences.set("sound", $0 ? "on" : "off") },
-        pause: { await pause(milliseconds: prefersReducedMotion ? 0 : $0) }
+        pause: { await pause(milliseconds: prefersReducedMotion ? 0 : $0) },
+        now: { window.performance.now().number ?? 0 }
       )
     )
     let layout = Layout()
@@ -137,18 +138,13 @@ final class App {
       if model.mode == .sitting, zen.isSettled { model.stirred() }
     }
 
-    let idleLimit = 5.0 * 60 * 1000
-    var lastActivity = window.performance.now().number ?? 0
     for event in ["keydown", "pointerdown", "wheel"] {
-      document.listen(event, passive: true, capture: true) { _ in lastActivity = window.performance.now().number ?? 0 }
+      document.listen(event, passive: true, capture: true) { _ in model.userActed() }
     }
     Task {
       while true {
         await pause(milliseconds: 10_000)
-        guard (window.performance.now().number ?? 0) - lastActivity > idleLimit else { continue }
-        // Once per quiet stretch; the cat doesn't come back until you do.
-        lastActivity = .infinity
-        await model.idled()
+        await model.clockTicked()
       }
     }
   }

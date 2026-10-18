@@ -116,19 +116,58 @@ struct EasterEggTests {
     #expect(fSharp > 366 && fSharp < 369.99)
   }
 
-  @Test func aCatWalksOnTheKeyboard() async {
+  @Test func aCatFindsTheKeyboardAfterFiveQuietMinutes() async {
     let model = recorder.model()
     model.started(at: .root)
-    await model.idled()
-    #expect(!model.input.isEmpty)
+    recorder.now = AppModel.catPatience - 1
+    await model.clockTicked()
+    #expect(model.input.isEmpty)
+
+    recorder.now = AppModel.catPatience
+    await model.clockTicked()
+    let prints = model.input
+    #expect(!prints.isEmpty)
     #expect(!model.isCatWalking)
     #expect(!model.isTyping)
   }
 
-  @Test func noCatWhileReading() async {
+  @Test func theCatComesOncePerQuietStretch() async {
+    let model = recorder.model()
+    model.started(at: .root)
+    recorder.now = AppModel.catPatience
+    await model.clockTicked()
+    let prints = model.input
+    recorder.now += AppModel.catPatience * 3
+    await model.clockTicked()
+    #expect(model.input == prints)
+
+    model.userActed()
+    recorder.now += AppModel.catPatience - 1
+    await model.clockTicked()
+    #expect(model.input == prints)
+    recorder.now += 1
+    await model.clockTicked()
+    #expect(model.input.count > prints.count)
+  }
+
+  @Test func activityKeepsTheCatAway() async {
+    let model = recorder.model()
+    model.started(at: .root)
+    recorder.now = AppModel.catPatience - 1
+    model.userActed()
+    recorder.now += AppModel.catPatience - 1
+    await model.clockTicked()
+    #expect(model.input.isEmpty)
+  }
+
+  @Test func noCatWhileReadingButItWaitsForYou() async {
     let model = recorder.model()
     model.started(at: SitePath(["about"]))
-    await model.idled()
+    recorder.now = AppModel.catPatience
+    await model.clockTicked()
     #expect(model.input.isEmpty)
+    model.pagerDismissed()
+    await model.clockTicked()
+    #expect(!model.input.isEmpty)
   }
 }
