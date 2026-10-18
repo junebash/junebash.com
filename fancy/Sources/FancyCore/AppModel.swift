@@ -416,7 +416,7 @@ public final class AppModel {
     case "dog":
       print(.text(Pets.dog))
     case "weather":
-      print(.text("In Bellingham? Wind and/or rain, probably, tbh"))
+      print(.text("in Bellingham? idk wind and/or rain probably"))
     case "import" where argument.lowercased() == "foundation":
       print(.text("What kinda machine do you think we're running here?"))
     case "swift", "swiftc":

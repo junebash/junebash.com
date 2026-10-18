@@ -16,7 +16,7 @@ struct EasterEggTests {
     let machine = "What kinda machine do you think we're running here?"
     for (line, reply) in [
       ("dog", Pets.dog),
-      ("weather", "In Bellingham? Wind and/or rain, probably, tbh"),
+      ("weather", "in Bellingham? idk wind and/or rain probably"),
       ("import Foundation", machine),
       ("swift build", machine),
       ("swiftc main.swift", machine),
