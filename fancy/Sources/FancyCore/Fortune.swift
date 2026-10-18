@@ -38,7 +38,7 @@ public struct Fortune: Equatable, Sendable {
     Fortune("Let's build each other up rather than keeping ourselves and each other down.", from: "mental-health-shame"),
     Fortune("But everyone gets their turn at the wheel of the struggle bus.", from: "mental-health-shame"),
     Fortune("By pushing any one person down, you push the whole world down.", from: "insults"),
-    Fortune("So pay me for my work, please, and do the same for others.", from: "free-work"),
+    Fortune("pay me for my work, please, and do the same for others.", from: "free-work"),
     Fortune("Do you think it’s the Bestest Game Ever Like Oh My God?", from: "what-makes-undertale-so-wonderful"),
     Fortune("This is probably just high grade copium.", from: "predictions"),
     Fortune("A single coal left of the campfire of the universe.", from: "the-very-last-light"),
