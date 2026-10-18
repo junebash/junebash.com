@@ -4,8 +4,6 @@ command = "scripts/netlify-build.sh"
 
 [build.environment]
 ZOLA_VERSION = "0.20.0"
-# Must match fancy/.swift-version; the wasm SDK checksum in scripts/netlify-build.sh is for this release.
-SWIFT_VERSION = "6.3.3"
 
 [context.production]
 command = "scripts/netlify-build.sh"
