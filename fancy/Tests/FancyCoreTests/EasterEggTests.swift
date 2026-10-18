@@ -109,11 +109,13 @@ struct EasterEggTests {
   }
 
   @Test func pianoLayout() {
-    let piano = Piano()
-    #expect(Piano.lower.map(\.note) == ["C", "D", "E", "F#", "G", "A", "B", "C", "D", "E", "F#"])
-    #expect(Piano.upper.map(\.1.note) == ["C#", "D#", "F", "G#", "A#", "C#", "D#"])
-    let fSharp = piano.frequency(of: Piano.key(at: "KeyF")!)
-    #expect(fSharp > 366 && fSharp < 369.99)
+    #expect(Piano.lower.map(\.note) == ["C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F"])
+    #expect(Piano.upper.map(\.1.note) == ["C#", "D#", "F#", "G#", "A#", "C#", "D#"])
+    // Each black key sits just right of the white key a semitone below it, and nowhere else.
+    for (slot, key) in Piano.upper {
+      #expect(Piano.lower[slot].semitone + 1 == key.semitone)
+    }
+    #expect(Piano.upper.map(\.1.code) == ["KeyW", "KeyE", "KeyT", "KeyY", "KeyU", "KeyO", "KeyP"])
   }
 
   @Test func everyLayoutCoversEveryKey() {
@@ -129,7 +131,7 @@ struct EasterEggTests {
     let changed = layout.learn(code: "KeyR", typed: "p")
     #expect(changed)
     #expect(Piano.lower.map { layout.label(for: $0.code)! } == ["a", "o", "e", "u", "i", "d", "h", "t", "n", "s", "-"])
-    #expect(Piano.upper.map { layout.label(for: $0.1.code)! } == [",", ".", "p", "f", "g", "r", "l"])
+    #expect(Piano.upper.map { layout.label(for: $0.1.code)! } == [",", ".", "y", "f", "g", "r", "l"])
     #expect(layout.label(for: Piano.octaveDown) == ";")
   }
 

@@ -6,7 +6,7 @@
   import Glibc
 #endif
 
-/// The home row plays C lydian, the boot chord's scale; the row above fills in the other five notes.
+/// The home row is the white keys from C, the row above the black keys, like a real keyboard.
 /// Keys are physical positions (`KeyboardEvent.code`), so the shape is the same on any layout.
 public struct Piano: Equatable, Sendable {
   public struct Key: Equatable, Sendable {
@@ -18,14 +18,14 @@ public struct Piano: Equatable, Sendable {
 
   public static let lower = keys(
     ["KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote"],
-    [0, 2, 4, 6, 7, 9, 11, 12, 14, 16, 18],
+    [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17],
     isUpper: false
   )
   /// Each upper key sits between the two home-row keys at `slot` and `slot + 1`.
   public static let upper = Array(
     zip(
-      [0, 1, 2, 4, 5, 7, 8],
-      keys(["KeyW", "KeyE", "KeyR", "KeyY", "KeyU", "KeyO", "KeyP"], [1, 3, 5, 8, 10, 13, 15], isUpper: true)
+      [0, 1, 3, 4, 5, 7, 8],
+      keys(["KeyW", "KeyE", "KeyT", "KeyY", "KeyU", "KeyO", "KeyP"], [1, 3, 6, 8, 10, 13, 15], isUpper: true)
     )
   )
   public static let octaveDown = "KeyZ"
@@ -49,11 +49,8 @@ public struct Piano: Equatable, Sendable {
     octave = min(max(octave + step, Self.octaves.lowerBound), Self.octaves.upperBound)
   }
 
-  /// Equal temperament, except F# sits a little flat, the way it does in the boot chord.
   public func frequency(of key: Key) -> Double {
-    let semitone = key.semitone + 12 * octave
-    let cents = key.semitone % 12 == 6 ? -15.0 : 0
-    return 261.63 * pow(2, (Double(semitone) + cents / 100) / 12)
+    261.63 * pow(2, Double(key.semitone + 12 * octave) / 12)
   }
 
   private static func keys(_ codes: [String], _ semitones: [Int], isUpper: Bool) -> [Key] {
