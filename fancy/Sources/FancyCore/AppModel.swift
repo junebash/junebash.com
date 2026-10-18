@@ -76,6 +76,7 @@ public final class AppModel {
   @ObservationIgnored private var fortunes: [Fortune] = []
   @ObservationIgnored private var lastActivity: Double
   @ObservationIgnored private var hasCatVisited = false
+  @ObservationIgnored private var recentKeys: [String] = []
   @ObservationIgnored private let effects: Effects
 
   public init(site: Site, isSoundOn: Bool, effects: Effects) {
@@ -191,6 +192,22 @@ public final class AppModel {
       historyIndex = nil
       input = draft
     }
+  }
+
+  public static let konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"]
+
+  /// Sees every shell keydown, as `KeyboardEvent.key`. `true` if it swallowed the key.
+  public func keyPressed(_ key: String) -> Bool {
+    recentKeys.append(key.count == 1 ? key.lowercased() : key)
+    if recentKeys.count > Self.konamiCode.count { recentKeys.removeFirst() }
+    guard recentKeys == Self.konamiCode else { return false }
+    recentKeys = []
+    input = ""
+    historyIndex = nil
+    completionMenu = nil
+    print(.text("LIVES += 30"))
+    play(.powerUp)
+    return true
   }
 
   public func interruptPressed() {

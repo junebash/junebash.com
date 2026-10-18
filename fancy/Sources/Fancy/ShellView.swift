@@ -104,6 +104,10 @@ final class ShellView {
   private func handleKey(_ event: JSValue) {
     let key = event.key.string ?? ""
     let control = event.ctrlKey.boolean == true
+    if model.keyPressed(key) {
+      _ = event.preventDefault()
+      return
+    }
     var handled = true
     switch key {
     case "Enter": model.returnKeyPressed()

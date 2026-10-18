@@ -44,6 +44,7 @@ public enum SoundEffect: Equatable, Sendable {
   case popup
   case boot
   case bell
+  case powerUp
   case note(Double)
 }
 

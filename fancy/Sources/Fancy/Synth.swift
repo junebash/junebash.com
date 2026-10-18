@@ -178,6 +178,12 @@ extension SoundEffect {
         Tone(wave: .sine, frequency: 196 * partial.0, duration: partial.2, gain: partial.1, attack: 0.004)
       }
         + [Tone(wave: .noise(filter: "bandpass"), frequency: 900, duration: 0.03, gain: 0.2, attack: 0.001, q: 2)]
+    case .powerUp:
+      // A fast rising square arpeggio, two octaves of C major and a sweep off the top.
+      [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568.0].enumerated().map { index, frequency in
+        Tone(wave: .square, frequency: frequency, duration: 0.06, gain: 0.05, attack: 0.001, delay: Double(index) * 0.05)
+      }
+        + [Tone(wave: .square, frequency: 2093.0, glide: 4186.0, duration: 0.18, gain: 0.04, attack: 0.001, delay: 0.3)]
     case .note(let frequency):
       [
         Tone(wave: .sine, frequency: frequency, duration: 1.5, gain: 0.16, attack: 0.004, fm: (ratio: 2.0, index: 0.9)),

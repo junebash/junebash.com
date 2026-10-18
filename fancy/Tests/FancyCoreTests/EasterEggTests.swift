@@ -198,4 +198,18 @@ struct EasterEggTests {
     await model.clockTicked()
     #expect(!model.input.isEmpty)
   }
+
+  @Test func konamiCodeGrantsLives() {
+    let model = recorder.model()
+    model.started(at: .root)
+    // A stray key and an extra up first: only the last ten keys count.
+    for key in ["x", "ArrowUp"] + AppModel.konamiCode.dropLast() {
+      #expect(!model.keyPressed(key))
+    }
+    model.inputChanged("b")
+    #expect(model.keyPressed("A"))
+    #expect(model.input == "")
+    #expect(model.output.last?.content == .text("LIVES += 30"))
+    #expect(recorder.sounds.last == .powerUp)
+  }
 }
