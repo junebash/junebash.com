@@ -68,6 +68,7 @@ final class PianoView {
   let keys = byID("piano-keys")
   let register = byID("piano-register")
   private var buttons: [String: JSObject] = [:]
+  private var layout = KeyboardLayout()
   /// Each physical key's caption, so it can show what this layout types there.
   private var captions: [String: JSObject] = [
     Piano.octaveDown: byID("piano-down"),
@@ -88,7 +89,7 @@ final class PianoView {
       _ = event.preventDefault()
       press(code)
     }
-    learnLayout()
+    relabel()
     observe { [self] in
       guard case .playing(let piano) = model.mode else {
         screen.setHidden(true)
@@ -101,27 +102,25 @@ final class PianoView {
 
   /// Everything but shortcuts stops here, so letters don't leak into the prompt.
   func handleKey(_ event: JSValue) {
-    let key = event.key.string ?? ""
-    let code = event.code.string ?? ""
-    if key == "Escape" {
+    if event.key.string == "Escape" {
       model.closeKeyPressed()
     } else if event.repeat.boolean != true {
-      // Browsers without a layout map still learn each caption the first time it's pressed.
-      if key.count == 1 { captions[code]?.textContent = .string(key.lowercased()) }
-      press(code)
+      press(event.code.string ?? "")
     }
   }
 
-  /// Only Chromium can say what each key types; elsewhere the captions start as QWERTY.
-  private func learnLayout() {
-    guard let keyboard = window.navigator.keyboard.object, keyboard.getLayoutMap.function != nil,
-      let promise = keyboard.getLayoutMap!().object.flatMap(JSPromise.init)
+  /// Every plain keypress on the site, the shell's included, says a little about the layout.
+  func learn(from event: JSValue) {
+    let modifiers = ["shiftKey", "altKey", "ctrlKey", "metaKey"]
+    guard !modifiers.contains(where: { event[dynamicMember: $0].boolean == true }),
+      layout.learn(code: event.code.string ?? "", typed: event.key.string ?? "")
     else { return }
-    _ = promise.then { [self] map in
-      for (code, caption) in captions {
-        if let typed = map.object?.get!(code).string { caption.textContent = .string(typed) }
-      }
-      return .undefined
+    relabel()
+  }
+
+  private func relabel() {
+    for (code, caption) in captions {
+      caption.textContent = .string(layout.label(for: code) ?? "")
     }
   }
 
@@ -139,18 +138,13 @@ final class PianoView {
     let button = element("div", "piano-key\(key.isUpper ? " is-upper" : "")")
     button.setAttr("data-code", key.code)
     button.setAttr("style", "grid-row: \(row); grid-column: \(column) / span 2")
-    let caption = element("span", "piano-letter", text: Self.qwerty[key.code])
+    let caption = element("span", "piano-letter")
     button.add(caption)
     button.add(element("span", "piano-note", text: key.note))
     keys.add(button)
     buttons[key.code] = button
     captions[key.code] = caption
   }
-
-  private static let qwerty = [
-    "KeyA": "a", "KeyS": "s", "KeyD": "d", "KeyF": "f", "KeyG": "g", "KeyH": "h", "KeyJ": "j", "KeyK": "k", "KeyL": "l",
-    "Semicolon": ";", "Quote": "'", "KeyW": "w", "KeyE": "e", "KeyT": "t", "KeyY": "y", "KeyU": "u", "KeyO": "o", "KeyP": "p",
-  ]
 }
 
 /// Five idle minutes in, a cat crosses the bottom of the screen.

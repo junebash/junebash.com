@@ -116,6 +116,32 @@ struct EasterEggTests {
     #expect(fSharp > 366 && fSharp < 369.99)
   }
 
+  @Test func everyLayoutCoversEveryKey() {
+    for layout in KeyboardLayout.known {
+      #expect(layout.count == KeyboardLayout.codes.joined().count)
+    }
+  }
+
+  @Test func onePressGivesAwayTheLayout() {
+    var layout = KeyboardLayout()
+    #expect(layout.label(for: "KeyS") == "s")
+    // Typing "p" on Dvorak hits the physical R.
+    let changed = layout.learn(code: "KeyR", typed: "p")
+    #expect(changed)
+    #expect(Piano.lower.map { layout.label(for: $0.code)! } == ["a", "o", "e", "u", "i", "d", "h", "t", "n", "s", "-"])
+    #expect(Piano.upper.map { layout.label(for: $0.1.code)! } == [",", ".", "p", "f", "g", "r", "l"])
+    #expect(layout.label(for: Piano.octaveDown) == ";")
+  }
+
+  @Test func anUnknownLayoutKeepsWhatItLearned() {
+    var layout = KeyboardLayout()
+    _ = layout.learn(code: "KeyA", typed: "ж")
+    #expect(layout.label(for: "KeyA") == "ж")
+    #expect(layout.label(for: "KeyS") == nil)
+    let learnedDeadKey = layout.learn(code: "KeyS", typed: "Dead")
+    #expect(!learnedDeadKey)
+  }
+
   @Test func aCatFindsTheKeyboardAfterFiveQuietMinutes() async {
     let model = recorder.model()
     model.started(at: .root)

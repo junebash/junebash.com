@@ -141,6 +141,7 @@ final class App {
     for event in ["keydown", "pointerdown", "wheel"] {
       document.listen(event, passive: true, capture: true) { _ in model.userActed() }
     }
+    document.listen("keydown", passive: true, capture: true) { event in piano.learn(from: event) }
     Task {
       while true {
         await pause(milliseconds: 10_000)

@@ -25,7 +25,7 @@ public struct Piano: Equatable, Sendable {
   public static let upper = Array(
     zip(
       [0, 1, 2, 4, 5, 7, 8],
-      keys(["KeyW", "KeyE", "KeyT", "KeyY", "KeyU", "KeyO", "KeyP"], [1, 3, 5, 8, 10, 13, 15], isUpper: true)
+      keys(["KeyW", "KeyE", "KeyR", "KeyY", "KeyU", "KeyO", "KeyP"], [1, 3, 5, 8, 10, 13, 15], isUpper: true)
     )
   )
   public static let octaveDown = "KeyZ"
