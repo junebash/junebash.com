@@ -28,3 +28,5 @@ usage_tracking*.json
 
 # Rust build artifacts
 tools/*/target/
+# Fancy mode build output (built by `just fancy` locally, scripts/netlify-build.sh on Netlify)
+static/fancy/build/

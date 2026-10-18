@@ -16,7 +16,8 @@ Personal website built with Zola static site generator using the Apollo theme. C
 
 A terminal version of the site, written in Swift and compiled to WebAssembly. It's served at `/fancy/` everywhere for now. netlify.toml is ready for fancy.junebash.com, but that domain has no DNS yet, so `templates/base.html` links to `/fancy/`.
 
-- `just fancy` builds it into `static/fancy/build/<hash>/` and updates `manifest.toml`. Rerun it after any change in `fancy/Sources` or `fancy/web` (the CSS lives there), then commit the build output. New posts need no rebuild: `templates/fancy.html` embeds the content at Zola build time.
+- `just fancy` builds it into `static/fancy/build/<hash>/` and updates `manifest.toml`. That folder is gitignored: Netlify builds it fresh on every deploy via `scripts/netlify-build.sh`. Locally, rerun `just fancy` after any change in `fancy/Sources` or `fancy/web` (the CSS lives there). New posts need no rebuild: `templates/fancy.html` embeds the content at Zola build time.
+- To change the Swift version, update `fancy/.swift-version`, `wasm-sdk` in the justfile, `SWIFT_VERSION` in netlify.toml, and the SDK checksum in `scripts/netlify-build.sh` together.
 - `just fancy-test` runs the core tests (`FancyCore`) on macOS.
 - The toolchain is swift.org Swift 6.3.3 plus its WASM SDK, run through `~/.swiftly/bin/swiftly`, which is not on PATH. Never `import Foundation` in `fancy/`: it adds about 10MB. The build fails above 3MB of compressed wasm.
 - `zola serve` caches the manifest, so restart it after a build. Netlify rewrites deep links under `/fancy/`; locally, `templates/404.html` hands them to `/fancy/?at=<path>`.
