@@ -286,18 +286,18 @@ public final class AppModel {
     print(.text("you moved. that's fine. begin again.", tone: .dim))
   }
 
-  /// `false` if the key isn't on the piano.
-  public func pianoKeyPressed(_ key: Character) -> Bool {
+  /// `code` is the key's physical position, as in `KeyboardEvent.code`. `false` if it isn't on the piano.
+  public func pianoKeyPressed(at code: String) -> Bool {
     guard case .playing(var piano) = mode else { return false }
-    switch key.lowercased() {
-    case "z":
+    switch code {
+    case Piano.octaveDown:
       piano.shift(-1)
       mode = .playing(piano)
-    case "x":
+    case Piano.octaveUp:
       piano.shift(1)
       mode = .playing(piano)
     default:
-      guard let key = Piano.key(for: key) else { return false }
+      guard let key = Piano.key(at: code) else { return false }
       // Asking for a piano is asking for sound, so this ignores the sound setting.
       effects.play(.note(piano.frequency(of: key)))
     }

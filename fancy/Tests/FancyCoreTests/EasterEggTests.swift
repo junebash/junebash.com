@@ -97,22 +97,22 @@ struct EasterEggTests {
     let model = recorder.model(isSoundOn: false)
     model.started(at: .root)
     run(model, "piano")
-    #expect(model.pianoKeyPressed("a"))
+    #expect(model.pianoKeyPressed(at: "KeyA"))
     #expect(recorder.sounds.last == .note(261.63))
-    #expect(model.pianoKeyPressed("x"))
-    #expect(model.pianoKeyPressed("A"))
+    #expect(model.pianoKeyPressed(at: Piano.octaveUp))
+    #expect(model.pianoKeyPressed(at: "KeyA"))
     #expect(recorder.sounds.last == .note(523.26))
-    #expect(!model.pianoKeyPressed("m"))
+    #expect(!model.pianoKeyPressed(at: "KeyM"))
     model.closeKeyPressed()
     #expect(model.mode == .shell)
-    #expect(!model.pianoKeyPressed("a"))
+    #expect(!model.pianoKeyPressed(at: "KeyA"))
   }
 
   @Test func pianoLayout() {
     let piano = Piano()
     #expect(Piano.lower.map(\.note) == ["C", "D", "E", "F#", "G", "A", "B", "C", "D", "E", "F#"])
     #expect(Piano.upper.map(\.1.note) == ["C#", "D#", "F", "G#", "A#", "C#", "D#"])
-    let fSharp = piano.frequency(of: Piano.key(for: "f")!)
+    let fSharp = piano.frequency(of: Piano.key(at: "KeyF")!)
     #expect(fSharp > 366 && fSharp < 369.99)
   }
 
