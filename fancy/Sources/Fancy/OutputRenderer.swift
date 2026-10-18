@@ -117,6 +117,19 @@ struct OutputRenderer {
       block.add(text)
       return block
 
+    case .fortune(let fortune):
+      let block = element("div", "t-block t-fortune")
+      block.add(element("div", "t-bright", text: fortune.text))
+      if case .document(let page) = site.node(at: fortune.source) {
+        let source = element("div", "t-dim")
+        _ = source.append!("  -- ")
+        let title = element("span", "t-click", text: page.title)
+        title.setAttr("data-path", fortune.source.urlPath)
+        source.add(title)
+        block.add(source)
+      }
+      return block
+
     case .underConstruction:
       let block = element("div", "t-block t-construction")
       block.add(element("pre", "t-sign", text: Self.sign))

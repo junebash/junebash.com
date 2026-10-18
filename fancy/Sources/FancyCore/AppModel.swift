@@ -40,6 +40,15 @@ public final class AppModel {
 
   public static let scrollbackLimit = 400
 
+  /// What the keyboard is for right now.
+  public enum Mode: Equatable, Sendable {
+    case shell
+    /// A command is hanging; only ^C gets you out.
+    case waiting
+    case sitting
+    case playing(Piano)
+  }
+
   public let site: Site
   public private(set) var cwd: SitePath = .root
   public private(set) var output: [OutputEntry] = []
@@ -50,12 +59,16 @@ public final class AppModel {
   public private(set) var isSoundOn: Bool
   public private(set) var isTyping = false
   public private(set) var completionMenu: CompletionMenu?
+  public private(set) var mode = Mode.shell
+  public private(set) var isCatWalking = false
 
   @ObservationIgnored private var history: [String] = []
   @ObservationIgnored private var historyIndex: Int?
   @ObservationIgnored private var draft = ""
   @ObservationIgnored private var nextID = 0
   @ObservationIgnored private var typingGeneration = 0
+  @ObservationIgnored private var waitGeneration = 0
+  @ObservationIgnored private var fortunes: [Fortune] = []
   @ObservationIgnored private let effects: Effects
 
   public init(site: Site, isSoundOn: Bool, effects: Effects) {
@@ -91,7 +104,7 @@ public final class AppModel {
   }
 
   public func inputChanged(_ text: String) {
-    guard !isTyping, text != input else { return }
+    guard !isTyping, mode == .shell, text != input else { return }
     input = text
     historyIndex = nil
     completionMenu = nil
@@ -173,6 +186,11 @@ public final class AppModel {
   }
 
   public func interruptPressed() {
+    if mode == .waiting {
+      mode = .shell
+      print(.text("^C"))
+      return
+    }
     completionMenu = nil
     print(.command(cwd: cwd, text: input + "^C"))
     input = ""
@@ -186,7 +204,10 @@ public final class AppModel {
 
   /// Escape or q: closes whatever is on top.
   public func closeKeyPressed() {
-    if popup != nil {
+    if case .playing = mode {
+      mode = .shell
+      play(.close)
+    } else if popup != nil {
       popupDismissed()
     } else if isMenuOpen {
       menuButtonTapped()
@@ -250,6 +271,53 @@ public final class AppModel {
     play(.popup)
   }
 
+  /// Any key or tap while sitting.
+  public func stirred() {
+    guard mode == .sitting else { return }
+    mode = .shell
+    print(.text("you moved. that's fine. begin again.", tone: .dim))
+  }
+
+  /// `false` if the key isn't on the piano.
+  public func pianoKeyPressed(_ key: Character) -> Bool {
+    guard case .playing(var piano) = mode else { return false }
+    switch key.lowercased() {
+    case "z":
+      piano.shift(-1)
+      mode = .playing(piano)
+    case "x":
+      piano.shift(1)
+      mode = .playing(piano)
+    default:
+      guard let key = Piano.key(for: key) else { return false }
+      // Asking for a piano is asking for sound, so this ignores the sound setting.
+      effects.play(.note(piano.frequency(of: key)))
+    }
+    return true
+  }
+
+  /// Leave the keyboard alone long enough and a cat will find it.
+  public func idled() async {
+    guard mode == .shell, pager == nil, popup == nil, !isMenuOpen, !isTyping, !isCatWalking else { return }
+    typingGeneration += 1
+    let generation = typingGeneration
+    isCatWalking = true
+    isTyping = true
+    completionMenu = nil
+    defer { isCatWalking = false }
+    await effects.pause(2200)
+    var generator = SystemRandomNumberGenerator()
+    for character in Pets.pawPrints(using: &generator) {
+      guard generation == typingGeneration else { return }
+      input.append(character)
+      play(.key)
+      await effects.pause(Int.random(in: 50...130))
+    }
+    guard generation == typingGeneration else { return }
+    isTyping = false
+    await effects.pause(2500)
+  }
+
   public func popupDismissed() {
     guard popup != nil else { return }
     popup = nil
@@ -263,6 +331,7 @@ public final class AppModel {
     isTyping = true
     completionMenu = nil
     popup = nil
+    mode = .shell
     if pager != nil {
       pager = nil
       effects.setLocation(location, false)
@@ -301,6 +370,8 @@ public final class AppModel {
       }
     case "cd":
       go(argument.isEmpty ? "~" : argument, command: command)
+    case "cat" where argument.isEmpty:
+      print(.text(Pets.cats.randomElement()!))
     case "open", "cat", "less", "more", "read", "view":
       if argument.isEmpty {
         fail("\(command): open what? try 'ls'.")
@@ -324,12 +395,49 @@ public final class AppModel {
       print(.text("guest"))
     case "sudo":
       fail("nice try.")
+    case "dog":
+      print(.text(Pets.dog))
+    case "weather":
+      print(.text("In Bellingham? Wind and/or rain, probably, tbh"))
+    case "import" where argument.lowercased() == "foundation":
+      print(.text("What kinda machine do you think we're running here?"))
+    case "swift", "swiftc":
+      print(.text("What kinda machine do you think we're running here?"))
+    case "xcodebuild":
+      print(.text("lmao"))
+    case "emacs":
+      hang(for: 5000, then: "out of memory")
+    case "nano":
+      print(.text("nano: did you mean vim?"))
+    case "vim", "vi":
+      print(.text("vim: did you mean nano?"))
+    case "fortune":
+      if fortunes.isEmpty { fortunes = Fortune.all.shuffled() }
+      print(.fortune(fortunes.removeLast()))
+    case "sit", "meditate":
+      mode = .sitting
+      play(.bell)
+    case "piano", "play":
+      mode = .playing(Piano())
+      play(.open)
     default:
       if site.lookup(line, from: cwd) != nil {
         go(line, command: command)
       } else {
         fail("\(words[0]): command not found. try 'help'.")
       }
+    }
+  }
+
+  private func hang(for milliseconds: Int, then message: String) {
+    mode = .waiting
+    waitGeneration += 1
+    let generation = waitGeneration
+    Task {
+      await effects.pause(milliseconds)
+      guard mode == .waiting, generation == waitGeneration else { return }
+      mode = .shell
+      fail(message)
     }
   }
 

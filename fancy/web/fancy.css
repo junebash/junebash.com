@@ -1128,6 +1128,113 @@ ul.t-list > li::before {
   }
 }
 
+/* ---------- easter eggs ---------- */
+
+.shell.is-waiting .input-line {
+  visibility: hidden;
+}
+
+.t-fortune {
+  max-width: 64ch;
+}
+
+.zen,
+.piano {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, #06140a 0%, var(--screen) 70%);
+}
+
+.zen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--line) * 1em);
+  padding: 30px;
+}
+
+.zen[hidden],
+.piano[hidden],
+.cat[hidden] {
+  display: none;
+}
+
+.zen-lotus {
+  margin: 0;
+  font: inherit;
+}
+
+.zen-breath {
+  color: var(--phosphor-dim);
+  letter-spacing: 0.3ch;
+}
+
+.piano {
+  display: flex;
+  flex-direction: column;
+}
+
+.piano-keys {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(22, minmax(0, 2.6ch));
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-content: center;
+  gap: 0.6em 0.3ch;
+  padding: 22px 30px;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.piano-key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3em 0 0.4em;
+  border: 2px solid var(--phosphor-dim);
+  cursor: pointer;
+}
+
+.piano-key.is-upper {
+  border-color: var(--phosphor-faint);
+  color: var(--phosphor-dim);
+}
+
+.piano-key.is-down {
+  background: var(--phosphor);
+  color: var(--screen);
+  text-shadow: none;
+}
+
+.piano-letter {
+  opacity: 0.6;
+}
+
+.cat {
+  position: absolute;
+  bottom: 10px;
+  left: 100%;
+  margin: 0;
+  font: inherit;
+  pointer-events: none;
+}
+
+.cat.is-walking {
+  animation: cat-walk 7s linear forwards;
+}
+
+@keyframes cat-walk {
+  to { left: -16ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vhs::before,
   .glass,

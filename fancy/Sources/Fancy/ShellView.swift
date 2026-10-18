@@ -70,6 +70,7 @@ final class ShellView {
 
     observe { [self] in renderOutput(model.output) }
     observe { [self] in renderCompletion(model.completionMenu) }
+    observe { [self] in screen.setClass("is-waiting", model.mode == .waiting) }
     observe { [self] in
       prompt.textContent = .string(model.prompt + " ")
       syncInput(model.input)

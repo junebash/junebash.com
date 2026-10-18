@@ -172,6 +172,17 @@ extension SoundEffect {
           )
         }
         + [Tone(wave: .triangle, frequency: 130.81 * 1.003, duration: 2.8, gain: 0.08, attack: 0.03, delay: 0.36)]
+    case .bell:
+      // A singing bowl: inharmonic partials, the lowest pair a hair apart so they beat.
+      [(1.0, 0.13, 8.0), (1.004, 0.09, 8.0), (2.76, 0.05, 5.0), (5.4, 0.022, 2.6), (8.93, 0.01, 1.4)].map { partial in
+        Tone(wave: .sine, frequency: 196 * partial.0, duration: partial.2, gain: partial.1, attack: 0.004)
+      }
+        + [Tone(wave: .noise(filter: "bandpass"), frequency: 900, duration: 0.03, gain: 0.2, attack: 0.001, q: 2)]
+    case .note(let frequency):
+      [
+        Tone(wave: .sine, frequency: frequency, duration: 1.5, gain: 0.16, attack: 0.004, fm: (ratio: 2.0, index: 0.9)),
+        Tone(wave: .triangle, frequency: frequency, duration: 0.8, gain: 0.05, attack: 0.004),
+      ]
     }
   }
 }

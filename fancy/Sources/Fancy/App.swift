@@ -39,8 +39,11 @@ final class App {
     let shell = ShellView(model: model, layout: layout)
     let pager = PagerView(model: model, router: router, layout: layout, darkroom: darkroom, shell: shell)
     let menu = MenuView(model: model, shell: shell)
-    views = [layout, shell, pager, PopupView(model: model), menu]
+    let zen = ZenView(model: model)
+    let piano = PianoView(model: model, synth: synth)
+    views = [layout, shell, pager, PopupView(model: model), menu, zen, piano, CatView(model: model)]
     listen(model: model, shell: shell, pager: pager, menu: menu, layout: layout)
+    listenOutsideTheShell(model: model, zen: zen, piano: piano)
 
     await boot.waitForGesture { [synth] in
       synth.unlock { if isSoundOn { synth.play(.boot) } }
@@ -113,6 +116,43 @@ final class App {
     return darkroom
   }
 
+  /// While sitting, playing, or stuck in emacs, the keyboard isn't the shell's.
+  private func listenOutsideTheShell(model: AppModel, zen: ZenView, piano: PianoView) {
+    document.listen("keydown", capture: true) { event in
+      guard model.mode != .shell, event.metaKey.boolean != true else { return }
+      switch model.mode {
+      case .shell:
+        return
+      case .waiting:
+        if event.ctrlKey.boolean == true, event.key.string == "c" { model.interruptPressed() }
+      case .sitting:
+        if zen.isSettled { model.stirred() }
+      case .playing:
+        piano.handleKey(event)
+      }
+      _ = event.preventDefault()
+      _ = event.stopPropagation()
+    }
+    document.listen("pointerdown", capture: true) { _ in
+      if model.mode == .sitting, zen.isSettled { model.stirred() }
+    }
+
+    let idleLimit = 5.0 * 60 * 1000
+    var lastActivity = window.performance.now().number ?? 0
+    for event in ["keydown", "pointerdown", "wheel"] {
+      document.listen(event, passive: true, capture: true) { _ in lastActivity = window.performance.now().number ?? 0 }
+    }
+    Task {
+      while true {
+        await pause(milliseconds: 10_000)
+        guard (window.performance.now().number ?? 0) - lastActivity > idleLimit else { continue }
+        // Once per quiet stretch; the cat doesn't come back until you do.
+        lastActivity = .infinity
+        await model.idled()
+      }
+    }
+  }
+
   private func listen(model: AppModel, shell: ShellView, pager: PagerView, menu: MenuView, layout: Layout) {
     window.listen("popstate") { [router] _ in model.locationChanged(to: router.currentPath) }
     window.listen("resize", passive: true) { _ in layout.measure() }
@@ -141,6 +181,7 @@ final class App {
         case "menu": model.menuButtonTapped()
         case "close-pager": model.pagerDismissed()
         case "close-popup": model.popupDismissed()
+        case "close-piano": model.closeKeyPressed()
         case "leave": model.leaveTapped()
         default: break
         }

@@ -11,6 +11,7 @@ public struct OutputEntry: Identifiable, Equatable, Sendable {
     case menu
     case welcome
     case underConstruction(SitePath)
+    case fortune(Fortune)
   }
 
   public enum Tone: Equatable, Sendable {
@@ -42,6 +43,8 @@ public enum SoundEffect: Equatable, Sendable {
   case blip
   case popup
   case boot
+  case bell
+  case note(Double)
 }
 
 public enum Popup: Equatable, Sendable {
