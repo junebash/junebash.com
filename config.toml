@@ -2,6 +2,7 @@
 base_url = "https://junebash.com"
 title = "June Bash"
 author = "June Bash"
+description = "Principal Swift/iOS developer, failed composer, occasional writer, Buddhist meditator, trans lady. Posts, code, and music."
 generate_feeds = true
 
 theme = "apollo"
