@@ -47,21 +47,60 @@
         {% endif %}
      {% endif %}
 
-     {% if not page_has_og_description %}
-         {% if page.description %}
-             <meta property="og:description" content="{{ page.description }}" />
-         {% elif config.description %}
-             <meta property="og:description" content="{{ config.description }}" />
-         {% endif %}
-     {% endif %}
-
-     {% if not page_has_description %}
-         {% if page.description %}
-             <meta name="description" content="{{ page.description }}" />
-         {% elif config.description %}
-             <meta name="description" content="{{ config.description }}" />
-         {% endif %}
+    {# Description: frontmatter first, then the post's summary (text above <!-- more -->), then the site's #}
+    {% if page.description %}
+        {% set description = page.description %}
+    {% elif page.summary %}
+        {# The summary is already HTML-escaped; undo the common entities so they aren't escaped twice #}
+        {% set description = page.summary | striptags | replace(from="&amp;", to="&") | replace(from="&quot;", to='"') | replace(from="&#39;", to="'") | replace(from="&lt;", to="<") | replace(from="&gt;", to=">") | trim | truncate(length=200) %}
+    {% elif section.description %}
+        {% set description = section.description %}
+    {% else %}
+        {% set description = config.description | default(value="") %}
     {% endif %}
+
+    {% if description %}
+        {% if not page_has_og_description %}
+            <meta property="og:description" content="{{ description }}" />
+        {% endif %}
+        {% if not page_has_description %}
+            <meta name="description" content="{{ description }}" />
+        {% endif %}
+    {% endif %}
+
+    {# Preview image. Templates store images a few different ways, so check each. #}
+    {% set extra = page.extra | default(value=section.extra | default(value=false)) %}
+    {% set image = "" %}
+    {% set card = "summary_large_image" %}
+    {% if extra %}
+        {% if extra.local_image %}
+            {% set image = extra.local_image %}
+        {% elif extra.image and page.components and page.components[0] == "games" %}
+            {% set image = "images/" ~ extra.image %}
+        {% elif extra.image %}
+            {% set image = extra.image %}
+        {% elif extra.icon %}
+            {# Icons are square, so use the small card #}
+            {% set image = extra.icon %}
+            {% set card = "summary" %}
+        {% endif %}
+    {% endif %}
+    {% if not image %}
+        {% set image = "images/june-portrait.png" %}
+        {% set card = "summary" %}
+    {% endif %}
+    {% if not image is starting_with("http") %}
+        {% set image = get_url(path=image | trim_start_matches(pat="/")) %}
+    {% endif %}
+
+    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:type" content="{% if page.title %}article{% else %}website{% endif %}" />
+    {% if current_url %}
+        <meta property="og:url" content="{{ current_url | safe }}" />
+        <link rel="canonical" href="{{ current_url | safe }}" />
+    {% endif %}
+    <meta property="og:image" content="{{ image | safe }}" />
+    <meta name="twitter:card" content="{{ card }}" />
 
     {# Favicon #}
     {% if config.extra.favicon %}
