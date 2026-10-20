@@ -5,13 +5,11 @@ import JavaScriptKit
 /// `data-media` so one delegated click handler can find them in `media`.
 struct DocumentRenderer {
   let router: Router
-  let art: [String: AsciiArt]
   let columns: Int
   private(set) var media: [Popup] = []
 
-  init(router: Router, art: [String: AsciiArt], columns: Int) {
+  init(router: Router, columns: Int) {
     self.router = router
-    self.art = art
     self.columns = columns
   }
 
@@ -58,15 +56,7 @@ struct DocumentRenderer {
 
     case .image(let image):
       media.append(.image(image))
-      let index = media.count - 1
-      if let art = art[image.src] {
-        let figure = element("figure", "t-figure")
-        figure.setAttr("data-media", String(index))
-        figure.add(element("pre", "t-art", text: art.lines(maxColumns: min(columns, 60)).joined(separator: "\n")))
-        figure.add(element("figcaption", "t-caption", text: "▸ " + (image.alt.isEmpty ? "view photo" : image.alt)))
-        return figure
-      }
-      return mediaLink(index: index, label: "[IMAGE]", title: image.alt.isEmpty ? "untitled" : image.alt)
+      return mediaLink(index: media.count - 1, label: "[IMAGE]", title: image.alt.isEmpty ? "untitled" : image.alt)
 
     case .embed(let embed):
       media.append(.embed(embed))

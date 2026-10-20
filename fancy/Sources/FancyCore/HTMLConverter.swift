@@ -7,11 +7,7 @@ public protocol HTMLNode {
 }
 
 public struct HTMLConverter {
-  public var isLocal: (String) -> Bool
-
-  public init(isLocal: @escaping (String) -> Bool) {
-    self.isLocal = isLocal
-  }
+  public init() {}
 
   public func document<Node: HTMLNode>(from root: Node) -> Document {
     Document(blocks: blocks(from: root.childNodes))
@@ -81,7 +77,7 @@ public struct HTMLConverter {
 
     case "img":
       guard let src = node.attribute("src"), !src.isEmpty else { return }
-      builder.append(.image(Image(src: src, alt: node.attribute("alt") ?? "", isLocal: isLocal(src))))
+      builder.append(.image(Image(src: src, alt: node.attribute("alt") ?? "")))
 
     case "iframe", "video", "audio", "embed", "object":
       let source = node.attribute("src") ?? node.attribute("data")

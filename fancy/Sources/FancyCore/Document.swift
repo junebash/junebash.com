@@ -4,10 +4,6 @@ public struct Document: Equatable, Sendable {
   public init(blocks: [Block]) {
     self.blocks = blocks
   }
-
-  public var images: [Image] {
-    blocks.flatMap(\.images)
-  }
 }
 
 public indirect enum Block: Equatable, Sendable {
@@ -19,15 +15,6 @@ public indirect enum Block: Equatable, Sendable {
   case rule
   case image(Image)
   case embed(Embed)
-
-  var images: [Image] {
-    switch self {
-    case .image(let image): [image]
-    case .list(_, let items): items.flatMap { $0.flatMap(\.images) }
-    case .quote(let blocks): blocks.flatMap(\.images)
-    default: []
-    }
-  }
 }
 
 public struct Span: Equatable, Sendable {
@@ -59,12 +46,10 @@ public struct Style: OptionSet, Hashable, Sendable {
 public struct Image: Equatable, Hashable, Sendable {
   public var src: String
   public var alt: String
-  public var isLocal: Bool
 
-  public init(src: String, alt: String, isLocal: Bool) {
+  public init(src: String, alt: String) {
     self.src = src
     self.alt = alt
-    self.isLocal = isLocal
   }
 }
 
