@@ -62,9 +62,4 @@ struct Router {
     if path.split(separator: "/").last?.contains(".") == true { return nil }
     return SitePath(urlPath: String(path))
   }
-
-  /// Only root-relative images are same-origin on every host, which canvas reads require.
-  static func isLocalAsset(_ src: String) -> Bool {
-    src.hasPrefix("/") && !src.hasPrefix("//")
-  }
 }

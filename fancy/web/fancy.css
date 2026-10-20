@@ -777,25 +777,6 @@ ul.t-list > li::before {
   color: var(--phosphor-dim);
 }
 
-.t-figure {
-  margin: 0.6em 0 1.1em;
-}
-
-.t-art {
-  margin: 0;
-  font: inherit;
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: pre;
-  overflow: hidden;
-}
-
-.t-caption {
-  margin-top: 0.3em;
-  color: var(--phosphor-dim);
-}
-
-.t-figure:hover .t-caption,
 .t-media:hover {
   color: var(--phosphor-bright);
 }

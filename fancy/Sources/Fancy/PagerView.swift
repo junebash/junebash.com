@@ -5,7 +5,6 @@ final class PagerView {
   let model: AppModel
   let router: Router
   let layout: Layout
-  let darkroom: Darkroom
   let shell: ShellView
   let root = byID("pager")
   let title = byID("pager-title")
@@ -15,11 +14,10 @@ final class PagerView {
   private var media: [Popup] = []
   private var shownPath: SitePath?
 
-  init(model: AppModel, router: Router, layout: Layout, darkroom: Darkroom, shell: ShellView) {
+  init(model: AppModel, router: Router, layout: Layout, shell: ShellView) {
     self.model = model
     self.router = router
     self.layout = layout
-    self.darkroom = darkroom
     self.shell = shell
 
     observe { [self] in render(model.pager, columns: layout.columns) }
@@ -84,7 +82,7 @@ final class PagerView {
     shownPath = page.path
     title.textContent = .string(page.title)
     meta.textContent = .string(([page.date].compactMap { $0 } + page.tags.map { "#" + $0 }).joined(separator: "  "))
-    var renderer = DocumentRenderer(router: router, art: darkroom.art, columns: min(columns, 76))
+    var renderer = DocumentRenderer(router: router, columns: min(columns, 76))
     let content = renderer.render(page.document)
     media = renderer.media
     let offset = body.scrollTop
@@ -98,20 +96,6 @@ final class PagerView {
       body.scrollTop = offset
     }
     updateStatus()
-    develop(page)
-  }
-
-  /// Photos appear as links first, then turn into art as each one develops.
-  private func develop(_ page: Page) {
-    let sources = darkroom.claim(page.document.images)
-    guard !sources.isEmpty else { return }
-    Task { [self] in
-      for src in sources {
-        if await darkroom.develop(src), shownPath == page.path, let current = model.pager {
-          render(current, columns: layout.columns)
-        }
-      }
-    }
   }
 
   private func updateStatus() {

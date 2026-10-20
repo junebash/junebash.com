@@ -72,12 +72,6 @@ struct SiteTests {
     #expect(site.complete("open t", cwd: posts, commands: commands) == .candidates(base: "open ", names: ["the-very-last-light", "type-erasure"]))
     #expect(site.complete("open x", cwd: posts, commands: commands) == .none)
   }
-
-  @Test func asciiArtScalesDown() {
-    let art = AsciiArt(width: 4, height: 2, luminance: [0, 0, 255, 255, 0, 0, 255, 255])
-    #expect(art.lines(maxColumns: 80) == ["  @@", "  @@"])
-    #expect(art.lines(maxColumns: 2) == [" @"])
-  }
 }
 
 struct SpinnerTests {

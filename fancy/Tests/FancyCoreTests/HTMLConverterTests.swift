@@ -3,7 +3,7 @@ import Testing
 @testable import FancyCore
 
 struct HTMLConverterTests {
-  let converter = HTMLConverter { $0.hasPrefix("/") }
+  let converter = HTMLConverter()
 
   func convert(_ nodes: FakeNode...) -> [Block] {
     converter.document(from: FakeNode(tagName: "body", childNodes: nodes)).blocks
@@ -47,7 +47,7 @@ struct HTMLConverterTests {
     #expect(
       blocks == [
         .paragraph([Span("look:")]),
-        .image(Image(src: "/images/a.png", alt: "a", isLocal: true)),
+        .image(Image(src: "/images/a.png", alt: "a")),
         .paragraph([Span("nice")]),
       ]
     )

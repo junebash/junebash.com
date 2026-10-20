@@ -16,7 +16,6 @@ final class App {
       boot.fail("MEMORY CORRUPTED. PLEASE TRY THE SIMPLE SITE.")
       return
     }
-    let darkroom = await developPhotographs(site)
 
     boot.line("CALIBRATING PHOSPHOR", status: "OK")
     await boot.beat(160)
@@ -38,7 +37,7 @@ final class App {
     )
     let layout = Layout()
     let shell = ShellView(model: model, layout: layout)
-    let pager = PagerView(model: model, router: router, layout: layout, darkroom: darkroom, shell: shell)
+    let pager = PagerView(model: model, router: router, layout: layout, shell: shell)
     let menu = MenuView(model: model, shell: shell)
     let zen = ZenView(model: model)
     let piano = PianoView(model: model, synth: synth)
@@ -60,7 +59,7 @@ final class App {
     let list = document.querySelectorAll!("#fancy-site > template").object!
     let count = Int(list.length.number ?? 0)
     guard count > 0 else { return nil }
-    let converter = HTMLConverter(isLocal: Router.isLocalAsset)
+    let converter = HTMLConverter()
     let progress = boot.line("READING PAGES", status: "0/\(count)")
     var directories: [Directory] = []
     var pages: [Page] = []
@@ -100,21 +99,6 @@ final class App {
     }
     progress.update("OK")
     return Site(directories: directories, pages: pages)
-  }
-
-  /// Only the photos a first visit is likely to see; the darkroom develops the rest when they're opened.
-  private func developPhotographs(_ site: Site) async -> Darkroom {
-    let darkroom = Darkroom()
-    let pages = site.pages(under: SitePath(["about"])) + site.pages(under: SitePath(["posts"]))
-    let sources = darkroom.claim(pages.flatMap(\.document.images))
-    let progress = boot.line("DEVELOPING PHOTOS", status: "0/\(sources.count)")
-    var developed = 0
-    for (index, src) in sources.enumerated() {
-      if await darkroom.develop(src) { developed += 1 }
-      progress.update("\(index + 1)/\(sources.count)")
-    }
-    progress.update(developed == sources.count ? "OK" : "\(developed)/\(sources.count) OK")
-    return darkroom
   }
 
   /// While sitting, playing, or stuck in emacs, the keyboard isn't the shell's.
