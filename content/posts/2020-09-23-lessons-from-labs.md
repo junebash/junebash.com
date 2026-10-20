@@ -146,7 +146,7 @@ extension View {
 
 Yes, all that code was written to get this.
 
-![aligned views](/images/esb-aligned-views.png)
+![The Edit Profile screen of the Eco-Soap Bank app. A red line runs down the left edge of every text field in the Name and Contact Info sections, labeled “Aligned! :D”](/images/esb-aligned-views.png)
 
 Some of the code was written in a way to increase reusability, of course (though I only ended up reusing it once or twice, to the point that I probably should not have wasted the time in writing the reusable version). It's also quite possibile that I'm missing a much more obvious way of accomplishing this goal (although I did steal the GeometryReader-background-Color.clear-PreferenceKey-alignment trick from objc.io, and they seem to know what they're talking about).
 

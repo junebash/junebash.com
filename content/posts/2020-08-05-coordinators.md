@@ -23,7 +23,7 @@ Next, you'll need to go to your project settings, and under the "General" tab, u
 
 The settings should look like the image below.
 
-![Make sure `Main Interface` is blank in your project settings](/images/coordinator_deleteMainInterface.png)
+![Xcode’s Deployment Info settings, with the Main Interface field highlighted and left blank](/images/coordinator_deleteMainInterface.png)
 
 I seem to remember at some point having to remove some other things from the project settings and/or `Info.plist` file (other things that reference storyboards or `Main.storyboard`, basically), but this seems to be enough to get us going from my testing today.
 

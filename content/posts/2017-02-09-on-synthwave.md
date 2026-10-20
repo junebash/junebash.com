@@ -25,7 +25,7 @@ I was born less than a month before the 80s were over. My baby-boomer parents w
 
 <h2>Technology</h2>
 
-<img class="alignright" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Synthesizers.com_Modular.jpg" width="493" height="363" />
+<img class="alignright" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Synthesizers.com_Modular.jpg" alt="A large modular synthesizer: two rows of black panels covered in knobs, jacks, patch cables, and a few glowing red lights, above a wooden keyboard" width="493" height="363" />
 
 For as long as I can remember I've had a fascination with technology. My first computer was a Windows 3.1 machine. I would dig around in the folders, exploring the structure of the machine just for fun. I didn't understand it, but it was like looking across an alien landscape.
 

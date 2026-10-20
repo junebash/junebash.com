@@ -23,7 +23,7 @@ Of course, it’s not without its faults; although the battle system did have it
 
 <h2>Humor</h2>
 
-<img class="" src="http://orig11.deviantart.net/3e8a/f/2015/293/c/5/flowey_large_by_sovanjedi-d9du6ic.gif" width="auto" max-width="100%" />
+<img class="" src="http://orig11.deviantart.net/3e8a/f/2015/293/c/5/flowey_large_by_sovanjedi-d9du6ic.gif" alt="Flowey, the smiling flower from Undertale" width="auto" max-width="100%" />
 <figcaption>GIF by Jon Davies</figcaption>
 
 The game is <em>hilarious</em>. It sets up expectations and turns them on their heads in fantastically clever ways. Within the first moments of the game, you meet a little flower who tells you about how one of the game’s systems works, only to turn its helpful smile into a horrific cackle and attempt to kill you. Characters have their own often-hysterically-stilted dialogue-progression sounds. And, without giving too much away, one of the final bosses completely throws away the entire game’s aesthetic in the most absurd and over-the-top fashion.

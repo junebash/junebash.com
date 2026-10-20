@@ -14,7 +14,7 @@ comment = true
 
 <h2 id="the-ghost-of-music-past">The Ghost of Music Past</h2>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Moritz_von_Schwind_Schubertiade.jpg" alt="19th century chamber music" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Moritz_von_Schwind_Schubertiade.jpg" alt="Moritz von Schwind’s drawing of a Schubertiade: a crowded 19th-century parlor of men and women gathered around Franz Schubert at the piano" /></p>
 
 <p>In the 19th century, if you wanted to listen to music, you had a couple of choices. You could wait for the next concert at the nearest concert hall and hear whatever they were playing (if you could afford it). You could make friends with someone who knew how to play whatever you wanted to hear. Or, you could learn it and play it yourself on your piano, which was much cheaper and more affordable to the rising merchant class than it had been only a hundred years ago due to technological advances and decreased production costs.</p>
 
@@ -32,7 +32,7 @@ comment = true
 
 <h2 id="the-ghost-of-music-yet-to-come">The Ghost of Music Yet to Come</h2>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Steve_Reich.jpg" alt="&#39;Clapping Music&#39;" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Steve_Reich.jpg" alt="Composer Steve Reich" /></p>
 
 <p>A few things can (and most some cases already are) help(ing) bring back these participatory sides of music-making. You probably won’t be surprised to see me start with video games.</p>
 
