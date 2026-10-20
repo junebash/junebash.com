@@ -23,7 +23,7 @@ Fast-forward 25 years. I've got basically everything I thought I wanted. I've be
  
 To make a long story just a tad shorter, I saw this meme.
  
-![uzfqvsqj5eyb1](/images/uzfqvsqj5eyb1.webp)
+![Four-panel cartoon meme. One man tells another, “You’re trans.” The second man asks, “But what if I’m faking it?” The first man yells, “No cis person daydreams about being another gender.” The second man stares back, stunned.](/images/uzfqvsqj5eyb1.webp)
 
 That was my egg-crack moment.
  

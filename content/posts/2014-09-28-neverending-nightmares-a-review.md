@@ -26,7 +26,7 @@ comment = true
 
 <p>One enemy, though, just wasn’t particularly scary or fun to deal with. Luckily it doesn’t show up very often, but a few of its behaviors seemed to be a bit out of place with the rest of the games. While another, later enemy hit the sense of adolescent terror just right, this one was more obnoxious and almost silly. Other than the one, though, the enemies overall were extremely effective from both a gameplay and horror perspective.</p>
 
-<p><img src="http://cdn.akamai.steamstatic.com/steam/apps/253330/ss_57c7fcbca86e4d6df080aa116b700ff13b3c8d3d.600x338.jpg?t=1411746927" alt="One of many haunting scenes from Neverending Nightmares" /></p>
+<p><img src="http://cdn.akamai.steamstatic.com/steam/apps/253330/ss_57c7fcbca86e4d6df080aa116b700ff13b3c8d3d.600x338.jpg?t=1411746927" alt="A scene from Neverending Nightmares, drawn in black-and-white crosshatching. A pale man in striped pajamas walks through a library while a bloodied figure slumps by the wall under red writing: “My God, why have you forsaken me?”" /></p>
 
 <p>The sound design and music are quite lovely, if you can call it that… aside from a few background ambience that sounds like someone doing an impression of a tortured Droopy Dog. I appreciated the way the music would evolve over the course of the different nightmares and a “new” nightmare’s beginning would be indicated by a shift in the music as much as the narrative.</p>
 
