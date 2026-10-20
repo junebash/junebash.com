@@ -141,7 +141,7 @@ a {
 }
 a:hover { text-decoration: underline; }
 
-::selection { background: var(--now-wash); }
+::selection { background: var(--now-wash); color: var(--ink); }
 
 /* Centered page column for inside pages */
 .rd-wrap {
