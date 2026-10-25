@@ -195,7 +195,7 @@
 
 <template data-dir="/music/" data-note="noise i've made" data-intro="{{ music.content | striptags | trim | safe }}" data-aliases="/solo_music/ /band_music/ /concert_music/ /games/ /films/">
 <h2>solo projects &amp; bands</h2>{% for p in projects %}<a href="{{ p.path }}"></a>{% endfor %}
-<h2>music for films &amp; games</h2>{% for p in films.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}{% for p in games.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}
+<h2>music for films &amp; games</h2>{% for p in films.pages | concat(with=games.pages) | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}
 <h2>concert music</h2>{% for p in concert.pages | sort(attribute="date") | reverse %}<a href="{{ p.path }}"></a>{% endfor %}
 </template>
 {#- Music dates are only ever years, so pages carry the year in their notes and facts instead of a date. #}

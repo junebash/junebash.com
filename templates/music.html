@@ -42,22 +42,15 @@
 
       <div class="music-list">
         {% set films = get_section(path="films/_index.md") %}
-        {% for film in films.pages | sort(attribute="date") | reverse %}
-        <a class="music-row" href="{{ film.permalink }}">
-          <span class="music-row-title">{{ film.title }}</span>
-          <span class="music-row-meta">
-            Film{% if film.extra.company %} &middot; {{ film.extra.company }}{% endif %}{% if film.date %} &middot; {{ film.date | date(format="%Y") }}{% endif %}
-          </span>
-          <span class="music-row-chip rd-chip music">details &rarr;</span>
-        </a>
-        {% endfor %}
-
         {% set games = get_section(path="games/_index.md") %}
-        {% for game in games.pages | sort(attribute="date") | reverse %}
-        <a class="music-row" href="{{ game.permalink }}">
-          <span class="music-row-title">{{ game.title }}</span>
+        {% set projects = films.pages | concat(with=games.pages) %}
+        {% for project in projects | sort(attribute="date") | reverse %}
+        <a class="music-row" href="{{ project.permalink }}">
+          <span class="music-row-title">{{ project.title }}</span>
           <span class="music-row-meta">
-            Game{% if game.extra.developer %} &middot; {{ game.extra.developer }}{% endif %}{% if game.date %} &middot; {{ game.date | date(format="%Y") }}{% endif %}
+            {%- if project.path is starting_with("/films/") %}Film{% if project.extra.company %} &middot; {{ project.extra.company }}{% endif %}
+            {%- else %}Game{% if project.extra.developer %} &middot; {{ project.extra.developer }}{% endif %}{% endif -%}
+            {%- if project.date %} &middot; {{ project.date | date(format="%Y") }}{% endif -%}
           </span>
           <span class="music-row-chip rd-chip music">details &rarr;</span>
         </a>
