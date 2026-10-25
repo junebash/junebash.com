@@ -35,29 +35,29 @@
       </div>
     </section>
 
-    {# ----------------------------------------- Music for Games &amp; Films #}
+    {# ----------------------------------------- Music for Films &amp; Games #}
     <section class="music-section">
-      <h2 class="music-section-title">🎮 Music for Games &amp; Films</h2>
-      <p class="music-section-desc">Soundtracks and scores for interactive media and film projects.</p>
+      <h2 class="music-section-title">🎮 Music for Films &amp; Games</h2>
+      <p class="music-section-desc">Soundtracks and scores for film projects and interactive media.</p>
 
       <div class="music-list">
-        {% set games = get_section(path="games/_index.md") %}
-        {% for game in games.pages | sort(attribute="date") | reverse %}
-        <a class="music-row" href="{{ game.permalink }}">
-          <span class="music-row-title">{{ game.title }}</span>
-          <span class="music-row-meta">
-            Game{% if game.extra.developer %} &middot; {{ game.extra.developer }}{% endif %}{% if game.date %} &middot; {{ game.date | date(format="%Y") }}{% endif %}
-          </span>
-          <span class="music-row-chip rd-chip music">details &rarr;</span>
-        </a>
-        {% endfor %}
-
         {% set films = get_section(path="films/_index.md") %}
         {% for film in films.pages | sort(attribute="date") | reverse %}
         <a class="music-row" href="{{ film.permalink }}">
           <span class="music-row-title">{{ film.title }}</span>
           <span class="music-row-meta">
             Film{% if film.extra.company %} &middot; {{ film.extra.company }}{% endif %}{% if film.date %} &middot; {{ film.date | date(format="%Y") }}{% endif %}
+          </span>
+          <span class="music-row-chip rd-chip music">details &rarr;</span>
+        </a>
+        {% endfor %}
+
+        {% set games = get_section(path="games/_index.md") %}
+        {% for game in games.pages | sort(attribute="date") | reverse %}
+        <a class="music-row" href="{{ game.permalink }}">
+          <span class="music-row-title">{{ game.title }}</span>
+          <span class="music-row-meta">
+            Game{% if game.extra.developer %} &middot; {{ game.extra.developer }}{% endif %}{% if game.date %} &middot; {{ game.date | date(format="%Y") }}{% endif %}
           </span>
           <span class="music-row-chip rd-chip music">details &rarr;</span>
         </a>
